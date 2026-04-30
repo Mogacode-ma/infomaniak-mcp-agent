@@ -82,14 +82,15 @@ jobs:
         run: gitleaks detect --source . --config .gitleaks.toml --redact --verbose
 
   audit:
-    name: npm audit (production deps, high severity)
+    name: npm audit (production deps, informational only)
     runs-on: ubuntu-latest
-    # We only audit production dependencies. Dev tools (vitest, tsup,
-    # eslint plugins…) drag in transitive vulnerabilities that don't ship
-    # to users; failing CI on those would be noise. The `chrome-cookies-secure@2`
-    # dependency itself bundles legacy modules with known advisories; tracked
-    # under issue #1 — switch to v3 (breaking change) or replace with a
-    # custom Chromium cookie reader.
+    # Informational-only: this job NEVER fails the workflow. We surface
+    # production-dep advisories in the logs, but the chrome-cookies-secure@2
+    # dependency we rely on for local Chrome cookie extraction bundles
+    # legacy modules with known advisories that we can't fix without
+    # migrating to v3 or rolling our own SQLite reader (tracked separately).
+    # Dev tools (vitest, tsup, eslint plugins…) drag in further transitive
+    # vulnerabilities that don't ship to users.
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -97,5 +98,7 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
-      - run: npm audit --omit=dev --audit-level=critical
-        continue-on-error: true
+      - name: Run npm audit (logs only, never fails)
+        run: |
+          npm audit --omit=dev --audit-level=critical || true
+          echo "::notice::npm audit ran in informational mode. Findings, if any, are in the log above."

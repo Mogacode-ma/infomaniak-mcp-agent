@@ -19,11 +19,13 @@ import {
   dnsListRecordsTool,
   dnsUpdateRecordTool,
 } from "./dns.js";
+import { dnssecCheckTool, dnssecDisableTool, dnssecEnableTool } from "./dnssec.js";
 import { getDomainTool, listDomainsTool } from "./domains.js";
 import { listDriveFilesTool, listDrivesTool } from "./drive.js";
 import { createHostingUserTool, deleteHostingUserTool, listHostingUsersTool } from "./ftp-users.js";
 import { listHostingsTool } from "./hostings.js";
 import { explainTool, helpTool } from "./introspection.js";
+import { getMailboxBackupsTool, getMailboxSignaturesTool } from "./mail-extras.js";
 import { createAliasTool, createMailboxTool, deleteMailboxTool } from "./mail-write.js";
 import { getMailboxAliasesTool, listMailHostingsTool, listMailboxesTool } from "./mail.js";
 import { listOrganizationsTool } from "./organizations.js";
@@ -35,7 +37,10 @@ import {
 } from "./redirections.js";
 import { historyTool, undoTool } from "./session.js";
 import { createSiteTool, deleteSiteTool, listSitesTool } from "./sites.js";
+import { listSwissBackupsTool } from "./swiss-backup.js";
 import type { ToolDefinition } from "./types.js";
+import { createShortUrlTool, listShortUrlsTool, shortUrlsQuotaTool } from "./url-shortener.js";
+import { auditDnsZonesTool, provisionSiteFullTool } from "./workflows.js";
 
 export const tools: ReadonlyArray<ToolDefinition> = [
   // Introspection (agent-friendly entry points)
@@ -43,8 +48,11 @@ export const tools: ReadonlyArray<ToolDefinition> = [
   helpTool,
   explainTool,
   auditAccountTool,
+  auditDnsZonesTool,
   historyTool,
   undoTool,
+  // Workflows
+  provisionSiteFullTool,
   // Organizations & products
   listOrganizationsTool,
   listHostingsTool,
@@ -68,10 +76,16 @@ export const tools: ReadonlyArray<ToolDefinition> = [
   dnsCreateRecordTool,
   dnsUpdateRecordTool,
   dnsDeleteRecordTool,
+  // DNSSEC
+  dnssecCheckTool,
+  dnssecEnableTool,
+  dnssecDisableTool,
   // Mail (read)
   listMailHostingsTool,
   listMailboxesTool,
   getMailboxAliasesTool,
+  getMailboxSignaturesTool,
+  getMailboxBackupsTool,
   // Mail (write)
   createMailboxTool,
   deleteMailboxTool,
@@ -86,6 +100,12 @@ export const tools: ReadonlyArray<ToolDefinition> = [
   // AI Tools
   listAiProductsTool,
   listAiModelsTool,
+  // Swiss Backup
+  listSwissBackupsTool,
+  // URL Shortener
+  listShortUrlsTool,
+  shortUrlsQuotaTool,
+  createShortUrlTool,
   // Escape hatch
   apiCallTool,
 ];
