@@ -62,10 +62,14 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.4",
-    "chrome-cookies-secure": "^2.1.1",
+    "chrome-cookies-secure": "^3.0.2",
     "pino": "^9.5.0",
     "zod": "^3.23.8",
     "zod-to-json-schema": "^3.23.5"
+  },
+  "overrides": {
+    "tar": "^7.4.3",
+    "@tootallnate/once": "^2.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.6.0",
