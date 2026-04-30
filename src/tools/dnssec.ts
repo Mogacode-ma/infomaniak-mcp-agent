@@ -79,7 +79,7 @@ function makeDnssecToggle(
   action: "enable" | "disable",
   description: string,
   warning: string,
-) {
+): ReturnType<typeof defineTool> {
   return defineTool({
     name: toolName,
     description,
