@@ -1,5 +1,12 @@
-# Gitleaks config — additional rules to catch project-specific secrets
-# Run: npm run secrets:scan
+# Gitleaks configuration — public OSS-safe rules.
+#
+# We rely on the gitleaks default ruleset (~150 patterns: AWS keys,
+# GitHub PATs, Google service-account keys, Slack tokens, …) plus three
+# Infomaniak-specific patterns below. We do NOT hard-code any real
+# customer / hosting names here — those would defeat the point of having
+# a public secret-scan config in the first place.
+#
+# Run locally: `npm run secrets:scan`.
 
 title = "infomaniak-mcp-agent — secret scan"
 
@@ -8,31 +15,18 @@ useDefault = true
 
 [[rules]]
 id = "infomaniak-bearer-token"
-description = "Infomaniak API Bearer token (typically 80+ alphanumeric chars)"
+description = "Long opaque token next to an Infomaniak Authorization header"
 regex = '''[A-Za-z0-9_-]{80,}'''
 keywords = ["INFOMANIAK_API_TOKEN", "Authorization: Bearer"]
 
 [[rules]]
 id = "infomaniak-sasession"
-description = "Infomaniak manager SASESSION cookie"
+description = "SASESSION cookie value (manager.infomaniak.com session)"
 regex = '''SASESSION\s*[=:]\s*['"]?[A-Za-z0-9]{20,}'''
 keywords = ["SASESSION"]
 
 [[rules]]
 id = "infomaniak-xsrf"
-description = "Infomaniak manager XSRF token"
+description = "Infomaniak manager XSRF token (Laravel encrypted form)"
 regex = '''(MANAGER-XSRF-TOKEN|X-XSRF-TOKEN)\s*[=:]\s*['"]?ey[A-Za-z0-9+/=%]{50,}'''
 keywords = ["MANAGER-XSRF-TOKEN", "X-XSRF-TOKEN"]
-
-[[rules]]
-id = "patrick-known-secrets"
-description = "Hardcoded references to Patrick / Coden / sites known"
-regex = '''(REDACTED_PWD|example_prefix|example_prefix|example_prefix|REDACTED|broz\.be|coden\.lu|coden\.ma|example_customer)'''
-
-[allowlist]
-description = "Files allowed to mention some keywords without being secrets"
-# `paths` entries are interpreted as Go regular expressions, NOT shell globs.
-paths = [
-  '''^\.gitleaks\.toml$''',
-  '''^tests/fixtures/''',
-]
