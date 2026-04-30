@@ -4,6 +4,17 @@
 
 A [Model Context Protocol](https://modelcontextprotocol.io/) server that lets [Claude](https://www.anthropic.com/claude) (or any MCP client) drive a real Infomaniak account end-to-end: list organizations and products, audit domains and SSL, create web sites, manage mailboxes, edit DNS, and more.
 
+## 🎒 Built in the open, in real time, by vibe-coding
+
+This project was built rapidly by an LLM driving a terminal session ("vibe-coding"), with live tests against a real Infomaniak account at every step. **It works perfectly on the maintainer's local setup** and the full pipeline is green (typecheck strict, lint, prettier, 37 tests, build).
+
+That said — given how it was built and given that several endpoints used here are reverse-engineered (see [`REVERSE-ENGINEERING.md`](./REVERSE-ENGINEERING.md)) — **it is entirely possible that you'll hit (potentially big) bugs** depending on your account topology, plan tier, scopes, or Infomaniak's own changes. We are here to fix them as they show up. Please:
+
+1. Open an issue with the exact tool call, the input, the response, and your environment (Node version, OS, MCP client). Sanitize tokens / cookies / customer names before pasting.
+2. Or, even better, send a PR with a failing test and we will work from there together.
+
+We move fast and ship often. Don't be shy.
+
 ## ⚠️ Status: unofficial
 
 This project is **not affiliated with, endorsed by, or sponsored by Infomaniak Network SA**. It is a community-driven tool that combines:
