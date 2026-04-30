@@ -31,7 +31,8 @@ regex = '''(REDACTED_PWD|example_prefix|example_prefix|example_prefix|REDACTED|b
 
 [allowlist]
 description = "Files allowed to mention some keywords without being secrets"
+# `paths` entries are interpreted as Go regular expressions, NOT shell globs.
 paths = [
-  ".gitleaks.toml",
-  "tests/fixtures/**",
+  '''^\.gitleaks\.toml$''',
+  '''^tests/fixtures/''',
 ]
