@@ -4,17 +4,37 @@
 [![CodeQL](https://github.com/Mogacode-ma/infomaniak-mcp-agent/actions/workflows/codeql.yml/badge.svg?branch=main)](https://github.com/Mogacode-ma/infomaniak-mcp-agent/actions/workflows/codeql.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 [![Node](https://img.shields.io/badge/node-%3E%3D18-43853d.svg)](https://nodejs.org)
-[![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178c6.svg)](https://www.typescriptlang.org/)
+[![TypeScript strict](https://img.shields.io/badge/TypeScript-strict-3178c6.svg)](https://www.typescriptlang.org/)
 [![MCP](https://img.shields.io/badge/Model_Context_Protocol-1.0-9333ea.svg)](https://modelcontextprotocol.io/)
+[![Tools](https://img.shields.io/badge/tools-54-blueviolet.svg)](#tools)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](./CONTRIBUTING.md)
 
-> **Full unofficial agentic Infomaniak MCP server — guided automation of web hosting, mail, kDrive, domains and DNS.**
+> **Drive your entire [Infomaniak](https://www.infomaniak.com) account from [Claude](https://www.anthropic.com/claude) — agentic, two-phase commit, open-source.**
 
-A [Model Context Protocol](https://modelcontextprotocol.io/) server that lets [Claude](https://www.anthropic.com/claude) (or any MCP client) drive a real Infomaniak account end-to-end: list organizations and products, audit domains and SSL, create web sites, manage mailboxes, edit DNS, and more — **54 tools** covering 14 areas, with a strict two-phase commit on every destructive operation.
+`infomaniak-mcp-agent` is an unofficial [Model Context Protocol](https://modelcontextprotocol.io/) server that exposes the full surface of Infomaniak — Switzerland's sovereign cloud — as **54 tools** an LLM can call directly: web hosting, mail (kSuite), kDrive, domains, DNS, DNSSEC, FTP/SSH users, AI products, account audits and more. Every destructive operation goes through a strict two-phase commit, so an agent can never silently delete or mutate something on your account.
+
+```
+You → Claude:  "audit the example.com hosting and tell me which mailboxes are over quota"
+Claude → MCP:  infomaniak_audit_account → infomaniak_list_mail_hostings → infomaniak_list_mailboxes
+Claude → You:  3 mailboxes >85% — paul@ (94%), notify@ (88%), team@ (87%). Want me to add an alert?
+```
+
+## Table of contents
+
+- [Why](#why-this-exists) · [What it does](#what-you-can-do-with-it) · [How it differs](#why-agentic-and-not-wrapper)
+- [Install](#install) · [Authentication](#authentication) · [Quick example](#quick-example)
+- [Tools](#tools) (54 across 11 areas) · [Limitations](#limitations) · [Roadmap](#roadmap) · [FAQ](#faq)
+- [Contributing](#contributing) · [License](#license)
+
+## Why this exists
+
+Infomaniak is one of the very few **independent, Swiss-owned, open-source-friendly cloud providers** in Europe — running its own datacentres in Switzerland, on hydro and wind power, with no parent in the US or China. Its product range is huge (web hosting, mail, kDrive, kChat, DNS, AI cloud, Swiss Backup, …) but its API is split between a documented public surface and a private manager-only one — which means automating real workflows usually requires a browser session, custom scripts, or both.
+
+This project closes that gap by exposing **everything** through a single MCP server, so Claude or any other MCP client can run real account operations through natural language: provision a hosting, rotate a DNS record, create a mailbox, audit your domains for upcoming expirations, browse your kDrive — without ever forcing you to leave the chat or write a script.
 
 ## 🎒 Built in the open, in real time, by vibe-coding
 
-This project was built rapidly by an LLM driving a terminal session ("vibe-coding"), with live tests against a real Infomaniak account at every step. **It works perfectly on the maintainer's local setup** and the full pipeline is green (typecheck strict, lint, prettier, 37 tests, build).
+This project was built rapidly by an LLM driving a terminal session ("vibe-coding"), with live tests against a real Infomaniak account at every step. **It works perfectly on the maintainer's local setup** and the full pipeline is green (TypeScript strict, ESLint, Prettier, 37 tests, build, CodeQL, gitleaks).
 
 That said — given how it was built and given that several endpoints used here are reverse-engineered (see [`REVERSE-ENGINEERING.md`](./REVERSE-ENGINEERING.md)) — **it is entirely possible that you'll hit (potentially big) bugs** depending on your account topology, plan tier, scopes, or Infomaniak's own changes. We are here to fix them as they show up. Please:
 
@@ -32,6 +52,21 @@ This project is **not affiliated with, endorsed by, or sponsored by Infomaniak N
 
 For full transparency, read [`REVERSE-ENGINEERING.md`](./REVERSE-ENGINEERING.md). Infomaniak may change these endpoints without notice; we do our best to keep up but cannot guarantee long-term compatibility.
 
+## What you can do with it
+
+Once installed, you can ask Claude things like:
+
+- *"List every domain on my account that expires in less than 60 days, sorted by date."*
+- *"Create a new site `staging.example.com` on hosting `WP1234567`, PHP 8.3, root in `/sites/staging`."*
+- *"Add a TXT record on `example.com` for the new Postmark DKIM, then verify it resolves."*
+- *"How much disk does the database `myprefix_wp123456` use, and which application is wired to it?"*
+- *"Create a mailbox `hello@example.com` with a 16-character random password and forward it to my Gmail."*
+- *"Show me which kDrives I'm an admin on and how full they are."*
+- *"Audit my whole account: any locked product, expiring SSL, broken DNSSEC, ongoing operations?"*
+- *"Undo the last DNS change I made through this session."*
+
+It will not silently mutate anything destructive: every change goes through a *plan + confirmation token* round-trip. You stay in control even if the model gets creative.
+
 ## Why "agentic" and not "wrapper"
 
 Most MCP servers expose one tool per HTTP endpoint and call it a day. This one is built differently:
@@ -41,12 +76,13 @@ Most MCP servers expose one tool per HTTP endpoint and call it a day. This one i
 - **Pre-flight checks** — the server checks for conflicts (existing FQDN, busy hosting, expired domain) *before* hitting the API.
 - **Actionable errors** — every error tells you what happened, why, and the next step you can take.
 - **Introspection** — `infomaniak_overview`, `infomaniak_help` and `infomaniak_explain` give the agent context-on-demand instead of forcing it to memorize a tool catalog.
+- **Session memory** — `infomaniak_history` lists every destructive action of the current session, and `infomaniak_undo` reverses the ones that are reversible.
 
 See [`ARCHITECTURE.md`](./ARCHITECTURE.md) for the full design rationale.
 
 ## Install
 
-> ⚠️ **Not published on npm yet.** Until v1.0, install from source.
+> ⚠️ **Not published on npm.** Install from source — see the [FAQ](#why-not-on-npm) for why.
 
 ```bash
 git clone https://github.com/Mogacode-ma/infomaniak-mcp-agent.git
@@ -87,18 +123,6 @@ claude mcp add infomaniak \
   -- node /absolute/path/to/infomaniak-mcp-agent/dist/server.js
 ```
 
-### Once it lands on npm (later)
-
-When `v1.0` is published you will be able to install with:
-
-```bash
-npm install -g infomaniak-mcp-agent
-# or run on demand:
-npx infomaniak-mcp-agent
-```
-
-The Claude Desktop / Claude Code configurations will then use `npx -y infomaniak-mcp-agent` instead of the absolute `node ...` path.
-
 ## Authentication
 
 Two distinct credentials are needed because Infomaniak runs two APIs side-by-side:
@@ -135,7 +159,34 @@ INFOMANIAK_XSRF_TOKEN=...
 
 To copy them: open Chrome DevTools on [manager.infomaniak.com](https://manager.infomaniak.com), Application → Cookies, copy `SASESSION` and `MANAGER-XSRF-TOKEN` (URL-encoded — paste as-is, the MCP decodes).
 
+## Quick example
+
+A typical first conversation, end-to-end:
+
+```text
+You:    What's on my account?
+Claude: [calls infomaniak_overview]
+        You have 16 organizations, 311 products: 47 web hostings, 73 domains,
+        12 mail hostings, 3 kDrives, 2 AI Tools subscriptions.
+
+You:    Any domain expiring soon?
+Claude: [calls infomaniak_audit_account on each org]
+        2 domains expire in <30 days: example.com (April 22), demo.org (May 04).
+        4 SSL certificates were auto-renewed in the last 7 days. No locked products.
+
+You:    Create a TXT record on example.com saying "v=spf1 include:spf.example.net ~all".
+Claude: [calls infomaniak_dns_create_record → returns plan + token]
+        Plan: CREATE TXT record on example.com → "v=spf1 include:spf.example.net ~all", TTL 3600.
+        Confirm with token abc-123 within 60 s.
+
+You:    Confirm.
+Claude: [calls infomaniak_dns_create_record again with the token]
+        Done. Record id 84219113. Logged in session history (undoable).
+```
+
 ## Tools
+
+54 tools across 11 areas. Use `infomaniak_help` to fuzzy-search by intent, or `infomaniak_explain` to dump a tool's full JSON schema.
 
 ### Introspection (start here)
 | Tool | Annotation | Purpose |
@@ -177,13 +228,16 @@ To copy them: open Chrome DevTools on [manager.infomaniak.com](https://manager.i
 | `infomaniak_create_hosting_user` | **destructive** | Two-phase create with connection_type (apache_php/ftp/sftp/nodejs). |
 | `infomaniak_delete_hosting_user` | **destructive** | Two-phase revoke (files preserved). |
 
-### DNS
+### DNS & DNSSEC
 | Tool | Annotation | Purpose |
 |---|---|---|
 | `infomaniak_dns_list_records` | read-only | Every DNS record on an Infomaniak-managed zone. |
 | `infomaniak_dns_create_record` | **destructive** | Two-phase create record (A, AAAA, CNAME, MX, TXT, SRV, NS, CAA, PTR, SPF). |
 | `infomaniak_dns_update_record` | **destructive** | Two-phase update (current vs proposed diff in the plan). |
 | `infomaniak_dns_delete_record` | **destructive** | Two-phase delete record (with full preview before commit). |
+| `infomaniak_dnssec_check` | read-only | DNSSEC status of a zone. |
+| `infomaniak_dnssec_enable` | **destructive** | Two-phase enable (signing keys auto-provisioned). |
+| `infomaniak_dnssec_disable` | **destructive** | Two-phase disable. |
 
 ### Mail
 | Tool | Annotation | Purpose |
@@ -194,6 +248,9 @@ To copy them: open Chrome DevTools on [manager.infomaniak.com](https://manager.i
 | `infomaniak_create_mailbox` | **destructive** | Two-phase create with password policy enforcement. |
 | `infomaniak_delete_mailbox` | **destructive** | Two-phase delete (also wipes stored mail). |
 | `infomaniak_create_mailbox_alias` | **destructive** | Two-phase add alias to a mailbox. |
+| `infomaniak_get_mailbox_signature` | read-only | Current signature of a mailbox. |
+| `infomaniak_update_mailbox_signature` | **destructive** | Two-phase signature update. |
+| `infomaniak_get_mailbox_backups` | read-only | List backup snapshots for a mailbox. |
 | `infomaniak_list_redirections` | read-only | Server-side mail redirection rules. |
 | `infomaniak_create_redirection` | **destructive** | Two-phase create rule (forward `name@…` to N targets). |
 | `infomaniak_delete_redirection` | **destructive** | Two-phase delete rule. |
@@ -204,18 +261,34 @@ To copy them: open Chrome DevTools on [manager.infomaniak.com](https://manager.i
 | `infomaniak_list_drives` | read-only | All kDrives the account has access to (with quota). |
 | `infomaniak_list_drive_files` | read-only | Files / subfolders of a drive root or any folder, paginated. |
 
+### URL shortener
+| Tool | Annotation | Purpose |
+|---|---|---|
+| `infomaniak_list_short_urls` | read-only | Short URLs configured on a domain. |
+| `infomaniak_create_short_url` | **destructive** | Two-phase create. |
+| `infomaniak_delete_short_url` | **destructive** | Two-phase delete. |
+
+### Swiss Backup
+| Tool | Annotation | Purpose |
+|---|---|---|
+| `infomaniak_list_swiss_backups` | read-only | Swiss Backup slots on the account. |
+
 ### AI Tools
 | Tool | Annotation | Purpose |
 |---|---|---|
 | `infomaniak_list_ai_products` | read-only | AI subscriptions the account owns. |
 | `infomaniak_list_ai_models` | read-only | Public catalogue of Swiss-sovereign LLM/STT models. |
 
+### Workflows (multi-step)
+| Tool | Annotation | Purpose |
+|---|---|---|
+| `infomaniak_provision_site_full` | **destructive** | Site + DB + DNS in one orchestrated, plan-then-apply flow. |
+| `infomaniak_audit_dns_zones` | read-only | Cross-zone audit: missing SPF/DMARC, dangling records, …. |
+
 ### Escape hatch (everything else)
 | Tool | Annotation | Purpose |
 |---|---|---|
 | `infomaniak_api_call` | **destructive** | Reach any endpoint on `api.infomaniak.com` directly. GET runs immediately, POST/PUT/PATCH/DELETE follow the two-phase commit. Refuses paths outside the documented `/{1,2,3}/...` namespace and refuses manager-private `/proxy/...` (use a typed tool). |
-
-More tools (kDrive, newsletters, swiss-backup, kchat, undo, history, …) are coming — see the [roadmap](#roadmap).
 
 ## Limitations
 
@@ -227,16 +300,71 @@ More tools (kDrive, newsletters, swiss-backup, kchat, undo, history, …) are co
 
 ## Roadmap
 
-- [x] Web hosting: list + create sites
-- [ ] Web hosting: list + create databases, FTP users, redirects, crons
-- [ ] DNS: full CRUD on records, DNSSEC management
-- [ ] Mail: mailboxes, aliases, autoresponders, signatures, backups
-- [ ] kDrive: list, share, upload, download, archive
-- [ ] Newsletter: campaigns, contacts
-- [ ] Swiss Backup: slots, schedules
-- [ ] Account audit: domains expiring soon, SSL near-expiration, mailbox quotas
-- [ ] `undo` / `history` tools
-- [ ] Workflow tools: `provision_wordpress_site`, `migrate_site`, `audit_account`
+**Shipped in v0.7 (current)**
+
+- ✅ Web hosting: list + create + delete sites, databases, FTP/SSH users
+- ✅ DNS: full CRUD on records, DNSSEC enable/disable/check
+- ✅ Mail: mailboxes, aliases, signatures, backups, redirections — all CRUD
+- ✅ kDrive: list drives + browse files
+- ✅ Swiss Backup: list slots
+- ✅ AI Tools: list products + public model catalogue
+- ✅ URL shortener: full CRUD
+- ✅ Account audit: domains expiring soon, locked products, ongoing operations
+- ✅ Workflow tools: `provision_site_full`, `audit_dns_zones`
+- ✅ `undo` / `history` session tools
+- ✅ Generic API escape hatch for any documented endpoint
+
+**Next (v0.8+)**
+
+- ⬜ kDrive write: upload, download, move, share, archive
+- ⬜ Newsletter: campaigns, contacts (untouched today)
+- ⬜ kChat: channels, threads, posts (no public API yet — needs reverse-engineering)
+- ⬜ Workflow: `provision_wordpress_site` (needs a WP install path that does not depend on the brittle manager wizard)
+- ⬜ Swiss Backup write: slot creation, schedules, restores
+- ⬜ Per-tool happy-path tests to push coverage from 35% to 70%
+- ⬜ MCPB packaging for one-click install in Claude Desktop
+
+## FAQ
+
+### Is this an official Infomaniak product?
+
+No. It is community-driven, MIT-licensed, and not affiliated with, endorsed by, or sponsored by Infomaniak Network SA. See the disclaimers in [`NOTICE`](./NOTICE) and [`REVERSE-ENGINEERING.md`](./REVERSE-ENGINEERING.md).
+
+### Does it work with clients other than Claude?
+
+Yes. It speaks the standard [Model Context Protocol](https://modelcontextprotocol.io/) over stdio, so it works with any MCP-capable client — Claude Desktop, Claude Code, Cursor, Cline, Continue, Zed AI, and the [MCP Inspector](https://github.com/modelcontextprotocol/inspector) for debugging.
+
+### Will my Infomaniak token / session ever leave my machine?
+
+No. The server runs locally over stdio. Your Bearer token is read from `INFOMANIAK_API_TOKEN` (env or `.env`) and used only to call `api.infomaniak.com`. The Chrome cookies (`SASESSION`, `MANAGER-XSRF-TOKEN`) live in memory for the duration of a single tool call and are never persisted. Logs redact every sensitive value (tokens, cookies, passwords).
+
+### Why not on npm?
+
+The codebase ships a few transitive dev-time dependencies (via `chrome-cookies-secure`'s native `sqlite3`) that show up on `npm audit` even after our overrides. Until that audit page is 100% clean, we prefer to ship from source so users can review the tree before installing. We will publish to npm in `v1.0`.
+
+### Does it support self-hosting / running outside macOS?
+
+Yes — `INFOMANIAK_AUTH_MODE=manual` lets you paste cookies straight into env vars, which is the path to use on Linux servers, Docker containers, or CI. Auto-extraction from Chrome works on macOS, Windows, and Linux when Chrome is installed locally.
+
+### Why does site creation use a manager-private endpoint and not the public API?
+
+Because the public `POST /1/products/{id}/web_hostings/{hid}/sites` endpoint silently returns a success response without actually creating anything. After reverse-engineering the manager bundle we found that the manager-private endpoint requires `force_fqdn: true`, `directory: /sites/...`, and `environment: apache_php` — none of which are documented. Full write-up in [`REVERSE-ENGINEERING.md`](./REVERSE-ENGINEERING.md).
+
+### Can it install WordPress automatically?
+
+Not today. The manager's `applications/add` flow is a multi-step wizard with per-step tokens that is brittle to script. The recommended pattern is: create the empty site with this MCP, then install WordPress (or any other CMS) from the manager wizard or by uploading via FTP/SSH.
+
+### Is there a hosted / SaaS version?
+
+No. By design — this server runs against your own credentials on your own machine. There is no hosted SaaS, no hosted proxy, no telemetry.
+
+### How do I report a bug or request a tool?
+
+Open a [GitHub issue](https://github.com/Mogacode-ma/infomaniak-mcp-agent/issues). Include the exact tool call, the input, the response (sanitized — strip tokens, cookies, customer names), and your environment (Node version, OS, MCP client, plan tier). PRs with a failing test are doubly welcome.
+
+### What about Infomaniak's own AI Tools?
+
+Infomaniak runs a [Swiss-sovereign AI cloud](https://www.infomaniak.com/en/ai-tools) hosting Llama, Mixtral, Whisper and other open-weights models. This MCP exposes `infomaniak_list_ai_products` and `infomaniak_list_ai_models` so an agent can discover what's available and what models are public on your account; we deliberately do not wrap their inference endpoints (use the OpenAI-compatible API directly for that).
 
 ## Contributing
 
@@ -244,6 +372,6 @@ Contributions are welcome. Please read [`CONTRIBUTING.md`](./CONTRIBUTING.md) an
 
 ## License
 
-[MIT](./LICENSE) — see also the trademark notice in `LICENSE`.
+[MIT](./LICENSE) — see [`NOTICE`](./NOTICE) for the trademark disclaimer.
 
 This project is not affiliated with Infomaniak Network SA. "Infomaniak", "kDrive", "kChat", "kMeet", "kSuite", "Swiss Backup" are trademarks of Infomaniak Network SA.

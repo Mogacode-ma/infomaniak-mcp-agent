@@ -1,0 +1,22 @@
+infomaniak-mcp-agent
+Copyright (c) 2026 Mogacode
+
+This product is licensed under the MIT License (see LICENSE).
+
+Trademark notice
+----------------
+
+This project is NOT affiliated with, endorsed by, or sponsored by Infomaniak
+Network SA. "Infomaniak", "kDrive", "kChat", "kMeet", "kSuite", "Swiss Backup"
+and related marks are trademarks of Infomaniak Network SA.
+
+This is an unofficial community-driven project that uses both the documented
+public Infomaniak API (api.infomaniak.com) and reverse-engineered endpoints
+of the manager web application (manager.infomaniak.com/proxy/...).
+See REVERSE-ENGINEERING.md for full transparency on which endpoints are
+undocumented and how they were discovered.
+
+By using this project, you acknowledge that:
+  * Undocumented endpoints may break without notice if Infomaniak changes them
+  * You use your own credentials on your own account, at your own risk
+  * The maintainers cannot guarantee continued compatibility
