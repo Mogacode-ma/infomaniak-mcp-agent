@@ -1,0 +1,37 @@
+# Gitleaks config — additional rules to catch project-specific secrets
+# Run: npm run secrets:scan
+
+title = "infomaniak-mcp-agent — secret scan"
+
+[extend]
+useDefault = true
+
+[[rules]]
+id = "infomaniak-bearer-token"
+description = "Infomaniak API Bearer token (typically 80+ alphanumeric chars)"
+regex = '''[A-Za-z0-9_-]{80,}'''
+keywords = ["INFOMANIAK_API_TOKEN", "Authorization: Bearer"]
+
+[[rules]]
+id = "infomaniak-sasession"
+description = "Infomaniak manager SASESSION cookie"
+regex = '''SASESSION\s*[=:]\s*['"]?[A-Za-z0-9]{20,}'''
+keywords = ["SASESSION"]
+
+[[rules]]
+id = "infomaniak-xsrf"
+description = "Infomaniak manager XSRF token"
+regex = '''(MANAGER-XSRF-TOKEN|X-XSRF-TOKEN)\s*[=:]\s*['"]?ey[A-Za-z0-9+/=%]{50,}'''
+keywords = ["MANAGER-XSRF-TOKEN", "X-XSRF-TOKEN"]
+
+[[rules]]
+id = "patrick-known-secrets"
+description = "Hardcoded references to Patrick / Coden / sites known"
+regex = '''(REDACTED_PWD|example_prefix|example_prefix|example_prefix|REDACTED|broz\.be|coden\.lu|coden\.ma|example_customer)'''
+
+[allowlist]
+description = "Files allowed to mention some keywords without being secrets"
+paths = [
+  ".gitleaks.toml",
+  "tests/fixtures/**",
+]

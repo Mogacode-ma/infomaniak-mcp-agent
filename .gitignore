@@ -1,0 +1,46 @@
+# Secrets — NEVER commit
+.env
+.env.*
+!.env.example
+*.local
+*.local.json
+/tokens/
+/credentials/
+/sessions/
+*.cookie
+*.session
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+pnpm-debug.log
+.npm
+.yarn
+
+# Build output
+dist/
+build/
+out/
+*.tsbuildinfo
+.tsup/
+
+# Test / coverage
+coverage/
+.nyc_output/
+*.lcov
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Local CLAUDE memory (NEVER pushed)
+.claude/
+CLAUDE.md
