@@ -1,8 +1,16 @@
 # infomaniak-mcp-agent
 
+[![CI](https://github.com/Mogacode-ma/infomaniak-mcp-agent/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Mogacode-ma/infomaniak-mcp-agent/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/Mogacode-ma/infomaniak-mcp-agent/actions/workflows/codeql.yml/badge.svg?branch=main)](https://github.com/Mogacode-ma/infomaniak-mcp-agent/actions/workflows/codeql.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
+[![Node](https://img.shields.io/badge/node-%3E%3D18-43853d.svg)](https://nodejs.org)
+[![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178c6.svg)](https://www.typescriptlang.org/)
+[![MCP](https://img.shields.io/badge/Model_Context_Protocol-1.0-9333ea.svg)](https://modelcontextprotocol.io/)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](./CONTRIBUTING.md)
+
 > **Full unofficial agentic Infomaniak MCP server — guided automation of web hosting, mail, kDrive, domains and DNS.**
 
-A [Model Context Protocol](https://modelcontextprotocol.io/) server that lets [Claude](https://www.anthropic.com/claude) (or any MCP client) drive a real Infomaniak account end-to-end: list organizations and products, audit domains and SSL, create web sites, manage mailboxes, edit DNS, and more.
+A [Model Context Protocol](https://modelcontextprotocol.io/) server that lets [Claude](https://www.anthropic.com/claude) (or any MCP client) drive a real Infomaniak account end-to-end: list organizations and products, audit domains and SSL, create web sites, manage mailboxes, edit DNS, and more — **54 tools** covering 14 areas, with a strict two-phase commit on every destructive operation.
 
 ## 🎒 Built in the open, in real time, by vibe-coding
 

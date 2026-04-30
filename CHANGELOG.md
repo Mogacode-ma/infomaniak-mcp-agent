@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+_(no unreleased changes yet)_
+
+## [0.7.0] — 2026-04-30
+
 ### Added (v0.5 work-in-progress)
 - Mail redirections CRUD: `infomaniak_list_redirections`, `infomaniak_create_redirection`, `infomaniak_delete_redirection`. Required fields (`name`, `targets`) confirmed via 422.
 - Database write: `infomaniak_create_database` and `infomaniak_delete_database`. Both go through the manager-private `/proxy/...` API because the public POST silently no-ops (same pattern as site creation; documented in REVERSE-ENGINEERING.md). Delete plan pulls the live database details (disk usage, linked application).
