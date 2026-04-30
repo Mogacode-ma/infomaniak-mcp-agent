@@ -6,7 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
-### Added (v0.3 work-in-progress)
+### Added (v0.4 work-in-progress)
+- Mail write tools: `infomaniak_create_mailbox` (with strict password policy enforcement), `infomaniak_delete_mailbox` (irreversible, full warning in plan), `infomaniak_create_mailbox_alias`. All two-phase commit. Required fields verified against Infomaniak's 422 validation responses.
+- kDrive read-only tools: `infomaniak_list_drives` (with quota / users / maintenance flags), `infomaniak_list_drive_files` (paginated, supports drilling into subfolders).
+- AI Tools: `infomaniak_list_ai_products` (account's own AI products), `infomaniak_list_ai_models` (catalogue of public Infomaniak-hosted models — Whisper, Mixtral, Llama variants, embeddings…).
+
+### Added (v0.3)
+
 - `infomaniak_delete_site` — two-phase commit, manager-private endpoint. Pulls the full site detail in the plan so the user can verify what disappears.
 - `infomaniak_dns_update_record` — completes the DNS CRUD: shows current vs proposed values, then PUTs the patch.
 - `infomaniak_list_databases` and `infomaniak_get_database` (read-only against the documented `/1/web_hostings/{id}/databases` endpoint).

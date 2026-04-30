@@ -163,6 +163,21 @@ To copy them: open Chrome DevTools on [manager.infomaniak.com](https://manager.i
 | `infomaniak_list_mail_hostings` | read-only | Mail hostings for one organization. |
 | `infomaniak_list_mailboxes` | read-only | Mailboxes on a given mail hosting. |
 | `infomaniak_get_mailbox_aliases` | read-only | Aliases configured on a specific mailbox. |
+| `infomaniak_create_mailbox` | **destructive** | Two-phase create with password policy enforcement. |
+| `infomaniak_delete_mailbox` | **destructive** | Two-phase delete (also wipes stored mail). |
+| `infomaniak_create_mailbox_alias` | **destructive** | Two-phase add alias to a mailbox. |
+
+### kDrive
+| Tool | Annotation | Purpose |
+|---|---|---|
+| `infomaniak_list_drives` | read-only | All kDrives the account has access to (with quota). |
+| `infomaniak_list_drive_files` | read-only | Files / subfolders of a drive root or any folder, paginated. |
+
+### AI Tools
+| Tool | Annotation | Purpose |
+|---|---|---|
+| `infomaniak_list_ai_products` | read-only | AI subscriptions the account owns. |
+| `infomaniak_list_ai_models` | read-only | Public catalogue of Swiss-sovereign LLM/STT models. |
 
 More tools (kDrive, newsletters, swiss-backup, kchat, undo, history, …) are coming — see the [roadmap](#roadmap).
 
