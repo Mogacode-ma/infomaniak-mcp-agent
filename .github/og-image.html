@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 1200px;
+    height: 630px;
+    overflow: hidden;
+    background: #0a0a0f;
+  }
+
+  body {
+    background: radial-gradient(ellipse at top left, #1e1b4b 0%, #0a0a0f 60%), #0a0a0f;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #e5e7eb;
+    position: relative;
+  }
+
+  .grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(99, 102, 241, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(99, 102, 241, 0.05) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+  }
+
+  .glow-1 {
+    position: absolute;
+    top: -100px; left: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(147, 51, 234, 0.25) 0%, transparent 70%);
+    filter: blur(60px);
+  }
+
+  .glow-2 {
+    position: absolute;
+    bottom: -150px; right: -150px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(217, 70, 70, 0.18) 0%, transparent 70%);
+    filter: blur(60px);
+  }
+
+  .container {
+    position: relative;
+    width: 1200px;
+    height: 630px;
+    z-index: 2;
+  }
+
+  .header {
+    position: absolute;
+    top: 56px;
+    left: 64px;
+  }
+
+  .hero {
+    position: absolute;
+    top: 130px;
+    left: 64px;
+    right: 64px;
+  }
+
+  .footer {
+    position: absolute;
+    bottom: 56px;
+    left: 64px;
+    right: 64px;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: #a5b4fc;
+    text-transform: uppercase;
+  }
+
+  .header .dot {
+    width: 8px; height: 8px;
+    background: #22c55e;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(34, 197, 94, 0.6);
+  }
+
+  .hero h1 {
+    font-size: 72px;
+    line-height: 1.04;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    margin-bottom: 22px;
+    background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero h1 .accent {
+    background: linear-gradient(90deg, #a78bfa 0%, #f472b6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero p {
+    font-size: 24px;
+    line-height: 1.4;
+    font-weight: 500;
+    color: #94a3b8;
+    max-width: 940px;
+  }
+
+  .hero p strong {
+    color: #e2e8f0;
+    font-weight: 600;
+  }
+
+  .stats-row {
+    font-size: 32px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stats-row .sep {
+    color: #334155;
+    margin: 0 22px;
+    font-weight: 400;
+  }
+
+  .labels-row {
+    font-size: 14px;
+    font-weight: 500;
+    color: #94a3b8;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    line-height: 1;
+    margin-bottom: 24px;
+  }
+
+  .labels-row .lsep {
+    visibility: hidden;
+    margin: 0 22px;
+  }
+
+  .repo {
+    position: absolute;
+    bottom: 56px;
+    right: 64px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 18px;
+    color: #818cf8;
+    line-height: 1;
+  }
+
+  .repo .at {
+    color: #64748b;
+  }
+</style>
+</head>
+<body>
+  <div class="glow-1"></div>
+  <div class="glow-2"></div>
+  <div class="grid-bg"></div>
+
+  <div class="container">
+    <div class="header">
+      <span class="dot"></span>
+      <span>Model Context Protocol &nbsp;·&nbsp; v0.7</span>
+    </div>
+
+    <div class="hero">
+      <h1>
+        Drive <span class="accent">Infomaniak</span><br>
+        from Claude.
+      </h1>
+      <p>
+        An <strong>agentic MCP server</strong> for Switzerland's sovereign cloud — web hosting, mail, DNS, kDrive, domains. <strong>Two-phase commit</strong> on every destructive operation.
+      </p>
+    </div>
+
+    <div class="footer">
+      <div class="stats-row">
+        54<span class="sep">·</span>11<span class="sep">·</span>0<span class="sep">·</span>MIT
+      </div>
+      <div class="labels-row">
+        TOOLS<span class="lsep">·</span>AREAS<span class="lsep">·</span>VULNS<span class="lsep">·</span>LICENSE
+      </div>
+      <div class="repo">
+        github.com/<span class="at">Mogacode-ma/</span>infomaniak-mcp-agent
+      </div>
+    </div>
+  </div>
+</body>
+</html>
