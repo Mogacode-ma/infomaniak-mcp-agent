@@ -6,7 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
-### Added (v0.4 work-in-progress)
+### Added (v0.5 work-in-progress)
+- Mail redirections CRUD: `infomaniak_list_redirections`, `infomaniak_create_redirection`, `infomaniak_delete_redirection`. Required fields (`name`, `targets`) confirmed via 422.
+- Database write: `infomaniak_create_database` and `infomaniak_delete_database`. Both go through the manager-private `/proxy/...` API because the public POST silently no-ops (same pattern as site creation; documented in REVERSE-ENGINEERING.md). Delete plan pulls the live database details (disk usage, linked application).
+- FTP / SSH user CRUD: `infomaniak_list_hosting_users`, `infomaniak_create_hosting_user`, `infomaniak_delete_hosting_user`. Required fields (`connection_type`, `login`, `password`) discovered via 422; `connection_type` enum: apache_php / ftp / sftp / nodejs.
+- Escape hatch: `infomaniak_api_call(method, path, query?, body?, confirmation_token?)`. Reaches any documented or undocumented Infomaniak endpoint on `api.infomaniak.com`. Two-phase commit on every non-GET method. Manager-private `/proxy/...` endpoints are intentionally NOT reachable through this tool — use a typed tool.
+
+### Added (v0.4)
 - Mail write tools: `infomaniak_create_mailbox` (with strict password policy enforcement), `infomaniak_delete_mailbox` (irreversible, full warning in plan), `infomaniak_create_mailbox_alias`. All two-phase commit. Required fields verified against Infomaniak's 422 validation responses.
 - kDrive read-only tools: `infomaniak_list_drives` (with quota / users / maintenance flags), `infomaniak_list_drive_files` (paginated, supports drilling into subfolders).
 - AI Tools: `infomaniak_list_ai_products` (account's own AI products), `infomaniak_list_ai_models` (catalogue of public Infomaniak-hosted models — Whisper, Mixtral, Llama variants, embeddings…).

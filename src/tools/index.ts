@@ -5,8 +5,14 @@
  * The server iterates this array at startup to register everything.
  */
 import { listAiModelsTool, listAiProductsTool } from "./ai.js";
+import { apiCallTool } from "./api-call.js";
 import { auditAccountTool } from "./audit.js";
-import { getDatabaseTool, listDatabasesTool } from "./databases.js";
+import {
+  createDatabaseTool,
+  deleteDatabaseTool,
+  getDatabaseTool,
+  listDatabasesTool,
+} from "./databases.js";
 import {
   dnsCreateRecordTool,
   dnsDeleteRecordTool,
@@ -15,12 +21,18 @@ import {
 } from "./dns.js";
 import { getDomainTool, listDomainsTool } from "./domains.js";
 import { listDriveFilesTool, listDrivesTool } from "./drive.js";
+import { createHostingUserTool, deleteHostingUserTool, listHostingUsersTool } from "./ftp-users.js";
 import { listHostingsTool } from "./hostings.js";
 import { explainTool, helpTool } from "./introspection.js";
 import { createAliasTool, createMailboxTool, deleteMailboxTool } from "./mail-write.js";
 import { getMailboxAliasesTool, listMailHostingsTool, listMailboxesTool } from "./mail.js";
 import { listOrganizationsTool } from "./organizations.js";
 import { overviewTool } from "./overview.js";
+import {
+  createRedirectionTool,
+  deleteRedirectionTool,
+  listRedirectionsTool,
+} from "./redirections.js";
 import { historyTool, undoTool } from "./session.js";
 import { createSiteTool, deleteSiteTool, listSitesTool } from "./sites.js";
 import type { ToolDefinition } from "./types.js";
@@ -45,6 +57,12 @@ export const tools: ReadonlyArray<ToolDefinition> = [
   // Databases
   listDatabasesTool,
   getDatabaseTool,
+  createDatabaseTool,
+  deleteDatabaseTool,
+  // FTP / SSH users
+  listHostingUsersTool,
+  createHostingUserTool,
+  deleteHostingUserTool,
   // DNS
   dnsListRecordsTool,
   dnsCreateRecordTool,
@@ -58,12 +76,18 @@ export const tools: ReadonlyArray<ToolDefinition> = [
   createMailboxTool,
   deleteMailboxTool,
   createAliasTool,
+  // Mail redirections
+  listRedirectionsTool,
+  createRedirectionTool,
+  deleteRedirectionTool,
   // kDrive
   listDrivesTool,
   listDriveFilesTool,
   // AI Tools
   listAiProductsTool,
   listAiModelsTool,
+  // Escape hatch
+  apiCallTool,
 ];
 
 export type { ToolDefinition } from "./types.js";

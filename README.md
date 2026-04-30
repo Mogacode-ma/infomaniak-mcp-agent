@@ -148,6 +148,15 @@ To copy them: open Chrome DevTools on [manager.infomaniak.com](https://manager.i
 |---|---|---|
 | `infomaniak_list_databases` | read-only | MariaDB databases attached to a hosting (with disk usage). |
 | `infomaniak_get_database` | read-only | Detail of one database. |
+| `infomaniak_create_database` | **destructive** | Two-phase create. |
+| `infomaniak_delete_database` | **destructive** | Two-phase delete (plan shows disk usage + linked app). |
+
+### FTP / SSH users
+| Tool | Annotation | Purpose |
+|---|---|---|
+| `infomaniak_list_hosting_users` | read-only | FTP / SSH users on a web hosting. |
+| `infomaniak_create_hosting_user` | **destructive** | Two-phase create with connection_type (apache_php/ftp/sftp/nodejs). |
+| `infomaniak_delete_hosting_user` | **destructive** | Two-phase revoke (files preserved). |
 
 ### DNS
 | Tool | Annotation | Purpose |
@@ -166,6 +175,9 @@ To copy them: open Chrome DevTools on [manager.infomaniak.com](https://manager.i
 | `infomaniak_create_mailbox` | **destructive** | Two-phase create with password policy enforcement. |
 | `infomaniak_delete_mailbox` | **destructive** | Two-phase delete (also wipes stored mail). |
 | `infomaniak_create_mailbox_alias` | **destructive** | Two-phase add alias to a mailbox. |
+| `infomaniak_list_redirections` | read-only | Server-side mail redirection rules. |
+| `infomaniak_create_redirection` | **destructive** | Two-phase create rule (forward `name@…` to N targets). |
+| `infomaniak_delete_redirection` | **destructive** | Two-phase delete rule. |
 
 ### kDrive
 | Tool | Annotation | Purpose |
@@ -178,6 +190,11 @@ To copy them: open Chrome DevTools on [manager.infomaniak.com](https://manager.i
 |---|---|---|
 | `infomaniak_list_ai_products` | read-only | AI subscriptions the account owns. |
 | `infomaniak_list_ai_models` | read-only | Public catalogue of Swiss-sovereign LLM/STT models. |
+
+### Escape hatch (everything else)
+| Tool | Annotation | Purpose |
+|---|---|---|
+| `infomaniak_api_call` | **destructive** | Reach any endpoint on `api.infomaniak.com` directly. GET runs immediately, POST/PUT/PATCH/DELETE follow the two-phase commit. Refuses paths outside the documented `/{1,2,3}/...` namespace and refuses manager-private `/proxy/...` (use a typed tool). |
 
 More tools (kDrive, newsletters, swiss-backup, kchat, undo, history, …) are coming — see the [roadmap](#roadmap).
 
