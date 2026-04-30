@@ -17,6 +17,7 @@ import { z } from "zod";
 import { ManagerApiClient, PublicApiClient } from "../api/http.js";
 import { SiteSchema } from "../types/infomaniak.js";
 import { consumeToken, mintToken } from "../utils/confirmation.js";
+import { recordHistory } from "../utils/history.js";
 import { childLogger } from "../utils/logger.js";
 
 import { defineTool } from "./types.js";
@@ -180,12 +181,140 @@ export const createSiteTool = defineTool({
       { body: payload },
     );
 
+    recordHistory({
+      tool: "infomaniak_create_site",
+      kind: "create_site",
+      summary: `Created site ${input.fqdn} on hosting ${input.hosting_id}`,
+      payload: { ...payload, progress_id: response.progress_id },
+      // We can't undo the creation directly because we don't yet know the
+      // site_id (it's assigned async via progress_id). The user can call
+      // infomaniak_delete_site once the manager has provisioned the site.
+    });
+
     return {
       status: "applied" as const,
       progress_id: response.progress_id,
       fqdn: input.fqdn,
       hosting_id: input.hosting_id,
       message: `✅ Site \`${input.fqdn}\` is being provisioned. It should appear in the manager within 10-30 seconds.`,
+    };
+  },
+});
+
+// --- delete_site -----------------------------------------------------------
+
+const DeleteSiteInput = z.object({
+  hosting_id: z.number().int().positive(),
+  site_id: z.number().int().positive(),
+  confirmation_token: z.string().uuid().optional(),
+});
+
+const DeleteSitePlanSchema = z.object({
+  status: z.literal("plan"),
+  plan: z.object({
+    hosting_id: z.number(),
+    site_id: z.number(),
+    site_preview: SiteSchema,
+  }),
+  confirmation_token: z.string(),
+  token_expires_at: z.string(),
+  next_step_markdown: z.string(),
+});
+
+const DeleteSiteAppliedSchema = z.object({
+  status: z.literal("applied"),
+  hosting_id: z.number(),
+  site_id: z.number(),
+  message: z.string(),
+});
+
+const DeleteSiteOutputSchema = z.union([DeleteSitePlanSchema, DeleteSiteAppliedSchema]);
+
+export const deleteSiteTool = defineTool({
+  name: "infomaniak_delete_site",
+  description:
+    "Delete a site from an Infomaniak web hosting. Two-phase commit: first call returns a plan with the site preview + token, second call (same params + token) actually deletes. WARNING: this also wipes the site directory on the FTP backend after a short grace period.",
+  inputSchema: DeleteSiteInput,
+  outputSchema: DeleteSiteOutputSchema,
+  annotations: {
+    readOnlyHint: false,
+    destructiveHint: true,
+    idempotentHint: true,
+    openWorldHint: true,
+  },
+  handler: async (input) => {
+    const fingerprint = JSON.stringify({
+      tool: "infomaniak_delete_site",
+      hosting_id: input.hosting_id,
+      site_id: input.site_id,
+    });
+
+    if (!input.confirmation_token) {
+      // Pull the site detail so the user sees exactly what will disappear.
+      const publicClient = new PublicApiClient();
+      const preview = await publicClient.request<unknown>(
+        "GET",
+        `/1/web_hostings/${input.hosting_id}/sites/${input.site_id}`,
+      );
+      const parsed = SiteSchema.parse(preview);
+      const { token, expiresAt } = mintToken(fingerprint);
+      return {
+        status: "plan" as const,
+        plan: {
+          hosting_id: input.hosting_id,
+          site_id: input.site_id,
+          site_preview: parsed,
+        },
+        confirmation_token: token,
+        token_expires_at: expiresAt.toISOString(),
+        next_step_markdown: [
+          `## Plan — delete site \`${parsed.customer_name}\``,
+          ``,
+          `- **Site id**: ${input.site_id}`,
+          `- **Hosting**: ${input.hosting_id}`,
+          `- **FQDN**: \`${parsed.main_fqdn ?? parsed.customer_name}\``,
+          ...(parsed.directory ? [`- **Directory**: \`${parsed.directory}\``] : []),
+          ...(parsed.applications && parsed.applications.length > 0
+            ? [
+                `- **Applications**: ${parsed.applications
+                  .map((a) => `${a.type} ${a.version ?? ""}`.trim())
+                  .join(", ")}`,
+              ]
+            : []),
+          ``,
+          `### ⚠️ This is irreversible`,
+          `- The site will disappear from the manager.`,
+          `- Any installed application (WordPress, etc.) and its data is removed.`,
+          `- The directory on the FTP backend may be wiped on the server side as well.`,
+          ``,
+          `### Next step`,
+          `Re-call \`infomaniak_delete_site\` with the same parameters AND \`confirmation_token: "${token}"\`.`,
+        ].join("\n"),
+      };
+    }
+
+    if (!consumeToken(input.confirmation_token, fingerprint)) {
+      throw new Error("Confirmation token is invalid, expired, or doesn't match the parameters.");
+    }
+    log.info({ site_id: input.site_id, hosting_id: input.hosting_id }, "Deleting site");
+    const manager = new ManagerApiClient();
+    await manager.request<unknown>(
+      "DELETE",
+      `/proxy/1/web_hostings/${input.hosting_id}/sites/${input.site_id}`,
+    );
+
+    recordHistory({
+      tool: "infomaniak_delete_site",
+      kind: "delete_site",
+      summary: `Deleted site id ${input.site_id} from hosting ${input.hosting_id}`,
+      payload: { hosting_id: input.hosting_id, site_id: input.site_id },
+    });
+
+    return {
+      status: "applied" as const,
+      hosting_id: input.hosting_id,
+      site_id: input.site_id,
+      message: `✅ Site ${input.site_id} deletion requested. The manager should reflect the change within seconds.`,
     };
   },
 });

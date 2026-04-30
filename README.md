@@ -125,6 +125,8 @@ To copy them: open Chrome DevTools on [manager.infomaniak.com](https://manager.i
 | `infomaniak_help` | read-only | Suggest tools matching a free-form intent ("create site", "list mailboxes"…). |
 | `infomaniak_explain` | read-only | Returns the full definition (description + schemas) of a specific tool. |
 | `infomaniak_audit_account` | read-only | Scan an organization for expirations / locked products / ongoing ops. |
+| `infomaniak_history` | read-only | List destructive actions taken in this session. |
+| `infomaniak_undo` | **destructive** | Reverse a session action when reversible (two-phase commit). |
 
 ### Organizations & products
 | Tool | Annotation | Purpose |
@@ -139,12 +141,20 @@ To copy them: open Chrome DevTools on [manager.infomaniak.com](https://manager.i
 |---|---|---|
 | `infomaniak_list_sites` | read-only | Sites on a given web hosting (with applications). |
 | `infomaniak_create_site` | **destructive** | Two-phase: returns a plan + token, second call with token actually creates. |
+| `infomaniak_delete_site` | **destructive** | Two-phase delete (full preview of the site to be removed). |
+
+### Databases
+| Tool | Annotation | Purpose |
+|---|---|---|
+| `infomaniak_list_databases` | read-only | MariaDB databases attached to a hosting (with disk usage). |
+| `infomaniak_get_database` | read-only | Detail of one database. |
 
 ### DNS
 | Tool | Annotation | Purpose |
 |---|---|---|
 | `infomaniak_dns_list_records` | read-only | Every DNS record on an Infomaniak-managed zone. |
 | `infomaniak_dns_create_record` | **destructive** | Two-phase create record (A, AAAA, CNAME, MX, TXT, SRV, NS, CAA, PTR, SPF). |
+| `infomaniak_dns_update_record` | **destructive** | Two-phase update (current vs proposed diff in the plan). |
 | `infomaniak_dns_delete_record` | **destructive** | Two-phase delete record (with full preview before commit). |
 
 ### Mail

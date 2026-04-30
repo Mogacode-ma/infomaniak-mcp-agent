@@ -6,8 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
-### Added (v0.2 work-in-progress)
+### Added (v0.3 work-in-progress)
+- `infomaniak_delete_site` — two-phase commit, manager-private endpoint. Pulls the full site detail in the plan so the user can verify what disappears.
+- `infomaniak_dns_update_record` — completes the DNS CRUD: shows current vs proposed values, then PUTs the patch.
+- `infomaniak_list_databases` and `infomaniak_get_database` (read-only against the documented `/1/web_hostings/{id}/databases` endpoint).
+- Session memory: `infomaniak_history` lists destructive actions taken in the current session, each entry tagged as reversible or not. `infomaniak_undo` walks the two-phase commit and dispatches the registered reverse action when available.
+- Internal `utils/history` module backing the above tools — caps in-memory entries at 200, never persisted to disk.
+
+### Added (v0.2)
 - DNS tools: `infomaniak_dns_list_records`, `infomaniak_dns_create_record` (two-phase commit), `infomaniak_dns_delete_record` (two-phase commit). Endpoints documented at developer.infomaniak.com (`/2/zones/{zone}/records`); list operation verified live.
+
+
 - Mail tools: `infomaniak_list_mail_hostings`, `infomaniak_list_mailboxes`, `infomaniak_get_mailbox_aliases`. All verified live.
 - Domain tools: `infomaniak_list_domains`, `infomaniak_get_domain`. Both verified live.
 - Audit tool: `infomaniak_audit_account` flags critical/warning/info findings (expirations, locked products, maintenance, in-progress operations).
