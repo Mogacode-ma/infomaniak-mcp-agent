@@ -1,0 +1,11 @@
+# Suppress historical findings that have been remediated in HEAD.
+# Format: <commit>:<file>:<rule>:<line>
+#
+# Each entry below has been investigated; the leaking string is no longer
+# present in the current tree.
+
+# v0.3 commit: a real Infomaniak hosting prefix appeared as an example
+# value in a Zod .describe() call. Replaced in HEAD with a generic
+# 'myprefix_WP123456'. The commit itself can't be rewritten on a
+# published branch, so we flag the historical match here.
+68efff2dffd94c4e3a085c471e425338dd5f284d:src/tools/databases.ts:patrick-known-secrets:70
