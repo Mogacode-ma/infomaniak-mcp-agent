@@ -6,7 +6,8 @@
  *   POST /2/domains/{domain}/dnssec/enable
  *   POST /2/domains/{domain}/dnssec/disable
  *
- * Live verified: GET on example.com returned the expected key set.
+ * The GET endpoint was verified live against a real Infomaniak-managed
+ * domain and returned the expected key set.
  */
 import { z } from "zod";
 

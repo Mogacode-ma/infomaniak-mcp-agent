@@ -9,3 +9,7 @@
 # 'myprefix_WP123456'. The commit itself can't be rewritten on a
 # published branch, so we flag the historical match here.
 68efff2dffd94c4e3a085c471e425338dd5f284d:src/tools/databases.ts:patrick-known-secrets:70
+
+# v0.6 commit: the maintainer's domain name appeared in a "live verified"
+# comment in dnssec.ts. Replaced in HEAD with a generic phrasing.
+e9ecb15c826723d4804d827ba3e5ad9119918ffb:src/tools/dnssec.ts:patrick-known-secrets:9
