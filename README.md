@@ -27,15 +27,16 @@ See [`ARCHITECTURE.md`](./ARCHITECTURE.md) for the full design rationale.
 
 ## Install
 
-```bash
-npm install -g infomaniak-mcp-agent
-```
-
-Or run on demand without installing:
+> ⚠️ **Not published on npm yet.** Until v1.0, install from source.
 
 ```bash
-npx infomaniak-mcp-agent
+git clone https://github.com/Mogacode-ma/infomaniak-mcp-agent.git
+cd infomaniak-mcp-agent
+npm ci
+npm run build
 ```
+
+The build output is in `dist/server.js` and is what your MCP client will run.
 
 ### Configure Claude Desktop
 
@@ -45,8 +46,8 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS)
 {
   "mcpServers": {
     "infomaniak": {
-      "command": "npx",
-      "args": ["-y", "infomaniak-mcp-agent"],
+      "command": "node",
+      "args": ["/absolute/path/to/infomaniak-mcp-agent/dist/server.js"],
       "env": {
         "INFOMANIAK_API_TOKEN": "paste-your-token-here",
         "INFOMANIAK_AUTH_MODE": "auto"
@@ -56,14 +57,28 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS)
 }
 ```
 
+Restart Claude Desktop to pick up the change.
+
 ### Configure Claude Code
 
 ```bash
 claude mcp add infomaniak \
   -e INFOMANIAK_API_TOKEN=paste-your-token-here \
   -e INFOMANIAK_AUTH_MODE=auto \
-  -- npx -y infomaniak-mcp-agent
+  -- node /absolute/path/to/infomaniak-mcp-agent/dist/server.js
 ```
+
+### Once it lands on npm (later)
+
+When `v1.0` is published you will be able to install with:
+
+```bash
+npm install -g infomaniak-mcp-agent
+# or run on demand:
+npx infomaniak-mcp-agent
+```
+
+The Claude Desktop / Claude Code configurations will then use `npx -y infomaniak-mcp-agent` instead of the absolute `node ...` path.
 
 ## Authentication
 
@@ -103,15 +118,43 @@ To copy them: open Chrome DevTools on [manager.infomaniak.com](https://manager.i
 
 ## Tools
 
+### Introspection (start here)
 | Tool | Annotation | Purpose |
 |---|---|---|
 | `infomaniak_overview` | read-only | Summary of organizations + products. Best first call. |
+| `infomaniak_help` | read-only | Suggest tools matching a free-form intent ("create site", "list mailboxes"…). |
+| `infomaniak_explain` | read-only | Returns the full definition (description + schemas) of a specific tool. |
+| `infomaniak_audit_account` | read-only | Scan an organization for expirations / locked products / ongoing ops. |
+
+### Organizations & products
+| Tool | Annotation | Purpose |
+|---|---|---|
 | `infomaniak_list_organizations` | read-only | Accounts you have technical access to. |
 | `infomaniak_list_hostings` | read-only | Web hostings (classic + Node.js) for one organization. |
+| `infomaniak_list_domains` | read-only | Domains for one organization, with creation + expiration dates. |
+| `infomaniak_get_domain` | read-only | Detail of one domain (DNS managed?, DNSSEC, errors). |
+
+### Web hosting sites
+| Tool | Annotation | Purpose |
+|---|---|---|
 | `infomaniak_list_sites` | read-only | Sites on a given web hosting (with applications). |
 | `infomaniak_create_site` | **destructive** | Two-phase: returns a plan + token, second call with token actually creates. |
 
-More tools (mail, dns, drive, domain, audit, undo, …) are coming — see the [roadmap](#roadmap).
+### DNS
+| Tool | Annotation | Purpose |
+|---|---|---|
+| `infomaniak_dns_list_records` | read-only | Every DNS record on an Infomaniak-managed zone. |
+| `infomaniak_dns_create_record` | **destructive** | Two-phase create record (A, AAAA, CNAME, MX, TXT, SRV, NS, CAA, PTR, SPF). |
+| `infomaniak_dns_delete_record` | **destructive** | Two-phase delete record (with full preview before commit). |
+
+### Mail
+| Tool | Annotation | Purpose |
+|---|---|---|
+| `infomaniak_list_mail_hostings` | read-only | Mail hostings for one organization. |
+| `infomaniak_list_mailboxes` | read-only | Mailboxes on a given mail hosting. |
+| `infomaniak_get_mailbox_aliases` | read-only | Aliases configured on a specific mailbox. |
+
+More tools (kDrive, newsletters, swiss-backup, kchat, undo, history, …) are coming — see the [roadmap](#roadmap).
 
 ## Limitations
 

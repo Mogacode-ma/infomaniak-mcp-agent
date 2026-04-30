@@ -125,3 +125,95 @@ export const CreateSiteResponseSchema = z.object({
   progress_id: z.string(),
 });
 export type CreateSiteResponse = z.infer<typeof CreateSiteResponseSchema>;
+
+// ----------------------------------------------------------------------------
+// Domain
+// ----------------------------------------------------------------------------
+
+export const DomainSchema = z.object({
+  id: z.number().optional(),
+  customer_name: z.string(),
+  is_dns_managed_by_infomaniak: z.boolean().optional(),
+  is_external: z.boolean().optional(),
+  has_dnssec: z.boolean().optional(),
+  is_dnssec_pending: z.boolean().optional(),
+  has_error: z.boolean().optional(),
+  has_trustee_contact: z.boolean().optional(),
+  has_whois_antispam: z.boolean().optional(),
+  is_part_of_ksuite: z.boolean().optional(),
+  is_premium: z.boolean().optional(),
+  is_idn: z.boolean().optional(),
+  puny_code: z.string().nullable().optional(),
+});
+export type Domain = z.infer<typeof DomainSchema>;
+
+// ----------------------------------------------------------------------------
+// DNS records
+// ----------------------------------------------------------------------------
+
+/** DNS record types supported by Infomaniak. */
+export const DnsRecordTypeSchema = z.enum([
+  "A",
+  "AAAA",
+  "CNAME",
+  "MX",
+  "TXT",
+  "SRV",
+  "NS",
+  "CAA",
+  "PTR",
+  "SPF",
+]);
+export type DnsRecordType = z.infer<typeof DnsRecordTypeSchema>;
+
+/**
+ * DNS record as returned by `GET /2/zones/{zone}/records`.
+ *
+ * Observed live on a real Infomaniak zone (96 records, types
+ * A/AAAA/CNAME/MX/NS/TXT). Only these keys are ever present:
+ * `id`, `source`, `type`, `ttl`, `target`, `updated_at`.
+ *
+ * Notes about Infomaniak's serialization:
+ * - `source` is `"."` for the zone apex, otherwise the subdomain part
+ *   (e.g. `"www"`).
+ * - `target` for MX/SRV records embeds the priority inline, e.g.
+ *   `"5 mta-gw.infomaniak.ch"`. There is no separate `priority` field.
+ */
+export const DnsRecordSchema = z.object({
+  id: z.number().optional(),
+  source: z.string(),
+  type: DnsRecordTypeSchema,
+  ttl: z.number().int().nonnegative(),
+  target: z.string(),
+  updated_at: z.number().optional(),
+});
+export type DnsRecord = z.infer<typeof DnsRecordSchema>;
+
+// ----------------------------------------------------------------------------
+// Mail hosting
+// ----------------------------------------------------------------------------
+
+export const MailHostingSchema = z.object({
+  id: z.number(),
+  account_id: z.number(),
+  service_name: z.string(),
+  customer_name: z.string(),
+  main_fqdn: z.string().optional(),
+  is_part_of_ksuite: z.boolean().optional(),
+  has_maintenance: z.boolean().optional(),
+  is_locked: z.boolean().optional(),
+  has_operation_in_progress: z.boolean().optional(),
+});
+export type MailHosting = z.infer<typeof MailHostingSchema>;
+
+export const MailboxSchema = z.object({
+  mailbox_name: z.string(),
+  mailbox: z.string().optional(),
+  mailbox_idn: z.string().optional(),
+  note: z.string().nullable().optional(),
+  type: z.string().optional(),
+  is_limited: z.boolean().optional(),
+  is_free_mail: z.boolean().optional(),
+  is_used_for_account: z.boolean().optional(),
+});
+export type Mailbox = z.infer<typeof MailboxSchema>;

@@ -3,14 +3,14 @@
   "version": "0.1.0",
   "description": "Full unofficial agentic Infomaniak MCP server — guided automation of web hosting, mail, kDrive, domains and DNS",
   "license": "MIT",
-  "author": "mogacode",
-  "homepage": "https://github.com/mogacode/infomaniak-mcp-agent#readme",
+  "author": "Mogacode",
+  "homepage": "https://github.com/Mogacode-ma/infomaniak-mcp-agent#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mogacode/infomaniak-mcp-agent.git"
+    "url": "git+https://github.com/Mogacode-ma/infomaniak-mcp-agent.git"
   },
   "bugs": {
-    "url": "https://github.com/mogacode/infomaniak-mcp-agent/issues"
+    "url": "https://github.com/Mogacode-ma/infomaniak-mcp-agent/issues"
   },
   "keywords": [
     "mcp",
