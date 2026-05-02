@@ -1,0 +1,17 @@
+node_modules
+dist
+coverage
+.git
+.github
+.husky
+.vscode
+.idea
+.env
+.env.*
+*.log
+tests
+.gitleaksignore
+.gitleaks.toml
+*.md
+LICENSE
+NOTICE
