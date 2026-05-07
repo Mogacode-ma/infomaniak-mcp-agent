@@ -1,0 +1,40 @@
+name: Dependabot auto-merge
+
+# Auto-merges Dependabot PRs that:
+#   - bump patch or minor versions of any package, OR
+#   - bump any GitHub Action,
+# AS LONG AS the full CI pipeline is green (branch protection still enforces
+# that — auto-merge only fires once required checks pass). Major version
+# bumps are intentionally left for manual review since they can introduce
+# breaking changes.
+#
+# Trigger uses pull_request_target so the workflow has access to a write
+# token even on Dependabot's first run, but it never checks out untrusted
+# PR code — only metadata + the gh CLI on the merge endpoint.
+
+on: pull_request_target
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  auto-merge:
+    if: ${{ github.actor == 'dependabot[bot]' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Enable auto-merge for safe bumps
+        if: |
+          steps.metadata.outputs.update-type == 'version-update:semver-patch' ||
+          steps.metadata.outputs.update-type == 'version-update:semver-minor' ||
+          steps.metadata.outputs.package-ecosystem == 'github_actions'
+        run: gh pr merge --auto --squash "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
