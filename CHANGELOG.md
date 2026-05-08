@@ -8,12 +8,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 _(no unreleased changes yet)_
 
+## [0.7.1] — 2026-05-08
+
+### Fixed
+- `infomaniak_create_hosting_user`: `connection_type` enum was wrong. The previous values (`apache_php / ftp / sftp / nodejs`) were a mis-read of the manager UI labels — those describe the *site* environment, not the *hosting user* connection type. Discovered via 422 (`validation_rule_in`) against a live h3 hosting: the API only accepts **`ftp`** (SFTP-only access) or **`ssh`** (full shell + FTP). The schema, default, description, REVERSE-ENGINEERING note and README table are now aligned with the real API. No runtime behaviour change for users who were already passing `ftp` (the default); calls that previously passed `apache_php / sftp / nodejs` were silently failing with 422 anyway.
+
+### Security
+- New transitive vulnerability `fast-uri <=3.1.0` (GHSA-q3j6-qgpj-74h6, path traversal via percent-encoded dot segments) pulled in via `@modelcontextprotocol/sdk → ajv@8.20.0`. Resolved with an `overrides` entry forcing `fast-uri ^3.1.2`. Project is back to **0 npm audit vulnerabilities**.
+
 ## [0.7.0] — 2026-04-30
 
 ### Added (v0.5 work-in-progress)
 - Mail redirections CRUD: `infomaniak_list_redirections`, `infomaniak_create_redirection`, `infomaniak_delete_redirection`. Required fields (`name`, `targets`) confirmed via 422.
 - Database write: `infomaniak_create_database` and `infomaniak_delete_database`. Both go through the manager-private `/proxy/...` API because the public POST silently no-ops (same pattern as site creation; documented in REVERSE-ENGINEERING.md). Delete plan pulls the live database details (disk usage, linked application).
-- FTP / SSH user CRUD: `infomaniak_list_hosting_users`, `infomaniak_create_hosting_user`, `infomaniak_delete_hosting_user`. Required fields (`connection_type`, `login`, `password`) discovered via 422; `connection_type` enum: apache_php / ftp / sftp / nodejs.
+- FTP / SSH user CRUD: `infomaniak_list_hosting_users`, `infomaniak_create_hosting_user`, `infomaniak_delete_hosting_user`. Required fields (`connection_type`, `login`, `password`) discovered via 422. (The `connection_type` enum shipped in v0.7.0 was incorrect — see v0.7.1 fix below.)
 - Escape hatch: `infomaniak_api_call(method, path, query?, body?, confirmation_token?)`. Reaches any documented or undocumented Infomaniak endpoint on `api.infomaniak.com`. Two-phase commit on every non-GET method. Manager-private `/proxy/...` endpoints are intentionally NOT reachable through this tool — use a typed tool.
 
 ### Added (v0.4)

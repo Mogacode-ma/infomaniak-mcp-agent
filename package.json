@@ -1,6 +1,6 @@
 {
   "name": "infomaniak-mcp-agent",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "Full unofficial agentic Infomaniak MCP server — guided automation of web hosting, mail, kDrive, domains and DNS",
   "license": "MIT",
   "author": "Mogacode",
@@ -71,7 +71,8 @@
     "tar": "^7.4.3",
     "@tootallnate/once": "^3.0.1",
     "esbuild": "^0.25.0",
-    "vite": "^6.4.2"
+    "vite": "^6.4.2",
+    "fast-uri": "^3.1.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.6.0",

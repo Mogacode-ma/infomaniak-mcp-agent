@@ -16,7 +16,16 @@ import { recordHistory } from "../utils/history.js";
 
 import { defineTool } from "./types.js";
 
-const ConnectionTypeSchema = z.enum(["apache_php", "ftp", "sftp", "nodejs"]);
+/**
+ * Connection types accepted by Infomaniak's API for hosting users.
+ *
+ * Discovered via 422 (`validation_rule_in`) on a live h3 hosting on
+ * 2026-05-08: only `ftp` (SFTP-only access) and `ssh` (full shell + FTP)
+ * are accepted. The previous enum `apache_php / ftp / sftp / nodejs` was
+ * a mis-read of the manager UI labels (those describe the *site*
+ * environment, not the *user* connection type).
+ */
+const ConnectionTypeSchema = z.enum(["ftp", "ssh"]);
 
 const HostingUserSchema = z.object({
   login: z.string(),
@@ -83,7 +92,7 @@ const CreateInput = z.object({
     .regex(/[a-z]/, "password must contain at least one lowercase letter")
     .regex(/[A-Z]/, "password must contain at least one uppercase letter")
     .regex(/\d/, "password must contain at least one digit"),
-  /** Connection environment. apache_php gives full SSH+FTP, ftp / sftp restrict accordingly. */
+  /** Access level. `ssh` = full shell + FTP, `ftp` = SFTP-only (no shell). */
   connection_type: ConnectionTypeSchema.default("ftp"),
   /** Sub-path the user is jailed into (default: root of the hosting). */
   home_directory: z.string().default("/"),
@@ -113,7 +122,7 @@ const CreateOutput = z.union([
 export const createHostingUserTool = defineTool({
   name: "infomaniak_create_hosting_user",
   description:
-    "Create a new FTP / SSH user on a web hosting. Two-phase commit. Connection types: apache_php (full), ftp, sftp, nodejs. The password follows Infomaniak's default policy.",
+    "Create a new FTP / SSH user on a web hosting. Two-phase commit. Connection types: `ftp` (SFTP-only, no shell) or `ssh` (full shell + FTP). The password follows Infomaniak's default policy.",
   inputSchema: CreateInput,
   outputSchema: CreateOutput,
   annotations: {
