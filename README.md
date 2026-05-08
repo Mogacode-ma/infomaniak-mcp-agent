@@ -225,7 +225,7 @@ Claude: [calls infomaniak_dns_create_record again with the token]
 | Tool | Annotation | Purpose |
 |---|---|---|
 | `infomaniak_list_hosting_users` | read-only | FTP / SSH users on a web hosting. |
-| `infomaniak_create_hosting_user` | **destructive** | Two-phase create with connection_type (apache_php/ftp/sftp/nodejs). |
+| `infomaniak_create_hosting_user` | **destructive** | Two-phase create with `connection_type`: `ftp` (SFTP-only) or `ssh` (full shell + FTP). |
 | `infomaniak_delete_hosting_user` | **destructive** | Two-phase revoke (files preserved). |
 
 ### DNS & DNSSEC

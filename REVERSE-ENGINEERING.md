@@ -109,6 +109,30 @@ GET https://login.infomaniak.com/.well-known/openid-configuration
 
 So OAuth is unusable for write operations against the manager's own product domains. This is why the MCP falls back on the SASESSION/CSRF path that the manager web app itself uses.
 
+### `connection_type` enum on `POST /1/web_hostings/{id}/users`
+
+The Infomaniak public API documents this endpoint at a high level but does not list the accepted values for `connection_type`. The manager UI shows three labels (`PHP application`, `FTP only`, `Node.js application`) which we initially mapped to `apache_php / ftp / sftp / nodejs` in v0.7.0 — that was wrong.
+
+Discovery (2026-05-08, h3 hosting on a live account):
+
+```
+POST /1/web_hostings/999999/users  body={"connection_type":"sftp", ...}
+→ 422 validation_failed
+   "code": "validation_rule_in",
+   "context": { "attribute": "connection_type", "values": ["ftp", "ssh"] }
+```
+
+So the **API actually accepts only two values**:
+
+| Value | Meaning | What the user can do |
+|---|---|---|
+| `ftp` | SFTP-only | upload / download files; **no shell** |
+| `ssh` | full shell | SSH login + SFTP + can run commands |
+
+The labels `PHP application` / `Node.js application` we saw in the UI describe the *site* environment (`apache_php` vs `nodejs`), not the user's access mode. The two concepts were conflated in our schema.
+
+Fixed in v0.7.1.
+
 ### `chrome-cookies-secure` and `SASESSION`
 
 The MCP reads Chrome cookies for `manager.infomaniak.com` to obtain a working session. Specifically:
