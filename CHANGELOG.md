@@ -8,7 +8,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 _(no unreleased changes yet)_
 
-## [0.7.2] — 2026-05-11
+## [0.7.3] — 2026-05-11
+
+### Added
+- `CHROME_PROFILE` and `CHROME_COOKIES_PATH` environment variables to point the auto cookie extractor at a non-default Chrome profile. Real-world setups commonly use named profiles (`Profile 3`, `Profile 4`, etc.) rather than the historical `Default`, and signing out of Chrome can briefly lock the live `Cookies` SQLite file — both cases are now handled cleanly. `CHROME_COOKIES_PATH` takes precedence when both are set; pass it the directory that contains the `Cookies` file.
+
+### Documented (REVERSE-ENGINEERING.md)
+- New section *"Manager UI internal API base — `/v3/api/proxypass_2/1/`"*. Reading the production Angular bundle gives an explicit map of the manager's API namespaces: `apiUrl = /v3/api/`, `apiProxy1 = /v3/api/proxypass_2/1/`, `apiProxy2 = /v3/api/proxypass_2/2/`, `apiUrlV1 = /v3/api/1/`. The old `/proxy/1/...` path we had been using and the new `/v3/api/proxypass_2/1/...` path route to the same backend (byte-identical responses verified live). The `/proxy/private/...` namespace is documented as the route family behind some of the most sensitive manager buttons.
+- The database-users section now leads with the *recommended SQL rotation path* (used live to rotate 58 WordPress sites on 2026-05-11) rather than the API-side caveat. The `PATCH` side-effect on `applications` and `permissions` is still mentioned, but as the reason a typed `reset_database_password` tool is intentionally not shipped — not as a blocker for users of the MCP.
 
 ### Added
 - `infomaniak_list_database_users` (read-only) and `infomaniak_get_database_user` (read-only). Two new typed tools wrapping the `GET /1/web_hostings/{id}/database_users` endpoints discovered live. The list returns MariaDB-level user accounts attached to a hosting with their `applications`, `permissions` (per-database `read/write/admin` rights), `protected` flag (true for WordPress-managed users) and direct phpMyAdmin link. The MCP now exposes **56 tools** across 11 areas.

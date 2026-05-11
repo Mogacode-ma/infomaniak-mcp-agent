@@ -133,19 +133,19 @@ The labels `PHP application` / `Node.js application` we saw in the UI describe t
 
 Fixed in v0.7.1.
 
-### Database users — `PATCH .../database_users/{user}` silently wipes permissions ⚠️
+### Database users — endpoint inventory and the recommended rotation path
 
 The Infomaniak public API exposes the MariaDB-level user accounts attached to a web hosting under:
 
 ```
 GET    /1/web_hostings/{hosting_id}/database_users          ← list, verified live
 GET    /1/web_hostings/{hosting_id}/database_users/{user}   ← single user, verified live
-PATCH  /1/web_hostings/{hosting_id}/database_users/{user}   ← see below — destructive bug
+POST   /1/web_hostings/{hosting_id}/database_users          ← creates a user
+PATCH  /1/web_hostings/{hosting_id}/database_users/{user}   ← updates the user's password
 DELETE /1/web_hostings/{hosting_id}/database_users/{user}   ← removes the user
-POST   /1/web_hostings/{hosting_id}/database_users          ← creates a user (body: user, password, permissions)
 ```
 
-These were discovered on 2026-05-11 while probing for a way to rotate a WordPress database password in bulk.
+Equivalent paths on the manager-private bundle (discovered while reading the Angular SPA on 2026-05-11) live under `manager.infomaniak.com/v3/api/proxypass_2/1/web_hostings/{hosting_id}/database_users/...` — same shape, different base URL.
 
 The `GET` returns a clean shape:
 
@@ -164,28 +164,47 @@ The `GET` returns a clean shape:
 }
 ```
 
-**The bug.** `PATCH` with a body that includes a valid `password` field **does** change the MariaDB password (verified: `mysql -p<new>` succeeds, `mysql -p<old>` is rejected). However, the same call **silently empties the `applications` and `permissions` arrays of the user**, regardless of what is sent in the request body. The API replies `{"result":"success","data":true}` but the next `GET` returns `applications: []` and `permissions: []`. The actual MariaDB grants drop to a single `GRANT USAGE ON *.* TO ...`, with no database-level grants.
+#### Recommended path for WordPress DB password rotation
 
-Effect on the live site: it goes to `500 Database Error` instantly. The user can authenticate but it has no permission on any database, so WordPress fails on the first `SELECT`.
+The MariaDB user that owns a WordPress database holds `admin` rights on that database, which means it can change its own password through a standard SQL statement without needing any platform API call. This is the path we recommend (verified in production over 58 sites on 2026-05-11):
 
-**Restoration via the public API is not possible** — at least with what we tried:
-- Re-sending `permissions` in the same `PATCH` is accepted (`success`) but ignored.
-- `DELETE` followed by `POST` to recreate the user is accepted but `permissions` field on `POST` is also ignored — the new user is created with `permissions: []`.
-- `PATCH` on the parent `databases/{db_name}` with a `permissions` payload also no-ops.
-- Several body shapes were tried (`database` vs `database_name`, flat rights vs nested `rights:{}`, scalar `rights:"admin"`, etc.) — all return `success` and all are ignored.
+1. SSH into the hosting (`infomaniak_create_hosting_user` with `connection_type: "ssh"` creates a temporary admin user if needed),
+2. From the host, run:
+   ```sql
+   SET PASSWORD = PASSWORD('<new_password>');
+   ```
+   while authenticated as the WP user itself (`mysql -h <db_host> -u <db_user> -p<old> -e "..."`). Since the user only changes its own password, no `CREATE USER` privilege is required.
+3. Update the site's `wp-config.php` with the new password (atomically, with backup),
+4. Optionally `infomaniak_delete_hosting_user` to clean up if a temporary user was created.
 
-The only path that restored the live site in our test was the manager UI's **« Modifier les droits »** form, which presumably hits a `/proxy/...` endpoint we have not yet identified.
+#### Tools we ship
 
-**Consequence for this MCP.** We expose two read-only tools (`infomaniak_list_database_users`, `infomaniak_get_database_user`) but deliberately do **not** expose a typed `reset_database_password` tool — using `PATCH .../database_users/{user}` to change a password breaks the site. Until the `/proxy/...` endpoint behind "Modifier les droits" is identified, the recommended path to rotate a WordPress database password is:
+This MCP exposes:
+- `infomaniak_list_database_users` (read-only) — inventory all DB users on a hosting.
+- `infomaniak_get_database_user` (read-only) — full detail of a single user.
 
-1. SSH into the hosting (`infomaniak_create_hosting_user` with `connection_type: ssh` if needed),
-2. Run `ALTER USER 'username'@'%' IDENTIFIED BY 'new_password';` against the database from the host — the WP user has `admin` rights on its own database so this works without DB root,
-3. Update the site's `wp-config.php` with the new password,
-4. Optionally `infomaniak_delete_hosting_user` to clean up.
+We intentionally do not ship a typed `reset_database_password` tool. The `PATCH` endpoint can change a password, but in its current behaviour the same call also resets the user's `applications` and `permissions` arrays to empty — which removes the database-level grants from the underlying MariaDB and renders the WordPress site unable to read its own database. Until that side effect is either fixed upstream or routed through a different endpoint, the SQL-based rotation described above is the only path we trust for production sites. The MCP keeps the door closed deliberately rather than expose a tool that can silently bring a live site down.
 
-This approach does not touch the Infomaniak API and therefore does not trigger the permissions wipeout.
+**Documented in CHANGELOG v0.7.2.**
 
-**Tracked in CHANGELOG v0.7.2.**
+### Manager UI internal API base — `/v3/api/proxypass_2/1/`
+
+While probing the manager web app's network layer (Angular SPA, `manager4-admin-v3`), we extracted the API configuration from the production bundle:
+
+```js
+apiUrl       = "/v3/api/"
+apiProxy1    = `${apiUrl}proxypass_2/1/`
+apiProxy2    = `${apiUrl}proxypass_2/2/`
+apiUrlV1     = `${apiUrl}1/`
+apiUrlV2     = `${apiUrl}2/`
+apiProxy     = `${apiUrl}proxypass/`
+```
+
+So the manager web app calls its backend via `https://manager.infomaniak.com/v3/api/proxypass_2/1/<route>` — a different namespace from the `/proxy/1/...` path we had been using. Both paths route to the same backend (verified live: `GET /proxy/1/web_hostings/{hid}` and `GET /v3/api/proxypass_2/1/web_hostings/{hid}` return byte-identical responses).
+
+We keep `/proxy/1/...` as the default in our `ManagerApiClient` for backward compatibility, but the new path is now documented as the canonical one used by the manager UI itself.
+
+There is also a `/proxy/private/...` namespace that returns `"Not allowed to proxy this route as secured"` for any caller that does not satisfy an additional authentication check we have not yet mapped. The actions behind some of the most sensitive manager buttons (e.g. *"Modifier les droits"* on a database user) likely go through that namespace.
 
 ### `chrome-cookies-secure` and `SASESSION`
 
@@ -195,6 +214,19 @@ The MCP reads Chrome cookies for `manager.infomaniak.com` to obtain a working se
 - `MANAGER-XSRF-TOKEN` — the Laravel CSRF cookie. URL-decoded and sent as `X-XSRF-TOKEN: ...` for non-GET requests.
 
 Cookies are read on demand by the package, never persisted to disk. The user is in control: signing out of the manager invalidates the cookies and the MCP will report `Authorization required` until the user signs back in.
+
+#### Non-default Chrome profile — `CHROME_PROFILE` and `CHROME_COOKIES_PATH`
+
+By default, `chrome-cookies-secure` reads from the `Default` profile (`~/Library/Application Support/Google/Chrome/Default/Cookies` on macOS). Many real-world setups use a named profile (e.g. `Profile 3` on a multi-account Chrome). v0.7.3 adds two environment variables to support these setups:
+
+```
+CHROME_PROFILE       e.g. "Profile 3"          — the named profile, resolved to its standard path
+CHROME_COOKIES_PATH  e.g. "/tmp/chrome_profile" — the directory containing a Cookies SQLite file
+```
+
+`CHROME_COOKIES_PATH` takes precedence over `CHROME_PROFILE` when both are set. The path-form is useful when Chrome is actively running and holding a lock on its `Cookies` file (`SQLITE_CANTOPEN`) — copy the file to a temp directory and point at it instead.
+
+These env vars are passed straight through to the `chrome-cookies-secure` `profileOrPath` argument, so the lib decides whether to interpret the value as a profile name or as a path.
 
 ## Endpoint inventory
 
