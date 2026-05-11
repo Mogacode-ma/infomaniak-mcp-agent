@@ -8,6 +8,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 _(no unreleased changes yet)_
 
+## [0.7.2] — 2026-05-11
+
+### Added
+- `infomaniak_list_database_users` (read-only) and `infomaniak_get_database_user` (read-only). Two new typed tools wrapping the `GET /1/web_hostings/{id}/database_users` endpoints discovered live. The list returns MariaDB-level user accounts attached to a hosting with their `applications`, `permissions` (per-database `read/write/admin` rights), `protected` flag (true for WordPress-managed users) and direct phpMyAdmin link. The MCP now exposes **56 tools** across 11 areas.
+
+### Documented (REVERSE-ENGINEERING.md)
+- New section *"Database users — `PATCH .../database_users/{user}` silently wipes permissions"*. The endpoint `PATCH /1/web_hostings/{hosting_id}/database_users/{user_name}` accepts a `password` field that **does** change the MariaDB password (verified live), but **silently empties the user's `applications` and `permissions` arrays** regardless of what is sent in the body. The API replies `success` but the actual MariaDB grants drop to `GRANT USAGE ON *.*` only, breaking every site that depends on the user. Restoration through the public API is not currently possible (POST `database_users`, PATCH `databases/{db}`, and PATCH `database_users/{user}` all accept a `permissions` payload but ignore it). The only repair we have found is the manager UI's *"Modifier les droits"* form, which presumably hits a manager-private `/proxy/...` endpoint not yet identified.
+
+### Decided NOT to ship
+- A typed `infomaniak_reset_database_password` tool. Until the `/proxy/...` permission-restore endpoint is reverse-engineered, exposing this would let agents accidentally break live WordPress sites with no API path back. The recommended rotation procedure is documented inline in `src/tools/databases.ts` and in REVERSE-ENGINEERING.md: SSH in (optionally via `infomaniak_create_hosting_user` with `connection_type: ssh`), run `ALTER USER ... IDENTIFIED BY '...'` directly against MariaDB (the WP user has `admin` rights on its own database, so this works without DB root), then update `wp-config.php`. This path avoids the buggy PATCH entirely.
+
 ## [0.7.1] — 2026-05-08
 
 ### Fixed

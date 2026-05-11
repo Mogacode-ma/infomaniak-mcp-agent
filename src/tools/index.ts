@@ -11,6 +11,8 @@ import {
   createDatabaseTool,
   deleteDatabaseTool,
   getDatabaseTool,
+  getDatabaseUserTool,
+  listDatabaseUsersTool,
   listDatabasesTool,
 } from "./databases.js";
 import {
@@ -67,6 +69,8 @@ export const tools: ReadonlyArray<ToolDefinition> = [
   getDatabaseTool,
   createDatabaseTool,
   deleteDatabaseTool,
+  listDatabaseUsersTool,
+  getDatabaseUserTool,
   // FTP / SSH users
   listHostingUsersTool,
   createHostingUserTool,

@@ -133,6 +133,60 @@ The labels `PHP application` / `Node.js application` we saw in the UI describe t
 
 Fixed in v0.7.1.
 
+### Database users — `PATCH .../database_users/{user}` silently wipes permissions ⚠️
+
+The Infomaniak public API exposes the MariaDB-level user accounts attached to a web hosting under:
+
+```
+GET    /1/web_hostings/{hosting_id}/database_users          ← list, verified live
+GET    /1/web_hostings/{hosting_id}/database_users/{user}   ← single user, verified live
+PATCH  /1/web_hostings/{hosting_id}/database_users/{user}   ← see below — destructive bug
+DELETE /1/web_hostings/{hosting_id}/database_users/{user}   ← removes the user
+POST   /1/web_hostings/{hosting_id}/database_users          ← creates a user (body: user, password, permissions)
+```
+
+These were discovered on 2026-05-11 while probing for a way to rotate a WordPress database password in bulk.
+
+The `GET` returns a clean shape:
+
+```json
+{
+  "data": {
+    "name": "myprefix_WP1234567",
+    "applications": [{ "id": "1401330", "type": "wordpress", "name": "..." }],
+    "permissions": [
+      { "database": "myprefix_WP1234567", "rights": { "read": true, "write": true, "admin": true } }
+    ],
+    "protected": true,
+    "protected_information": "My WordPress Site",
+    "link": "https://h2-phpmyadmin.infomaniak.com/?pma_servername=..."
+  }
+}
+```
+
+**The bug.** `PATCH` with a body that includes a valid `password` field **does** change the MariaDB password (verified: `mysql -p<new>` succeeds, `mysql -p<old>` is rejected). However, the same call **silently empties the `applications` and `permissions` arrays of the user**, regardless of what is sent in the request body. The API replies `{"result":"success","data":true}` but the next `GET` returns `applications: []` and `permissions: []`. The actual MariaDB grants drop to a single `GRANT USAGE ON *.* TO ...`, with no database-level grants.
+
+Effect on the live site: it goes to `500 Database Error` instantly. The user can authenticate but it has no permission on any database, so WordPress fails on the first `SELECT`.
+
+**Restoration via the public API is not possible** — at least with what we tried:
+- Re-sending `permissions` in the same `PATCH` is accepted (`success`) but ignored.
+- `DELETE` followed by `POST` to recreate the user is accepted but `permissions` field on `POST` is also ignored — the new user is created with `permissions: []`.
+- `PATCH` on the parent `databases/{db_name}` with a `permissions` payload also no-ops.
+- Several body shapes were tried (`database` vs `database_name`, flat rights vs nested `rights:{}`, scalar `rights:"admin"`, etc.) — all return `success` and all are ignored.
+
+The only path that restored the live site in our test was the manager UI's **« Modifier les droits »** form, which presumably hits a `/proxy/...` endpoint we have not yet identified.
+
+**Consequence for this MCP.** We expose two read-only tools (`infomaniak_list_database_users`, `infomaniak_get_database_user`) but deliberately do **not** expose a typed `reset_database_password` tool — using `PATCH .../database_users/{user}` to change a password breaks the site. Until the `/proxy/...` endpoint behind "Modifier les droits" is identified, the recommended path to rotate a WordPress database password is:
+
+1. SSH into the hosting (`infomaniak_create_hosting_user` with `connection_type: ssh` if needed),
+2. Run `ALTER USER 'username'@'%' IDENTIFIED BY 'new_password';` against the database from the host — the WP user has `admin` rights on its own database so this works without DB root,
+3. Update the site's `wp-config.php` with the new password,
+4. Optionally `infomaniak_delete_hosting_user` to clean up.
+
+This approach does not touch the Infomaniak API and therefore does not trigger the permissions wipeout.
+
+**Tracked in CHANGELOG v0.7.2.**
+
 ### `chrome-cookies-secure` and `SASESSION`
 
 The MCP reads Chrome cookies for `manager.infomaniak.com` to obtain a working session. Specifically:
