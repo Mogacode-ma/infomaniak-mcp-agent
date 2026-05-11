@@ -14,7 +14,7 @@
 `infomaniak-mcp-agent` is an unofficial [Model Context Protocol](https://modelcontextprotocol.io/) server that exposes the full surface of Infomaniak — Switzerland's sovereign cloud — as **56 tools** an LLM can call directly: web hosting, mail (kSuite), kDrive, domains, DNS, DNSSEC, FTP/SSH users, AI products, account audits and more. Every destructive operation goes through a strict two-phase commit, so an agent can never silently delete or mutate something on your account.
 
 ```
-You → Claude:  "audit the broz.be hosting and tell me which mailboxes are over quota"
+You → Claude:  "audit the example.com hosting and tell me which mailboxes are over quota"
 Claude → MCP:  infomaniak_audit_account → infomaniak_list_mail_hostings → infomaniak_list_mailboxes
 Claude → You:  3 mailboxes >85% — paul@ (94%), notify@ (88%), team@ (87%). Want me to add an alert?
 ```

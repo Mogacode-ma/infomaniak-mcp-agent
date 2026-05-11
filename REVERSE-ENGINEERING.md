@@ -116,7 +116,7 @@ The Infomaniak public API documents this endpoint at a high level but does not l
 Discovery (2026-05-08, h3 hosting on a live account):
 
 ```
-POST /1/web_hostings/693895/users  body={"connection_type":"sftp", ...}
+POST /1/web_hostings/999999/users  body={"connection_type":"sftp", ...}
 → 422 validation_failed
    "code": "validation_rule_in",
    "context": { "attribute": "connection_type", "values": ["ftp", "ssh"] }
@@ -152,10 +152,10 @@ The `GET` returns a clean shape:
 ```json
 {
   "data": {
-    "name": "0w1r8s_WP1401330",
+    "name": "myprefix_WP1234567",
     "applications": [{ "id": "1401330", "type": "wordpress", "name": "..." }],
     "permissions": [
-      { "database": "0w1r8s_WP1401330", "rights": { "read": true, "write": true, "admin": true } }
+      { "database": "myprefix_WP1234567", "rights": { "read": true, "write": true, "admin": true } }
     ],
     "protected": true,
     "protected_information": "My WordPress Site",

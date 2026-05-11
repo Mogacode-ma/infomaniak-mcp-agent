@@ -8,6 +8,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 _(no unreleased changes yet)_
 
+## [0.7.4] — 2026-05-11
+
+### Fixed
+- Sanitize examples in `REVERSE-ENGINEERING.md` (`693895` hosting id → `999999`, `0w1r8s_WP1401330` DB user → `myprefix_WP1234567`) and in `README.md` (`broz.be` → `example.com`). These were real identifiers from the maintainer's account that slipped through previous releases. The repo now contains no real account-specific identifiers; all examples use placeholder values.
+
 ## [0.7.3] — 2026-05-11
 
 ### Added
