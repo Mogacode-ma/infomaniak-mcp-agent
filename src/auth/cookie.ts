@@ -78,18 +78,20 @@ async function extractFromChrome(): Promise<ManagerSession> {
   // Lazy-import to keep cold-start fast for users in manual mode.
   const { default: chrome } = await import("chrome-cookies-secure");
 
+  const profileOverride = process.env["CHROME_COOKIES_PATH"] || process.env["CHROME_PROFILE"];
   const cookieJar = await new Promise<Record<string, string>>((resolve, reject) => {
-    chrome.getCookies(
-      "https://manager.infomaniak.com/",
-      "object",
-      (err: Error | null, cookies: Record<string, string>) => {
-        if (err) {
-          reject(err);
-          return;
-        }
-        resolve(cookies);
-      },
-    );
+    const cb = (err: Error | null, cookies: Record<string, string>): void => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve(cookies);
+    };
+    if (profileOverride) {
+      chrome.getCookies("https://manager.infomaniak.com/", "object", cb, profileOverride);
+    } else {
+      chrome.getCookies("https://manager.infomaniak.com/", "object", cb);
+    }
   }).catch((err: unknown) => {
     log.error({ err }, "Failed to read Chrome cookies");
     throw new InfomaniakAuthError({
