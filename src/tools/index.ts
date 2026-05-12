@@ -39,6 +39,7 @@ import {
 } from "./redirections.js";
 import { historyTool, undoTool } from "./session.js";
 import { createSiteTool, deleteSiteTool, listSitesTool } from "./sites.js";
+import { deleteCertificateTool, getCertificateTool, requestCertificateTool } from "./ssl.js";
 import { listSwissBackupsTool } from "./swiss-backup.js";
 import type { ToolDefinition } from "./types.js";
 import { createShortUrlTool, listShortUrlsTool, shortUrlsQuotaTool } from "./url-shortener.js";
@@ -64,6 +65,10 @@ export const tools: ReadonlyArray<ToolDefinition> = [
   listSitesTool,
   createSiteTool,
   deleteSiteTool,
+  // SSL certificates
+  getCertificateTool,
+  requestCertificateTool,
+  deleteCertificateTool,
   // Databases
   listDatabasesTool,
   getDatabaseTool,

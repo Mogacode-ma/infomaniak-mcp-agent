@@ -6,12 +6,12 @@
 [![Node](https://img.shields.io/badge/node-%3E%3D18-43853d.svg)](https://nodejs.org)
 [![TypeScript strict](https://img.shields.io/badge/TypeScript-strict-3178c6.svg)](https://www.typescriptlang.org/)
 [![MCP](https://img.shields.io/badge/Model_Context_Protocol-1.0-9333ea.svg)](https://modelcontextprotocol.io/)
-[![Tools](https://img.shields.io/badge/tools-56-blueviolet.svg)](#tools)
+[![Tools](https://img.shields.io/badge/tools-59-blueviolet.svg)](#tools)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](./CONTRIBUTING.md)
 
 > **Drive your entire [Infomaniak](https://www.infomaniak.com) account from [Claude](https://www.anthropic.com/claude) — agentic, two-phase commit, open-source.**
 
-`infomaniak-mcp-agent` is an unofficial [Model Context Protocol](https://modelcontextprotocol.io/) server that exposes the full surface of Infomaniak — Switzerland's sovereign cloud — as **56 tools** an LLM can call directly: web hosting, mail (kSuite), kDrive, domains, DNS, DNSSEC, FTP/SSH users, AI products, account audits and more. Every destructive operation goes through a strict two-phase commit, so an agent can never silently delete or mutate something on your account.
+`infomaniak-mcp-agent` is an unofficial [Model Context Protocol](https://modelcontextprotocol.io/) server that exposes the full surface of Infomaniak — Switzerland's sovereign cloud — as **59 tools** an LLM can call directly: web hosting, mail (kSuite), kDrive, domains, DNS, DNSSEC, FTP/SSH users, AI products, account audits and more. Every destructive operation goes through a strict two-phase commit, so an agent can never silently delete or mutate something on your account.
 
 ```
 You → Claude:  "audit the example.com hosting and tell me which mailboxes are over quota"
@@ -186,7 +186,7 @@ Claude: [calls infomaniak_dns_create_record again with the token]
 
 ## Tools
 
-56 tools across 11 areas. Use `infomaniak_help` to fuzzy-search by intent, or `infomaniak_explain` to dump a tool's full JSON schema.
+59 tools across 11 areas. Use `infomaniak_help` to fuzzy-search by intent, or `infomaniak_explain` to dump a tool's full JSON schema.
 
 ### Introspection (start here)
 | Tool | Annotation | Purpose |
@@ -212,6 +212,13 @@ Claude: [calls infomaniak_dns_create_record again with the token]
 | `infomaniak_list_sites` | read-only | Sites on a given web hosting (with applications). |
 | `infomaniak_create_site` | **destructive** | Two-phase: returns a plan + token, second call with token actually creates. |
 | `infomaniak_delete_site` | **destructive** | Two-phase delete (full preview of the site to be removed). |
+
+### SSL certificates
+| Tool | Annotation | Purpose |
+|---|---|---|
+| `infomaniak_get_certificate` | read-only | Current cert status (`updating`/`ok`/`error`), issuer, expiry, ACME identifier errors. |
+| `infomaniak_request_certificate` | **destructive** | Two-phase. Issue or renew a cert. Three `type` values: `free` (Let's Encrypt), `paid` (Sectigo, requires `certificate_id`), `custom` (BYO PEM, requires `certificate` + `private_key`). |
+| `infomaniak_delete_certificate` | **destructive** | Two-phase. Remove the cert from a site. Undo via `request_certificate` with `type: "free"`. |
 
 ### Databases
 | Tool | Annotation | Purpose |

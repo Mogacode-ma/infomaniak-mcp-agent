@@ -8,6 +8,35 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 _(no unreleased changes yet)_
 
+## [0.8.0] — 2026-05-12
+
+### Added — SSL certificates (3 new tools)
+
+The MCP can now manage SSL certificates on web hosting sites end-to-end, through the standard two-phase commit. Three new typed tools:
+
+- `infomaniak_get_certificate(hosting_id, site_id)` — read-only. Returns the ACME-flow status (`updating` / `ok` / `error` / …), main FQDN in IDN form, any identifier-level errors, and the timestamp of the last issuance attempt.
+- `infomaniak_request_certificate(hosting_id, site_id, type, …)` — destructive, two-phase. Three `type` values are accepted:
+  - `free` — Let's Encrypt (no extra fields, Infomaniak runs the ACME flow automatically).
+  - `paid` — a pre-purchased Sectigo certificate, requires `certificate_id`.
+  - `custom` — bring-your-own PEM certificate, requires `certificate` + `private_key` (and optionally `intermediate_certificate` for the chain).
+  Returns an `operation_uuid`; poll `infomaniak_get_certificate` to track progress.
+- `infomaniak_delete_certificate(hosting_id, site_id)` — destructive, two-phase. Removes the certificate from the site. Pulls the current status into the plan so the caller sees what is about to be removed. The history entry registers an `infomaniak_request_certificate` with `type: "free"` as the undo action.
+
+Endpoints (verified live, public Bearer auth):
+```
+GET    /1/web_hostings/{hid}/certificates/{site_id}
+POST   /1/web_hostings/{hid}/certificates   body: {site_id, type, ...}
+DELETE /1/web_hostings/{hid}/certificates/{site_id}
+```
+
+The site object (returned by `infomaniak_list_sites`) already exposes `ssl_status` / `ssl_issuer` / `ssl_emitted_at` / `ssl_expired_at` for quick visibility without hitting these endpoints.
+
+### Documented (REVERSE-ENGINEERING.md)
+
+New section *"SSL certificates"* with the full endpoint map, the `type` enum values discovered via 422, and the rationale for the per-type required-fields validation we run client-side before issuing the call.
+
+Total tool count is now **59** (was 56).
+
 ## [0.7.4] — 2026-05-11
 
 ### Fixed
