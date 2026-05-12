@@ -33,11 +33,39 @@ const CertificateTypeSchema = z.enum(["free", "paid", "custom"]);
 
 const CertificateStatusSchema = z.object({
   site_id: z.number(),
-  main_fqdn_idn: z.string().optional(),
+  /** Provisioning state: "installed", "updating", "error", "pending", etc. */
   status: z.string(),
+  /** Certificate type — same enum as the POST body. */
+  type: z.enum(["free", "paid", "custom"]).optional(),
+  /** Concrete CA used. For free certs: typically "lets_encrypt". */
+  sub_type: z.string().nullable().optional(),
+  /** Short issuer identifier (e.g. "R12", "R11" for Let's Encrypt rotations). */
+  issuer: z.string().nullable().optional(),
+  /** Organization that issued the cert (e.g. "Let's Encrypt"). */
+  organization: z.string().nullable().optional(),
+  /** Main FQDN this certificate covers. */
+  main_fqdn: z.string().optional(),
+  /** Same FQDN, IDN form (xn--...). */
+  main_fqdn_idn: z.string().optional(),
+  /** Unix timestamp (seconds) of when the cert was issued. */
+  emitted_at: z.number().nullable().optional(),
+  /** Unix timestamp (seconds) of cert expiry. */
+  expired_at: z.number().nullable().optional(),
+  /** Hex SHA-256 fingerprint, useful for cross-checking what's actually served. */
+  fingerprint_sha256: z.string().nullable().optional(),
+  /** Whether the certificate is currently valid (signed by a trusted CA, not expired, …). */
+  is_valid: z.boolean().optional(),
+  /** Whether the certificate has passed its expiry date. */
+  is_expired: z.boolean().optional(),
+  /** Whether the certificate is a fallback self-signed one. */
+  is_selfsigned: z.boolean().optional(),
+  /** ACME identifiers that were skipped during issuance (e.g. unreachable domains). */
   ignored_identifiers: z.array(z.unknown()).optional(),
+  /** ACME identifiers that errored during issuance, with the reason. */
   error_identifiers: z.array(z.unknown()).optional(),
+  /** Top-level certificate error, when applicable. */
   error_on_certificate: z.unknown().nullable().optional(),
+  /** Unix timestamp of the last issuance attempt. */
   last_attempt_at: z.number().optional(),
 });
 
@@ -55,7 +83,7 @@ const GetCertificateOutput = CertificateStatusSchema;
 export const getCertificateTool = defineTool({
   name: "infomaniak_get_certificate",
   description:
-    "Return the SSL certificate status for one site on a web hosting: provisioning state (`updating`, `ok`, `error`, etc.), the IDN form of the main FQDN, any identifier-level errors from the ACME flow, and the timestamp of the last issuance attempt.",
+    "Return the full SSL certificate detail for one site on a web hosting: provisioning state (`installed`, `updating`, `error`, …), type (free/paid/custom) and sub-type (`lets_encrypt`, …), issuer + organization, validity flags (`is_valid`, `is_expired`, `is_selfsigned`), issue and expiry timestamps, SHA-256 fingerprint, main FQDN in IDN form, ACME identifier errors and the timestamp of the last issuance attempt.",
   inputSchema: GetCertificateInput,
   outputSchema: GetCertificateOutput,
   annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: true },

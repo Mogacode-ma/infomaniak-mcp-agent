@@ -8,7 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 _(no unreleased changes yet)_
 
-## [0.8.0] — 2026-05-12
+## [0.8.1] — 2026-05-12
+
+### Improved
+- `infomaniak_get_certificate` now exposes the full response schema, not just the provisioning state. The endpoint `GET /1/web_hostings/{hid}/certificates/{site_id}` actually returns a much richer object than v0.8.0 surfaced — `type`, `sub_type`, `issuer`, `organization`, `main_fqdn`, `emitted_at`, `expired_at`, `fingerprint_sha256`, `is_valid`, `is_expired`, `is_selfsigned`. Verified live against `crm.example.com`'s freshly-issued Let's Encrypt R12 cert. No new endpoint, just a wider Zod schema and an updated tool description so agents and humans see everything that's available.
 
 ### Added — SSL certificates (3 new tools)
 
