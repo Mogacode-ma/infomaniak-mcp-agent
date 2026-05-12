@@ -205,7 +205,7 @@ The `type` field on `POST` is constrained to `free` / `paid` / `custom` (confirm
 | `paid`   | `certificate_id` | id of a Sectigo (or similar) certificate previously purchased. |
 | `custom` | a PEM payload (the validation message reads *"A certificate is required. Provide either a certificate file or a PEM certificate"*) | We pass `certificate` + `private_key` + optional `intermediate_certificate`. |
 
-The `GET` response is intentionally narrow — it exposes only the *provisioning state* (`status`, `last_attempt_at`, ACME identifier errors). Information about the certificate itself (issuer, validity window, …) lives on the *site* object under `ssl_status`, `ssl_issuer`, `ssl_emitted_at`, `ssl_expired_at`.
+The `GET` response is in fact much richer than it first looks — `status` and the ACME identifier arrays sit alongside `type`, `sub_type`, `issuer`, `organization`, `main_fqdn`, `emitted_at`, `expired_at`, `fingerprint_sha256`, `is_valid`, `is_expired`, `is_selfsigned`. The same information also surfaces on the *site* object (`ssl_status`, `ssl_issuer`, `ssl_emitted_at`, `ssl_expired_at`) for cheap listing without hitting this endpoint per-site, but the certificate endpoint is the canonical source. (The v0.8.0 Zod schema was too narrow and only exposed a fraction of those fields — widened in v0.8.1.)
 
 `GET /1/web_hostings/{hid}/certificates` (the collection, with no site filter) returns `401 not_authorized` even for a token that successfully reads single certificates — likely a separate `certificates:read` scope is required. We don't ship a typed `list_certificates_for_hosting` tool yet for this reason.
 
