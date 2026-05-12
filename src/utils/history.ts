@@ -18,7 +18,9 @@ export type ActionKind =
   | "create_dns_record"
   | "delete_dns_record"
   | "create_database"
-  | "delete_database";
+  | "delete_database"
+  | "request_certificate"
+  | "delete_certificate";
 
 /**
  * Description of how to reverse an action. `undefined` means the action

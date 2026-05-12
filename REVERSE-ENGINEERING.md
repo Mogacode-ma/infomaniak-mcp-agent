@@ -187,6 +187,30 @@ We intentionally do not ship a typed `reset_database_password` tool. The `PATCH`
 
 **Documented in CHANGELOG v0.7.2.**
 
+### SSL certificates — public API endpoint family
+
+Discovered on 2026-05-12 by enumerating `POST` body shapes against `/1/web_hostings/{hid}/...`. The public Bearer API exposes three certificate endpoints, all on the hosting-level resource (not on the per-site sub-resource — `/sites/{sid}/certificates` returns `method_not_found`):
+
+```
+GET    /1/web_hostings/{hid}/certificates/{site_id}
+POST   /1/web_hostings/{hid}/certificates       body: {site_id, type, ...}
+DELETE /1/web_hostings/{hid}/certificates/{site_id}
+```
+
+The `type` field on `POST` is constrained to `free` / `paid` / `custom` (confirmed via `validation_rule_in`). Per-type required fields, also discovered via 422:
+
+| `type` | Required fields | Notes |
+|---|---|---|
+| `free`   | — | Let's Encrypt. Infomaniak runs the ACME flow. |
+| `paid`   | `certificate_id` | id of a Sectigo (or similar) certificate previously purchased. |
+| `custom` | a PEM payload (the validation message reads *"A certificate is required. Provide either a certificate file or a PEM certificate"*) | We pass `certificate` + `private_key` + optional `intermediate_certificate`. |
+
+The `GET` response is intentionally narrow — it exposes only the *provisioning state* (`status`, `last_attempt_at`, ACME identifier errors). Information about the certificate itself (issuer, validity window, …) lives on the *site* object under `ssl_status`, `ssl_issuer`, `ssl_emitted_at`, `ssl_expired_at`.
+
+`GET /1/web_hostings/{hid}/certificates` (the collection, with no site filter) returns `401 not_authorized` even for a token that successfully reads single certificates — likely a separate `certificates:read` scope is required. We don't ship a typed `list_certificates_for_hosting` tool yet for this reason.
+
+Implemented as `infomaniak_get_certificate`, `infomaniak_request_certificate`, `infomaniak_delete_certificate` in v0.8.0.
+
 ### Manager UI internal API base — `/v3/api/proxypass_2/1/`
 
 While probing the manager web app's network layer (Angular SPA, `manager4-admin-v3`), we extracted the API configuration from the production bundle:
