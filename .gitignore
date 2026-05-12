@@ -44,3 +44,7 @@ Thumbs.db
 # Local CLAUDE memory (NEVER pushed)
 .claude/
 CLAUDE.md
+
+# Python appmap auto-generated
+appmap.yml
+tmp/
