@@ -1,5 +1,7 @@
 # infomaniak-mcp-agent
 
+[![npm version](https://img.shields.io/npm/v/infomaniak-mcp-agent.svg)](https://www.npmjs.com/package/infomaniak-mcp-agent)
+[![npm downloads](https://img.shields.io/npm/dm/infomaniak-mcp-agent.svg)](https://www.npmjs.com/package/infomaniak-mcp-agent)
 [![CI](https://github.com/Mogacode-ma/infomaniak-mcp-agent/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Mogacode-ma/infomaniak-mcp-agent/actions/workflows/ci.yml)
 [![CodeQL](https://github.com/Mogacode-ma/infomaniak-mcp-agent/actions/workflows/codeql.yml/badge.svg?branch=main)](https://github.com/Mogacode-ma/infomaniak-mcp-agent/actions/workflows/codeql.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
@@ -82,16 +84,29 @@ See [`ARCHITECTURE.md`](./ARCHITECTURE.md) for the full design rationale.
 
 ## Install
 
-> ⚠️ **Not published on npm.** Install from source — see the [FAQ](#why-not-on-npm) for why.
+Available on npm — the recommended path is to let `npx` fetch the latest release on demand:
+
+```bash
+npx infomaniak-mcp-agent
+```
+
+(no install step needed; `npx` resolves the latest version on first invocation and caches it).
+
+Or install globally if you prefer a stable binary in your `$PATH`:
+
+```bash
+npm install -g infomaniak-mcp-agent
+```
+
+If you'd rather pin to a specific commit (or hack on the source), install from this repo:
 
 ```bash
 git clone https://github.com/Mogacode-ma/infomaniak-mcp-agent.git
 cd infomaniak-mcp-agent
 npm ci
 npm run build
+# resulting binary: ./dist/server.js
 ```
-
-The build output is in `dist/server.js` and is what your MCP client will run.
 
 ### Configure Claude Desktop
 
@@ -101,8 +116,8 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS)
 {
   "mcpServers": {
     "infomaniak": {
-      "command": "node",
-      "args": ["/absolute/path/to/infomaniak-mcp-agent/dist/server.js"],
+      "command": "npx",
+      "args": ["-y", "infomaniak-mcp-agent"],
       "env": {
         "INFOMANIAK_API_TOKEN": "paste-your-token-here",
         "INFOMANIAK_AUTH_MODE": "auto"
@@ -120,7 +135,7 @@ Restart Claude Desktop to pick up the change.
 claude mcp add infomaniak \
   -e INFOMANIAK_API_TOKEN=paste-your-token-here \
   -e INFOMANIAK_AUTH_MODE=auto \
-  -- node /absolute/path/to/infomaniak-mcp-agent/dist/server.js
+  -- npx -y infomaniak-mcp-agent
 ```
 
 ## Authentication
@@ -348,10 +363,6 @@ Yes. It speaks the standard [Model Context Protocol](https://modelcontextprotoco
 ### Will my Infomaniak token / session ever leave my machine?
 
 No. The server runs locally over stdio. Your Bearer token is read from `INFOMANIAK_API_TOKEN` (env or `.env`) and used only to call `api.infomaniak.com`. The Chrome cookies (`SASESSION`, `MANAGER-XSRF-TOKEN`) live in memory for the duration of a single tool call and are never persisted. Logs redact every sensitive value (tokens, cookies, passwords).
-
-### Why not on npm?
-
-The codebase ships a few transitive dev-time dependencies (via `chrome-cookies-secure`'s native `sqlite3`) that show up on `npm audit` even after our overrides. Until that audit page is 100% clean, we prefer to ship from source so users can review the tree before installing. We will publish to npm in `v1.0`.
 
 ### Does it support self-hosting / running outside macOS?
 
