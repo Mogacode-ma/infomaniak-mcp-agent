@@ -4,6 +4,10 @@
  * Run with: `npm run dev` (watch) or `npm start` (compiled).
  * Test interactively with: `npm run inspector`.
  */
+import { readFileSync } from "node:fs";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
@@ -15,8 +19,15 @@ import { loadConfig } from "./config.js";
 import { tools } from "./tools/index.js";
 import { logger } from "./utils/logger.js";
 
-const PACKAGE_NAME = "infomaniak-mcp-agent";
-const PACKAGE_VERSION = "0.1.0";
+// Read name+version from package.json at runtime — avoids drift between the
+// published npm version and a hardcoded constant.
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const pkg = JSON.parse(readFileSync(resolve(__dirname, "../package.json"), "utf8")) as {
+  name: string;
+  version: string;
+};
+const PACKAGE_NAME = pkg.name;
+const PACKAGE_VERSION = pkg.version;
 
 /**
  * Convert a Zod schema to JSON Schema that is accepted by both the MCP
