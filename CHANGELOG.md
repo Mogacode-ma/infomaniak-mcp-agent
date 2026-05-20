@@ -8,6 +8,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 _(no unreleased changes yet)_
 
+## [0.8.2] — 2026-05-20
+
+### Fixed — MCP spec compliance (contributed by [@ruffzy](https://github.com/ruffzy))
+
+PR [#13](https://github.com/Mogacode-ma/infomaniak-mcp-agent/pull/13) fixes two JSON Schema compliance issues that prevented the server from working with strict MCP clients (Claude Code) and with the Anthropic Tool Use API. Both are now addressed by routing every Zod-to-JSON-Schema conversion through a single `toMcpJsonSchema()` helper in `src/server.ts`.
+
+- **`outputSchema` missing `type: "object"` at the root (22 tools affected).** Tools using the two-phase-commit pattern (`infomaniak_undo`, `*_create*`, every destructive tool) declare their output as `z.union([PlanSchema, AppliedSchema])`. `zod-to-json-schema` emits a bare `anyOf` for unions, which is valid JSON Schema but breaks MCP clients that require a top-level `type: "object"` on `outputSchema`. The helper now injects the missing `type` when the schema is a union of objects.
+- **`$schema` property rejected by the Anthropic validator.** `zodToJsonSchema` defaults to emitting `"$schema": "http://json-schema.org/draft-07/schema#"`, which Anthropic's Tool Use validator rejects on `outputSchema`. The helper strips it.
+- **Target switched to `jsonSchema7`** (was `openApi3`) so `exclusiveMinimum` is emitted as a number per Draft 2020-12 instead of the legacy boolean-with-companion-`minimum` form.
+
+Huge thanks to [@ruffzy](https://github.com/ruffzy) for the first external PR on this repo — clean, focused, well-explained, and exactly the kind of fix only a real user trips over.
+
 ## [0.8.1] — 2026-05-12
 
 ### Improved
