@@ -48,10 +48,17 @@ export function loadConfig(): Config {
       .join("\n");
     throw new Error(
       [
-        "Invalid runtime configuration. Please check your .env file:",
+        "Invalid runtime configuration — required environment variable(s) missing or malformed:",
         issues,
         "",
-        "See .env.example for the expected format.",
+        "How to set them:",
+        "  • Claude Desktop / Claude Code: add them to the `env` block of your MCP server entry in",
+        "    `claude_desktop_config.json` (or `~/.claude.json` for Claude Code).",
+        "    See: https://github.com/Mogacode-ma/infomaniak-mcp-agent#configure-claude-desktop",
+        "  • From a shell: export INFOMANIAK_API_TOKEN=... before running the server.",
+        "  • Running from a clone: copy .env.example to .env and fill it in.",
+        "",
+        "Get an API token at: https://manager.infomaniak.com/v3/api-token",
       ].join("\n"),
     );
   }
