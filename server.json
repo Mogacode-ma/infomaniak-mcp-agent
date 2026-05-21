@@ -1,0 +1,51 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.Mogacode-ma/infomaniak-mcp-agent",
+  "description": "Unofficial MCP server for Infomaniak (web hosting, mail, DNS, kDrive, SSL, AI). 54 tools.",
+  "repository": {
+    "url": "https://github.com/Mogacode-ma/infomaniak-mcp-agent",
+    "source": "github"
+  },
+  "version": "0.8.5",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "infomaniak-mcp-agent",
+      "version": "0.8.5",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "INFOMANIAK_API_TOKEN",
+          "description": "Bearer token for api.infomaniak.com. Generate at https://manager.infomaniak.com/v3/api-token",
+          "isRequired": true,
+          "isSecret": true,
+          "format": "string"
+        },
+        {
+          "name": "INFOMANIAK_AUTH_MODE",
+          "description": "Authentication mode for manager.infomaniak.com endpoints. 'auto' (default) reads Chrome cookies on demand. 'manual' uses INFOMANIAK_SASESSION+INFOMANIAK_XSRF_TOKEN. 'disabled' skips manager-private endpoints.",
+          "isRequired": false,
+          "isSecret": false,
+          "format": "string",
+          "default": "auto"
+        },
+        {
+          "name": "INFOMANIAK_SASESSION",
+          "description": "Manager session cookie (used when INFOMANIAK_AUTH_MODE=manual).",
+          "isRequired": false,
+          "isSecret": true,
+          "format": "string"
+        },
+        {
+          "name": "INFOMANIAK_XSRF_TOKEN",
+          "description": "Manager XSRF cookie (used when INFOMANIAK_AUTH_MODE=manual).",
+          "isRequired": false,
+          "isSecret": true,
+          "format": "string"
+        }
+      ]
+    }
+  ]
+}
