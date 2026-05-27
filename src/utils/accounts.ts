@@ -43,5 +43,5 @@ export async function listAccountIds(): Promise<number[]> {
  */
 export async function defaultAccountId(): Promise<number | null> {
   const ids = await listAccountIds();
-  return ids.length > 0 ? ids[0] : null;
+  return ids[0] ?? null;
 }

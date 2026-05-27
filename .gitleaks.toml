@@ -30,3 +30,14 @@ id = "infomaniak-xsrf"
 description = "Infomaniak manager XSRF token (Laravel encrypted form)"
 regex = '''(MANAGER-XSRF-TOKEN|X-XSRF-TOKEN)\s*[=:]\s*['"]?ey[A-Za-z0-9+/=%]{50,}'''
 keywords = ["MANAGER-XSRF-TOKEN", "X-XSRF-TOKEN"]
+
+# Allowlist: test snapshot fixtures may contain ephemeral confirmation_token
+# UUIDs captured from real smoke runs. These are NOT secrets — they're
+# single-use, 60-second-TTL tokens minted by the MCP for the two-phase
+# commit safety pattern, expired long before any commit lands. Excluding
+# them prevents gitleaks from flagging UUIDs as generic-api-key leaks.
+[allowlist]
+paths = [
+  '''tests/snapshots/responses/.*\.json''',
+]
+description = "Ephemeral confirmation_token UUIDs in smoke test snapshots"

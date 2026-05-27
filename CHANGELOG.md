@@ -8,6 +8,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 _(no unreleased changes yet)_
 
+## [0.10.2] — 2026-05-27
+
+### Fixed (CI)
+
+- `tsc --noEmit` (typecheck): `InfomaniakAuthError.errorType` now uses
+  the `override` modifier (TS4114).
+- `tsc --noEmit` (typecheck): `defaultAccountId()` no longer trips on
+  `noUncheckedIndexedAccess` — uses `ids[0] ?? null`.
+- Gitleaks: snapshot fixtures under `tests/snapshots/responses/` are
+  allowlisted. They contain ephemeral `confirmation_token` UUIDs from
+  real smoke runs — single-use, 60-second TTL, expired before commit;
+  not real secrets but the generic-api-key entropy rule flagged them.
+
 ## [0.10.1] — 2026-05-27
 
 ### Changed
