@@ -344,9 +344,26 @@ export const dnsUpdateRecordTool = defineTool({
 // ---------------------------------------------------------------------------
 
 const DeleteRecordInput = z.object({
-  zone: z.string().min(3),
-  record_id: z.number().int().positive(),
-  confirmation_token: z.string().uuid().optional(),
+  zone: z
+    .string()
+    .min(3)
+    .describe(
+      "DNS zone (root domain) the record belongs to, e.g. 'example.com'. Must be a domain whose DNS is managed by Infomaniak.",
+    ),
+  record_id: z
+    .number()
+    .int()
+    .positive()
+    .describe(
+      "Numeric id of the record to delete. Get it from infomaniak_dns_list_records → records[].id. NOT the record name or source.",
+    ),
+  confirmation_token: z
+    .string()
+    .uuid()
+    .optional()
+    .describe(
+      "Token from the first (plan) phase. The plan response includes a full preview of the record so you can verify before confirming. Re-pass to execute.",
+    ),
 });
 
 const DeleteRecordOutput = z.union([

@@ -8,6 +8,29 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 _(no unreleased changes yet)_
 
+## [0.11.0] — 2026-05-27
+
+### Changed (TDQS — Glama scoring on delete tools)
+
+The first wave of Glama TDQS scores landed and flagged `delete_*` tools at
+**2.7/5** (Parameters dimension = 1/5, schema description coverage 0%). The
+v0.10.1 patch enriched only `create_*` tools — symmetric polish was missing
+on the delete side. This release closes that gap:
+
+- `delete_redirection`, `delete_site`, `delete_certificate`, `delete_database`,
+  `delete_hosting_user`, `delete_mailbox`, `dns_delete_record` — every input
+  parameter now has a `.describe()` explaining: where to source the value
+  (which discovery tool to call first), exact format (prefixed vs unprefixed,
+  full email vs local part, record id vs name), and the two-phase commit
+  semantics of `confirmation_token`.
+
+No behavior change. Expected impact: Parameters dimension 1/5 → 4/5 on the
+seven delete tools, bringing their average score from ~2.7 to ~3.7+. The
+"Completeness" dimension also gains because the descriptions now state what
+each phase returns (preview content for plan, executed action for apply).
+
+`npm test`: 78/78. Typecheck + lint clean.
+
 ## [0.10.2] — 2026-05-27
 
 ### Fixed (CI)

@@ -192,9 +192,24 @@ export const createRedirectionTool = defineTool({
 // ---------------------------------------------------------------------------
 
 const DeleteInput = z.object({
-  mail_hosting_id: z.number().int().positive(),
-  name: z.string().min(1),
-  confirmation_token: z.string().uuid().optional(),
+  mail_hosting_id: z
+    .number()
+    .int()
+    .positive()
+    .describe("Mail hosting ID. Discover via infomaniak_list_mail_hostings."),
+  name: z
+    .string()
+    .min(1)
+    .describe(
+      "Local part of the redirection source to remove (e.g. 'support' to delete 'support@example.com'). NOT the full email. List existing rules with infomaniak_list_redirections.",
+    ),
+  confirmation_token: z
+    .string()
+    .uuid()
+    .optional()
+    .describe(
+      "Token returned by the first (plan) phase of the two-phase commit. Re-pass it on the second call to actually delete. Omit on first call to receive the plan + token.",
+    ),
 });
 
 const DeleteOutput = z.union([

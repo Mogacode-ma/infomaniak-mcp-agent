@@ -285,9 +285,23 @@ export const requestCertificateTool = defineTool({
 // ---------------------------------------------------------------------------
 
 const DeleteCertificateInput = z.object({
-  hosting_id: z.number().int().positive(),
-  site_id: z.number().int().positive(),
-  confirmation_token: z.string().uuid().optional(),
+  hosting_id: z
+    .number()
+    .int()
+    .positive()
+    .describe("Web hosting ID. Discover via infomaniak_find_site(domain) → hosting_id."),
+  site_id: z
+    .number()
+    .int()
+    .positive()
+    .describe("Site ID on that hosting. Same source as hosting_id."),
+  confirmation_token: z
+    .string()
+    .uuid()
+    .optional()
+    .describe(
+      "Token from the first (plan) phase. Re-pass to execute. Omit to receive the plan + token. Undo afterwards by calling infomaniak_request_certificate with type='free'.",
+    ),
 });
 
 const DeleteCertificateOutput = z.union([

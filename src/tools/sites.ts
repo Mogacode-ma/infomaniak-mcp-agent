@@ -204,9 +204,27 @@ export const createSiteTool = defineTool({
 // --- delete_site -----------------------------------------------------------
 
 const DeleteSiteInput = z.object({
-  hosting_id: z.number().int().positive(),
-  site_id: z.number().int().positive(),
-  confirmation_token: z.string().uuid().optional(),
+  hosting_id: z
+    .number()
+    .int()
+    .positive()
+    .describe(
+      "Web hosting ID. Discover via infomaniak_find_site(domain) or infomaniak_list_hostings.",
+    ),
+  site_id: z
+    .number()
+    .int()
+    .positive()
+    .describe(
+      "Site ID on that hosting. Same source as hosting_id (infomaniak_find_site or infomaniak_list_sites).",
+    ),
+  confirmation_token: z
+    .string()
+    .uuid()
+    .optional()
+    .describe(
+      "Token returned by the first (plan) phase. Re-pass on the second call to execute the delete. Omit on first call to receive the plan + token (full preview of what will be removed).",
+    ),
 });
 
 const DeleteSitePlanSchema = z.object({
