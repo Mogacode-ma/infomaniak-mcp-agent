@@ -67,7 +67,7 @@ export class InfomaniakError extends Error {
 
 /** Authentication problem — token missing, expired, or insufficient. */
 export class InfomaniakAuthError extends InfomaniakError {
-  public get errorType(): string {
+  public override get errorType(): string {
     return "auth_failure";
   }
 }
