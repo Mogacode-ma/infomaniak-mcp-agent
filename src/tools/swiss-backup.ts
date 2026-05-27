@@ -9,6 +9,7 @@
 import { z } from "zod";
 
 import { PublicApiClient } from "../api/http.js";
+import { defaultAccountId } from "../utils/accounts.js";
 
 import { defineTool } from "./types.js";
 
@@ -22,7 +23,14 @@ const SwissBackupSchema = z
   .passthrough();
 
 const ListInput = z.object({
-  account_id: z.number().int().positive(),
+  account_id: z
+    .number()
+    .int()
+    .positive()
+    .optional()
+    .describe(
+      "Organization/account ID. Optional: defaults to the first account the token has access to. Discover via infomaniak_overview.",
+    ),
 });
 
 const ListOutput = z.object({
@@ -39,12 +47,18 @@ export const listSwissBackupsTool = defineTool({
   outputSchema: ListOutput,
   annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: true },
   handler: async (input) => {
+    const accountId = input.account_id ?? (await defaultAccountId());
+    if (accountId === null) {
+      throw new Error(
+        "No account_id provided and the token reaches no accounts. Use infomaniak_overview to list available accounts.",
+      );
+    }
     const client = new PublicApiClient();
     const data = await client.request<Array<unknown>>("GET", "/1/swiss_backups", {
-      query: { account_id: input.account_id },
+      query: { account_id: accountId },
     });
     return {
-      account_id: input.account_id,
+      account_id: accountId,
       count: data.length,
       swiss_backups: data.map((b) => SwissBackupSchema.parse(b)),
     };

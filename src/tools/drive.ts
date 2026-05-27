@@ -49,7 +49,14 @@ const DriveFileSchema = z.object({
 // ---------------------------------------------------------------------------
 
 const ListDrivesInput = z.object({
-  account_id: z.number().int().positive(),
+  account_id: z
+    .number()
+    .int()
+    .positive()
+    .optional()
+    .describe(
+      "Organization/account ID. Optional: defaults to the first account the token has access to. Discover via infomaniak_overview.",
+    ),
 });
 
 const ListDrivesOutput = z.object({
@@ -65,13 +72,20 @@ export const listDrivesTool = defineTool({
   outputSchema: ListDrivesOutput,
   annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: true },
   handler: async (input) => {
+    const { defaultAccountId } = await import("../utils/accounts.js");
+    const accountId = input.account_id ?? (await defaultAccountId());
+    if (accountId === null) {
+      throw new Error(
+        "No account_id provided and the token reaches no accounts. Use infomaniak_overview to list available accounts.",
+      );
+    }
     const client = new PublicApiClient();
     const drives = await client.request<Array<unknown>>("GET", `/2/drive`, {
-      query: { account_id: input.account_id },
+      query: { account_id: accountId },
     });
     const parsed = drives.map((d) => DriveSchema.parse(d));
     return {
-      account_id: input.account_id,
+      account_id: accountId,
       count: parsed.length,
       drives: parsed,
     };

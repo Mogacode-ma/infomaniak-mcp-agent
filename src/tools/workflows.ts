@@ -311,9 +311,31 @@ export const provisionSiteFullTool = defineTool({
 // ---------------------------------------------------------------------------
 
 const AuditDnsInput = z.object({
-  account_id: z.number().int().positive(),
+  account_id: z
+    .number()
+    .int()
+    .positive()
+    .optional()
+    .describe(
+      "Organization/account ID. Optional: defaults to the first account the token has access to.",
+    ),
   /** Stop after this many domains to keep the API call budget bounded. */
-  max_domains: z.number().int().min(1).max(200).default(50),
+  max_domains: z
+    .number()
+    .int()
+    .min(1)
+    .max(200)
+    .default(20)
+    .describe(
+      "Cap the number of domains scanned. Each domain requires 2 sequential API calls (records + dnssec). Default 20 keeps execution under ~30s.",
+    ),
+  /** Only audit domains whose name contains this substring (case-insensitive). */
+  filter_contains: z
+    .string()
+    .optional()
+    .describe(
+      "Filter domains by substring (case-insensitive). Use this for targeted audits (e.g. 'broz.be') to avoid scanning the entire fleet.",
+    ),
 });
 
 const ZoneSummarySchema = z.object({
@@ -338,14 +360,24 @@ export const auditDnsZonesTool = defineTool({
   outputSchema: AuditDnsOutput,
   annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: true },
   handler: async (input) => {
+    const { defaultAccountId } = await import("../utils/accounts.js");
+    const accountId = input.account_id ?? (await defaultAccountId());
+    if (accountId === null) {
+      throw new Error(
+        "No account_id provided and the token reaches no accounts. Use infomaniak_overview to list available accounts.",
+      );
+    }
     const client = new PublicApiClient();
     const products = await client.request<
       Array<{ account_id: number; service_name: string; customer_name: string }>
-    >("GET", "/1/products", { query: { per_page: 500, account_id: input.account_id } });
-    const domainNames = products
-      .filter((p) => p.account_id === input.account_id && p.service_name === "domain")
-      .map((p) => p.customer_name)
-      .slice(0, input.max_domains);
+    >("GET", "/1/products", { query: { per_page: 500, account_id: accountId } });
+    const allDomains = products
+      .filter((p) => p.account_id === accountId && p.service_name === "domain")
+      .map((p) => p.customer_name);
+    const filtered = input.filter_contains
+      ? allDomains.filter((d) => d.toLowerCase().includes(input.filter_contains!.toLowerCase()))
+      : allDomains;
+    const domainNames = filtered.slice(0, input.max_domains);
 
     const zones: Array<z.infer<typeof ZoneSummarySchema>> = [];
     for (const zone of domainNames) {
@@ -378,7 +410,7 @@ export const auditDnsZonesTool = defineTool({
     const dnssecOn = zones.filter((z) => z.has_dnssec === true).length;
     const errored = zones.filter((z) => z.error).length;
     const summary = [
-      `# DNS audit — account ${input.account_id}`,
+      `# DNS audit — account ${accountId}`,
       ``,
       `Scanned **${zones.length}** zones (capped at ${input.max_domains}).`,
       ``,
@@ -396,7 +428,7 @@ export const auditDnsZonesTool = defineTool({
     ].join("\n");
 
     return {
-      account_id: input.account_id,
+      account_id: accountId,
       scanned: zones.length,
       zones,
       summary_markdown: summary,

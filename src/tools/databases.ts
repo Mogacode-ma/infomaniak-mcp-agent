@@ -14,13 +14,39 @@ import { recordHistory } from "../utils/history.js";
 
 import { defineTool } from "./types.js";
 
+/** Real Infomaniak API responses observed in prod (broz.be hosting). */
+const DatabaseApplicationSchema = z
+  .object({
+    id: z.union([z.string(), z.number()]).optional(),
+    type: z.string().optional(),
+    name: z.string().optional(),
+    location: z.string().optional(),
+  })
+  .nullable()
+  .optional();
+
+const DatabasePermissionSchema = z.object({
+  user: z.string(),
+  rights: z
+    .object({
+      read: z.boolean().optional(),
+      write: z.boolean().optional(),
+      admin: z.boolean().optional(),
+    })
+    .partial()
+    .optional(),
+});
+
 const DatabaseSchema = z.object({
   name: z.string(),
   description: z.string().nullable().optional(),
-  application: z.string().nullable().optional(),
+  /** Application linking the DB to (e.g. a WordPress install). Was historically a string; the API returns an object. */
+  application: z.union([z.string(), DatabaseApplicationSchema]).nullable().optional(),
   disk_used: z.number().nullable().optional(),
-  permissions: z.unknown().optional(),
-  backups: z.unknown().optional(),
+  /** List of users with rights on this DB. */
+  permissions: z.array(DatabasePermissionSchema).optional(),
+  /** Unix timestamps of past backups. */
+  backups: z.array(z.number()).optional(),
   operation_in_progress: z.boolean().optional(),
 });
 

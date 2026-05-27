@@ -31,8 +31,17 @@ export class InfomaniakError extends Error {
     this.details = options.details;
   }
 
+  /** Stable machine-readable error type. Sub-classes override. */
+  public get errorType(): string {
+    return "infomaniak_error";
+  }
+
   /** Render a structured payload for tool responses. */
-  public toToolError(): { content: Array<{ type: "text"; text: string }>; isError: true } {
+  public toToolError(): {
+    content: Array<{ type: "text"; text: string }>;
+    structuredContent: Record<string, unknown>;
+    isError: true;
+  } {
     const parts = [`❌ ${this.message}`];
     if (this.code) {
       parts.push(`Code: ${this.code}`);
@@ -43,13 +52,25 @@ export class InfomaniakError extends Error {
     parts.push(`→ ${this.actionable}`);
     return {
       content: [{ type: "text", text: parts.join("\n") }],
+      structuredContent: {
+        error: true,
+        error_type: this.errorType,
+        message: this.message,
+        code: this.code,
+        status: this.status,
+        actionable: this.actionable,
+      },
       isError: true,
     };
   }
 }
 
 /** Authentication problem — token missing, expired, or insufficient. */
-export class InfomaniakAuthError extends InfomaniakError {}
+export class InfomaniakAuthError extends InfomaniakError {
+  public get errorType(): string {
+    return "auth_failure";
+  }
+}
 
 /** Hit Infomaniak's hard rate limit (60 req/min). */
 export class InfomaniakRateLimitError extends InfomaniakError {

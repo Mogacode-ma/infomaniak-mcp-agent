@@ -8,6 +8,28 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 _(no unreleased changes yet)_
 
+## [0.9.0] — 2026-05-27
+
+### Fixed (parser bugs caught by end-to-end smoke test on broz.be)
+
+- **`infomaniak_list_mailboxes`** — schema accepted only `type: string`, but the API returns `type: 1` (number) or `null`. All mail tools depending on mailbox enumeration were broken. Schema now accepts string | number | null.
+- **`infomaniak_list_databases`** — `application` field was declared as string but the API returns an object `{id, type, name, location}`. `permissions` was `unknown` and is now a typed array of `{user, rights:{read,write,admin}}`. `backups` is now a typed array of timestamps.
+- **`infomaniak_get_certificate`** — `last_attempt_at` schema was non-nullable, but is `null` when no issuance attempt has happened yet. Field is now nullable.
+
+### Added
+
+- **`infomaniak_find_site(domain)`** — domain-first site lookup. Resolves a public domain to `{account_id, hosting_id, hosting_label, site_id, full site object}`. Without it, agents had to iterate every hosting via `list_sites` (46+ API calls on a real fleet) to locate a site by name. Useful before any tool requiring `hosting_id + site_id` (get_certificate, list_databases, etc.) when you only know the domain.
+
+### Changed
+
+- **`account_id` is now optional** on `list_hostings`, `list_domains`, `list_mail_hostings`, `list_drives`, `list_swiss_backups`, `audit_account`, `audit_dns_zones`. When omitted, the first account the token can reach is used. The defaulted value is echoed back in the response so the agent knows which account was queried. Discovered via cached `GET /1/account`.
+- **`audit_dns_zones`** — added `filter_contains` param to scope the scan to one or a handful of domains, and reduced default `max_domains` from 50 to 20. Filtering by `"broz.be"` on a 50-zone account drops execution from ~129s to ~1.4s.
+- **Auth error contract** — `InfomaniakAuthError.toToolError()` now returns a `structuredContent` payload `{error: true, error_type: "auth_failure", code, status, actionable}` so agents can branch programmatically instead of parsing the human-readable text.
+
+### Notes
+
+This release is driven by an end-to-end smoke audit run against the real Mogacode Infomaniak account (17 sub-accounts, 309 products, broz.be hosted on hosting #693806). Audit findings, raw API response captures and per-tool matrix are documented in the project notes. The three Zod schema bugs above were silently bricking real workflows; the smoke test surfaced them in one run.
+
 ## [0.8.2] — 2026-05-20
 
 ### Fixed — MCP spec compliance (contributed by [@ruffzy](https://github.com/ruffzy))

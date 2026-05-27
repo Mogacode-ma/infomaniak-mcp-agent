@@ -16,11 +16,19 @@ import { z } from "zod";
 
 import { PublicApiClient } from "../api/http.js";
 import { ProductSchema } from "../types/infomaniak.js";
+import { defaultAccountId } from "../utils/accounts.js";
 
 import { defineTool } from "./types.js";
 
 const InputSchema = z.object({
-  account_id: z.number().int().positive(),
+  account_id: z
+    .number()
+    .int()
+    .positive()
+    .optional()
+    .describe(
+      "Organization/account ID. Optional: defaults to the first account the token has access to. Discover via infomaniak_overview.",
+    ),
   /** Flag products expiring within this many days as "soon". Default: 60. */
   days_ahead: z.number().int().min(1).max(365).default(60),
 });
@@ -50,14 +58,20 @@ export const auditAccountTool = defineTool({
   outputSchema: OutputSchema,
   annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: true },
   handler: async (input) => {
+    const accountId = input.account_id ?? (await defaultAccountId());
+    if (accountId === null) {
+      throw new Error(
+        "No account_id provided and the token reaches no accounts. Use infomaniak_overview to list available accounts.",
+      );
+    }
     const client = new PublicApiClient();
     const products = (
       await client.request<Array<unknown>>("GET", "/1/products", {
-        query: { per_page: 500, account_id: input.account_id },
+        query: { per_page: 500, account_id: accountId },
       })
     )
       .map((p) => ProductSchema.parse(p))
-      .filter((p) => p.account_id === input.account_id);
+      .filter((p) => p.account_id === accountId);
 
     const now = Math.floor(Date.now() / 1000);
     const cutoff = now + input.days_ahead * SECONDS_PER_DAY;
@@ -115,10 +129,10 @@ export const auditAccountTool = defineTool({
 
     findings.sort((a, b) => severityWeight(b.severity) - severityWeight(a.severity));
 
-    const summaryMarkdown = renderSummary(input.account_id, products.length, findings);
+    const summaryMarkdown = renderSummary(accountId, products.length, findings);
 
     return {
-      account_id: input.account_id,
+      account_id: accountId,
       scanned_products: products.length,
       findings,
       summary_markdown: summaryMarkdown,

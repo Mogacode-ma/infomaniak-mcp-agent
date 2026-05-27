@@ -211,7 +211,8 @@ export const MailboxSchema = z.object({
   mailbox: z.string().optional(),
   mailbox_idn: z.string().optional(),
   note: z.string().nullable().optional(),
-  type: z.string().optional(),
+  /** Mailbox kind as returned by the API. Observed numeric (1, 2, …) and null in production — historically documented as string. Accept all three for forward-compat. */
+  type: z.union([z.string(), z.number()]).nullable().optional(),
   is_limited: z.boolean().optional(),
   is_free_mail: z.boolean().optional(),
   is_used_for_account: z.boolean().optional(),
