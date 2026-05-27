@@ -1,0 +1,65 @@
+# Auto-publish to npm when a vX.Y.Z tag is pushed.
+#
+# Why this exists: between v0.9.0 and v0.11.0, GitHub kept moving while npm
+# stayed pinned at v0.8.5 — every `npx -y infomaniak-mcp-agent` was serving
+# stale code containing the three Zod parser bugs fixed in v0.9. This
+# workflow closes the drift: tag the commit, push the tag, npm publishes
+# the same artifact CI just validated.
+#
+# Required secret: NPM_TOKEN (generate at https://www.npmjs.com/ →
+# Access Tokens → Generation token, scope "Automation").
+
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  publish:
+    name: Publish to npm
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # for npm provenance
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          registry-url: "https://registry.npmjs.org/"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Verify tag matches package.json version
+        run: |
+          TAG_VERSION="${GITHUB_REF_NAME#v}"
+          PKG_VERSION=$(node -p "require('./package.json').version")
+          echo "Tag: $TAG_VERSION  Package: $PKG_VERSION"
+          if [ "$TAG_VERSION" != "$PKG_VERSION" ]; then
+            echo "::error::Tag $GITHUB_REF_NAME does not match package.json version $PKG_VERSION"
+            exit 1
+          fi
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Test
+        run: npm test
+
+      - name: Build
+        run: npm run build
+
+      - name: Publish to npm with provenance
+        run: npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
