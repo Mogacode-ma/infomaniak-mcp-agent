@@ -1,0 +1,20 @@
+{
+  "args": {
+    "hosting_id": 693806,
+    "login": "broz.be",
+    "password": "broz.be"
+  },
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "\u274c [\n  {\n    \"validation\": \"regex\",\n    \"code\": \"invalid_string\",\n    \"message\": \"login must be alphanumeric with _ -\",\n    \"path\": [\n      \"login\"\n    ]\n  },\n  {\n    \"code\": \"too_small\",\n    \"minimum\": 8,\n    \"type\": \"string\",\n    \"inclusive\": true,\n    \"exact\": false,\n    \"message\": \"String must contain at least 8 character(s)\",\n    \"path\": [\n      \"password\"\n    ]\n  },\n  {\n    \"validation\": \"regex\",\n    \"code\": \"invalid_string\",\n    \"message\": \"password must contain at least one uppercase letter\",\n    \"path\": [\n      \"password\"\n    ]\n  },\n  {\n    \"validation\": \"regex\",\n    \"code\": \"invalid_string\",\n    \"message\": \"password must contain at least one digit\",\n    \"path\": [\n      \"password\"\n    ]\n  }\n]"
+        }
+      ],
+      "isError": true
+    },
+    "jsonrpc": "2.0",
+    "id": 26
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "args": {
+    "tool": "broz.be"
+  },
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "\u274c Unknown tool: broz.be. Known tools: `infomaniak_overview`, `infomaniak_help`, `infomaniak_explain`, `infomaniak_audit_account`, `infomaniak_audit_dns_zones`, `infomaniak_history`, `infomaniak_undo`, `infomaniak_provision_site_full`, `infomaniak_list_organizations`, `infomaniak_list_hostings`, `infomaniak_list_domains`, `infomaniak_get_domain`, `infomaniak_list_sites`, `infomaniak_create_site`, `infomaniak_delete_site`, `infomaniak_get_certificate`, `infomaniak_request_certificate`, `infomaniak_delete_certificate`, `infomaniak_list_databases`, `infomaniak_get_database`, `infomaniak_create_database`, `infomaniak_delete_database`, `infomaniak_list_database_users`, `infomaniak_get_database_user`, `infomaniak_list_hosting_users`, `infomaniak_create_hosting_user`, `infomaniak_delete_hosting_user`, `infomaniak_dns_list_records`, `infomaniak_dns_create_record`, `infomaniak_dns_update_record`, `infomaniak_dns_delete_record`, `infomaniak_dnssec_check`, `infomaniak_dnssec_enable`, `infomaniak_dnssec_disable`, `infomaniak_list_mail_hostings`, `infomaniak_list_mailboxes`, `infomaniak_get_mailbox_aliases`, `infomaniak_get_mailbox_signatures`, `infomaniak_get_mailbox_backups`, `infomaniak_create_mailbox`, `infomaniak_delete_mailbox`, `infomaniak_create_mailbox_alias`, `infomaniak_list_redirections`, `infomaniak_create_redirection`, `infomaniak_delete_redirection`, `infomaniak_list_drives`, `infomaniak_list_drive_files`, `infomaniak_list_ai_products`, `infomaniak_list_ai_models`, `infomaniak_list_swiss_backups`, `infomaniak_list_short_urls`, `infomaniak_short_urls_quota`, `infomaniak_create_short_url`, `infomaniak_api_call`. Use infomaniak_help for fuzzy lookup."
+        }
+      ],
+      "isError": true
+    },
+    "jsonrpc": "2.0",
+    "id": 8
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "args": {
+    "mail_hosting_id": 496525,
+    "mailbox_name": "broz.be"
+  },
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "\u274c account not found with mail address broz.be@coden.lu\nCode: object_not_found_in_padl\nHTTP status: 404\n\u2192 The endpoint https://api.infomaniak.com/1/mail_hostings/496525/mailboxes/broz.be/signatures does not exist or the resource was deleted."
+        }
+      ],
+      "isError": true
+    },
+    "jsonrpc": "2.0",
+    "id": 34
+  }
+}

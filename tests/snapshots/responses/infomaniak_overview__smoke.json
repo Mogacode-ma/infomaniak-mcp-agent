@@ -1,0 +1,450 @@
+{
+  "args": {},
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"total_accounts\": 17,\n  \"total_products\": 309,\n  \"accounts\": [\n    {\n      \"account_id\": 1032817,\n      \"account_name\": \"LAW IN NOVATION\",\n      \"total_products\": 130,\n      \"by_service\": [\n        {\n          \"service_name\": \"domain\",\n          \"count\": 62\n        },\n        {\n          \"service_name\": \"email_hosting\",\n          \"count\": 49\n        },\n        {\n          \"service_name\": \"hosting\",\n          \"count\": 16\n        },\n        {\n          \"service_name\": \"ksuite\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"drive\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"kchat\",\n          \"count\": 1\n        }\n      ]\n    },\n    {\n      \"account_id\": 46276,\n      \"account_name\": \"Mogacode\",\n      \"total_products\": 107,\n      \"by_service\": [\n        {\n          \"service_name\": \"domain\",\n          \"count\": 46\n        },\n        {\n          \"service_name\": \"email_hosting\",\n          \"count\": 32\n        },\n        {\n          \"service_name\": \"hosting\",\n          \"count\": 12\n        },\n        {\n          \"service_name\": \"hosting_3\",\n          \"count\": 7\n        },\n        {\n          \"service_name\": \"mailing\",\n          \"count\": 2\n        },\n        {\n          \"service_name\": \"cloud\",\n          \"count\": 2\n        },\n        {\n          \"service_name\": \"inviation\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"support_premium\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"ksuite\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"drive\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"kchat\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"custom_url\",\n          \"count\": 1\n        }\n      ]\n    },\n    {\n      \"account_id\": 1020032,\n      \"account_name\": \"Eric JACOBS\",\n      \"total_products\": 15,\n      \"by_service\": [\n        {\n          \"service_name\": \"domain\",\n          \"count\": 7\n        },\n        {\n          \"service_name\": \"email_hosting\",\n          \"count\": 3\n        },\n        {\n          \"service_name\": \"cloud\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"hosting\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"ksuite\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"drive\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"kchat\",\n          \"count\": 1\n        }\n      ]\n    },\n    {\n      \"account_id\": 1028200,\n      \"account_name\": \"VINCULA\",\n      \"total_products\": 9,\n      \"by_service\": [\n        {\n          \"service_name\": \"domain\",\n          \"count\": 2\n        },\n        {\n          \"service_name\": \"email_hosting\",\n          \"count\": 2\n        },\n        {\n          \"service_name\": \"ksuite\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"drive\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"kchat\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"hosting\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"vod\",\n          \"count\": 1\n        }\n      ]\n    },\n    {\n      \"account_id\": 1213821,\n      \"account_name\": \"i-Move\",\n      \"total_products\": 7,\n      \"by_service\": [\n        {\n          \"service_name\": \"ksuite\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"drive\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"kchat\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"email_hosting\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"domain\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"hosting\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"mailing\",\n          \"count\": 1\n        }\n      ]\n    },\n    {\n      \"account_id\": 1084923,\n      \"account_name\": \"alain@maximalcom.be\",\n      \"total_products\": 6,\n      \"by_service\": [\n        {\n          \"service_name\": \"domain\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"hosting\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"email_hosting\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"ksuite\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"drive\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"kchat\",\n          \"count\": 1\n        }\n      ]\n    },\n    {\n      \"account_id\": 1492572,\n      \"account_name\": \"scaramanga gmbh\",\n      \"total_products\": 6,\n      \"by_service\": [\n        {\n          \"service_name\": \"domain\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"ksuite\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"email_hosting\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"drive\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"kchat\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"hosting\",\n          \"count\": 1\n        }\n      ]\n    },\n    {\n      \"account_id\": 1514816,\n      \"account_name\": \"aureleloane vacances\",\n      \"total_products\": 6,\n      \"by_service\": [\n        {\n          \"service_name\": \"domain\",\n          \"count\": 2\n        },\n        {\n          \"service_name\": \"ksuite\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"email_hosting\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"drive\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"kchat\",\n          \"count\": 1\n        }\n      ]\n    },\n    {\n      \"account_id\": 1586926,\n      \"account_name\": \"Bscan\",\n      \"total_products\": 6,\n      \"by_service\": [\n        {\n          \"service_name\": \"domain\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"ksuite\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"email_hosting\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"drive\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"kchat\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"hosting\",\n          \"count\": 1\n        }\n      ]\n    },\n    {\n      \"account_id\": 1956653,\n      \"account_name\": \"Marokeys\",\n      \"total_products\": 6,\n      \"by_service\": [\n        {\n          \"service_name\": \"ksuite\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"drive\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"kchat\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"domain\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"email_hosting\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"hosting\",\n          \"count\": 1\n        }\n      ]\n    },\n    {\n      \"account_id\": 1576144,\n      \"account_name\": \"AKAZA BELGIUM SRL\",\n      \"total_products\": 4,\n      \"by_service\": [\n        {\n          \"service_name\": \"hosting\",\n          \"count\": 2\n        },\n        {\n          \"service_name\": \"domain\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"email_hosting\",\n          \"count\": 1\n        }\n      ]\n    },\n    {\n      \"account_id\": 1584405,\n      \"account_name\": \"Win-ia \",\n      \"total_products\": 3,\n      \"by_service\": [\n        {\n          \"service_name\": \"domain\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"email_hosting\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"hosting\",\n          \"count\": 1\n        }\n      ]\n    },\n    {\n      \"account_id\": 1782998,\n      \"account_name\": \"Olivier et Melody\",\n      \"total_products\": 3,\n      \"by_service\": [\n        {\n          \"service_name\": \"ksuite\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"drive\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"kchat\",\n          \"count\": 1\n        }\n      ]\n    },\n    {\n      \"account_id\": 287541,\n      \"account_name\": \"Axel Vroonen (I.A.V.)\",\n      \"total_products\": 1,\n      \"by_service\": [\n        {\n          \"service_name\": \"hosting\",\n          \"count\": 1\n        }\n      ]\n    },\n    {\n      \"account_id\": 506069,\n      \"account_name\": \"Mediasant\u00e9\",\n      \"total_products\": 0,\n      \"by_service\": []\n    },\n    {\n      \"account_id\": 1060743,\n      \"account_name\": \"Fargan\",\n      \"total_products\": 0,\n      \"by_service\": []\n    },\n    {\n      \"account_id\": 1169805,\n      \"account_name\": \"Les petits sapins de Waterloo asbl\",\n      \"total_products\": 0,\n      \"by_service\": []\n    }\n  ],\n  \"summary_markdown\": \"# Infomaniak account overview\\n\\n**17 organization(s) \u2014 309 product(s) total**\\n\\n## LAW IN NOVATION (id 1032817)\\nTotal: **130** products\\n\\n- `domain`: 62\\n- `email_hosting`: 49\\n- `hosting`: 16\\n- `ksuite`: 1\\n- `drive`: 1\\n- `kchat`: 1\\n\\n## Mogacode (id 46276)\\nTotal: **107** products\\n\\n- `domain`: 46\\n- `email_hosting`: 32\\n- `hosting`: 12\\n- `hosting_3`: 7\\n- `mailing`: 2\\n- `cloud`: 2\\n- `inviation`: 1\\n- `support_premium`: 1\\n- `ksuite`: 1\\n- `drive`: 1\\n- `kchat`: 1\\n- `custom_url`: 1\\n\\n## Eric JACOBS (id 1020032)\\nTotal: **15** products\\n\\n- `domain`: 7\\n- `email_hosting`: 3\\n- `cloud`: 1\\n- `hosting`: 1\\n- `ksuite`: 1\\n- `drive`: 1\\n- `kchat`: 1\\n\\n## VINCULA (id 1028200)\\nTotal: **9** products\\n\\n- `domain`: 2\\n- `email_hosting`: 2\\n- `ksuite`: 1\\n- `drive`: 1\\n- `kchat`: 1\\n- `hosting`: 1\\n- `vod`: 1\\n\\n## i-Move (id 1213821)\\nTotal: **7** products\\n\\n- `ksuite`: 1\\n- `drive`: 1\\n- `kchat`: 1\\n- `email_hosting`: 1\\n- `domain`: 1\\n- `hosting`: 1\\n- `mailing`: 1\\n\\n## alain@maximalcom.be (id 1084923)\\nTotal: **6** products\\n\\n- `domain`: 1\\n- `hosting`: 1\\n- `email_hosting`: 1\\n- `ksuite`: 1\\n- `drive`: 1\\n- `kchat`: 1\\n\\n## scaramanga gmbh (id 1492572)\\nTotal: **6** products\\n\\n- `domain`: 1\\n- `ksuite`: 1\\n- `email_hosting`: 1\\n- `drive`: 1\\n- `kchat`: 1\\n- `hosting`: 1\\n\\n## aureleloane vacances (id 1514816)\\nTotal: **6** products\\n\\n- `domain`: 2\\n- `ksuite`: 1\\n- `email_hosting`: 1\\n- `drive`: 1\\n- `kchat`: 1\\n\\n## Bscan (id 1586926)\\nTotal: **6** products\\n\\n- `domain`: 1\\n- `ksuite`: 1\\n- `email_hosting`: 1\\n- `drive`: 1\\n- `kchat`: 1\\n- `hosting`: 1\\n\\n## Marokeys (id 1956653)\\nTotal: **6** products\\n\\n- `ksuite`: 1\\n- `drive`: 1\\n- `kchat`: 1\\n- `domain`: 1\\n- `email_hosting`: 1\\n- `hosting`: 1\\n\\n## AKAZA BELGIUM SRL (id 1576144)\\nTotal: **4** products\\n\\n- `hosting`: 2\\n- `domain`: 1\\n- `email_hosting`: 1\\n\\n## Win-ia  (id 1584405)\\nTotal: **3** products\\n\\n- `domain`: 1\\n- `email_hosting`: 1\\n- `hosting`: 1\\n\\n## Olivier et Melody (id 1782998)\\nTotal: **3** products\\n\\n- `ksuite`: 1\\n- `drive`: 1\\n- `kchat`: 1\\n\\n## Axel Vroonen (I.A.V.) (id 287541)\\nTotal: **1** products\\n\\n- `hosting`: 1\\n\\n## Mediasant\u00e9 (id 506069)\\nTotal: **0** products\\n\\n## Fargan (id 1060743)\\nTotal: **0** products\\n\\n## Les petits sapins de Waterloo asbl (id 1169805)\\nTotal: **0** products\\n\"\n}"
+        }
+      ],
+      "structuredContent": {
+        "total_accounts": 17,
+        "total_products": 309,
+        "accounts": [
+          {
+            "account_id": 1032817,
+            "account_name": "LAW IN NOVATION",
+            "total_products": 130,
+            "by_service": [
+              {
+                "service_name": "domain",
+                "count": 62
+              },
+              {
+                "service_name": "email_hosting",
+                "count": 49
+              },
+              {
+                "service_name": "hosting",
+                "count": 16
+              },
+              {
+                "service_name": "ksuite",
+                "count": 1
+              },
+              {
+                "service_name": "drive",
+                "count": 1
+              },
+              {
+                "service_name": "kchat",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "account_id": 46276,
+            "account_name": "Mogacode",
+            "total_products": 107,
+            "by_service": [
+              {
+                "service_name": "domain",
+                "count": 46
+              },
+              {
+                "service_name": "email_hosting",
+                "count": 32
+              },
+              {
+                "service_name": "hosting",
+                "count": 12
+              },
+              {
+                "service_name": "hosting_3",
+                "count": 7
+              },
+              {
+                "service_name": "mailing",
+                "count": 2
+              },
+              {
+                "service_name": "cloud",
+                "count": 2
+              },
+              {
+                "service_name": "inviation",
+                "count": 1
+              },
+              {
+                "service_name": "support_premium",
+                "count": 1
+              },
+              {
+                "service_name": "ksuite",
+                "count": 1
+              },
+              {
+                "service_name": "drive",
+                "count": 1
+              },
+              {
+                "service_name": "kchat",
+                "count": 1
+              },
+              {
+                "service_name": "custom_url",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "account_id": 1020032,
+            "account_name": "Eric JACOBS",
+            "total_products": 15,
+            "by_service": [
+              {
+                "service_name": "domain",
+                "count": 7
+              },
+              {
+                "service_name": "email_hosting",
+                "count": 3
+              },
+              {
+                "service_name": "cloud",
+                "count": 1
+              },
+              {
+                "service_name": "hosting",
+                "count": 1
+              },
+              {
+                "service_name": "ksuite",
+                "count": 1
+              },
+              {
+                "service_name": "drive",
+                "count": 1
+              },
+              {
+                "service_name": "kchat",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "account_id": 1028200,
+            "account_name": "VINCULA",
+            "total_products": 9,
+            "by_service": [
+              {
+                "service_name": "domain",
+                "count": 2
+              },
+              {
+                "service_name": "email_hosting",
+                "count": 2
+              },
+              {
+                "service_name": "ksuite",
+                "count": 1
+              },
+              {
+                "service_name": "drive",
+                "count": 1
+              },
+              {
+                "service_name": "kchat",
+                "count": 1
+              },
+              {
+                "service_name": "hosting",
+                "count": 1
+              },
+              {
+                "service_name": "vod",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "account_id": 1213821,
+            "account_name": "i-Move",
+            "total_products": 7,
+            "by_service": [
+              {
+                "service_name": "ksuite",
+                "count": 1
+              },
+              {
+                "service_name": "drive",
+                "count": 1
+              },
+              {
+                "service_name": "kchat",
+                "count": 1
+              },
+              {
+                "service_name": "email_hosting",
+                "count": 1
+              },
+              {
+                "service_name": "domain",
+                "count": 1
+              },
+              {
+                "service_name": "hosting",
+                "count": 1
+              },
+              {
+                "service_name": "mailing",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "account_id": 1084923,
+            "account_name": "alain@maximalcom.be",
+            "total_products": 6,
+            "by_service": [
+              {
+                "service_name": "domain",
+                "count": 1
+              },
+              {
+                "service_name": "hosting",
+                "count": 1
+              },
+              {
+                "service_name": "email_hosting",
+                "count": 1
+              },
+              {
+                "service_name": "ksuite",
+                "count": 1
+              },
+              {
+                "service_name": "drive",
+                "count": 1
+              },
+              {
+                "service_name": "kchat",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "account_id": 1492572,
+            "account_name": "scaramanga gmbh",
+            "total_products": 6,
+            "by_service": [
+              {
+                "service_name": "domain",
+                "count": 1
+              },
+              {
+                "service_name": "ksuite",
+                "count": 1
+              },
+              {
+                "service_name": "email_hosting",
+                "count": 1
+              },
+              {
+                "service_name": "drive",
+                "count": 1
+              },
+              {
+                "service_name": "kchat",
+                "count": 1
+              },
+              {
+                "service_name": "hosting",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "account_id": 1514816,
+            "account_name": "aureleloane vacances",
+            "total_products": 6,
+            "by_service": [
+              {
+                "service_name": "domain",
+                "count": 2
+              },
+              {
+                "service_name": "ksuite",
+                "count": 1
+              },
+              {
+                "service_name": "email_hosting",
+                "count": 1
+              },
+              {
+                "service_name": "drive",
+                "count": 1
+              },
+              {
+                "service_name": "kchat",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "account_id": 1586926,
+            "account_name": "Bscan",
+            "total_products": 6,
+            "by_service": [
+              {
+                "service_name": "domain",
+                "count": 1
+              },
+              {
+                "service_name": "ksuite",
+                "count": 1
+              },
+              {
+                "service_name": "email_hosting",
+                "count": 1
+              },
+              {
+                "service_name": "drive",
+                "count": 1
+              },
+              {
+                "service_name": "kchat",
+                "count": 1
+              },
+              {
+                "service_name": "hosting",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "account_id": 1956653,
+            "account_name": "Marokeys",
+            "total_products": 6,
+            "by_service": [
+              {
+                "service_name": "ksuite",
+                "count": 1
+              },
+              {
+                "service_name": "drive",
+                "count": 1
+              },
+              {
+                "service_name": "kchat",
+                "count": 1
+              },
+              {
+                "service_name": "domain",
+                "count": 1
+              },
+              {
+                "service_name": "email_hosting",
+                "count": 1
+              },
+              {
+                "service_name": "hosting",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "account_id": 1576144,
+            "account_name": "AKAZA BELGIUM SRL",
+            "total_products": 4,
+            "by_service": [
+              {
+                "service_name": "hosting",
+                "count": 2
+              },
+              {
+                "service_name": "domain",
+                "count": 1
+              },
+              {
+                "service_name": "email_hosting",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "account_id": 1584405,
+            "account_name": "Win-ia ",
+            "total_products": 3,
+            "by_service": [
+              {
+                "service_name": "domain",
+                "count": 1
+              },
+              {
+                "service_name": "email_hosting",
+                "count": 1
+              },
+              {
+                "service_name": "hosting",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "account_id": 1782998,
+            "account_name": "Olivier et Melody",
+            "total_products": 3,
+            "by_service": [
+              {
+                "service_name": "ksuite",
+                "count": 1
+              },
+              {
+                "service_name": "drive",
+                "count": 1
+              },
+              {
+                "service_name": "kchat",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "account_id": 287541,
+            "account_name": "Axel Vroonen (I.A.V.)",
+            "total_products": 1,
+            "by_service": [
+              {
+                "service_name": "hosting",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "account_id": 506069,
+            "account_name": "Mediasant\u00e9",
+            "total_products": 0,
+            "by_service": []
+          },
+          {
+            "account_id": 1060743,
+            "account_name": "Fargan",
+            "total_products": 0,
+            "by_service": []
+          },
+          {
+            "account_id": 1169805,
+            "account_name": "Les petits sapins de Waterloo asbl",
+            "total_products": 0,
+            "by_service": []
+          }
+        ],
+        "summary_markdown": "# Infomaniak account overview\n\n**17 organization(s) \u2014 309 product(s) total**\n\n## LAW IN NOVATION (id 1032817)\nTotal: **130** products\n\n- `domain`: 62\n- `email_hosting`: 49\n- `hosting`: 16\n- `ksuite`: 1\n- `drive`: 1\n- `kchat`: 1\n\n## Mogacode (id 46276)\nTotal: **107** products\n\n- `domain`: 46\n- `email_hosting`: 32\n- `hosting`: 12\n- `hosting_3`: 7\n- `mailing`: 2\n- `cloud`: 2\n- `inviation`: 1\n- `support_premium`: 1\n- `ksuite`: 1\n- `drive`: 1\n- `kchat`: 1\n- `custom_url`: 1\n\n## Eric JACOBS (id 1020032)\nTotal: **15** products\n\n- `domain`: 7\n- `email_hosting`: 3\n- `cloud`: 1\n- `hosting`: 1\n- `ksuite`: 1\n- `drive`: 1\n- `kchat`: 1\n\n## VINCULA (id 1028200)\nTotal: **9** products\n\n- `domain`: 2\n- `email_hosting`: 2\n- `ksuite`: 1\n- `drive`: 1\n- `kchat`: 1\n- `hosting`: 1\n- `vod`: 1\n\n## i-Move (id 1213821)\nTotal: **7** products\n\n- `ksuite`: 1\n- `drive`: 1\n- `kchat`: 1\n- `email_hosting`: 1\n- `domain`: 1\n- `hosting`: 1\n- `mailing`: 1\n\n## alain@maximalcom.be (id 1084923)\nTotal: **6** products\n\n- `domain`: 1\n- `hosting`: 1\n- `email_hosting`: 1\n- `ksuite`: 1\n- `drive`: 1\n- `kchat`: 1\n\n## scaramanga gmbh (id 1492572)\nTotal: **6** products\n\n- `domain`: 1\n- `ksuite`: 1\n- `email_hosting`: 1\n- `drive`: 1\n- `kchat`: 1\n- `hosting`: 1\n\n## aureleloane vacances (id 1514816)\nTotal: **6** products\n\n- `domain`: 2\n- `ksuite`: 1\n- `email_hosting`: 1\n- `drive`: 1\n- `kchat`: 1\n\n## Bscan (id 1586926)\nTotal: **6** products\n\n- `domain`: 1\n- `ksuite`: 1\n- `email_hosting`: 1\n- `drive`: 1\n- `kchat`: 1\n- `hosting`: 1\n\n## Marokeys (id 1956653)\nTotal: **6** products\n\n- `ksuite`: 1\n- `drive`: 1\n- `kchat`: 1\n- `domain`: 1\n- `email_hosting`: 1\n- `hosting`: 1\n\n## AKAZA BELGIUM SRL (id 1576144)\nTotal: **4** products\n\n- `hosting`: 2\n- `domain`: 1\n- `email_hosting`: 1\n\n## Win-ia  (id 1584405)\nTotal: **3** products\n\n- `domain`: 1\n- `email_hosting`: 1\n- `hosting`: 1\n\n## Olivier et Melody (id 1782998)\nTotal: **3** products\n\n- `ksuite`: 1\n- `drive`: 1\n- `kchat`: 1\n\n## Axel Vroonen (I.A.V.) (id 287541)\nTotal: **1** products\n\n- `hosting`: 1\n\n## Mediasant\u00e9 (id 506069)\nTotal: **0** products\n\n## Fargan (id 1060743)\nTotal: **0** products\n\n## Les petits sapins de Waterloo asbl (id 1169805)\nTotal: **0** products\n"
+      }
+    },
+    "jsonrpc": "2.0",
+    "id": 6
+  }
+}

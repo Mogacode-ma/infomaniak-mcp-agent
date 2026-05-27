@@ -1,0 +1,311 @@
+{
+  "args": {
+    "account_id": 46276
+  },
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"account_id\": 46276,\n  \"count\": 32,\n  \"mail_hostings\": [\n    {\n      \"id\": 496525,\n      \"account_id\": 46276,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"coden.lu\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 501989,\n      \"account_id\": 46276,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"ultimaos.com\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 757906,\n      \"account_id\": 46276,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"wouber.be\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 761983,\n      \"account_id\": 46276,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"equidoc.eu\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 762416,\n      \"account_id\": 46276,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"anidoc.eu\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 797471,\n      \"account_id\": 46276,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"mistress-naelle.com\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 814853,\n      \"account_id\": 46276,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"amicimiei.be\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 815100,\n      \"account_id\": 46276,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"edelmaks.com\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 824466,\n      \"account_id\": 46276,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"eval-immo.be\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 841205,\n      \"account_id\": 46276,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"kingpur-europe.com\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 846255,\n      \"account_id\": 46276,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"boucherie-pascale.be\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 857298,\n      \"account_id\": 46276,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"pharmatch.eu\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 858400,\n      \"account_id\": 46276,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"coachtok.eu\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 859910,\n      \"account_id\": 46276,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"eventcorpolux.com\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 860619,\n      \"account_id\": 46276,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"maud-de-san-nicolas.com\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 863816,\n      \"account_id\": 46276,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"audreyleenaerts.be\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 877962,\n      \"account_id\": 46276,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"cvboost.be\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 879683,\n      \"account_id\": 46276,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"m4b-construct.be\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 898471,\n      \"account_id\": 46276,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"coden.ma\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 907006,\n      \"account_id\": 46276,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"gomogador.com\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 923005,\n      \"account_id\": 46276,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"mogacode.ma\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 926919,\n      \"account_id\": 46276,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"dominadistrict.com\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 935677,\n      \"account_id\": 46276,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"mogsapp.com\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 936446,\n      \"account_id\": 46276,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"marobal.com\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 950642,\n      \"account_id\": 46276,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"amaryllis-home.be\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 955251,\n      \"account_id\": 46276,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"padmala-construction.com\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 957062,\n      \"account_id\": 46276,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"essaouira-airport.com\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 958031,\n      \"account_id\": 46276,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"laayoune-airport.com\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 959974,\n      \"account_id\": 46276,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"guinguette.fun\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 973201,\n      \"account_id\": 46276,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"latableduboucherbyp.be\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 973598,\n      \"account_id\": 46276,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"latableduboucherbybp.be\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 1013467,\n      \"account_id\": 46276,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"dardartluz.com\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    }\n  ]\n}"
+        }
+      ],
+      "structuredContent": {
+        "account_id": 46276,
+        "count": 32,
+        "mail_hostings": [
+          {
+            "id": 496525,
+            "account_id": 46276,
+            "service_name": "email_hosting",
+            "customer_name": "coden.lu",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 501989,
+            "account_id": 46276,
+            "service_name": "email_hosting",
+            "customer_name": "ultimaos.com",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 757906,
+            "account_id": 46276,
+            "service_name": "email_hosting",
+            "customer_name": "wouber.be",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 761983,
+            "account_id": 46276,
+            "service_name": "email_hosting",
+            "customer_name": "equidoc.eu",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 762416,
+            "account_id": 46276,
+            "service_name": "email_hosting",
+            "customer_name": "anidoc.eu",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 797471,
+            "account_id": 46276,
+            "service_name": "email_hosting",
+            "customer_name": "mistress-naelle.com",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 814853,
+            "account_id": 46276,
+            "service_name": "email_hosting",
+            "customer_name": "amicimiei.be",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 815100,
+            "account_id": 46276,
+            "service_name": "email_hosting",
+            "customer_name": "edelmaks.com",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 824466,
+            "account_id": 46276,
+            "service_name": "email_hosting",
+            "customer_name": "eval-immo.be",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 841205,
+            "account_id": 46276,
+            "service_name": "email_hosting",
+            "customer_name": "kingpur-europe.com",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 846255,
+            "account_id": 46276,
+            "service_name": "email_hosting",
+            "customer_name": "boucherie-pascale.be",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 857298,
+            "account_id": 46276,
+            "service_name": "email_hosting",
+            "customer_name": "pharmatch.eu",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 858400,
+            "account_id": 46276,
+            "service_name": "email_hosting",
+            "customer_name": "coachtok.eu",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 859910,
+            "account_id": 46276,
+            "service_name": "email_hosting",
+            "customer_name": "eventcorpolux.com",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 860619,
+            "account_id": 46276,
+            "service_name": "email_hosting",
+            "customer_name": "maud-de-san-nicolas.com",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 863816,
+            "account_id": 46276,
+            "service_name": "email_hosting",
+            "customer_name": "audreyleenaerts.be",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 877962,
+            "account_id": 46276,
+            "service_name": "email_hosting",
+            "customer_name": "cvboost.be",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 879683,
+            "account_id": 46276,
+            "service_name": "email_hosting",
+            "customer_name": "m4b-construct.be",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 898471,
+            "account_id": 46276,
+            "service_name": "email_hosting",
+            "customer_name": "coden.ma",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 907006,
+            "account_id": 46276,
+            "service_name": "email_hosting",
+            "customer_name": "gomogador.com",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 923005,
+            "account_id": 46276,
+            "service_name": "email_hosting",
+            "customer_name": "mogacode.ma",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 926919,
+            "account_id": 46276,
+            "service_name": "email_hosting",
+            "customer_name": "dominadistrict.com",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 935677,
+            "account_id": 46276,
+            "service_name": "email_hosting",
+            "customer_name": "mogsapp.com",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 936446,
+            "account_id": 46276,
+            "service_name": "email_hosting",
+            "customer_name": "marobal.com",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 950642,
+            "account_id": 46276,
+            "service_name": "email_hosting",
+            "customer_name": "amaryllis-home.be",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 955251,
+            "account_id": 46276,
+            "service_name": "email_hosting",
+            "customer_name": "padmala-construction.com",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 957062,
+            "account_id": 46276,
+            "service_name": "email_hosting",
+            "customer_name": "essaouira-airport.com",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 958031,
+            "account_id": 46276,
+            "service_name": "email_hosting",
+            "customer_name": "laayoune-airport.com",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 959974,
+            "account_id": 46276,
+            "service_name": "email_hosting",
+            "customer_name": "guinguette.fun",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 973201,
+            "account_id": 46276,
+            "service_name": "email_hosting",
+            "customer_name": "latableduboucherbyp.be",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 973598,
+            "account_id": 46276,
+            "service_name": "email_hosting",
+            "customer_name": "latableduboucherbybp.be",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 1013467,
+            "account_id": 46276,
+            "service_name": "email_hosting",
+            "customer_name": "dardartluz.com",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          }
+        ]
+      }
+    },
+    "jsonrpc": "2.0",
+    "id": 31
+  }
+}

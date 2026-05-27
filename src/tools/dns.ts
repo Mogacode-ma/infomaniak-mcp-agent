@@ -56,21 +56,38 @@ export const dnsListRecordsTool = defineTool({
 // ---------------------------------------------------------------------------
 
 const CreateRecordInput = z.object({
-  zone: z.string().min(3),
+  zone: z
+    .string()
+    .min(3)
+    .describe(
+      "DNS zone (root domain) to add the record to, e.g. 'broz.be'. Must be a domain whose DNS is managed by Infomaniak (check via infomaniak_get_domain).",
+    ),
   source: z
     .string()
     .describe(
       "Subdomain part (e.g. 'www', 'mail') or '.' for the zone apex. Do NOT include the zone itself.",
     ),
-  type: DnsRecordTypeSchema,
+  type: DnsRecordTypeSchema.describe(
+    "Record type as enum: A, AAAA, CNAME, MX, TXT, NS, SRV, CAA, PTR. Must be UPPERCASE.",
+  ),
   target: z
     .string()
     .min(1)
     .describe(
       "Record value. For MX and SRV, embed the priority inline as Infomaniak does, e.g. '5 mta-gw.infomaniak.ch'.",
     ),
-  ttl: z.number().int().min(60).max(86_400).default(3600),
-  confirmation_token: z.string().uuid().optional(),
+  ttl: z
+    .number()
+    .int()
+    .min(60)
+    .max(86_400)
+    .default(3600)
+    .describe("Time-to-live in seconds. Min 60, max 86400 (24h). Default 3600 (1h)."),
+  confirmation_token: z
+    .string()
+    .uuid()
+    .optional()
+    .describe("Token from the prior plan response. Required on the apply phase only."),
 });
 
 const CreateRecordOutput = z.union([

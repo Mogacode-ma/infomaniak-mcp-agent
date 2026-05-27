@@ -1,0 +1,184 @@
+{
+  "args": {
+    "hosting_id": 693806
+  },
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"hosting_id\": 693806,\n  \"sites\": [\n    {\n      \"id\": 1249755,\n      \"account_id\": 46276,\n      \"customer_name\": \"crm.coden.lu\",\n      \"hosting_type\": \"h2\",\n      \"main_fqdn\": \"crm.coden.lu\",\n      \"directory\": \"/sites/crm.coden.lu\",\n      \"ssl_status\": \"free\",\n      \"ssl_issuer\": \"R12\",\n      \"has_wordpress\": false,\n      \"has_website_builder\": false,\n      \"applications\": [],\n      \"parent_id\": 693806,\n      \"parent_hosting_name\": \"Coden Priv\u00e9\"\n    },\n    {\n      \"id\": 1250842,\n      \"account_id\": 46276,\n      \"customer_name\": \"coden.lu\",\n      \"hosting_type\": \"h2\",\n      \"main_fqdn\": \"coden.lu\",\n      \"directory\": \"/sites/coden-srl.broz.be\",\n      \"ssl_status\": \"free\",\n      \"ssl_issuer\": \"Let's Encrypt, R13\",\n      \"has_wordpress\": true,\n      \"has_website_builder\": false,\n      \"applications\": [\n        {\n          \"id\": 1250842,\n          \"type\": \"wordpress\",\n          \"version\": \"6.8.1\",\n          \"name\": \"Coden - Cr\u00e9ation de Sites Web Wordpress &#038; Automatisation IA\",\n          \"url\": \"https://coden-srl.broz.be\",\n          \"link_admin\": \"https://coden-srl.broz.be/wp-admin/\",\n          \"is_complete\": true\n        }\n      ],\n      \"parent_id\": 693806,\n      \"parent_hosting_name\": \"Coden Priv\u00e9\"\n    },\n    {\n      \"id\": 1317109,\n      \"account_id\": 46276,\n      \"customer_name\": \"www.mogacode.ma\",\n      \"hosting_type\": \"h2\",\n      \"main_fqdn\": \"www.mogacode.ma\",\n      \"directory\": \"/sites/coden.ma\",\n      \"ssl_status\": \"free\",\n      \"ssl_issuer\": \"Let's Encrypt, R13\",\n      \"has_wordpress\": true,\n      \"has_website_builder\": false,\n      \"applications\": [\n        {\n          \"id\": 1317109,\n          \"type\": \"wordpress\",\n          \"version\": \"6.8.2\",\n          \"name\": \"Coden Mogador\",\n          \"url\": \"https://www.coden.ma\",\n          \"link_admin\": \"https://www.coden.ma/wp-admin/\",\n          \"is_complete\": true\n        }\n      ],\n      \"parent_id\": 693806,\n      \"parent_hosting_name\": \"Coden Priv\u00e9\"\n    },\n    {\n      \"id\": 1338845,\n      \"account_id\": 46276,\n      \"customer_name\": \"call.mogacode.ma\",\n      \"hosting_type\": \"h2\",\n      \"main_fqdn\": \"call.mogacode.ma\",\n      \"directory\": \"/sites/call.mogacode.ma\",\n      \"ssl_status\": \"disabled\",\n      \"has_wordpress\": false,\n      \"has_website_builder\": false,\n      \"applications\": [],\n      \"parent_id\": 693806,\n      \"parent_hosting_name\": \"Coden Priv\u00e9\"\n    },\n    {\n      \"id\": 1378552,\n      \"account_id\": 46276,\n      \"customer_name\": \"guinguette.fun\",\n      \"hosting_type\": \"h2\",\n      \"main_fqdn\": \"guinguette.fun\",\n      \"directory\": \"/sites/guinguette.fun\",\n      \"ssl_status\": \"free\",\n      \"ssl_issuer\": \"Let's Encrypt, R12\",\n      \"has_wordpress\": false,\n      \"has_website_builder\": false,\n      \"applications\": [],\n      \"parent_id\": 693806,\n      \"parent_hosting_name\": \"Coden Priv\u00e9\"\n    },\n    {\n      \"id\": 1404625,\n      \"account_id\": 46276,\n      \"customer_name\": \"broz.be\",\n      \"hosting_type\": \"h2\",\n      \"main_fqdn\": \"broz.be\",\n      \"directory\": \"/sites/broz.be\",\n      \"ssl_status\": \"free\",\n      \"ssl_issuer\": \"R12\",\n      \"has_wordpress\": true,\n      \"has_website_builder\": false,\n      \"applications\": [\n        {\n          \"id\": 1404625,\n          \"type\": \"wordpress\",\n          \"version\": \"6.9.4\",\n          \"name\": \"Broz\",\n          \"url\": \"http://broz.be\",\n          \"link_admin\": \"http://broz.be/wp-admin/\",\n          \"is_complete\": true\n        }\n      ],\n      \"parent_id\": 693806,\n      \"parent_hosting_name\": \"Coden Priv\u00e9\"\n    },\n    {\n      \"id\": 1422830,\n      \"account_id\": 46276,\n      \"customer_name\": \"evo.broz.be\",\n      \"hosting_type\": \"h2\",\n      \"main_fqdn\": \"evo.broz.be\",\n      \"directory\": \"/sites/evo.broz.be\",\n      \"ssl_status\": \"free\",\n      \"ssl_issuer\": \"R12\",\n      \"has_wordpress\": false,\n      \"has_website_builder\": false,\n      \"applications\": [],\n      \"parent_id\": 693806,\n      \"parent_hosting_name\": \"Coden Priv\u00e9\"\n    },\n    {\n      \"id\": 1440686,\n      \"account_id\": 46276,\n      \"customer_name\": \"ms.broz.be\",\n      \"hosting_type\": \"h2\",\n      \"main_fqdn\": \"ms.broz.be\",\n      \"directory\": \"/sites/ms.broz.be\",\n      \"ssl_status\": \"disabled\",\n      \"has_wordpress\": false,\n      \"has_website_builder\": false,\n      \"applications\": [],\n      \"parent_id\": 693806,\n      \"parent_hosting_name\": \"Coden Priv\u00e9\"\n    },\n    {\n      \"id\": 105493,\n      \"account_id\": 46276,\n      \"customer_name\": \"formation.mogacode.ma\",\n      \"hosting_type\": \"h3\",\n      \"main_fqdn\": \"formation.mogacode.ma\",\n      \"ssl_status\": \"free\",\n      \"ssl_issuer\": \"R13\",\n      \"has_wordpress\": false,\n      \"has_website_builder\": false,\n      \"applications\": [],\n      \"parent_id\": 693806,\n      \"parent_hosting_name\": \"Coden Priv\u00e9\"\n    }\n  ]\n}"
+        }
+      ],
+      "structuredContent": {
+        "hosting_id": 693806,
+        "sites": [
+          {
+            "id": 1249755,
+            "account_id": 46276,
+            "customer_name": "crm.coden.lu",
+            "hosting_type": "h2",
+            "main_fqdn": "crm.coden.lu",
+            "directory": "/sites/crm.coden.lu",
+            "ssl_status": "free",
+            "ssl_issuer": "R12",
+            "has_wordpress": false,
+            "has_website_builder": false,
+            "applications": [],
+            "parent_id": 693806,
+            "parent_hosting_name": "Coden Priv\u00e9"
+          },
+          {
+            "id": 1250842,
+            "account_id": 46276,
+            "customer_name": "coden.lu",
+            "hosting_type": "h2",
+            "main_fqdn": "coden.lu",
+            "directory": "/sites/coden-srl.broz.be",
+            "ssl_status": "free",
+            "ssl_issuer": "Let's Encrypt, R13",
+            "has_wordpress": true,
+            "has_website_builder": false,
+            "applications": [
+              {
+                "id": 1250842,
+                "type": "wordpress",
+                "version": "6.8.1",
+                "name": "Coden - Cr\u00e9ation de Sites Web Wordpress &#038; Automatisation IA",
+                "url": "https://coden-srl.broz.be",
+                "link_admin": "https://coden-srl.broz.be/wp-admin/",
+                "is_complete": true
+              }
+            ],
+            "parent_id": 693806,
+            "parent_hosting_name": "Coden Priv\u00e9"
+          },
+          {
+            "id": 1317109,
+            "account_id": 46276,
+            "customer_name": "www.mogacode.ma",
+            "hosting_type": "h2",
+            "main_fqdn": "www.mogacode.ma",
+            "directory": "/sites/coden.ma",
+            "ssl_status": "free",
+            "ssl_issuer": "Let's Encrypt, R13",
+            "has_wordpress": true,
+            "has_website_builder": false,
+            "applications": [
+              {
+                "id": 1317109,
+                "type": "wordpress",
+                "version": "6.8.2",
+                "name": "Coden Mogador",
+                "url": "https://www.coden.ma",
+                "link_admin": "https://www.coden.ma/wp-admin/",
+                "is_complete": true
+              }
+            ],
+            "parent_id": 693806,
+            "parent_hosting_name": "Coden Priv\u00e9"
+          },
+          {
+            "id": 1338845,
+            "account_id": 46276,
+            "customer_name": "call.mogacode.ma",
+            "hosting_type": "h2",
+            "main_fqdn": "call.mogacode.ma",
+            "directory": "/sites/call.mogacode.ma",
+            "ssl_status": "disabled",
+            "has_wordpress": false,
+            "has_website_builder": false,
+            "applications": [],
+            "parent_id": 693806,
+            "parent_hosting_name": "Coden Priv\u00e9"
+          },
+          {
+            "id": 1378552,
+            "account_id": 46276,
+            "customer_name": "guinguette.fun",
+            "hosting_type": "h2",
+            "main_fqdn": "guinguette.fun",
+            "directory": "/sites/guinguette.fun",
+            "ssl_status": "free",
+            "ssl_issuer": "Let's Encrypt, R12",
+            "has_wordpress": false,
+            "has_website_builder": false,
+            "applications": [],
+            "parent_id": 693806,
+            "parent_hosting_name": "Coden Priv\u00e9"
+          },
+          {
+            "id": 1404625,
+            "account_id": 46276,
+            "customer_name": "broz.be",
+            "hosting_type": "h2",
+            "main_fqdn": "broz.be",
+            "directory": "/sites/broz.be",
+            "ssl_status": "free",
+            "ssl_issuer": "R12",
+            "has_wordpress": true,
+            "has_website_builder": false,
+            "applications": [
+              {
+                "id": 1404625,
+                "type": "wordpress",
+                "version": "6.9.4",
+                "name": "Broz",
+                "url": "http://broz.be",
+                "link_admin": "http://broz.be/wp-admin/",
+                "is_complete": true
+              }
+            ],
+            "parent_id": 693806,
+            "parent_hosting_name": "Coden Priv\u00e9"
+          },
+          {
+            "id": 1422830,
+            "account_id": 46276,
+            "customer_name": "evo.broz.be",
+            "hosting_type": "h2",
+            "main_fqdn": "evo.broz.be",
+            "directory": "/sites/evo.broz.be",
+            "ssl_status": "free",
+            "ssl_issuer": "R12",
+            "has_wordpress": false,
+            "has_website_builder": false,
+            "applications": [],
+            "parent_id": 693806,
+            "parent_hosting_name": "Coden Priv\u00e9"
+          },
+          {
+            "id": 1440686,
+            "account_id": 46276,
+            "customer_name": "ms.broz.be",
+            "hosting_type": "h2",
+            "main_fqdn": "ms.broz.be",
+            "directory": "/sites/ms.broz.be",
+            "ssl_status": "disabled",
+            "has_wordpress": false,
+            "has_website_builder": false,
+            "applications": [],
+            "parent_id": 693806,
+            "parent_hosting_name": "Coden Priv\u00e9"
+          },
+          {
+            "id": 105493,
+            "account_id": 46276,
+            "customer_name": "formation.mogacode.ma",
+            "hosting_type": "h3",
+            "main_fqdn": "formation.mogacode.ma",
+            "ssl_status": "free",
+            "ssl_issuer": "R13",
+            "has_wordpress": false,
+            "has_website_builder": false,
+            "applications": [],
+            "parent_id": 693806,
+            "parent_hosting_name": "Coden Priv\u00e9"
+          }
+        ]
+      }
+    },
+    "jsonrpc": "2.0",
+    "id": 16
+  }
+}

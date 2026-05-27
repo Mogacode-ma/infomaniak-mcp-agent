@@ -27,26 +27,39 @@ import { defineTool } from "./types.js";
 // ---------------------------------------------------------------------------
 
 const CreateMailboxInput = z.object({
-  mail_hosting_id: z.number().int().positive(),
-  /** Local part only — without @domain. Lowercase letters, digits, dots, dashes. */
+  mail_hosting_id: z
+    .number()
+    .int()
+    .positive()
+    .describe("Mail hosting ID. Discover via infomaniak_list_mail_hostings."),
   mailbox_name: z
     .string()
     .min(1)
     .max(64)
-    .regex(/^[a-z0-9._-]+$/, "mailbox_name must be lowercase alphanumeric with . _ -"),
-  /**
-   * Initial password. Must satisfy Infomaniak's policy: ≥ 8 chars, at least
-   * one lowercase + uppercase + digit + special character.
-   */
+    .regex(/^[a-z0-9._-]+$/, "mailbox_name must be lowercase alphanumeric with . _ -")
+    .describe(
+      "Local part of the mailbox WITHOUT the @domain (e.g. 'info', NOT 'info@example.com'). Lowercase alphanumeric with dots, underscores or dashes; 1-64 chars.",
+    ),
   password: z
     .string()
     .min(8)
     .regex(/[a-z]/, "password must contain at least one lowercase letter")
     .regex(/[A-Z]/, "password must contain at least one uppercase letter")
     .regex(/\d/, "password must contain at least one digit")
-    .regex(/[^A-Za-z0-9]/, "password must contain at least one special character"),
-  description: z.string().max(255).optional(),
-  confirmation_token: z.string().uuid().optional(),
+    .regex(/[^A-Za-z0-9]/, "password must contain at least one special character")
+    .describe(
+      "Initial mailbox password. Infomaniak policy: ≥ 8 chars, at least one lowercase, one uppercase, one digit and one special character. NEVER appears in the plan response — only in the apply call.",
+    ),
+  description: z
+    .string()
+    .max(255)
+    .optional()
+    .describe("Optional free-text description (≤ 255 chars), shown in the manager UI."),
+  confirmation_token: z
+    .string()
+    .uuid()
+    .optional()
+    .describe("Token from the prior plan response. Required on the apply phase only."),
 });
 
 const CreateMailboxOutput = z.union([

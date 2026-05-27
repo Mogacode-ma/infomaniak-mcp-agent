@@ -1,0 +1,143 @@
+{
+  "args": {
+    "hosting_id": 693806
+  },
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"hosting_id\": 693806,\n  \"count\": 6,\n  \"users\": [\n    {\n      \"name\": \"v33dqc_WP1250842\",\n      \"applications\": [\n        {\n          \"id\": \"1250842\",\n          \"type\": \"wordpress\",\n          \"name\": \"Coden - Cr\u00e9ation de Sites Web Wordpress &#038; Automatisation IA\"\n        }\n      ],\n      \"permissions\": [\n        {\n          \"database\": \"v33dqc_WP1250842\",\n          \"rights\": {\n            \"read\": true,\n            \"write\": true,\n            \"admin\": true\n          }\n        }\n      ],\n      \"is_temporary\": false,\n      \"operation_in_progress\": false,\n      \"is_unlocked\": false\n    },\n    {\n      \"name\": \"v33dqc_WP1317109\",\n      \"applications\": [\n        {\n          \"id\": \"1317109\",\n          \"type\": \"wordpress\",\n          \"name\": \"Coden Mogador\"\n        }\n      ],\n      \"permissions\": [\n        {\n          \"database\": \"v33dqc_WP1317109\",\n          \"rights\": {\n            \"read\": true,\n            \"write\": true,\n            \"admin\": true\n          }\n        }\n      ],\n      \"is_temporary\": false,\n      \"operation_in_progress\": false,\n      \"is_unlocked\": false\n    },\n    {\n      \"name\": \"v33dqc_WP1404625\",\n      \"applications\": [\n        {\n          \"id\": \"1404625\",\n          \"type\": \"wordpress\",\n          \"name\": \"Broz\"\n        }\n      ],\n      \"permissions\": [\n        {\n          \"database\": \"v33dqc_WP1404625\",\n          \"rights\": {\n            \"read\": true,\n            \"write\": true,\n            \"admin\": true\n          }\n        }\n      ],\n      \"is_temporary\": false,\n      \"operation_in_progress\": false,\n      \"is_unlocked\": false\n    },\n    {\n      \"name\": \"v33dqc_evolu\",\n      \"applications\": [],\n      \"permissions\": [\n        {\n          \"database\": \"v33dqc_evoluphar\",\n          \"rights\": {\n            \"read\": true,\n            \"write\": true,\n            \"admin\": true\n          }\n        }\n      ],\n      \"is_temporary\": false,\n      \"operation_in_progress\": false,\n      \"is_unlocked\": false\n    },\n    {\n      \"name\": \"v33dqc_marobal\",\n      \"applications\": [],\n      \"permissions\": [\n        {\n          \"database\": \"v33dqc_marobal\",\n          \"rights\": {\n            \"read\": true,\n            \"write\": true,\n            \"admin\": true\n          }\n        }\n      ],\n      \"is_temporary\": false,\n      \"operation_in_progress\": false,\n      \"is_unlocked\": false\n    },\n    {\n      \"name\": \"v33dqc_perfex\",\n      \"applications\": [],\n      \"permissions\": [\n        {\n          \"database\": \"v33dqc_perfex\",\n          \"rights\": {\n            \"read\": true,\n            \"write\": true,\n            \"admin\": true\n          }\n        }\n      ],\n      \"is_temporary\": false,\n      \"operation_in_progress\": false,\n      \"is_unlocked\": false\n    }\n  ]\n}"
+        }
+      ],
+      "structuredContent": {
+        "hosting_id": 693806,
+        "count": 6,
+        "users": [
+          {
+            "name": "v33dqc_WP1250842",
+            "applications": [
+              {
+                "id": "1250842",
+                "type": "wordpress",
+                "name": "Coden - Cr\u00e9ation de Sites Web Wordpress &#038; Automatisation IA"
+              }
+            ],
+            "permissions": [
+              {
+                "database": "v33dqc_WP1250842",
+                "rights": {
+                  "read": true,
+                  "write": true,
+                  "admin": true
+                }
+              }
+            ],
+            "is_temporary": false,
+            "operation_in_progress": false,
+            "is_unlocked": false
+          },
+          {
+            "name": "v33dqc_WP1317109",
+            "applications": [
+              {
+                "id": "1317109",
+                "type": "wordpress",
+                "name": "Coden Mogador"
+              }
+            ],
+            "permissions": [
+              {
+                "database": "v33dqc_WP1317109",
+                "rights": {
+                  "read": true,
+                  "write": true,
+                  "admin": true
+                }
+              }
+            ],
+            "is_temporary": false,
+            "operation_in_progress": false,
+            "is_unlocked": false
+          },
+          {
+            "name": "v33dqc_WP1404625",
+            "applications": [
+              {
+                "id": "1404625",
+                "type": "wordpress",
+                "name": "Broz"
+              }
+            ],
+            "permissions": [
+              {
+                "database": "v33dqc_WP1404625",
+                "rights": {
+                  "read": true,
+                  "write": true,
+                  "admin": true
+                }
+              }
+            ],
+            "is_temporary": false,
+            "operation_in_progress": false,
+            "is_unlocked": false
+          },
+          {
+            "name": "v33dqc_evolu",
+            "applications": [],
+            "permissions": [
+              {
+                "database": "v33dqc_evoluphar",
+                "rights": {
+                  "read": true,
+                  "write": true,
+                  "admin": true
+                }
+              }
+            ],
+            "is_temporary": false,
+            "operation_in_progress": false,
+            "is_unlocked": false
+          },
+          {
+            "name": "v33dqc_marobal",
+            "applications": [],
+            "permissions": [
+              {
+                "database": "v33dqc_marobal",
+                "rights": {
+                  "read": true,
+                  "write": true,
+                  "admin": true
+                }
+              }
+            ],
+            "is_temporary": false,
+            "operation_in_progress": false,
+            "is_unlocked": false
+          },
+          {
+            "name": "v33dqc_perfex",
+            "applications": [],
+            "permissions": [
+              {
+                "database": "v33dqc_perfex",
+                "rights": {
+                  "read": true,
+                  "write": true,
+                  "admin": true
+                }
+              }
+            ],
+            "is_temporary": false,
+            "operation_in_progress": false,
+            "is_unlocked": false
+          }
+        ]
+      }
+    },
+    "jsonrpc": "2.0",
+    "id": 23
+  }
+}

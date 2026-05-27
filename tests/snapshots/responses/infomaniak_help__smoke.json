@@ -1,0 +1,53 @@
+{
+  "args": {
+    "intent": "list domains"
+  },
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"intent\": \"list domains\",\n  \"suggestions\": [\n    {\n      \"tool\": \"infomaniak_list_domains\",\n      \"description\": \"List every domain owned by an Infomaniak organization, with creation and expiration dates.\",\n      \"score\": 2,\n      \"matched_terms\": [\n        \"list\",\n        \"domains\"\n      ]\n    },\n    {\n      \"tool\": \"infomaniak_history\",\n      \"description\": \"List the destructive actions taken in the current session, most recent first. Each entry includes whether it can be reversed via infomaniak_undo.\",\n      \"score\": 1,\n      \"matched_terms\": [\n        \"list\"\n      ]\n    },\n    {\n      \"tool\": \"infomaniak_list_organizations\",\n      \"description\": \"Lists all Infomaniak organizations (accounts) the current token has technical access to.\",\n      \"score\": 1,\n      \"matched_terms\": [\n        \"list\"\n      ]\n    },\n    {\n      \"tool\": \"infomaniak_list_hostings\",\n      \"description\": \"Lists web hostings (classic + Node.js) for a given Infomaniak organization. Use infomaniak_list_organizations first to discover account IDs.\",\n      \"score\": 1,\n      \"matched_terms\": [\n        \"list\"\n      ]\n    },\n    {\n      \"tool\": \"infomaniak_list_sites\",\n      \"description\": \"Lists all sites on a given web hosting (with applications attached).\",\n      \"score\": 1,\n      \"matched_terms\": [\n        \"list\"\n      ]\n    }\n  ],\n  \"next_step_markdown\": \"## Suggested tools for \\\"list domains\\\"\\n\\n- **`infomaniak_list_domains`** (2 term match): List every domain owned by an Infomaniak organization, with creation and expiration dates.\\n- **`infomaniak_history`** (1 term match): List the destructive actions taken in the current session, most recent first. Each entry includes whether it can be reversed via infomaniak_undo.\\n- **`infomaniak_list_organizations`** (1 term match): Lists all Infomaniak organizations (accounts) the current token has technical access to.\\n- **`infomaniak_list_hostings`** (1 term match): Lists web hostings (classic + Node.js) for a given Infomaniak organization. Use infomaniak_list_organizations first to discover account IDs.\\n- **`infomaniak_list_sites`** (1 term match): Lists all sites on a given web hosting (with applications attached).\\n\\nUse `infomaniak_explain` with a tool name to learn its parameters.\"\n}"
+        }
+      ],
+      "structuredContent": {
+        "intent": "list domains",
+        "suggestions": [
+          {
+            "tool": "infomaniak_list_domains",
+            "description": "List every domain owned by an Infomaniak organization, with creation and expiration dates.",
+            "score": 2,
+            "matched_terms": ["list", "domains"]
+          },
+          {
+            "tool": "infomaniak_history",
+            "description": "List the destructive actions taken in the current session, most recent first. Each entry includes whether it can be reversed via infomaniak_undo.",
+            "score": 1,
+            "matched_terms": ["list"]
+          },
+          {
+            "tool": "infomaniak_list_organizations",
+            "description": "Lists all Infomaniak organizations (accounts) the current token has technical access to.",
+            "score": 1,
+            "matched_terms": ["list"]
+          },
+          {
+            "tool": "infomaniak_list_hostings",
+            "description": "Lists web hostings (classic + Node.js) for a given Infomaniak organization. Use infomaniak_list_organizations first to discover account IDs.",
+            "score": 1,
+            "matched_terms": ["list"]
+          },
+          {
+            "tool": "infomaniak_list_sites",
+            "description": "Lists all sites on a given web hosting (with applications attached).",
+            "score": 1,
+            "matched_terms": ["list"]
+          }
+        ],
+        "next_step_markdown": "## Suggested tools for \"list domains\"\n\n- **`infomaniak_list_domains`** (2 term match): List every domain owned by an Infomaniak organization, with creation and expiration dates.\n- **`infomaniak_history`** (1 term match): List the destructive actions taken in the current session, most recent first. Each entry includes whether it can be reversed via infomaniak_undo.\n- **`infomaniak_list_organizations`** (1 term match): Lists all Infomaniak organizations (accounts) the current token has technical access to.\n- **`infomaniak_list_hostings`** (1 term match): Lists web hostings (classic + Node.js) for a given Infomaniak organization. Use infomaniak_list_organizations first to discover account IDs.\n- **`infomaniak_list_sites`** (1 term match): Lists all sites on a given web hosting (with applications attached).\n\nUse `infomaniak_explain` with a tool name to learn its parameters."
+      }
+    },
+    "jsonrpc": "2.0",
+    "id": 7
+  }
+}

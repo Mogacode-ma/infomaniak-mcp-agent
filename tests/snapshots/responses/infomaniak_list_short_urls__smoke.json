@@ -1,0 +1,21 @@
+{
+  "args": {},
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"page\": 1,\n  \"per_page\": 20,\n  \"count\": 0,\n  \"short_urls\": []\n}"
+        }
+      ],
+      "structuredContent": {
+        "page": 1,
+        "per_page": 20,
+        "count": 0,
+        "short_urls": []
+      }
+    },
+    "jsonrpc": "2.0",
+    "id": 46
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "args": {
+    "mail_hosting_id": 496525
+  },
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "\u274c [\n  {\n    \"code\": \"invalid_type\",\n    \"expected\": \"string\",\n    \"received\": \"number\",\n    \"path\": [\n      \"type\"\n    ],\n    \"message\": \"Expected string, received number\"\n  }\n]"
+        }
+      ],
+      "isError": true
+    },
+    "jsonrpc": "2.0",
+    "id": 32
+  }
+}

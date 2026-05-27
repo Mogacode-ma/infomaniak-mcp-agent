@@ -1,0 +1,19 @@
+{
+  "args": {
+    "hosting_id": 693806,
+    "database_name": "broz.be"
+  },
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "\u274c [\n  {\n    \"validation\": \"regex\",\n    \"code\": \"invalid_string\",\n    \"message\": \"database_name must be alphanumeric with underscores\",\n    \"path\": [\n      \"database_name\"\n    ]\n  }\n]"
+        }
+      ],
+      "isError": true
+    },
+    "jsonrpc": "2.0",
+    "id": 21
+  }
+}

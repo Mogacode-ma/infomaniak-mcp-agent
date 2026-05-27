@@ -1,0 +1,26 @@
+{
+  "args": {
+    "domain": "broz.be"
+  },
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"has_dnssec\": true,\n  \"dnssec_type\": \"keydata\",\n  \"dnssec_data\": [],\n  \"ksk\": {\n    \"algorithm\": \"\",\n    \"public_key\": \"\"\n  }\n}"
+        }
+      ],
+      "structuredContent": {
+        "has_dnssec": true,
+        "dnssec_type": "keydata",
+        "dnssec_data": [],
+        "ksk": {
+          "algorithm": "",
+          "public_key": ""
+        }
+      }
+    },
+    "jsonrpc": "2.0",
+    "id": 30
+  }
+}

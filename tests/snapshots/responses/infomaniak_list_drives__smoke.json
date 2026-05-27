@@ -1,0 +1,34 @@
+{
+  "args": {
+    "account_id": 46276
+  },
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"account_id\": 46276,\n  \"count\": 1,\n  \"drives\": [\n    {\n      \"id\": 764000,\n      \"name\": \"Studio Coden\",\n      \"size\": 131941395333120,\n      \"used_size\": 188459771781,\n      \"users_count\": 5,\n      \"users_quota\": 20,\n      \"in_maintenance\": false,\n      \"product_id\": 6320326,\n      \"account_id\": 46276\n    }\n  ]\n}"
+        }
+      ],
+      "structuredContent": {
+        "account_id": 46276,
+        "count": 1,
+        "drives": [
+          {
+            "id": 764000,
+            "name": "Studio Coden",
+            "size": 131941395333120,
+            "used_size": 188459771781,
+            "users_count": 5,
+            "users_quota": 20,
+            "in_maintenance": false,
+            "product_id": 6320326,
+            "account_id": 46276
+          }
+        ]
+      }
+    },
+    "jsonrpc": "2.0",
+    "id": 41
+  }
+}

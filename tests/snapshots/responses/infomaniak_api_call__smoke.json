@@ -1,0 +1,19 @@
+{
+  "args": {
+    "method": "broz.be",
+    "path": "broz.be"
+  },
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "\u274c [\n  {\n    \"received\": \"broz.be\",\n    \"code\": \"invalid_enum_value\",\n    \"options\": [\n      \"GET\",\n      \"POST\",\n      \"PUT\",\n      \"PATCH\",\n      \"DELETE\"\n    ],\n    \"path\": [\n      \"method\"\n    ],\n    \"message\": \"Invalid enum value. Expected 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE', received 'broz.be'\"\n  },\n  {\n    \"code\": \"invalid_string\",\n    \"validation\": {\n      \"startsWith\": \"/\"\n    },\n    \"message\": \"path must begin with '/'\",\n    \"path\": [\n      \"path\"\n    ]\n  },\n  {\n    \"validation\": \"regex\",\n    \"code\": \"invalid_string\",\n    \"message\": \"path must look like /<version>/<route>, e.g. '/1/profile' or '/2/zones/example.com/records'\",\n    \"path\": [\n      \"path\"\n    ]\n  }\n]"
+        }
+      ],
+      "isError": true
+    },
+    "jsonrpc": "2.0",
+    "id": 49
+  }
+}

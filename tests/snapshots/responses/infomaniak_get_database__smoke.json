@@ -1,0 +1,19 @@
+{
+  "args": {
+    "hosting_id": 693806,
+    "database_name": "broz.be"
+  },
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "\u274c Object not found\nCode: object_not_found\nHTTP status: 404\n\u2192 The endpoint https://api.infomaniak.com/1/web_hostings/693806/databases/broz.be does not exist or the resource was deleted."
+        }
+      ],
+      "isError": true
+    },
+    "jsonrpc": "2.0",
+    "id": 20
+  }
+}

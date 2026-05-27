@@ -1,0 +1,32 @@
+{
+  "args": {
+    "domain": "broz.be"
+  },
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"id\": 1600456,\n  \"customer_name\": \"broz.be\",\n  \"is_dns_managed_by_infomaniak\": true,\n  \"is_external\": false,\n  \"has_dnssec\": true,\n  \"is_dnssec_pending\": false,\n  \"has_error\": false,\n  \"has_trustee_contact\": false,\n  \"has_whois_antispam\": false,\n  \"is_part_of_ksuite\": false,\n  \"is_premium\": false,\n  \"is_idn\": false,\n  \"puny_code\": \"broz.be\"\n}"
+        }
+      ],
+      "structuredContent": {
+        "id": 1600456,
+        "customer_name": "broz.be",
+        "is_dns_managed_by_infomaniak": true,
+        "is_external": false,
+        "has_dnssec": true,
+        "is_dnssec_pending": false,
+        "has_error": false,
+        "has_trustee_contact": false,
+        "has_whois_antispam": false,
+        "is_part_of_ksuite": false,
+        "is_premium": false,
+        "is_idn": false,
+        "puny_code": "broz.be"
+      }
+    },
+    "jsonrpc": "2.0",
+    "id": 15
+  }
+}

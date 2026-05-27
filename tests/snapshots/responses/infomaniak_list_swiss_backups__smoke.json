@@ -1,0 +1,22 @@
+{
+  "args": {
+    "account_id": 46276
+  },
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"account_id\": 46276,\n  \"count\": 0,\n  \"swiss_backups\": []\n}"
+        }
+      ],
+      "structuredContent": {
+        "account_id": 46276,
+        "count": 0,
+        "swiss_backups": []
+      }
+    },
+    "jsonrpc": "2.0",
+    "id": 45
+  }
+}

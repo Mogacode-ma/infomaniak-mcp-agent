@@ -1,0 +1,19 @@
+{
+  "args": {
+    "mail_hosting_id": 496525,
+    "mailbox_name": "broz.be"
+  },
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "\u274c We could not found any backups for this mailbox\nCode: fail_when_retrieving_email_backups\nHTTP status: 500\n\u2192 Unexpected server response \u2014 check details. If it persists, report the issue with the request_id."
+        }
+      ],
+      "isError": true
+    },
+    "jsonrpc": "2.0",
+    "id": 35
+  }
+}

@@ -8,6 +8,47 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 _(no unreleased changes yet)_
 
+## [0.10.0] — 2026-05-27
+
+### Fixed
+
+- **`audit_account` reported false-positive expirations on domain products.**
+  `/1/products.expired_at` is the original contract expiry and stays in the past
+  even after auto-renewal. The tool now re-fetches the live expiry via
+  `/1/domain/{name}` for every domain finding before flagging. On the Mogacode
+  account, 5 critical false positives were eliminated (axesspharma.be,
+  beachnumber1.be, mertens.brussels, golf-anderlecht.com, upfss.com).
+
+### Changed (consolidation, no loss of capability)
+
+- **`dnssec_check` + `dnssec_enable` + `dnssec_disable` → `manage_dnssec`**.
+  Single tool with `action: check | enable | disable`. Two-phase commit is
+  preserved on the destructive actions.
+- **`get_mailbox_aliases` + `get_mailbox_signatures` + `get_mailbox_backups`
+  → `get_mailbox_info`**. Single read tool with a `fields` array. Fetches only
+  the requested sections, in parallel. Returns per-section errors for partial
+  failures.
+- **Tool count: 55 → 51** as a result of these two consolidations (no feature
+  removed). TDQS "Tool Count" dimension should improve.
+
+### Added
+
+- **Snapshot regression tests** under `tests/snapshots/`. The 41 live API
+  responses captured during the broz.be smoke (v0.9) are now CI fixtures and
+  asserted against each tool's declared `outputSchema`. Locks the contract so
+  the kind of silent Zod-schema drift that bricked three tools in v0.9 can't
+  happen again unnoticed.
+- **Param descriptions and constraint docs** on the hot destructive tools
+  (`create_short_url`, `create_mailbox`, `dns_create_record`). Each param now
+  states the format, allowed values, and gotchas (e.g. mailbox = local part
+  only, NOT a full email; password = 8 chars + 4 character classes).
+
+### Notes
+
+`npm test`: 78/78. Lint clean. Snapshot tests added 41 cases. The
+consolidation is driven by an expert panel review of the v0.9 smoke audit:
+keep capability, reduce the agent's tool-selection cognitive load.
+
 ## [0.9.0] — 2026-05-27
 
 ### Fixed (parser bugs caught by end-to-end smoke test on broz.be)

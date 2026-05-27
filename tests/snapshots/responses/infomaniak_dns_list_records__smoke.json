@@ -1,0 +1,823 @@
+{
+  "args": {
+    "zone": "broz.be"
+  },
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"zone\": \"broz.be\",\n  \"count\": 100,\n  \"records\": [\n    {\n      \"id\": 17781140,\n      \"source\": \".\",\n      \"type\": \"NS\",\n      \"ttl\": 3600,\n      \"target\": \"ns41.infomaniak.com\",\n      \"updated_at\": 1695991493\n    },\n    {\n      \"id\": 17781141,\n      \"source\": \".\",\n      \"type\": \"NS\",\n      \"ttl\": 3600,\n      \"target\": \"ns42.infomaniak.com\",\n      \"updated_at\": 1695991494\n    },\n    {\n      \"id\": 20892818,\n      \"source\": \"_domainkey\",\n      \"type\": \"NS\",\n      \"ttl\": 3600,\n      \"target\": \"ns41.infomaniak.com\",\n      \"updated_at\": 1719818038\n    },\n    {\n      \"id\": 20892819,\n      \"source\": \"_domainkey\",\n      \"type\": \"NS\",\n      \"ttl\": 3600,\n      \"target\": \"ns42.infomaniak.com\",\n      \"updated_at\": 1719818038\n    },\n    {\n      \"id\": 20892833,\n      \"source\": \"_dmarc\",\n      \"type\": \"TXT\",\n      \"ttl\": 3600,\n      \"target\": \"\\\"v=DMARC1;p=reject\\\"\",\n      \"updated_at\": 1719818051\n    },\n    {\n      \"id\": 25919340,\n      \"source\": \"maud\",\n      \"type\": \"A\",\n      \"ttl\": 300,\n      \"target\": \"185.177.62.161\",\n      \"updated_at\": 1746699697\n    },\n    {\n      \"id\": 25919341,\n      \"source\": \"maud\",\n      \"type\": \"AAAA\",\n      \"ttl\": 300,\n      \"target\": \"2001:1600:13:100:f816:3eff:fe5c:fa22\",\n      \"updated_at\": 1746699698\n    },\n    {\n      \"id\": 26385848,\n      \"source\": \"mertens-bru\",\n      \"type\": \"A\",\n      \"ttl\": 300,\n      \"target\": \"185.177.62.161\",\n      \"updated_at\": 1748765769\n    },\n    {\n      \"id\": 26385849,\n      \"source\": \"mertens-bru\",\n      \"type\": \"AAAA\",\n      \"ttl\": 300,\n      \"target\": \"2001:1600:13:100:f816:3eff:fe5c:fa22\",\n      \"updated_at\": 1748765770\n    },\n    {\n      \"id\": 26404011,\n      \"source\": \"boucherie-pascale\",\n      \"type\": \"A\",\n      \"ttl\": 300,\n      \"target\": \"185.177.62.161\",\n      \"updated_at\": 1748851764\n    },\n    {\n      \"id\": 26404012,\n      \"source\": \"boucherie-pascale\",\n      \"type\": \"AAAA\",\n      \"ttl\": 300,\n      \"target\": \"2001:1600:13:100:f816:3eff:fe5c:fa22\",\n      \"updated_at\": 1748851764\n    },\n    {\n      \"id\": 26405459,\n      \"source\": \"golf-vip\",\n      \"type\": \"A\",\n      \"ttl\": 300,\n      \"target\": \"185.177.62.161\",\n      \"updated_at\": 1748855156\n    },\n    {\n      \"id\": 26405460,\n      \"source\": \"golf-vip\",\n      \"type\": \"AAAA\",\n      \"ttl\": 300,\n      \"target\": \"2001:1600:13:100:f816:3eff:fe5c:fa22\",\n      \"updated_at\": 1748855157\n    },\n    {\n      \"id\": 26424329,\n      \"source\": \"beach\",\n      \"type\": \"A\",\n      \"ttl\": 300,\n      \"target\": \"185.177.62.161\",\n      \"updated_at\": 1748924125\n    },\n    {\n      \"id\": 26424331,\n      \"source\": \"beach\",\n      \"type\": \"AAAA\",\n      \"ttl\": 300,\n      \"target\": \"2001:1600:13:100:f816:3eff:fe5c:fa22\",\n      \"updated_at\": 1748924126\n    },\n    {\n      \"id\": 26425778,\n      \"source\": \"eg\",\n      \"type\": \"A\",\n      \"ttl\": 300,\n      \"target\": \"185.177.62.161\",\n      \"updated_at\": 1748931543\n    },\n    {\n      \"id\": 26425779,\n      \"source\": \"eg\",\n      \"type\": \"AAAA\",\n      \"ttl\": 300,\n      \"target\": \"2001:1600:13:100:f816:3eff:fe5c:fa22\",\n      \"updated_at\": 1748931544\n    },\n    {\n      \"id\": 26433154,\n      \"source\": \"mistress\",\n      \"type\": \"A\",\n      \"ttl\": 300,\n      \"target\": \"185.177.62.161\",\n      \"updated_at\": 1748950486\n    },\n    {\n      \"id\": 26433155,\n      \"source\": \"mistress\",\n      \"type\": \"AAAA\",\n      \"ttl\": 300,\n      \"target\": \"2001:1600:13:100:f816:3eff:fe5c:fa22\",\n      \"updated_at\": 1748950486\n    },\n    {\n      \"id\": 26454071,\n      \"source\": \"tempo-srl\",\n      \"type\": \"A\",\n      \"ttl\": 300,\n      \"target\": \"185.177.62.161\",\n      \"updated_at\": 1749030266\n    },\n    {\n      \"id\": 26454073,\n      \"source\": \"tempo-srl\",\n      \"type\": \"AAAA\",\n      \"ttl\": 300,\n      \"target\": \"2001:1600:13:100:f816:3eff:fe5c:fa22\",\n      \"updated_at\": 1749030266\n    },\n    {\n      \"id\": 26458542,\n      \"source\": \"arcenciel\",\n      \"type\": \"A\",\n      \"ttl\": 300,\n      \"target\": \"185.177.62.161\",\n      \"updated_at\": 1749042754\n    },\n    {\n      \"id\": 26458543,\n      \"source\": \"arcenciel\",\n      \"type\": \"AAAA\",\n      \"ttl\": 300,\n      \"target\": \"2001:1600:13:100:f816:3eff:fe5c:fa22\",\n      \"updated_at\": 1749042755\n    },\n    {\n      \"id\": 26477531,\n      \"source\": \"amicimiei\",\n      \"type\": \"A\",\n      \"ttl\": 300,\n      \"target\": \"185.177.62.161\",\n      \"updated_at\": 1749117618\n    },\n    {\n      \"id\": 26477535,\n      \"source\": \"amicimiei\",\n      \"type\": \"AAAA\",\n      \"ttl\": 300,\n      \"target\": \"2001:1600:13:100:f816:3eff:fe5c:fa22\",\n      \"updated_at\": 1749117619\n    },\n    {\n      \"id\": 26604809,\n      \"source\": \"kingpur\",\n      \"type\": \"A\",\n      \"ttl\": 300,\n      \"target\": \"185.177.62.161\",\n      \"updated_at\": 1749711620\n    },\n    {\n      \"id\": 26604810,\n      \"source\": \"kingpur\",\n      \"type\": \"AAAA\",\n      \"ttl\": 300,\n      \"target\": \"2001:1600:13:100:f816:3eff:fe5c:fa22\",\n      \"updated_at\": 1749711621\n    },\n    {\n      \"id\": 26675658,\n      \"source\": \"ufapt\",\n      \"type\": \"A\",\n      \"ttl\": 300,\n      \"target\": \"185.177.62.161\",\n      \"updated_at\": 1750061682\n    },\n    {\n      \"id\": 26675660,\n      \"source\": \"ufapt\",\n      \"type\": \"AAAA\",\n      \"ttl\": 300,\n      \"target\": \"2001:1600:13:100:f816:3eff:fe5c:fa22\",\n      \"updated_at\": 1750061683\n    },\n    {\n      \"id\": 26679680,\n      \"source\": \"tempo\",\n      \"type\": \"A\",\n      \"ttl\": 300,\n      \"target\": \"185.177.62.161\",\n      \"updated_at\": 1750075091\n    },\n    {\n      \"id\": 26679681,\n      \"source\": \"tempo\",\n      \"type\": \"AAAA\",\n      \"ttl\": 300,\n      \"target\": \"2001:1600:13:100:f816:3eff:fe5c:fa22\",\n      \"updated_at\": 1750075092\n    },\n    {\n      \"id\": 26825086,\n      \"source\": \"m4b\",\n      \"type\": \"A\",\n      \"ttl\": 300,\n      \"target\": \"185.177.62.161\",\n      \"updated_at\": 1750664121\n    },\n    {\n      \"id\": 26825087,\n      \"source\": \"m4b\",\n      \"type\": \"AAAA\",\n      \"ttl\": 300,\n      \"target\": \"2001:1600:13:100:f816:3eff:fe5c:fa22\",\n      \"updated_at\": 1750664122\n    },\n    {\n      \"id\": 26867991,\n      \"source\": \"petitssapins\",\n      \"type\": \"A\",\n      \"ttl\": 300,\n      \"target\": \"185.177.62.161\",\n      \"updated_at\": 1750835976\n    },\n    {\n      \"id\": 26867992,\n      \"source\": \"petitssapins\",\n      \"type\": \"AAAA\",\n      \"ttl\": 300,\n      \"target\": \"2001:1600:13:100:f816:3eff:fe5c:fa22\",\n      \"updated_at\": 1750835976\n    },\n    {\n      \"id\": 26879501,\n      \"source\": \"ecl\",\n      \"type\": \"A\",\n      \"ttl\": 300,\n      \"target\": \"185.177.62.161\",\n      \"updated_at\": 1750866758\n    },\n    {\n      \"id\": 26879502,\n      \"source\": \"ecl\",\n      \"type\": \"AAAA\",\n      \"ttl\": 300,\n      \"target\": \"2001:1600:13:100:f816:3eff:fe5c:fa22\",\n      \"updated_at\": 1750866759\n    },\n    {\n      \"id\": 27750338,\n      \"source\": \"mn\",\n      \"type\": \"A\",\n      \"ttl\": 300,\n      \"target\": \"185.177.62.161\",\n      \"updated_at\": 1754645459\n    },\n    {\n      \"id\": 27750339,\n      \"source\": \"mn\",\n      \"type\": \"AAAA\",\n      \"ttl\": 300,\n      \"target\": \"2001:1600:13:100:f816:3eff:fe5c:fa22\",\n      \"updated_at\": 1754645460\n    },\n    {\n      \"id\": 27968426,\n      \"source\": \"junior\",\n      \"type\": \"A\",\n      \"ttl\": 300,\n      \"target\": \"185.177.62.161\",\n      \"updated_at\": 1755631133\n    },\n    {\n      \"id\": 27968427,\n      \"source\": \"junior\",\n      \"type\": \"AAAA\",\n      \"ttl\": 300,\n      \"target\": \"2001:1600:13:100:f816:3eff:fe5c:fa22\",\n      \"updated_at\": 1755631134\n    },\n    {\n      \"id\": 28215629,\n      \"source\": \"kdt\",\n      \"type\": \"A\",\n      \"ttl\": 300,\n      \"target\": \"185.177.62.161\",\n      \"updated_at\": 1756730942\n    },\n    {\n      \"id\": 28215630,\n      \"source\": \"kdt\",\n      \"type\": \"AAAA\",\n      \"ttl\": 300,\n      \"target\": \"2001:1600:13:100:f816:3eff:fe5c:fa22\",\n      \"updated_at\": 1756730942\n    },\n    {\n      \"id\": 28866116,\n      \"source\": \"ess\",\n      \"type\": \"A\",\n      \"ttl\": 300,\n      \"target\": \"185.177.62.161\",\n      \"updated_at\": 1759077843\n    },\n    {\n      \"id\": 28866117,\n      \"source\": \"ess\",\n      \"type\": \"AAAA\",\n      \"ttl\": 300,\n      \"target\": \"2001:1600:13:100:f816:3eff:fe5c:fa22\",\n      \"updated_at\": 1759077844\n    },\n    {\n      \"id\": 28910340,\n      \"source\": \"odeon\",\n      \"type\": \"A\",\n      \"ttl\": 300,\n      \"target\": \"185.177.62.161\",\n      \"updated_at\": 1759246199\n    },\n    {\n      \"id\": 28910342,\n      \"source\": \"odeon\",\n      \"type\": \"AAAA\",\n      \"ttl\": 300,\n      \"target\": \"2001:1600:13:100:f816:3eff:fe5c:fa22\",\n      \"updated_at\": 1759246200\n    },\n    {\n      \"id\": 29292922,\n      \"source\": \"eb\",\n      \"type\": \"A\",\n      \"ttl\": 300,\n      \"target\": \"185.177.62.161\",\n      \"updated_at\": 1760684009\n    },\n    {\n      \"id\": 29292923,\n      \"source\": \"eb\",\n      \"type\": \"AAAA\",\n      \"ttl\": 300,\n      \"target\": \"2001:1600:13:100:f816:3eff:fe5c:fa22\",\n      \"updated_at\": 1760684009\n    },\n    {\n      \"id\": 29429745,\n      \"source\": \"gites\",\n      \"type\": \"A\",\n      \"ttl\": 300,\n      \"target\": \"185.177.62.161\",\n      \"updated_at\": 1761243069\n    },\n    {\n      \"id\": 29429746,\n      \"source\": \"gites\",\n      \"type\": \"AAAA\",\n      \"ttl\": 300,\n      \"target\": \"2001:1600:13:100:f816:3eff:fe5c:fa22\",\n      \"updated_at\": 1761243070\n    },\n    {\n      \"id\": 29863667,\n      \"source\": \"dar\",\n      \"type\": \"A\",\n      \"ttl\": 300,\n      \"target\": \"185.177.62.161\",\n      \"updated_at\": 1762942099\n    },\n    {\n      \"id\": 29863668,\n      \"source\": \"dar\",\n      \"type\": \"AAAA\",\n      \"ttl\": 300,\n      \"target\": \"2001:1600:13:100:f816:3eff:fe5c:fa22\",\n      \"updated_at\": 1762942100\n    },\n    {\n      \"id\": 30276301,\n      \"source\": \"winia\",\n      \"type\": \"A\",\n      \"ttl\": 300,\n      \"target\": \"185.177.62.161\",\n      \"updated_at\": 1764605561\n    },\n    {\n      \"id\": 30276302,\n      \"source\": \"winia\",\n      \"type\": \"AAAA\",\n      \"ttl\": 300,\n      \"target\": \"2001:1600:13:100:f816:3eff:fe5c:fa22\",\n      \"updated_at\": 1764605562\n    },\n    {\n      \"id\": 30289732,\n      \"source\": \"olimelo\",\n      \"type\": \"A\",\n      \"ttl\": 300,\n      \"target\": \"185.177.62.161\",\n      \"updated_at\": 1764667170\n    },\n    {\n      \"id\": 30289733,\n      \"source\": \"olimelo\",\n      \"type\": \"AAAA\",\n      \"ttl\": 300,\n      \"target\": \"2001:1600:13:100:f816:3eff:fe5c:fa22\",\n      \"updated_at\": 1764667171\n    },\n    {\n      \"id\": 30583592,\n      \"source\": \"pl\",\n      \"type\": \"A\",\n      \"ttl\": 3600,\n      \"target\": \"185.125.27.88\",\n      \"updated_at\": 1765814399\n    },\n    {\n      \"id\": 30583593,\n      \"source\": \"pl\",\n      \"type\": \"AAAA\",\n      \"ttl\": 3600,\n      \"target\": \"2001:1600:4:11::63b\",\n      \"updated_at\": 1765814400\n    },\n    {\n      \"id\": 31153490,\n      \"source\": \"lucid\",\n      \"type\": \"A\",\n      \"ttl\": 300,\n      \"target\": \"185.177.62.161\",\n      \"updated_at\": 1768204326\n    },\n    {\n      \"id\": 31153491,\n      \"source\": \"lucid\",\n      \"type\": \"AAAA\",\n      \"ttl\": 300,\n      \"target\": \"2001:1600:13:100:f816:3eff:fe5c:fa22\",\n      \"updated_at\": 1768204326\n    },\n    {\n      \"id\": 31429989,\n      \"source\": \"amarillys\",\n      \"type\": \"A\",\n      \"ttl\": 300,\n      \"target\": \"185.177.62.161\",\n      \"updated_at\": 1769089284\n    },\n    {\n      \"id\": 31429990,\n      \"source\": \"amarillys\",\n      \"type\": \"AAAA\",\n      \"ttl\": 300,\n      \"target\": \"2001:1600:13:100:f816:3eff:fe5c:fa22\",\n      \"updated_at\": 1769089285\n    },\n    {\n      \"id\": 31448365,\n      \"source\": \"padmala\",\n      \"type\": \"A\",\n      \"ttl\": 300,\n      \"target\": \"185.177.62.161\",\n      \"updated_at\": 1769159972\n    },\n    {\n      \"id\": 31448366,\n      \"source\": \"padmala\",\n      \"type\": \"AAAA\",\n      \"ttl\": 300,\n      \"target\": \"2001:1600:13:100:f816:3eff:fe5c:fa22\",\n      \"updated_at\": 1769159972\n    },\n    {\n      \"id\": 31578213,\n      \"source\": \"lys\",\n      \"type\": \"A\",\n      \"ttl\": 300,\n      \"target\": \"185.177.62.161\",\n      \"updated_at\": 1769610436\n    },\n    {\n      \"id\": 31578215,\n      \"source\": \"lys\",\n      \"type\": \"AAAA\",\n      \"ttl\": 300,\n      \"target\": \"2001:1600:13:100:f816:3eff:fe5c:fa22\",\n      \"updated_at\": 1769610436\n    },\n    {\n      \"id\": 31592721,\n      \"source\": \"agensea\",\n      \"type\": \"A\",\n      \"ttl\": 300,\n      \"target\": \"185.177.62.161\",\n      \"updated_at\": 1769667822\n    },\n    {\n      \"id\": 31592722,\n      \"source\": \"agensea\",\n      \"type\": \"AAAA\",\n      \"ttl\": 300,\n      \"target\": \"2001:1600:13:100:f816:3eff:fe5c:fa22\",\n      \"updated_at\": 1769667822\n    },\n    {\n      \"id\": 31774141,\n      \"source\": \"bois\",\n      \"type\": \"A\",\n      \"ttl\": 300,\n      \"target\": \"185.177.62.161\",\n      \"updated_at\": 1770273881\n    },\n    {\n      \"id\": 31774142,\n      \"source\": \"bois\",\n      \"type\": \"AAAA\",\n      \"ttl\": 300,\n      \"target\": \"2001:1600:13:100:f816:3eff:fe5c:fa22\",\n      \"updated_at\": 1770273882\n    },\n    {\n      \"id\": 32515770,\n      \"source\": \"coach\",\n      \"type\": \"A\",\n      \"ttl\": 300,\n      \"target\": \"185.177.62.161\",\n      \"updated_at\": 1772797898\n    },\n    {\n      \"id\": 32515771,\n      \"source\": \"coach\",\n      \"type\": \"AAAA\",\n      \"ttl\": 300,\n      \"target\": \"2001:1600:13:100:f816:3eff:fe5c:fa22\",\n      \"updated_at\": 1772797899\n    },\n    {\n      \"id\": 32640740,\n      \"source\": \"restaurant\",\n      \"type\": \"A\",\n      \"ttl\": 300,\n      \"target\": \"185.177.62.161\",\n      \"updated_at\": 1773219169\n    },\n    {\n      \"id\": 32640742,\n      \"source\": \"restaurant\",\n      \"type\": \"AAAA\",\n      \"ttl\": 300,\n      \"target\": \"2001:1600:13:100:f816:3eff:fe5c:fa22\",\n      \"updated_at\": 1773219170\n    },\n    {\n      \"id\": 32696564,\n      \"source\": \"boucherie\",\n      \"type\": \"A\",\n      \"ttl\": 300,\n      \"target\": \"185.177.62.161\",\n      \"updated_at\": 1773383302\n    },\n    {\n      \"id\": 32696565,\n      \"source\": \"boucherie\",\n      \"type\": \"AAAA\",\n      \"ttl\": 300,\n      \"target\": \"2001:1600:13:100:f816:3eff:fe5c:fa22\",\n      \"updated_at\": 1773383303\n    },\n    {\n      \"id\": 32949268,\n      \"source\": \"marokeys\",\n      \"type\": \"A\",\n      \"ttl\": 300,\n      \"target\": \"185.177.62.161\",\n      \"updated_at\": 1774251835\n    },\n    {\n      \"id\": 32949269,\n      \"source\": \"marokeys\",\n      \"type\": \"AAAA\",\n      \"ttl\": 300,\n      \"target\": \"2001:1600:13:100:f816:3eff:fe5c:fa22\",\n      \"updated_at\": 1774251835\n    },\n    {\n      \"id\": 33066373,\n      \"source\": \".\",\n      \"type\": \"A\",\n      \"ttl\": 300,\n      \"target\": \"185.177.62.161\",\n      \"updated_at\": 1774611671\n    },\n    {\n      \"id\": 33066374,\n      \"source\": \".\",\n      \"type\": \"AAAA\",\n      \"ttl\": 300,\n      \"target\": \"2001:1600:13:100:f816:3eff:fe5c:fa22\",\n      \"updated_at\": 1774611671\n    },\n    {\n      \"id\": 33066375,\n      \"source\": \"www\",\n      \"type\": \"A\",\n      \"ttl\": 300,\n      \"target\": \"185.177.62.161\",\n      \"updated_at\": 1774611674\n    },\n    {\n      \"id\": 33066376,\n      \"source\": \"www\",\n      \"type\": \"AAAA\",\n      \"ttl\": 300,\n      \"target\": \"2001:1600:13:100:f816:3eff:fe5c:fa22\",\n      \"updated_at\": 1774611674\n    },\n    {\n      \"id\": 33066546,\n      \"source\": \"uap\",\n      \"type\": \"A\",\n      \"ttl\": 300,\n      \"target\": \"185.177.62.161\",\n      \"updated_at\": 1774612240\n    },\n    {\n      \"id\": 33066547,\n      \"source\": \"uap\",\n      \"type\": \"AAAA\",\n      \"ttl\": 300,\n      \"target\": \"2001:1600:13:100:f816:3eff:fe5c:fa22\",\n      \"updated_at\": 1774612241\n    },\n    {\n      \"id\": 33100297,\n      \"source\": \"perle\",\n      \"type\": \"A\",\n      \"ttl\": 300,\n      \"target\": \"185.177.62.161\",\n      \"updated_at\": 1774728008\n    },\n    {\n      \"id\": 33100298,\n      \"source\": \"perle\",\n      \"type\": \"AAAA\",\n      \"ttl\": 300,\n      \"target\": \"2001:1600:13:100:f816:3eff:fe5c:fa22\",\n      \"updated_at\": 1774728009\n    },\n    {\n      \"id\": 33259198,\n      \"source\": \"luz\",\n      \"type\": \"A\",\n      \"ttl\": 300,\n      \"target\": \"185.177.62.161\",\n      \"updated_at\": 1775225843\n    },\n    {\n      \"id\": 33259199,\n      \"source\": \"luz\",\n      \"type\": \"AAAA\",\n      \"ttl\": 300,\n      \"target\": \"2001:1600:13:100:f816:3eff:fe5c:fa22\",\n      \"updated_at\": 1775225844\n    },\n    {\n      \"id\": 33373375,\n      \"source\": \"coton\",\n      \"type\": \"A\",\n      \"ttl\": 300,\n      \"target\": \"185.177.62.161\",\n      \"updated_at\": 1775661562\n    },\n    {\n      \"id\": 33373376,\n      \"source\": \"coton\",\n      \"type\": \"AAAA\",\n      \"ttl\": 300,\n      \"target\": \"2001:1600:13:100:f816:3eff:fe5c:fa22\",\n      \"updated_at\": 1775661563\n    },\n    {\n      \"id\": 33428266,\n      \"source\": \"cuis\",\n      \"type\": \"A\",\n      \"ttl\": 300,\n      \"target\": \"185.177.62.161\",\n      \"updated_at\": 1775836251\n    },\n    {\n      \"id\": 33428267,\n      \"source\": \"cuis\",\n      \"type\": \"AAAA\",\n      \"ttl\": 300,\n      \"target\": \"2001:1600:13:100:f816:3eff:fe5c:fa22\",\n      \"updated_at\": 1775836251\n    },\n    {\n      \"id\": 33846628,\n      \"source\": \"evo\",\n      \"type\": \"A\",\n      \"ttl\": 300,\n      \"target\": \"185.177.62.161\",\n      \"updated_at\": 1777283252\n    },\n    {\n      \"id\": 33846629,\n      \"source\": \"evo\",\n      \"type\": \"AAAA\",\n      \"ttl\": 300,\n      \"target\": \"2001:1600:13:100:f816:3eff:fe5c:fa22\",\n      \"updated_at\": 1777283253\n    },\n    {\n      \"id\": 34362872,\n      \"source\": \"crm\",\n      \"type\": \"A\",\n      \"ttl\": 300,\n      \"target\": \"185.177.62.161\",\n      \"updated_at\": 1778843699\n    },\n    {\n      \"id\": 34362873,\n      \"source\": \"crm\",\n      \"type\": \"AAAA\",\n      \"ttl\": 300,\n      \"target\": \"2001:1600:13:100:f816:3eff:fe5c:fa22\",\n      \"updated_at\": 1778843700\n    },\n    {\n      \"id\": 34465519,\n      \"source\": \"crmspl\",\n      \"type\": \"A\",\n      \"ttl\": 3600,\n      \"target\": \"185.177.62.161\",\n      \"updated_at\": 1779182385\n    },\n    {\n      \"id\": 34656328,\n      \"source\": \"ms\",\n      \"type\": \"A\",\n      \"ttl\": 300,\n      \"target\": \"185.177.62.161\",\n      \"updated_at\": 1779798799\n    },\n    {\n      \"id\": 34656345,\n      \"source\": \"ms\",\n      \"type\": \"AAAA\",\n      \"ttl\": 300,\n      \"target\": \"2001:1600:13:100:f816:3eff:fe5c:fa22\",\n      \"updated_at\": 1779798807\n    }\n  ]\n}"
+        }
+      ],
+      "structuredContent": {
+        "zone": "broz.be",
+        "count": 100,
+        "records": [
+          {
+            "id": 17781140,
+            "source": ".",
+            "type": "NS",
+            "ttl": 3600,
+            "target": "ns41.infomaniak.com",
+            "updated_at": 1695991493
+          },
+          {
+            "id": 17781141,
+            "source": ".",
+            "type": "NS",
+            "ttl": 3600,
+            "target": "ns42.infomaniak.com",
+            "updated_at": 1695991494
+          },
+          {
+            "id": 20892818,
+            "source": "_domainkey",
+            "type": "NS",
+            "ttl": 3600,
+            "target": "ns41.infomaniak.com",
+            "updated_at": 1719818038
+          },
+          {
+            "id": 20892819,
+            "source": "_domainkey",
+            "type": "NS",
+            "ttl": 3600,
+            "target": "ns42.infomaniak.com",
+            "updated_at": 1719818038
+          },
+          {
+            "id": 20892833,
+            "source": "_dmarc",
+            "type": "TXT",
+            "ttl": 3600,
+            "target": "\"v=DMARC1;p=reject\"",
+            "updated_at": 1719818051
+          },
+          {
+            "id": 25919340,
+            "source": "maud",
+            "type": "A",
+            "ttl": 300,
+            "target": "185.177.62.161",
+            "updated_at": 1746699697
+          },
+          {
+            "id": 25919341,
+            "source": "maud",
+            "type": "AAAA",
+            "ttl": 300,
+            "target": "2001:1600:13:100:f816:3eff:fe5c:fa22",
+            "updated_at": 1746699698
+          },
+          {
+            "id": 26385848,
+            "source": "mertens-bru",
+            "type": "A",
+            "ttl": 300,
+            "target": "185.177.62.161",
+            "updated_at": 1748765769
+          },
+          {
+            "id": 26385849,
+            "source": "mertens-bru",
+            "type": "AAAA",
+            "ttl": 300,
+            "target": "2001:1600:13:100:f816:3eff:fe5c:fa22",
+            "updated_at": 1748765770
+          },
+          {
+            "id": 26404011,
+            "source": "boucherie-pascale",
+            "type": "A",
+            "ttl": 300,
+            "target": "185.177.62.161",
+            "updated_at": 1748851764
+          },
+          {
+            "id": 26404012,
+            "source": "boucherie-pascale",
+            "type": "AAAA",
+            "ttl": 300,
+            "target": "2001:1600:13:100:f816:3eff:fe5c:fa22",
+            "updated_at": 1748851764
+          },
+          {
+            "id": 26405459,
+            "source": "golf-vip",
+            "type": "A",
+            "ttl": 300,
+            "target": "185.177.62.161",
+            "updated_at": 1748855156
+          },
+          {
+            "id": 26405460,
+            "source": "golf-vip",
+            "type": "AAAA",
+            "ttl": 300,
+            "target": "2001:1600:13:100:f816:3eff:fe5c:fa22",
+            "updated_at": 1748855157
+          },
+          {
+            "id": 26424329,
+            "source": "beach",
+            "type": "A",
+            "ttl": 300,
+            "target": "185.177.62.161",
+            "updated_at": 1748924125
+          },
+          {
+            "id": 26424331,
+            "source": "beach",
+            "type": "AAAA",
+            "ttl": 300,
+            "target": "2001:1600:13:100:f816:3eff:fe5c:fa22",
+            "updated_at": 1748924126
+          },
+          {
+            "id": 26425778,
+            "source": "eg",
+            "type": "A",
+            "ttl": 300,
+            "target": "185.177.62.161",
+            "updated_at": 1748931543
+          },
+          {
+            "id": 26425779,
+            "source": "eg",
+            "type": "AAAA",
+            "ttl": 300,
+            "target": "2001:1600:13:100:f816:3eff:fe5c:fa22",
+            "updated_at": 1748931544
+          },
+          {
+            "id": 26433154,
+            "source": "mistress",
+            "type": "A",
+            "ttl": 300,
+            "target": "185.177.62.161",
+            "updated_at": 1748950486
+          },
+          {
+            "id": 26433155,
+            "source": "mistress",
+            "type": "AAAA",
+            "ttl": 300,
+            "target": "2001:1600:13:100:f816:3eff:fe5c:fa22",
+            "updated_at": 1748950486
+          },
+          {
+            "id": 26454071,
+            "source": "tempo-srl",
+            "type": "A",
+            "ttl": 300,
+            "target": "185.177.62.161",
+            "updated_at": 1749030266
+          },
+          {
+            "id": 26454073,
+            "source": "tempo-srl",
+            "type": "AAAA",
+            "ttl": 300,
+            "target": "2001:1600:13:100:f816:3eff:fe5c:fa22",
+            "updated_at": 1749030266
+          },
+          {
+            "id": 26458542,
+            "source": "arcenciel",
+            "type": "A",
+            "ttl": 300,
+            "target": "185.177.62.161",
+            "updated_at": 1749042754
+          },
+          {
+            "id": 26458543,
+            "source": "arcenciel",
+            "type": "AAAA",
+            "ttl": 300,
+            "target": "2001:1600:13:100:f816:3eff:fe5c:fa22",
+            "updated_at": 1749042755
+          },
+          {
+            "id": 26477531,
+            "source": "amicimiei",
+            "type": "A",
+            "ttl": 300,
+            "target": "185.177.62.161",
+            "updated_at": 1749117618
+          },
+          {
+            "id": 26477535,
+            "source": "amicimiei",
+            "type": "AAAA",
+            "ttl": 300,
+            "target": "2001:1600:13:100:f816:3eff:fe5c:fa22",
+            "updated_at": 1749117619
+          },
+          {
+            "id": 26604809,
+            "source": "kingpur",
+            "type": "A",
+            "ttl": 300,
+            "target": "185.177.62.161",
+            "updated_at": 1749711620
+          },
+          {
+            "id": 26604810,
+            "source": "kingpur",
+            "type": "AAAA",
+            "ttl": 300,
+            "target": "2001:1600:13:100:f816:3eff:fe5c:fa22",
+            "updated_at": 1749711621
+          },
+          {
+            "id": 26675658,
+            "source": "ufapt",
+            "type": "A",
+            "ttl": 300,
+            "target": "185.177.62.161",
+            "updated_at": 1750061682
+          },
+          {
+            "id": 26675660,
+            "source": "ufapt",
+            "type": "AAAA",
+            "ttl": 300,
+            "target": "2001:1600:13:100:f816:3eff:fe5c:fa22",
+            "updated_at": 1750061683
+          },
+          {
+            "id": 26679680,
+            "source": "tempo",
+            "type": "A",
+            "ttl": 300,
+            "target": "185.177.62.161",
+            "updated_at": 1750075091
+          },
+          {
+            "id": 26679681,
+            "source": "tempo",
+            "type": "AAAA",
+            "ttl": 300,
+            "target": "2001:1600:13:100:f816:3eff:fe5c:fa22",
+            "updated_at": 1750075092
+          },
+          {
+            "id": 26825086,
+            "source": "m4b",
+            "type": "A",
+            "ttl": 300,
+            "target": "185.177.62.161",
+            "updated_at": 1750664121
+          },
+          {
+            "id": 26825087,
+            "source": "m4b",
+            "type": "AAAA",
+            "ttl": 300,
+            "target": "2001:1600:13:100:f816:3eff:fe5c:fa22",
+            "updated_at": 1750664122
+          },
+          {
+            "id": 26867991,
+            "source": "petitssapins",
+            "type": "A",
+            "ttl": 300,
+            "target": "185.177.62.161",
+            "updated_at": 1750835976
+          },
+          {
+            "id": 26867992,
+            "source": "petitssapins",
+            "type": "AAAA",
+            "ttl": 300,
+            "target": "2001:1600:13:100:f816:3eff:fe5c:fa22",
+            "updated_at": 1750835976
+          },
+          {
+            "id": 26879501,
+            "source": "ecl",
+            "type": "A",
+            "ttl": 300,
+            "target": "185.177.62.161",
+            "updated_at": 1750866758
+          },
+          {
+            "id": 26879502,
+            "source": "ecl",
+            "type": "AAAA",
+            "ttl": 300,
+            "target": "2001:1600:13:100:f816:3eff:fe5c:fa22",
+            "updated_at": 1750866759
+          },
+          {
+            "id": 27750338,
+            "source": "mn",
+            "type": "A",
+            "ttl": 300,
+            "target": "185.177.62.161",
+            "updated_at": 1754645459
+          },
+          {
+            "id": 27750339,
+            "source": "mn",
+            "type": "AAAA",
+            "ttl": 300,
+            "target": "2001:1600:13:100:f816:3eff:fe5c:fa22",
+            "updated_at": 1754645460
+          },
+          {
+            "id": 27968426,
+            "source": "junior",
+            "type": "A",
+            "ttl": 300,
+            "target": "185.177.62.161",
+            "updated_at": 1755631133
+          },
+          {
+            "id": 27968427,
+            "source": "junior",
+            "type": "AAAA",
+            "ttl": 300,
+            "target": "2001:1600:13:100:f816:3eff:fe5c:fa22",
+            "updated_at": 1755631134
+          },
+          {
+            "id": 28215629,
+            "source": "kdt",
+            "type": "A",
+            "ttl": 300,
+            "target": "185.177.62.161",
+            "updated_at": 1756730942
+          },
+          {
+            "id": 28215630,
+            "source": "kdt",
+            "type": "AAAA",
+            "ttl": 300,
+            "target": "2001:1600:13:100:f816:3eff:fe5c:fa22",
+            "updated_at": 1756730942
+          },
+          {
+            "id": 28866116,
+            "source": "ess",
+            "type": "A",
+            "ttl": 300,
+            "target": "185.177.62.161",
+            "updated_at": 1759077843
+          },
+          {
+            "id": 28866117,
+            "source": "ess",
+            "type": "AAAA",
+            "ttl": 300,
+            "target": "2001:1600:13:100:f816:3eff:fe5c:fa22",
+            "updated_at": 1759077844
+          },
+          {
+            "id": 28910340,
+            "source": "odeon",
+            "type": "A",
+            "ttl": 300,
+            "target": "185.177.62.161",
+            "updated_at": 1759246199
+          },
+          {
+            "id": 28910342,
+            "source": "odeon",
+            "type": "AAAA",
+            "ttl": 300,
+            "target": "2001:1600:13:100:f816:3eff:fe5c:fa22",
+            "updated_at": 1759246200
+          },
+          {
+            "id": 29292922,
+            "source": "eb",
+            "type": "A",
+            "ttl": 300,
+            "target": "185.177.62.161",
+            "updated_at": 1760684009
+          },
+          {
+            "id": 29292923,
+            "source": "eb",
+            "type": "AAAA",
+            "ttl": 300,
+            "target": "2001:1600:13:100:f816:3eff:fe5c:fa22",
+            "updated_at": 1760684009
+          },
+          {
+            "id": 29429745,
+            "source": "gites",
+            "type": "A",
+            "ttl": 300,
+            "target": "185.177.62.161",
+            "updated_at": 1761243069
+          },
+          {
+            "id": 29429746,
+            "source": "gites",
+            "type": "AAAA",
+            "ttl": 300,
+            "target": "2001:1600:13:100:f816:3eff:fe5c:fa22",
+            "updated_at": 1761243070
+          },
+          {
+            "id": 29863667,
+            "source": "dar",
+            "type": "A",
+            "ttl": 300,
+            "target": "185.177.62.161",
+            "updated_at": 1762942099
+          },
+          {
+            "id": 29863668,
+            "source": "dar",
+            "type": "AAAA",
+            "ttl": 300,
+            "target": "2001:1600:13:100:f816:3eff:fe5c:fa22",
+            "updated_at": 1762942100
+          },
+          {
+            "id": 30276301,
+            "source": "winia",
+            "type": "A",
+            "ttl": 300,
+            "target": "185.177.62.161",
+            "updated_at": 1764605561
+          },
+          {
+            "id": 30276302,
+            "source": "winia",
+            "type": "AAAA",
+            "ttl": 300,
+            "target": "2001:1600:13:100:f816:3eff:fe5c:fa22",
+            "updated_at": 1764605562
+          },
+          {
+            "id": 30289732,
+            "source": "olimelo",
+            "type": "A",
+            "ttl": 300,
+            "target": "185.177.62.161",
+            "updated_at": 1764667170
+          },
+          {
+            "id": 30289733,
+            "source": "olimelo",
+            "type": "AAAA",
+            "ttl": 300,
+            "target": "2001:1600:13:100:f816:3eff:fe5c:fa22",
+            "updated_at": 1764667171
+          },
+          {
+            "id": 30583592,
+            "source": "pl",
+            "type": "A",
+            "ttl": 3600,
+            "target": "185.125.27.88",
+            "updated_at": 1765814399
+          },
+          {
+            "id": 30583593,
+            "source": "pl",
+            "type": "AAAA",
+            "ttl": 3600,
+            "target": "2001:1600:4:11::63b",
+            "updated_at": 1765814400
+          },
+          {
+            "id": 31153490,
+            "source": "lucid",
+            "type": "A",
+            "ttl": 300,
+            "target": "185.177.62.161",
+            "updated_at": 1768204326
+          },
+          {
+            "id": 31153491,
+            "source": "lucid",
+            "type": "AAAA",
+            "ttl": 300,
+            "target": "2001:1600:13:100:f816:3eff:fe5c:fa22",
+            "updated_at": 1768204326
+          },
+          {
+            "id": 31429989,
+            "source": "amarillys",
+            "type": "A",
+            "ttl": 300,
+            "target": "185.177.62.161",
+            "updated_at": 1769089284
+          },
+          {
+            "id": 31429990,
+            "source": "amarillys",
+            "type": "AAAA",
+            "ttl": 300,
+            "target": "2001:1600:13:100:f816:3eff:fe5c:fa22",
+            "updated_at": 1769089285
+          },
+          {
+            "id": 31448365,
+            "source": "padmala",
+            "type": "A",
+            "ttl": 300,
+            "target": "185.177.62.161",
+            "updated_at": 1769159972
+          },
+          {
+            "id": 31448366,
+            "source": "padmala",
+            "type": "AAAA",
+            "ttl": 300,
+            "target": "2001:1600:13:100:f816:3eff:fe5c:fa22",
+            "updated_at": 1769159972
+          },
+          {
+            "id": 31578213,
+            "source": "lys",
+            "type": "A",
+            "ttl": 300,
+            "target": "185.177.62.161",
+            "updated_at": 1769610436
+          },
+          {
+            "id": 31578215,
+            "source": "lys",
+            "type": "AAAA",
+            "ttl": 300,
+            "target": "2001:1600:13:100:f816:3eff:fe5c:fa22",
+            "updated_at": 1769610436
+          },
+          {
+            "id": 31592721,
+            "source": "agensea",
+            "type": "A",
+            "ttl": 300,
+            "target": "185.177.62.161",
+            "updated_at": 1769667822
+          },
+          {
+            "id": 31592722,
+            "source": "agensea",
+            "type": "AAAA",
+            "ttl": 300,
+            "target": "2001:1600:13:100:f816:3eff:fe5c:fa22",
+            "updated_at": 1769667822
+          },
+          {
+            "id": 31774141,
+            "source": "bois",
+            "type": "A",
+            "ttl": 300,
+            "target": "185.177.62.161",
+            "updated_at": 1770273881
+          },
+          {
+            "id": 31774142,
+            "source": "bois",
+            "type": "AAAA",
+            "ttl": 300,
+            "target": "2001:1600:13:100:f816:3eff:fe5c:fa22",
+            "updated_at": 1770273882
+          },
+          {
+            "id": 32515770,
+            "source": "coach",
+            "type": "A",
+            "ttl": 300,
+            "target": "185.177.62.161",
+            "updated_at": 1772797898
+          },
+          {
+            "id": 32515771,
+            "source": "coach",
+            "type": "AAAA",
+            "ttl": 300,
+            "target": "2001:1600:13:100:f816:3eff:fe5c:fa22",
+            "updated_at": 1772797899
+          },
+          {
+            "id": 32640740,
+            "source": "restaurant",
+            "type": "A",
+            "ttl": 300,
+            "target": "185.177.62.161",
+            "updated_at": 1773219169
+          },
+          {
+            "id": 32640742,
+            "source": "restaurant",
+            "type": "AAAA",
+            "ttl": 300,
+            "target": "2001:1600:13:100:f816:3eff:fe5c:fa22",
+            "updated_at": 1773219170
+          },
+          {
+            "id": 32696564,
+            "source": "boucherie",
+            "type": "A",
+            "ttl": 300,
+            "target": "185.177.62.161",
+            "updated_at": 1773383302
+          },
+          {
+            "id": 32696565,
+            "source": "boucherie",
+            "type": "AAAA",
+            "ttl": 300,
+            "target": "2001:1600:13:100:f816:3eff:fe5c:fa22",
+            "updated_at": 1773383303
+          },
+          {
+            "id": 32949268,
+            "source": "marokeys",
+            "type": "A",
+            "ttl": 300,
+            "target": "185.177.62.161",
+            "updated_at": 1774251835
+          },
+          {
+            "id": 32949269,
+            "source": "marokeys",
+            "type": "AAAA",
+            "ttl": 300,
+            "target": "2001:1600:13:100:f816:3eff:fe5c:fa22",
+            "updated_at": 1774251835
+          },
+          {
+            "id": 33066373,
+            "source": ".",
+            "type": "A",
+            "ttl": 300,
+            "target": "185.177.62.161",
+            "updated_at": 1774611671
+          },
+          {
+            "id": 33066374,
+            "source": ".",
+            "type": "AAAA",
+            "ttl": 300,
+            "target": "2001:1600:13:100:f816:3eff:fe5c:fa22",
+            "updated_at": 1774611671
+          },
+          {
+            "id": 33066375,
+            "source": "www",
+            "type": "A",
+            "ttl": 300,
+            "target": "185.177.62.161",
+            "updated_at": 1774611674
+          },
+          {
+            "id": 33066376,
+            "source": "www",
+            "type": "AAAA",
+            "ttl": 300,
+            "target": "2001:1600:13:100:f816:3eff:fe5c:fa22",
+            "updated_at": 1774611674
+          },
+          {
+            "id": 33066546,
+            "source": "uap",
+            "type": "A",
+            "ttl": 300,
+            "target": "185.177.62.161",
+            "updated_at": 1774612240
+          },
+          {
+            "id": 33066547,
+            "source": "uap",
+            "type": "AAAA",
+            "ttl": 300,
+            "target": "2001:1600:13:100:f816:3eff:fe5c:fa22",
+            "updated_at": 1774612241
+          },
+          {
+            "id": 33100297,
+            "source": "perle",
+            "type": "A",
+            "ttl": 300,
+            "target": "185.177.62.161",
+            "updated_at": 1774728008
+          },
+          {
+            "id": 33100298,
+            "source": "perle",
+            "type": "AAAA",
+            "ttl": 300,
+            "target": "2001:1600:13:100:f816:3eff:fe5c:fa22",
+            "updated_at": 1774728009
+          },
+          {
+            "id": 33259198,
+            "source": "luz",
+            "type": "A",
+            "ttl": 300,
+            "target": "185.177.62.161",
+            "updated_at": 1775225843
+          },
+          {
+            "id": 33259199,
+            "source": "luz",
+            "type": "AAAA",
+            "ttl": 300,
+            "target": "2001:1600:13:100:f816:3eff:fe5c:fa22",
+            "updated_at": 1775225844
+          },
+          {
+            "id": 33373375,
+            "source": "coton",
+            "type": "A",
+            "ttl": 300,
+            "target": "185.177.62.161",
+            "updated_at": 1775661562
+          },
+          {
+            "id": 33373376,
+            "source": "coton",
+            "type": "AAAA",
+            "ttl": 300,
+            "target": "2001:1600:13:100:f816:3eff:fe5c:fa22",
+            "updated_at": 1775661563
+          },
+          {
+            "id": 33428266,
+            "source": "cuis",
+            "type": "A",
+            "ttl": 300,
+            "target": "185.177.62.161",
+            "updated_at": 1775836251
+          },
+          {
+            "id": 33428267,
+            "source": "cuis",
+            "type": "AAAA",
+            "ttl": 300,
+            "target": "2001:1600:13:100:f816:3eff:fe5c:fa22",
+            "updated_at": 1775836251
+          },
+          {
+            "id": 33846628,
+            "source": "evo",
+            "type": "A",
+            "ttl": 300,
+            "target": "185.177.62.161",
+            "updated_at": 1777283252
+          },
+          {
+            "id": 33846629,
+            "source": "evo",
+            "type": "AAAA",
+            "ttl": 300,
+            "target": "2001:1600:13:100:f816:3eff:fe5c:fa22",
+            "updated_at": 1777283253
+          },
+          {
+            "id": 34362872,
+            "source": "crm",
+            "type": "A",
+            "ttl": 300,
+            "target": "185.177.62.161",
+            "updated_at": 1778843699
+          },
+          {
+            "id": 34362873,
+            "source": "crm",
+            "type": "AAAA",
+            "ttl": 300,
+            "target": "2001:1600:13:100:f816:3eff:fe5c:fa22",
+            "updated_at": 1778843700
+          },
+          {
+            "id": 34465519,
+            "source": "crmspl",
+            "type": "A",
+            "ttl": 3600,
+            "target": "185.177.62.161",
+            "updated_at": 1779182385
+          },
+          {
+            "id": 34656328,
+            "source": "ms",
+            "type": "A",
+            "ttl": 300,
+            "target": "185.177.62.161",
+            "updated_at": 1779798799
+          },
+          {
+            "id": 34656345,
+            "source": "ms",
+            "type": "AAAA",
+            "ttl": 300,
+            "target": "2001:1600:13:100:f816:3eff:fe5c:fa22",
+            "updated_at": 1779798807
+          }
+        ]
+      }
+    },
+    "jsonrpc": "2.0",
+    "id": 28
+  }
+}

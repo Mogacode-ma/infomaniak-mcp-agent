@@ -1,0 +1,154 @@
+{
+  "args": {},
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"organizations\": [\n    {\n      \"id\": 46276,\n      \"name\": \"Mogacode\",\n      \"type\": \"owner\",\n      \"legal_entity_type\": \"company\",\n      \"support_level\": 2,\n      \"website\": \"https://www.mogacode.ma\",\n      \"phone\": \"+212620229114\"\n    },\n    {\n      \"id\": 287541,\n      \"name\": \"Axel Vroonen (I.A.V.)\",\n      \"type\": \"partner_limited\",\n      \"legal_entity_type\": \"company\",\n      \"support_level\": 1,\n      \"website\": \"http://www.i-a-v.be\",\n      \"phone\": \"+32479845510\"\n    },\n    {\n      \"id\": 506069,\n      \"name\": \"Mediasant\u00e9\",\n      \"type\": \"external\",\n      \"legal_entity_type\": \"company\",\n      \"support_level\": 2,\n      \"website\": \"https://www.mediapharma.be\",\n      \"phone\": \"+3233192600\"\n    },\n    {\n      \"id\": 1020032,\n      \"name\": \"Eric JACOBS\",\n      \"type\": \"partner_admin\",\n      \"legal_entity_type\": \"individual\",\n      \"support_level\": 1,\n      \"phone\": \"+32475655446\"\n    },\n    {\n      \"id\": 1028200,\n      \"name\": \"VINCULA\",\n      \"type\": \"partner_admin\",\n      \"legal_entity_type\": \"company\",\n      \"support_level\": 1\n    },\n    {\n      \"id\": 1032817,\n      \"name\": \"LAW IN NOVATION\",\n      \"type\": \"partner_admin\",\n      \"legal_entity_type\": \"company\",\n      \"support_level\": 1,\n      \"phone\": \"+32499115274\"\n    },\n    {\n      \"id\": 1060743,\n      \"name\": \"Fargan\",\n      \"type\": \"partner_limited\",\n      \"legal_entity_type\": \"company\",\n      \"support_level\": 1\n    },\n    {\n      \"id\": 1084923,\n      \"name\": \"alain@maximalcom.be\",\n      \"type\": \"partner_admin\",\n      \"legal_entity_type\": \"company\",\n      \"support_level\": 1\n    },\n    {\n      \"id\": 1169805,\n      \"name\": \"Les petits sapins de Waterloo asbl\",\n      \"type\": \"owner\",\n      \"legal_entity_type\": \"association\",\n      \"support_level\": 1\n    },\n    {\n      \"id\": 1213821,\n      \"name\": \"i-Move\",\n      \"type\": \"partner_admin\",\n      \"legal_entity_type\": \"company\",\n      \"support_level\": 1\n    },\n    {\n      \"id\": 1492572,\n      \"name\": \"scaramanga gmbh\",\n      \"type\": \"partner_admin\",\n      \"legal_entity_type\": \"company\",\n      \"support_level\": 1,\n      \"phone\": \"+491713243788\"\n    },\n    {\n      \"id\": 1514816,\n      \"name\": \"aureleloane vacances\",\n      \"type\": \"partner_admin\",\n      \"legal_entity_type\": \"company\",\n      \"support_level\": 1,\n      \"phone\": \"+33610237739\"\n    },\n    {\n      \"id\": 1576144,\n      \"name\": \"AKAZA BELGIUM SRL\",\n      \"type\": \"partner_admin\",\n      \"legal_entity_type\": \"company\",\n      \"support_level\": 1,\n      \"website\": \"https://akazahomedesign.be\",\n      \"phone\": \"+32472633962\"\n    },\n    {\n      \"id\": 1584405,\n      \"name\": \"Win-ia \",\n      \"type\": \"partner_admin\",\n      \"legal_entity_type\": \"company\",\n      \"support_level\": 1,\n      \"phone\": \"+41683741565\"\n    },\n    {\n      \"id\": 1586926,\n      \"name\": \"Bscan\",\n      \"type\": \"partner_admin\",\n      \"legal_entity_type\": \"company\",\n      \"support_level\": 1,\n      \"phone\": \"+32471220971\"\n    },\n    {\n      \"id\": 1782998,\n      \"name\": \"Olivier et Melody\",\n      \"type\": \"partner_admin\",\n      \"legal_entity_type\": \"company\",\n      \"support_level\": 1,\n      \"phone\": \"+212669410763\"\n    },\n    {\n      \"id\": 1956653,\n      \"name\": \"Marokeys\",\n      \"type\": \"partner_admin\",\n      \"legal_entity_type\": \"company\",\n      \"support_level\": 1,\n      \"phone\": \"+212625172734\"\n    }\n  ]\n}"
+        }
+      ],
+      "structuredContent": {
+        "organizations": [
+          {
+            "id": 46276,
+            "name": "Mogacode",
+            "type": "owner",
+            "legal_entity_type": "company",
+            "support_level": 2,
+            "website": "https://www.mogacode.ma",
+            "phone": "+212620229114"
+          },
+          {
+            "id": 287541,
+            "name": "Axel Vroonen (I.A.V.)",
+            "type": "partner_limited",
+            "legal_entity_type": "company",
+            "support_level": 1,
+            "website": "http://www.i-a-v.be",
+            "phone": "+32479845510"
+          },
+          {
+            "id": 506069,
+            "name": "Mediasant\u00e9",
+            "type": "external",
+            "legal_entity_type": "company",
+            "support_level": 2,
+            "website": "https://www.mediapharma.be",
+            "phone": "+3233192600"
+          },
+          {
+            "id": 1020032,
+            "name": "Eric JACOBS",
+            "type": "partner_admin",
+            "legal_entity_type": "individual",
+            "support_level": 1,
+            "phone": "+32475655446"
+          },
+          {
+            "id": 1028200,
+            "name": "VINCULA",
+            "type": "partner_admin",
+            "legal_entity_type": "company",
+            "support_level": 1
+          },
+          {
+            "id": 1032817,
+            "name": "LAW IN NOVATION",
+            "type": "partner_admin",
+            "legal_entity_type": "company",
+            "support_level": 1,
+            "phone": "+32499115274"
+          },
+          {
+            "id": 1060743,
+            "name": "Fargan",
+            "type": "partner_limited",
+            "legal_entity_type": "company",
+            "support_level": 1
+          },
+          {
+            "id": 1084923,
+            "name": "alain@maximalcom.be",
+            "type": "partner_admin",
+            "legal_entity_type": "company",
+            "support_level": 1
+          },
+          {
+            "id": 1169805,
+            "name": "Les petits sapins de Waterloo asbl",
+            "type": "owner",
+            "legal_entity_type": "association",
+            "support_level": 1
+          },
+          {
+            "id": 1213821,
+            "name": "i-Move",
+            "type": "partner_admin",
+            "legal_entity_type": "company",
+            "support_level": 1
+          },
+          {
+            "id": 1492572,
+            "name": "scaramanga gmbh",
+            "type": "partner_admin",
+            "legal_entity_type": "company",
+            "support_level": 1,
+            "phone": "+491713243788"
+          },
+          {
+            "id": 1514816,
+            "name": "aureleloane vacances",
+            "type": "partner_admin",
+            "legal_entity_type": "company",
+            "support_level": 1,
+            "phone": "+33610237739"
+          },
+          {
+            "id": 1576144,
+            "name": "AKAZA BELGIUM SRL",
+            "type": "partner_admin",
+            "legal_entity_type": "company",
+            "support_level": 1,
+            "website": "https://akazahomedesign.be",
+            "phone": "+32472633962"
+          },
+          {
+            "id": 1584405,
+            "name": "Win-ia ",
+            "type": "partner_admin",
+            "legal_entity_type": "company",
+            "support_level": 1,
+            "phone": "+41683741565"
+          },
+          {
+            "id": 1586926,
+            "name": "Bscan",
+            "type": "partner_admin",
+            "legal_entity_type": "company",
+            "support_level": 1,
+            "phone": "+32471220971"
+          },
+          {
+            "id": 1782998,
+            "name": "Olivier et Melody",
+            "type": "partner_admin",
+            "legal_entity_type": "company",
+            "support_level": 1,
+            "phone": "+212669410763"
+          },
+          {
+            "id": 1956653,
+            "name": "Marokeys",
+            "type": "partner_admin",
+            "legal_entity_type": "company",
+            "support_level": 1,
+            "phone": "+212625172734"
+          }
+        ]
+      }
+    },
+    "jsonrpc": "2.0",
+    "id": 12
+  }
+}

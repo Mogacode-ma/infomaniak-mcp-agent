@@ -1,0 +1,33 @@
+{
+  "args": {
+    "hosting_id": 693806
+  },
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"hosting_id\": 693806,\n  \"count\": 1,\n  \"users\": [\n    {\n      \"login\": \"v33dqc_patrick\",\n      \"environment\": \"apache_php\",\n      \"is_active\": true,\n      \"has_ssh\": true,\n      \"is_temporary\": false,\n      \"home_directory\": \"/\",\n      \"link_ftp_manager\": \"https://ftp.hosting-ik.com\",\n      \"link\": \"https://ftp.hosting-ik.com\"\n    }\n  ]\n}"
+        }
+      ],
+      "structuredContent": {
+        "hosting_id": 693806,
+        "count": 1,
+        "users": [
+          {
+            "login": "v33dqc_patrick",
+            "environment": "apache_php",
+            "is_active": true,
+            "has_ssh": true,
+            "is_temporary": false,
+            "home_directory": "/",
+            "link_ftp_manager": "https://ftp.hosting-ik.com",
+            "link": "https://ftp.hosting-ik.com"
+          }
+        ]
+      }
+    },
+    "jsonrpc": "2.0",
+    "id": 25
+  }
+}

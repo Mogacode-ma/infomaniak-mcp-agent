@@ -1,0 +1,28 @@
+{
+  "args": {
+    "mail_hosting_id": 496525,
+    "name": "broz.be"
+  },
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"status\": \"plan\",\n  \"plan\": {\n    \"mail_hosting_id\": 496525,\n    \"name\": \"broz.be\"\n  },\n  \"confirmation_token\": \"d858622a-1ce4-4b67-9a51-2638d8a6ea4e\",\n  \"token_expires_at\": \"2026-05-27T09:10:12.907Z\",\n  \"next_step_markdown\": \"## Plan \u2014 delete mail redirection\\n\\n- **Mail hosting**: 496525\\n- **Redirection**: `broz.be`\\n\\n### Next step\\nRe-call with `confirmation_token: \\\"d858622a-1ce4-4b67-9a51-2638d8a6ea4e\\\"`.\"\n}"
+        }
+      ],
+      "structuredContent": {
+        "status": "plan",
+        "plan": {
+          "mail_hosting_id": 496525,
+          "name": "broz.be"
+        },
+        "confirmation_token": "d858622a-1ce4-4b67-9a51-2638d8a6ea4e",
+        "token_expires_at": "2026-05-27T09:10:12.907Z",
+        "next_step_markdown": "## Plan \u2014 delete mail redirection\n\n- **Mail hosting**: 496525\n- **Redirection**: `broz.be`\n\n### Next step\nRe-call with `confirmation_token: \"d858622a-1ce4-4b67-9a51-2638d8a6ea4e\"`."
+      }
+    },
+    "jsonrpc": "2.0",
+    "id": 40
+  }
+}

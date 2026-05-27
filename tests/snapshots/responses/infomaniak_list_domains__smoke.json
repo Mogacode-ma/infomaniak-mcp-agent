@@ -1,0 +1,391 @@
+{
+  "args": {
+    "account_id": 46276
+  },
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"account_id\": 46276,\n  \"count\": 46,\n  \"domains\": [\n    {\n      \"id\": 814152,\n      \"account_id\": 46276,\n      \"service_name\": \"domain\",\n      \"customer_name\": \"3briques.be\",\n      \"created_at\": 1514977559,\n      \"expired_at\": 1798758000\n    },\n    {\n      \"id\": 1043808,\n      \"account_id\": 46276,\n      \"service_name\": \"domain\",\n      \"customer_name\": \"onimperium.com\",\n      \"created_at\": 1578645887,\n      \"expired_at\": 1799535600\n    },\n    {\n      \"id\": 1044989,\n      \"account_id\": 46276,\n      \"service_name\": \"domain\",\n      \"customer_name\": \"upfss.com\",\n      \"created_at\": 1578948763,\n      \"expired_at\": 1610406000\n    },\n    {\n      \"id\": 1063982,\n      \"account_id\": 46276,\n      \"service_name\": \"domain\",\n      \"customer_name\": \"ultimaos.com\",\n      \"created_at\": 1582985098,\n      \"expired_at\": 1803769200\n    },\n    {\n      \"id\": 1245146,\n      \"account_id\": 46276,\n      \"service_name\": \"domain\",\n      \"customer_name\": \"uos.sh\",\n      \"created_at\": 1620246730,\n      \"expired_at\": 1809468000\n    },\n    {\n      \"id\": 1432775,\n      \"account_id\": 46276,\n      \"service_name\": \"domain\",\n      \"customer_name\": \"christmas-tree.be\",\n      \"created_at\": 1662447965,\n      \"expired_at\": 1788472800\n    },\n    {\n      \"id\": 1600456,\n      \"account_id\": 46276,\n      \"service_name\": \"domain\",\n      \"customer_name\": \"broz.be\",\n      \"created_at\": 1695991489,\n      \"expired_at\": 1790460000\n    },\n    {\n      \"id\": 1647554,\n      \"account_id\": 46276,\n      \"service_name\": \"domain\",\n      \"customer_name\": \"coden.lu\",\n      \"created_at\": 1704362879,\n      \"expired_at\": 1798671600\n    },\n    {\n      \"id\": 1666244,\n      \"account_id\": 46276,\n      \"service_name\": \"domain\",\n      \"customer_name\": \"cosifoodtruck.com\",\n      \"created_at\": 1707415323,\n      \"expired_at\": 1792101600\n    },\n    {\n      \"id\": 1669935,\n      \"account_id\": 46276,\n      \"service_name\": \"domain\",\n      \"customer_name\": \"soulandom.be\",\n      \"created_at\": 1707844465,\n      \"expired_at\": 1802300400\n    },\n    {\n      \"id\": 1790485,\n      \"account_id\": 46276,\n      \"service_name\": \"domain\",\n      \"customer_name\": \"mistress-naelle.com\",\n      \"created_at\": 1729424570,\n      \"expired_at\": 1792447200\n    },\n    {\n      \"id\": 1800328,\n      \"account_id\": 46276,\n      \"service_name\": \"domain\",\n      \"customer_name\": \"golf-anderlecht.com\",\n      \"created_at\": 1731000997,\n      \"expired_at\": 1762470000\n    },\n    {\n      \"id\": 1806249,\n      \"account_id\": 46276,\n      \"service_name\": \"domain\",\n      \"customer_name\": \"edelmaks.com\",\n      \"created_at\": 1731922050,\n      \"expired_at\": 1800399600\n    },\n    {\n      \"id\": 1807897,\n      \"account_id\": 46276,\n      \"service_name\": \"domain\",\n      \"customer_name\": \"mertens.brussels\",\n      \"created_at\": 1732113519,\n      \"expired_at\": 1763593200\n    },\n    {\n      \"id\": 1824634,\n      \"account_id\": 46276,\n      \"service_name\": \"domain\",\n      \"customer_name\": \"amicimiei.be\",\n      \"created_at\": 1734445355,\n      \"expired_at\": 1797289200\n    },\n    {\n      \"id\": 1843432,\n      \"account_id\": 46276,\n      \"service_name\": \"domain\",\n      \"customer_name\": \"eval-immo.be\",\n      \"created_at\": 1737650238,\n      \"expired_at\": 1800486000\n    },\n    {\n      \"id\": 1869430,\n      \"account_id\": 46276,\n      \"service_name\": \"domain\",\n      \"customer_name\": \"beachnumber1.be\",\n      \"created_at\": 1741170975,\n      \"expired_at\": 1772665200\n    },\n    {\n      \"id\": 1876146,\n      \"account_id\": 46276,\n      \"service_name\": \"domain\",\n      \"customer_name\": \"kingpur-europe.com\",\n      \"created_at\": 1741941927,\n      \"expired_at\": 1804978800\n    },\n    {\n      \"id\": 1885250,\n      \"account_id\": 46276,\n      \"service_name\": \"domain\",\n      \"customer_name\": \"boucherie-pascale.be\",\n      \"created_at\": 1743152475,\n      \"expired_at\": 1806015600\n    },\n    {\n      \"id\": 1905064,\n      \"account_id\": 46276,\n      \"service_name\": \"domain\",\n      \"customer_name\": \"axesspharma.be\",\n      \"created_at\": 1745931926,\n      \"expired_at\": 1777413600\n    },\n    {\n      \"id\": 1909977,\n      \"account_id\": 46276,\n      \"service_name\": \"domain\",\n      \"customer_name\": \"eventcorpolux.com\",\n      \"created_at\": 1746629131,\n      \"expired_at\": 1809640800\n    },\n    {\n      \"id\": 1911296,\n      \"account_id\": 46276,\n      \"service_name\": \"domain\",\n      \"customer_name\": \"maud-de-san-nicolas.com\",\n      \"created_at\": 1746792806,\n      \"expired_at\": 1789941600\n    },\n    {\n      \"id\": 1917785,\n      \"account_id\": 46276,\n      \"service_name\": \"domain\",\n      \"customer_name\": \"audreyleenaerts.be\",\n      \"created_at\": 1747672401,\n      \"expired_at\": 1810504800\n    },\n    {\n      \"id\": 1921287,\n      \"account_id\": 46276,\n      \"service_name\": \"domain\",\n      \"customer_name\": \"water-detect.be\",\n      \"created_at\": 1748240594,\n      \"expired_at\": 1779746400\n    },\n    {\n      \"id\": 1938345,\n      \"account_id\": 46276,\n      \"service_name\": \"domain\",\n      \"customer_name\": \"agensea.net\",\n      \"created_at\": 1750747858,\n      \"expired_at\": 1782252000\n    },\n    {\n      \"id\": 1943649,\n      \"account_id\": 46276,\n      \"service_name\": \"domain\",\n      \"customer_name\": \"cvboost.be\",\n      \"created_at\": 1751486165,\n      \"expired_at\": 1782770400\n    },\n    {\n      \"id\": 1946454,\n      \"account_id\": 46276,\n      \"service_name\": \"domain\",\n      \"customer_name\": \"m4b-construct.be\",\n      \"created_at\": 1751968000,\n      \"expired_at\": 1783288800\n    },\n    {\n      \"id\": 1957919,\n      \"account_id\": 46276,\n      \"service_name\": \"domain\",\n      \"customer_name\": \"notreafrik.com\",\n      \"created_at\": 1753809450,\n      \"expired_at\": 1785276000\n    },\n    {\n      \"id\": 1978994,\n      \"account_id\": 46276,\n      \"service_name\": \"domain\",\n      \"customer_name\": \"coden.ma\",\n      \"created_at\": 1757065403,\n      \"expired_at\": 1788472800\n    },\n    {\n      \"id\": 1979558,\n      \"account_id\": 46276,\n      \"service_name\": \"domain\",\n      \"customer_name\": \"islandkidsibiza.com\",\n      \"created_at\": 1757155802,\n      \"expired_at\": 1788645600\n    },\n    {\n      \"id\": 1982983,\n      \"account_id\": 46276,\n      \"service_name\": \"domain\",\n      \"customer_name\": \"arc-en-ciel.be\",\n      \"created_at\": 1757586251,\n      \"expired_at\": 1789077600\n    },\n    {\n      \"id\": 1993972,\n      \"account_id\": 46276,\n      \"service_name\": \"domain\",\n      \"customer_name\": \"gomogador.com\",\n      \"created_at\": 1759227622,\n      \"expired_at\": 1790719200\n    },\n    {\n      \"id\": 2023845,\n      \"account_id\": 46276,\n      \"service_name\": \"domain\",\n      \"customer_name\": \"mogacode.ma\",\n      \"created_at\": 1763378204,\n      \"expired_at\": 1794697200\n    },\n    {\n      \"id\": 2030744,\n      \"account_id\": 46276,\n      \"service_name\": \"domain\",\n      \"customer_name\": \"dominadistrict.com\",\n      \"created_at\": 1764326236,\n      \"expired_at\": 1795820400\n    },\n    {\n      \"id\": 2045964,\n      \"account_id\": 46276,\n      \"service_name\": \"domain\",\n      \"customer_name\": \"mogsapp.com\",\n      \"created_at\": 1766399745,\n      \"expired_at\": 1797894000\n    },\n    {\n      \"id\": 2047290,\n      \"account_id\": 46276,\n      \"service_name\": \"domain\",\n      \"customer_name\": \"marobal.com\",\n      \"created_at\": 1766586097,\n      \"expired_at\": 1798066800\n    },\n    {\n      \"id\": 2057384,\n      \"account_id\": 46276,\n      \"service_name\": \"domain\",\n      \"customer_name\": \"lucid-360.com\",\n      \"created_at\": 1768222496,\n      \"expired_at\": 1799708400\n    },\n    {\n      \"id\": 2066998,\n      \"account_id\": 46276,\n      \"service_name\": \"domain\",\n      \"customer_name\": \"olivieretmelody.com\",\n      \"created_at\": 1769186731,\n      \"expired_at\": 1800658800\n    },\n    {\n      \"id\": 2069731,\n      \"account_id\": 46276,\n      \"service_name\": \"domain\",\n      \"customer_name\": \"amaryllis-home.be\",\n      \"created_at\": 1769512992,\n      \"expired_at\": 1800831600\n    },\n    {\n      \"id\": 2077064,\n      \"account_id\": 46276,\n      \"service_name\": \"domain\",\n      \"customer_name\": \"padmala-construction.com\",\n      \"created_at\": 1770283757,\n      \"expired_at\": 1801782000\n    },\n    {\n      \"id\": 2079778,\n      \"account_id\": 46276,\n      \"service_name\": \"domain\",\n      \"customer_name\": \"essaouira-airport.com\",\n      \"created_at\": 1770617335,\n      \"expired_at\": 1802127600\n    },\n    {\n      \"id\": 2081343,\n      \"account_id\": 46276,\n      \"service_name\": \"domain\",\n      \"customer_name\": \"laayoune-airport.com\",\n      \"created_at\": 1770741825,\n      \"expired_at\": 1802214000\n    },\n    {\n      \"id\": 2084474,\n      \"account_id\": 46276,\n      \"service_name\": \"domain\",\n      \"customer_name\": \"guinguette.fun\",\n      \"created_at\": 1771073093,\n      \"expired_at\": 1802559600\n    },\n    {\n      \"id\": 2104637,\n      \"account_id\": 46276,\n      \"service_name\": \"domain\",\n      \"customer_name\": \"latableduboucherbyp.be\",\n      \"created_at\": 1773239254,\n      \"expired_at\": 1804546800\n    },\n    {\n      \"id\": 2105301,\n      \"account_id\": 46276,\n      \"service_name\": \"domain\",\n      \"customer_name\": \"latableduboucherbybp.be\",\n      \"created_at\": 1773306501,\n      \"expired_at\": 1804633200\n    },\n    {\n      \"id\": 2165770,\n      \"account_id\": 46276,\n      \"service_name\": \"domain\",\n      \"customer_name\": \"dardartluz.com\",\n      \"created_at\": 1779364210,\n      \"expired_at\": 1810850400\n    }\n  ]\n}"
+        }
+      ],
+      "structuredContent": {
+        "account_id": 46276,
+        "count": 46,
+        "domains": [
+          {
+            "id": 814152,
+            "account_id": 46276,
+            "service_name": "domain",
+            "customer_name": "3briques.be",
+            "created_at": 1514977559,
+            "expired_at": 1798758000
+          },
+          {
+            "id": 1043808,
+            "account_id": 46276,
+            "service_name": "domain",
+            "customer_name": "onimperium.com",
+            "created_at": 1578645887,
+            "expired_at": 1799535600
+          },
+          {
+            "id": 1044989,
+            "account_id": 46276,
+            "service_name": "domain",
+            "customer_name": "upfss.com",
+            "created_at": 1578948763,
+            "expired_at": 1610406000
+          },
+          {
+            "id": 1063982,
+            "account_id": 46276,
+            "service_name": "domain",
+            "customer_name": "ultimaos.com",
+            "created_at": 1582985098,
+            "expired_at": 1803769200
+          },
+          {
+            "id": 1245146,
+            "account_id": 46276,
+            "service_name": "domain",
+            "customer_name": "uos.sh",
+            "created_at": 1620246730,
+            "expired_at": 1809468000
+          },
+          {
+            "id": 1432775,
+            "account_id": 46276,
+            "service_name": "domain",
+            "customer_name": "christmas-tree.be",
+            "created_at": 1662447965,
+            "expired_at": 1788472800
+          },
+          {
+            "id": 1600456,
+            "account_id": 46276,
+            "service_name": "domain",
+            "customer_name": "broz.be",
+            "created_at": 1695991489,
+            "expired_at": 1790460000
+          },
+          {
+            "id": 1647554,
+            "account_id": 46276,
+            "service_name": "domain",
+            "customer_name": "coden.lu",
+            "created_at": 1704362879,
+            "expired_at": 1798671600
+          },
+          {
+            "id": 1666244,
+            "account_id": 46276,
+            "service_name": "domain",
+            "customer_name": "cosifoodtruck.com",
+            "created_at": 1707415323,
+            "expired_at": 1792101600
+          },
+          {
+            "id": 1669935,
+            "account_id": 46276,
+            "service_name": "domain",
+            "customer_name": "soulandom.be",
+            "created_at": 1707844465,
+            "expired_at": 1802300400
+          },
+          {
+            "id": 1790485,
+            "account_id": 46276,
+            "service_name": "domain",
+            "customer_name": "mistress-naelle.com",
+            "created_at": 1729424570,
+            "expired_at": 1792447200
+          },
+          {
+            "id": 1800328,
+            "account_id": 46276,
+            "service_name": "domain",
+            "customer_name": "golf-anderlecht.com",
+            "created_at": 1731000997,
+            "expired_at": 1762470000
+          },
+          {
+            "id": 1806249,
+            "account_id": 46276,
+            "service_name": "domain",
+            "customer_name": "edelmaks.com",
+            "created_at": 1731922050,
+            "expired_at": 1800399600
+          },
+          {
+            "id": 1807897,
+            "account_id": 46276,
+            "service_name": "domain",
+            "customer_name": "mertens.brussels",
+            "created_at": 1732113519,
+            "expired_at": 1763593200
+          },
+          {
+            "id": 1824634,
+            "account_id": 46276,
+            "service_name": "domain",
+            "customer_name": "amicimiei.be",
+            "created_at": 1734445355,
+            "expired_at": 1797289200
+          },
+          {
+            "id": 1843432,
+            "account_id": 46276,
+            "service_name": "domain",
+            "customer_name": "eval-immo.be",
+            "created_at": 1737650238,
+            "expired_at": 1800486000
+          },
+          {
+            "id": 1869430,
+            "account_id": 46276,
+            "service_name": "domain",
+            "customer_name": "beachnumber1.be",
+            "created_at": 1741170975,
+            "expired_at": 1772665200
+          },
+          {
+            "id": 1876146,
+            "account_id": 46276,
+            "service_name": "domain",
+            "customer_name": "kingpur-europe.com",
+            "created_at": 1741941927,
+            "expired_at": 1804978800
+          },
+          {
+            "id": 1885250,
+            "account_id": 46276,
+            "service_name": "domain",
+            "customer_name": "boucherie-pascale.be",
+            "created_at": 1743152475,
+            "expired_at": 1806015600
+          },
+          {
+            "id": 1905064,
+            "account_id": 46276,
+            "service_name": "domain",
+            "customer_name": "axesspharma.be",
+            "created_at": 1745931926,
+            "expired_at": 1777413600
+          },
+          {
+            "id": 1909977,
+            "account_id": 46276,
+            "service_name": "domain",
+            "customer_name": "eventcorpolux.com",
+            "created_at": 1746629131,
+            "expired_at": 1809640800
+          },
+          {
+            "id": 1911296,
+            "account_id": 46276,
+            "service_name": "domain",
+            "customer_name": "maud-de-san-nicolas.com",
+            "created_at": 1746792806,
+            "expired_at": 1789941600
+          },
+          {
+            "id": 1917785,
+            "account_id": 46276,
+            "service_name": "domain",
+            "customer_name": "audreyleenaerts.be",
+            "created_at": 1747672401,
+            "expired_at": 1810504800
+          },
+          {
+            "id": 1921287,
+            "account_id": 46276,
+            "service_name": "domain",
+            "customer_name": "water-detect.be",
+            "created_at": 1748240594,
+            "expired_at": 1779746400
+          },
+          {
+            "id": 1938345,
+            "account_id": 46276,
+            "service_name": "domain",
+            "customer_name": "agensea.net",
+            "created_at": 1750747858,
+            "expired_at": 1782252000
+          },
+          {
+            "id": 1943649,
+            "account_id": 46276,
+            "service_name": "domain",
+            "customer_name": "cvboost.be",
+            "created_at": 1751486165,
+            "expired_at": 1782770400
+          },
+          {
+            "id": 1946454,
+            "account_id": 46276,
+            "service_name": "domain",
+            "customer_name": "m4b-construct.be",
+            "created_at": 1751968000,
+            "expired_at": 1783288800
+          },
+          {
+            "id": 1957919,
+            "account_id": 46276,
+            "service_name": "domain",
+            "customer_name": "notreafrik.com",
+            "created_at": 1753809450,
+            "expired_at": 1785276000
+          },
+          {
+            "id": 1978994,
+            "account_id": 46276,
+            "service_name": "domain",
+            "customer_name": "coden.ma",
+            "created_at": 1757065403,
+            "expired_at": 1788472800
+          },
+          {
+            "id": 1979558,
+            "account_id": 46276,
+            "service_name": "domain",
+            "customer_name": "islandkidsibiza.com",
+            "created_at": 1757155802,
+            "expired_at": 1788645600
+          },
+          {
+            "id": 1982983,
+            "account_id": 46276,
+            "service_name": "domain",
+            "customer_name": "arc-en-ciel.be",
+            "created_at": 1757586251,
+            "expired_at": 1789077600
+          },
+          {
+            "id": 1993972,
+            "account_id": 46276,
+            "service_name": "domain",
+            "customer_name": "gomogador.com",
+            "created_at": 1759227622,
+            "expired_at": 1790719200
+          },
+          {
+            "id": 2023845,
+            "account_id": 46276,
+            "service_name": "domain",
+            "customer_name": "mogacode.ma",
+            "created_at": 1763378204,
+            "expired_at": 1794697200
+          },
+          {
+            "id": 2030744,
+            "account_id": 46276,
+            "service_name": "domain",
+            "customer_name": "dominadistrict.com",
+            "created_at": 1764326236,
+            "expired_at": 1795820400
+          },
+          {
+            "id": 2045964,
+            "account_id": 46276,
+            "service_name": "domain",
+            "customer_name": "mogsapp.com",
+            "created_at": 1766399745,
+            "expired_at": 1797894000
+          },
+          {
+            "id": 2047290,
+            "account_id": 46276,
+            "service_name": "domain",
+            "customer_name": "marobal.com",
+            "created_at": 1766586097,
+            "expired_at": 1798066800
+          },
+          {
+            "id": 2057384,
+            "account_id": 46276,
+            "service_name": "domain",
+            "customer_name": "lucid-360.com",
+            "created_at": 1768222496,
+            "expired_at": 1799708400
+          },
+          {
+            "id": 2066998,
+            "account_id": 46276,
+            "service_name": "domain",
+            "customer_name": "olivieretmelody.com",
+            "created_at": 1769186731,
+            "expired_at": 1800658800
+          },
+          {
+            "id": 2069731,
+            "account_id": 46276,
+            "service_name": "domain",
+            "customer_name": "amaryllis-home.be",
+            "created_at": 1769512992,
+            "expired_at": 1800831600
+          },
+          {
+            "id": 2077064,
+            "account_id": 46276,
+            "service_name": "domain",
+            "customer_name": "padmala-construction.com",
+            "created_at": 1770283757,
+            "expired_at": 1801782000
+          },
+          {
+            "id": 2079778,
+            "account_id": 46276,
+            "service_name": "domain",
+            "customer_name": "essaouira-airport.com",
+            "created_at": 1770617335,
+            "expired_at": 1802127600
+          },
+          {
+            "id": 2081343,
+            "account_id": 46276,
+            "service_name": "domain",
+            "customer_name": "laayoune-airport.com",
+            "created_at": 1770741825,
+            "expired_at": 1802214000
+          },
+          {
+            "id": 2084474,
+            "account_id": 46276,
+            "service_name": "domain",
+            "customer_name": "guinguette.fun",
+            "created_at": 1771073093,
+            "expired_at": 1802559600
+          },
+          {
+            "id": 2104637,
+            "account_id": 46276,
+            "service_name": "domain",
+            "customer_name": "latableduboucherbyp.be",
+            "created_at": 1773239254,
+            "expired_at": 1804546800
+          },
+          {
+            "id": 2105301,
+            "account_id": 46276,
+            "service_name": "domain",
+            "customer_name": "latableduboucherbybp.be",
+            "created_at": 1773306501,
+            "expired_at": 1804633200
+          },
+          {
+            "id": 2165770,
+            "account_id": 46276,
+            "service_name": "domain",
+            "customer_name": "dardartluz.com",
+            "created_at": 1779364210,
+            "expired_at": 1810850400
+          }
+        ]
+      }
+    },
+    "jsonrpc": "2.0",
+    "id": 14
+  }
+}

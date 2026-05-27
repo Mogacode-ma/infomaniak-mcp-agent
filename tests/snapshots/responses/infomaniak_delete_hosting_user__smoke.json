@@ -1,0 +1,28 @@
+{
+  "args": {
+    "hosting_id": 693806,
+    "login": "broz.be"
+  },
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"status\": \"plan\",\n  \"plan\": {\n    \"hosting_id\": 693806,\n    \"login\": \"broz.be\"\n  },\n  \"confirmation_token\": \"9c35b644-5a29-40a5-a25e-91d20a7865a6\",\n  \"token_expires_at\": \"2026-05-27T09:10:10.371Z\",\n  \"next_step_markdown\": \"## Plan \u2014 revoke hosting user\\n\\n- **Hosting**: 693806\\n- **Login**: `broz.be`\\n\\n### Note\\nThis deletes the user account but leaves their files in place.\\n\\n### Next step\\nRe-call with `confirmation_token: \\\"9c35b644-5a29-40a5-a25e-91d20a7865a6\\\"`.\"\n}"
+        }
+      ],
+      "structuredContent": {
+        "status": "plan",
+        "plan": {
+          "hosting_id": 693806,
+          "login": "broz.be"
+        },
+        "confirmation_token": "9c35b644-5a29-40a5-a25e-91d20a7865a6",
+        "token_expires_at": "2026-05-27T09:10:10.371Z",
+        "next_step_markdown": "## Plan \u2014 revoke hosting user\n\n- **Hosting**: 693806\n- **Login**: `broz.be`\n\n### Note\nThis deletes the user account but leaves their files in place.\n\n### Next step\nRe-call with `confirmation_token: \"9c35b644-5a29-40a5-a25e-91d20a7865a6\"`."
+      }
+    },
+    "jsonrpc": "2.0",
+    "id": 27
+  }
+}

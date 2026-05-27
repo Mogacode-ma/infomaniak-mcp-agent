@@ -1,0 +1,185 @@
+{
+  "args": {
+    "account_id": 46276
+  },
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"account_id\": 46276,\n  \"scanned_products\": 107,\n  \"findings\": [\n    {\n      \"severity\": \"critical\",\n      \"category\": \"expiration\",\n      \"message\": \"Expired 1961 days ago\",\n      \"product_id\": 1044989,\n      \"product_name\": \"domain: upfss.com\"\n    },\n    {\n      \"severity\": \"critical\",\n      \"category\": \"expiration\",\n      \"message\": \"Expired 201 days ago\",\n      \"product_id\": 1800328,\n      \"product_name\": \"domain: golf-anderlecht.com\"\n    },\n    {\n      \"severity\": \"critical\",\n      \"category\": \"expiration\",\n      \"message\": \"Expired 188 days ago\",\n      \"product_id\": 1807897,\n      \"product_name\": \"domain: mertens.brussels\"\n    },\n    {\n      \"severity\": \"critical\",\n      \"category\": \"expiration\",\n      \"message\": \"Expired 83 days ago\",\n      \"product_id\": 1869430,\n      \"product_name\": \"domain: beachnumber1.be\"\n    },\n    {\n      \"severity\": \"critical\",\n      \"category\": \"expiration\",\n      \"message\": \"Expired 28 days ago\",\n      \"product_id\": 1905064,\n      \"product_name\": \"domain: axesspharma.be\"\n    },\n    {\n      \"severity\": \"critical\",\n      \"category\": \"expiration\",\n      \"message\": \"Expired 1 day ago\",\n      \"product_id\": 1921287,\n      \"product_name\": \"domain: water-detect.be\"\n    },\n    {\n      \"severity\": \"warning\",\n      \"category\": \"expiration\",\n      \"message\": \"Expires in 13 days\",\n      \"product_id\": 997,\n      \"product_name\": \"support_premium: Support Plus\"\n    },\n    {\n      \"severity\": \"warning\",\n      \"category\": \"expiration\",\n      \"message\": \"Expires in 22 days\",\n      \"product_id\": 24973,\n      \"product_name\": \"cloud: Coden\"\n    },\n    {\n      \"severity\": \"warning\",\n      \"category\": \"expiration\",\n      \"message\": \"Expires in 1 days\",\n      \"product_id\": 762416,\n      \"product_name\": \"email_hosting: anidoc.eu\"\n    },\n    {\n      \"severity\": \"warning\",\n      \"category\": \"expiration\",\n      \"message\": \"Expires in 4 days\",\n      \"product_id\": 693758,\n      \"product_name\": \"hosting: Coden VIP\"\n    },\n    {\n      \"severity\": \"warning\",\n      \"category\": \"expiration\",\n      \"message\": \"Expires in 4 days\",\n      \"product_id\": 693763,\n      \"product_name\": \"hosting: AxessPharma\"\n    },\n    {\n      \"severity\": \"warning\",\n      \"category\": \"expiration\",\n      \"message\": \"Expires in 4 days\",\n      \"product_id\": 693764,\n      \"product_name\": \"hosting: BeachNumber1\"\n    },\n    {\n      \"severity\": \"warning\",\n      \"category\": \"expiration\",\n      \"message\": \"Expires in 4 days\",\n      \"product_id\": 693806,\n      \"product_name\": \"hosting: Coden Priv\u00e9\"\n    },\n    {\n      \"severity\": \"warning\",\n      \"category\": \"expiration\",\n      \"message\": \"Expires in 4 days\",\n      \"product_id\": 693817,\n      \"product_name\": \"hosting: Coden Guests\"\n    },\n    {\n      \"severity\": \"warning\",\n      \"category\": \"expiration\",\n      \"message\": \"Expires in 5 days\",\n      \"product_id\": 693895,\n      \"product_name\": \"hosting: Coden Apps\"\n    },\n    {\n      \"severity\": \"warning\",\n      \"category\": \"expiration\",\n      \"message\": \"Expires in 6 days\",\n      \"product_id\": 694106,\n      \"product_name\": \"hosting: Coden Temp\"\n    },\n    {\n      \"severity\": \"warning\",\n      \"category\": \"expiration\",\n      \"message\": \"Expires in 6 days\",\n      \"product_id\": 694107,\n      \"product_name\": \"hosting: Coden Demos\"\n    },\n    {\n      \"severity\": \"warning\",\n      \"category\": \"expiration\",\n      \"message\": \"Expires in 28 days\",\n      \"product_id\": 1938345,\n      \"product_name\": \"domain: agensea.net\"\n    },\n    {\n      \"severity\": \"warning\",\n      \"category\": \"expiration\",\n      \"message\": \"Expires in 34 days\",\n      \"product_id\": 1943649,\n      \"product_name\": \"domain: cvboost.be\"\n    },\n    {\n      \"severity\": \"warning\",\n      \"category\": \"expiration\",\n      \"message\": \"Expires in 36 days\",\n      \"product_id\": 877962,\n      \"product_name\": \"email_hosting: cvboost.be\"\n    },\n    {\n      \"severity\": \"warning\",\n      \"category\": \"expiration\",\n      \"message\": \"Expires in 40 days\",\n      \"product_id\": 1946454,\n      \"product_name\": \"domain: m4b-construct.be\"\n    },\n    {\n      \"severity\": \"warning\",\n      \"category\": \"expiration\",\n      \"message\": \"Expires in 42 days\",\n      \"product_id\": 879683,\n      \"product_name\": \"email_hosting: m4b-construct.be\"\n    },\n    {\n      \"severity\": \"warning\",\n      \"category\": \"expiration\",\n      \"message\": \"Expires in 21 days\",\n      \"product_id\": 44180,\n      \"product_name\": \"cloud: MogaVps\"\n    }\n  ],\n  \"summary_markdown\": \"# Audit \u2014 account 46276\\n\\nScanned **107** products.\\n\\n**6** critical \u00b7 **17** warnings \u00b7 **0** info\\n\\n## \ud83d\udd34 Critical\\n\\n- [`expiration`] domain: upfss.com \u2014 Expired 1961 days ago\\n- [`expiration`] domain: golf-anderlecht.com \u2014 Expired 201 days ago\\n- [`expiration`] domain: mertens.brussels \u2014 Expired 188 days ago\\n- [`expiration`] domain: beachnumber1.be \u2014 Expired 83 days ago\\n- [`expiration`] domain: axesspharma.be \u2014 Expired 28 days ago\\n- [`expiration`] domain: water-detect.be \u2014 Expired 1 day ago\\n\\n## \ud83d\udfe0 Warnings\\n\\n- [`expiration`] support_premium: Support Plus \u2014 Expires in 13 days\\n- [`expiration`] cloud: Coden \u2014 Expires in 22 days\\n- [`expiration`] email_hosting: anidoc.eu \u2014 Expires in 1 days\\n- [`expiration`] hosting: Coden VIP \u2014 Expires in 4 days\\n- [`expiration`] hosting: AxessPharma \u2014 Expires in 4 days\\n- [`expiration`] hosting: BeachNumber1 \u2014 Expires in 4 days\\n- [`expiration`] hosting: Coden Priv\u00e9 \u2014 Expires in 4 days\\n- [`expiration`] hosting: Coden Guests \u2014 Expires in 4 days\\n- [`expiration`] hosting: Coden Apps \u2014 Expires in 5 days\\n- [`expiration`] hosting: Coden Temp \u2014 Expires in 6 days\\n- [`expiration`] hosting: Coden Demos \u2014 Expires in 6 days\\n- [`expiration`] domain: agensea.net \u2014 Expires in 28 days\\n- [`expiration`] domain: cvboost.be \u2014 Expires in 34 days\\n- [`expiration`] email_hosting: cvboost.be \u2014 Expires in 36 days\\n- [`expiration`] domain: m4b-construct.be \u2014 Expires in 40 days\\n- [`expiration`] email_hosting: m4b-construct.be \u2014 Expires in 42 days\\n- [`expiration`] cloud: MogaVps \u2014 Expires in 21 days\\n\"\n}"
+        }
+      ],
+      "structuredContent": {
+        "account_id": 46276,
+        "scanned_products": 107,
+        "findings": [
+          {
+            "severity": "critical",
+            "category": "expiration",
+            "message": "Expired 1961 days ago",
+            "product_id": 1044989,
+            "product_name": "domain: upfss.com"
+          },
+          {
+            "severity": "critical",
+            "category": "expiration",
+            "message": "Expired 201 days ago",
+            "product_id": 1800328,
+            "product_name": "domain: golf-anderlecht.com"
+          },
+          {
+            "severity": "critical",
+            "category": "expiration",
+            "message": "Expired 188 days ago",
+            "product_id": 1807897,
+            "product_name": "domain: mertens.brussels"
+          },
+          {
+            "severity": "critical",
+            "category": "expiration",
+            "message": "Expired 83 days ago",
+            "product_id": 1869430,
+            "product_name": "domain: beachnumber1.be"
+          },
+          {
+            "severity": "critical",
+            "category": "expiration",
+            "message": "Expired 28 days ago",
+            "product_id": 1905064,
+            "product_name": "domain: axesspharma.be"
+          },
+          {
+            "severity": "critical",
+            "category": "expiration",
+            "message": "Expired 1 day ago",
+            "product_id": 1921287,
+            "product_name": "domain: water-detect.be"
+          },
+          {
+            "severity": "warning",
+            "category": "expiration",
+            "message": "Expires in 13 days",
+            "product_id": 997,
+            "product_name": "support_premium: Support Plus"
+          },
+          {
+            "severity": "warning",
+            "category": "expiration",
+            "message": "Expires in 22 days",
+            "product_id": 24973,
+            "product_name": "cloud: Coden"
+          },
+          {
+            "severity": "warning",
+            "category": "expiration",
+            "message": "Expires in 1 days",
+            "product_id": 762416,
+            "product_name": "email_hosting: anidoc.eu"
+          },
+          {
+            "severity": "warning",
+            "category": "expiration",
+            "message": "Expires in 4 days",
+            "product_id": 693758,
+            "product_name": "hosting: Coden VIP"
+          },
+          {
+            "severity": "warning",
+            "category": "expiration",
+            "message": "Expires in 4 days",
+            "product_id": 693763,
+            "product_name": "hosting: AxessPharma"
+          },
+          {
+            "severity": "warning",
+            "category": "expiration",
+            "message": "Expires in 4 days",
+            "product_id": 693764,
+            "product_name": "hosting: BeachNumber1"
+          },
+          {
+            "severity": "warning",
+            "category": "expiration",
+            "message": "Expires in 4 days",
+            "product_id": 693806,
+            "product_name": "hosting: Coden Priv\u00e9"
+          },
+          {
+            "severity": "warning",
+            "category": "expiration",
+            "message": "Expires in 4 days",
+            "product_id": 693817,
+            "product_name": "hosting: Coden Guests"
+          },
+          {
+            "severity": "warning",
+            "category": "expiration",
+            "message": "Expires in 5 days",
+            "product_id": 693895,
+            "product_name": "hosting: Coden Apps"
+          },
+          {
+            "severity": "warning",
+            "category": "expiration",
+            "message": "Expires in 6 days",
+            "product_id": 694106,
+            "product_name": "hosting: Coden Temp"
+          },
+          {
+            "severity": "warning",
+            "category": "expiration",
+            "message": "Expires in 6 days",
+            "product_id": 694107,
+            "product_name": "hosting: Coden Demos"
+          },
+          {
+            "severity": "warning",
+            "category": "expiration",
+            "message": "Expires in 28 days",
+            "product_id": 1938345,
+            "product_name": "domain: agensea.net"
+          },
+          {
+            "severity": "warning",
+            "category": "expiration",
+            "message": "Expires in 34 days",
+            "product_id": 1943649,
+            "product_name": "domain: cvboost.be"
+          },
+          {
+            "severity": "warning",
+            "category": "expiration",
+            "message": "Expires in 36 days",
+            "product_id": 877962,
+            "product_name": "email_hosting: cvboost.be"
+          },
+          {
+            "severity": "warning",
+            "category": "expiration",
+            "message": "Expires in 40 days",
+            "product_id": 1946454,
+            "product_name": "domain: m4b-construct.be"
+          },
+          {
+            "severity": "warning",
+            "category": "expiration",
+            "message": "Expires in 42 days",
+            "product_id": 879683,
+            "product_name": "email_hosting: m4b-construct.be"
+          },
+          {
+            "severity": "warning",
+            "category": "expiration",
+            "message": "Expires in 21 days",
+            "product_id": 44180,
+            "product_name": "cloud: MogaVps"
+          }
+        ],
+        "summary_markdown": "# Audit \u2014 account 46276\n\nScanned **107** products.\n\n**6** critical \u00b7 **17** warnings \u00b7 **0** info\n\n## \ud83d\udd34 Critical\n\n- [`expiration`] domain: upfss.com \u2014 Expired 1961 days ago\n- [`expiration`] domain: golf-anderlecht.com \u2014 Expired 201 days ago\n- [`expiration`] domain: mertens.brussels \u2014 Expired 188 days ago\n- [`expiration`] domain: beachnumber1.be \u2014 Expired 83 days ago\n- [`expiration`] domain: axesspharma.be \u2014 Expired 28 days ago\n- [`expiration`] domain: water-detect.be \u2014 Expired 1 day ago\n\n## \ud83d\udfe0 Warnings\n\n- [`expiration`] support_premium: Support Plus \u2014 Expires in 13 days\n- [`expiration`] cloud: Coden \u2014 Expires in 22 days\n- [`expiration`] email_hosting: anidoc.eu \u2014 Expires in 1 days\n- [`expiration`] hosting: Coden VIP \u2014 Expires in 4 days\n- [`expiration`] hosting: AxessPharma \u2014 Expires in 4 days\n- [`expiration`] hosting: BeachNumber1 \u2014 Expires in 4 days\n- [`expiration`] hosting: Coden Priv\u00e9 \u2014 Expires in 4 days\n- [`expiration`] hosting: Coden Guests \u2014 Expires in 4 days\n- [`expiration`] hosting: Coden Apps \u2014 Expires in 5 days\n- [`expiration`] hosting: Coden Temp \u2014 Expires in 6 days\n- [`expiration`] hosting: Coden Demos \u2014 Expires in 6 days\n- [`expiration`] domain: agensea.net \u2014 Expires in 28 days\n- [`expiration`] domain: cvboost.be \u2014 Expires in 34 days\n- [`expiration`] email_hosting: cvboost.be \u2014 Expires in 36 days\n- [`expiration`] domain: m4b-construct.be \u2014 Expires in 40 days\n- [`expiration`] email_hosting: m4b-construct.be \u2014 Expires in 42 days\n- [`expiration`] cloud: MogaVps \u2014 Expires in 21 days\n"
+      }
+    },
+    "jsonrpc": "2.0",
+    "id": 9
+  }
+}

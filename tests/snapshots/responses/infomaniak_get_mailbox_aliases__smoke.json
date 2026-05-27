@@ -1,0 +1,24 @@
+{
+  "args": {
+    "mail_hosting_id": 496525,
+    "mailbox_name": "broz.be"
+  },
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"mail_hosting_id\": 496525,\n  \"mailbox_name\": \"broz.be\",\n  \"enabled_alias\": false,\n  \"aliases\": []\n}"
+        }
+      ],
+      "structuredContent": {
+        "mail_hosting_id": 496525,
+        "mailbox_name": "broz.be",
+        "enabled_alias": false,
+        "aliases": []
+      }
+    },
+    "jsonrpc": "2.0",
+    "id": 33
+  }
+}

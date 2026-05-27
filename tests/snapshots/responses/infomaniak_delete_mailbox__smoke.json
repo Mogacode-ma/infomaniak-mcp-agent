@@ -1,0 +1,28 @@
+{
+  "args": {
+    "mail_hosting_id": 496525,
+    "mailbox_name": "broz.be"
+  },
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"status\": \"plan\",\n  \"plan\": {\n    \"mail_hosting_id\": 496525,\n    \"mailbox_name\": \"broz.be\"\n  },\n  \"confirmation_token\": \"26487a6b-6007-485f-9491-ff4c0e1b7ad0\",\n  \"token_expires_at\": \"2026-05-27T09:10:12.803Z\",\n  \"next_step_markdown\": \"## Plan \u2014 delete mailbox\\n\\n- **Mail hosting**: 496525\\n- **Mailbox**: `broz.be@\u2026`\\n\\n### \u26a0\ufe0f Irreversible\\nAll stored mails (inbox, sent, drafts, spam) for this mailbox will be deleted.\\n\\n### Next step\\nRe-call `infomaniak_delete_mailbox` with the same parameters AND `confirmation_token: \\\"26487a6b-6007-485f-9491-ff4c0e1b7ad0\\\"`.\"\n}"
+        }
+      ],
+      "structuredContent": {
+        "status": "plan",
+        "plan": {
+          "mail_hosting_id": 496525,
+          "mailbox_name": "broz.be"
+        },
+        "confirmation_token": "26487a6b-6007-485f-9491-ff4c0e1b7ad0",
+        "token_expires_at": "2026-05-27T09:10:12.803Z",
+        "next_step_markdown": "## Plan \u2014 delete mailbox\n\n- **Mail hosting**: 496525\n- **Mailbox**: `broz.be@\u2026`\n\n### \u26a0\ufe0f Irreversible\nAll stored mails (inbox, sent, drafts, spam) for this mailbox will be deleted.\n\n### Next step\nRe-call `infomaniak_delete_mailbox` with the same parameters AND `confirmation_token: \"26487a6b-6007-485f-9491-ff4c0e1b7ad0\"`."
+      }
+    },
+    "jsonrpc": "2.0",
+    "id": 37
+  }
+}

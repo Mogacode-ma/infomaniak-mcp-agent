@@ -1,0 +1,18 @@
+{
+  "args": {
+    "hosting_id": 693806
+  },
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "\u274c [\n  {\n    \"code\": \"invalid_type\",\n    \"expected\": \"string\",\n    \"received\": \"object\",\n    \"path\": [\n      \"application\"\n    ],\n    \"message\": \"Expected string, received object\"\n  }\n]"
+        }
+      ],
+      "isError": true
+    },
+    "jsonrpc": "2.0",
+    "id": 19
+  }
+}

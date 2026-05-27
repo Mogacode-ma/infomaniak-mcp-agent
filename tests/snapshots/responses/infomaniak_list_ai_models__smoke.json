@@ -1,0 +1,155 @@
+{
+  "args": {},
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"count\": 15,\n  \"models\": [\n    {\n      \"id\": 2,\n      \"name\": \"whisper\",\n      \"type\": \"stt\",\n      \"description\": \"Whisper V3\",\n      \"documentation_link\": \"https://developer.infomaniak.com/docs/api/post/1/ai/%7Bproduct_id%7D/openai/audio/transcriptions\",\n      \"info_status\": \"ready\",\n      \"logo_url\": \"https://storage4.infomaniak.com/ai-tools/public/logos/whisper.svg\"\n    },\n    {\n      \"id\": 8,\n      \"name\": \"photomaker\",\n      \"type\": \"image\",\n      \"description\": \"Photomaker V2\",\n      \"documentation_link\": \"https://developer.infomaniak.com/docs/api/post/1/ai/%7Bproduct_id%7D/images/generations/photo_maker\",\n      \"info_status\": \"coming_soon\",\n      \"logo_url\": \"https://storage4.infomaniak.com/ai-tools/public/logos/photomaker.svg\"\n    },\n    {\n      \"id\": 10,\n      \"name\": \"flux\",\n      \"type\": \"image\",\n      \"description\": \"Flux schnell\",\n      \"documentation_link\": \"https://developer.infomaniak.com/docs/api/post/1/ai/%7Bproduct_id%7D/openai/images/generations\",\n      \"info_status\": \"ready\",\n      \"logo_url\": \"https://storage4.infomaniak.com/ai-tools/public/logos/flux.svg\"\n    },\n    {\n      \"id\": 12,\n      \"name\": \"bge_multilingual_gemma2\",\n      \"type\": \"embedding\",\n      \"description\": \"Bge Multilingual Gemma2\",\n      \"documentation_link\": \"https://developer.infomaniak.com/docs/api/post/1/ai/%7Bproduct_id%7D/openai/v1/embeddings\",\n      \"info_status\": \"coming_soon\",\n      \"logo_url\": \"https://storage4.infomaniak.com/ai-tools/public/logos/bge.svg\"\n    },\n    {\n      \"id\": 13,\n      \"name\": \"mini_lm_l12_v2\",\n      \"type\": \"embedding\",\n      \"description\": \"All MiniLM L12 v2\",\n      \"documentation_link\": \"https://developer.infomaniak.com/docs/api/post/1/ai/%7Bproduct_id%7D/openai/v1/embeddings\",\n      \"info_status\": \"coming_soon\",\n      \"logo_url\": \"https://storage4.infomaniak.com/ai-tools/public/logos/minilm.svg\"\n    },\n    {\n      \"id\": 20,\n      \"name\": \"swiss-ai/Apertus-70B-Instruct-2509\",\n      \"type\": \"llm\",\n      \"description\": \"Apertus-70B-Instruct-2509\",\n      \"documentation_link\": \"https://developer.infomaniak.com/docs/api/post/2/ai/%7Bproduct_id%7D/openai/v1/chat/completions\",\n      \"info_status\": \"ready\",\n      \"logo_url\": \"https://storage4.infomaniak.com/ai-tools/public/logos/apertus.svg\"\n    },\n    {\n      \"id\": 21,\n      \"name\": \"Qwen/Qwen3-Embedding-8B\",\n      \"type\": \"embedding\",\n      \"description\": \"Qwen/Qwen3-Embedding-8B\",\n      \"documentation_link\": \"https://developer.infomaniak.com/docs/api/post/2/ai/%7Bproduct_id%7D/openai/v1/embeddings\",\n      \"info_status\": \"coming_soon\",\n      \"logo_url\": \"https://storage4.infomaniak.com/ai-tools/public/logos/qwen.svg\"\n    },\n    {\n      \"id\": 23,\n      \"name\": \"BAAI/bge-reranker-v2-m3\",\n      \"type\": \"reranker\",\n      \"description\": \"BAAI/bge-reranker-v2-m3\",\n      \"documentation_link\": \"https://developer.infomaniak.com/docs/api/post/2/ai/%7Bproduct_id%7D/cohere/v2/rerank\",\n      \"info_status\": \"coming_soon\",\n      \"logo_url\": \"https://storage4.infomaniak.com/ai-tools/public/logos/bge.svg\"\n    },\n    {\n      \"id\": 24,\n      \"name\": \"Qwen/Qwen3-Reranker-0.6B\",\n      \"type\": \"reranker\",\n      \"description\": \"Qwen/Qwen3-Reranker-0.6B\",\n      \"documentation_link\": \"https://developer.infomaniak.com/docs/api/post/2/ai/%7Bproduct_id%7D/cohere/v2/rerank\",\n      \"info_status\": \"coming_soon\",\n      \"logo_url\": \"https://storage4.infomaniak.com/ai-tools/public/logos/qwen.svg\"\n    },\n    {\n      \"id\": 27,\n      \"name\": \"mistralai/Ministral-3-14B-Instruct-2512\",\n      \"type\": \"llm\",\n      \"description\": \"mistralai/Ministral-3-14B-Instruct-2512\",\n      \"documentation_link\": \"https://developer.infomaniak.com/docs/api/post/2/ai/%7Bproduct_id%7D/openai/v1/chat/completions\",\n      \"info_status\": \"ready\",\n      \"logo_url\": \"https://storage4.infomaniak.com/ai-tools/public/logos/mixtral.svg\"\n    },\n    {\n      \"id\": 30,\n      \"name\": \"Qwen/Qwen3.5-122B-A10B-FP8\",\n      \"type\": \"llm\",\n      \"description\": \"Qwen/Qwen3.5-122B-A10B-FP8\",\n      \"documentation_link\": \"https://developer.infomaniak.com/docs/api/post/2/ai/%7Bproduct_id%7D/openai/v1/chat/completions\",\n      \"info_status\": \"coming_soon\",\n      \"logo_url\": \"https://storage4.infomaniak.com/ai-tools/public/logos/qwen.svg\"\n    },\n    {\n      \"id\": 31,\n      \"name\": \"google/gemma-4-31B-it\",\n      \"type\": \"llm\",\n      \"description\": \"google/gemma-4-31B-it\",\n      \"documentation_link\": \"https://developer.infomaniak.com/docs/api/post/2/ai/%7Bproduct_id%7D/openai/v1/chat/completions\",\n      \"info_status\": \"coming_soon\",\n      \"logo_url\": \"https://storage4.infomaniak.com/ai-tools/public/logos/google.svg\"\n    },\n    {\n      \"id\": 32,\n      \"name\": \"moonshotai/Kimi-K2.6\",\n      \"type\": \"llm\",\n      \"description\": \"moonshotai/Kimi-K2.6\",\n      \"documentation_link\": \"https://developer.infomaniak.com/docs/api/post/2/ai/%7Bproduct_id%7D/openai/v1/chat/completions\",\n      \"info_status\": \"coming_soon\",\n      \"logo_url\": \"https://storage4.infomaniak.com/ai-tools/public/logos/moonshotai.svg\"\n    },\n    {\n      \"id\": 33,\n      \"name\": \"nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-FP8\",\n      \"type\": \"llm\",\n      \"description\": \"nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-FP8\",\n      \"documentation_link\": \"https://developer.infomaniak.com/docs/api/post/2/ai/%7Bproduct_id%7D/openai/v1/chat/completions\",\n      \"info_status\": \"coming_soon\",\n      \"logo_url\": \"https://storage4.infomaniak.com/ai-tools/public/logos/nvidia.svg\"\n    },\n    {\n      \"id\": 34,\n      \"name\": \"mistralai/Mistral-Small-4-119B-2603\",\n      \"type\": \"llm\",\n      \"description\": \"mistralai/Mistral-Small-4-119B-2603\",\n      \"documentation_link\": \"https://developer.infomaniak.com/docs/api/post/2/ai/%7Bproduct_id%7D/openai/v1/chat/completions\",\n      \"info_status\": \"coming_soon\",\n      \"logo_url\": \"https://storage4.infomaniak.com/ai-tools/public/logos/mistralai.svg\"\n    }\n  ]\n}"
+        }
+      ],
+      "structuredContent": {
+        "count": 15,
+        "models": [
+          {
+            "id": 2,
+            "name": "whisper",
+            "type": "stt",
+            "description": "Whisper V3",
+            "documentation_link": "https://developer.infomaniak.com/docs/api/post/1/ai/%7Bproduct_id%7D/openai/audio/transcriptions",
+            "info_status": "ready",
+            "logo_url": "https://storage4.infomaniak.com/ai-tools/public/logos/whisper.svg"
+          },
+          {
+            "id": 8,
+            "name": "photomaker",
+            "type": "image",
+            "description": "Photomaker V2",
+            "documentation_link": "https://developer.infomaniak.com/docs/api/post/1/ai/%7Bproduct_id%7D/images/generations/photo_maker",
+            "info_status": "coming_soon",
+            "logo_url": "https://storage4.infomaniak.com/ai-tools/public/logos/photomaker.svg"
+          },
+          {
+            "id": 10,
+            "name": "flux",
+            "type": "image",
+            "description": "Flux schnell",
+            "documentation_link": "https://developer.infomaniak.com/docs/api/post/1/ai/%7Bproduct_id%7D/openai/images/generations",
+            "info_status": "ready",
+            "logo_url": "https://storage4.infomaniak.com/ai-tools/public/logos/flux.svg"
+          },
+          {
+            "id": 12,
+            "name": "bge_multilingual_gemma2",
+            "type": "embedding",
+            "description": "Bge Multilingual Gemma2",
+            "documentation_link": "https://developer.infomaniak.com/docs/api/post/1/ai/%7Bproduct_id%7D/openai/v1/embeddings",
+            "info_status": "coming_soon",
+            "logo_url": "https://storage4.infomaniak.com/ai-tools/public/logos/bge.svg"
+          },
+          {
+            "id": 13,
+            "name": "mini_lm_l12_v2",
+            "type": "embedding",
+            "description": "All MiniLM L12 v2",
+            "documentation_link": "https://developer.infomaniak.com/docs/api/post/1/ai/%7Bproduct_id%7D/openai/v1/embeddings",
+            "info_status": "coming_soon",
+            "logo_url": "https://storage4.infomaniak.com/ai-tools/public/logos/minilm.svg"
+          },
+          {
+            "id": 20,
+            "name": "swiss-ai/Apertus-70B-Instruct-2509",
+            "type": "llm",
+            "description": "Apertus-70B-Instruct-2509",
+            "documentation_link": "https://developer.infomaniak.com/docs/api/post/2/ai/%7Bproduct_id%7D/openai/v1/chat/completions",
+            "info_status": "ready",
+            "logo_url": "https://storage4.infomaniak.com/ai-tools/public/logos/apertus.svg"
+          },
+          {
+            "id": 21,
+            "name": "Qwen/Qwen3-Embedding-8B",
+            "type": "embedding",
+            "description": "Qwen/Qwen3-Embedding-8B",
+            "documentation_link": "https://developer.infomaniak.com/docs/api/post/2/ai/%7Bproduct_id%7D/openai/v1/embeddings",
+            "info_status": "coming_soon",
+            "logo_url": "https://storage4.infomaniak.com/ai-tools/public/logos/qwen.svg"
+          },
+          {
+            "id": 23,
+            "name": "BAAI/bge-reranker-v2-m3",
+            "type": "reranker",
+            "description": "BAAI/bge-reranker-v2-m3",
+            "documentation_link": "https://developer.infomaniak.com/docs/api/post/2/ai/%7Bproduct_id%7D/cohere/v2/rerank",
+            "info_status": "coming_soon",
+            "logo_url": "https://storage4.infomaniak.com/ai-tools/public/logos/bge.svg"
+          },
+          {
+            "id": 24,
+            "name": "Qwen/Qwen3-Reranker-0.6B",
+            "type": "reranker",
+            "description": "Qwen/Qwen3-Reranker-0.6B",
+            "documentation_link": "https://developer.infomaniak.com/docs/api/post/2/ai/%7Bproduct_id%7D/cohere/v2/rerank",
+            "info_status": "coming_soon",
+            "logo_url": "https://storage4.infomaniak.com/ai-tools/public/logos/qwen.svg"
+          },
+          {
+            "id": 27,
+            "name": "mistralai/Ministral-3-14B-Instruct-2512",
+            "type": "llm",
+            "description": "mistralai/Ministral-3-14B-Instruct-2512",
+            "documentation_link": "https://developer.infomaniak.com/docs/api/post/2/ai/%7Bproduct_id%7D/openai/v1/chat/completions",
+            "info_status": "ready",
+            "logo_url": "https://storage4.infomaniak.com/ai-tools/public/logos/mixtral.svg"
+          },
+          {
+            "id": 30,
+            "name": "Qwen/Qwen3.5-122B-A10B-FP8",
+            "type": "llm",
+            "description": "Qwen/Qwen3.5-122B-A10B-FP8",
+            "documentation_link": "https://developer.infomaniak.com/docs/api/post/2/ai/%7Bproduct_id%7D/openai/v1/chat/completions",
+            "info_status": "coming_soon",
+            "logo_url": "https://storage4.infomaniak.com/ai-tools/public/logos/qwen.svg"
+          },
+          {
+            "id": 31,
+            "name": "google/gemma-4-31B-it",
+            "type": "llm",
+            "description": "google/gemma-4-31B-it",
+            "documentation_link": "https://developer.infomaniak.com/docs/api/post/2/ai/%7Bproduct_id%7D/openai/v1/chat/completions",
+            "info_status": "coming_soon",
+            "logo_url": "https://storage4.infomaniak.com/ai-tools/public/logos/google.svg"
+          },
+          {
+            "id": 32,
+            "name": "moonshotai/Kimi-K2.6",
+            "type": "llm",
+            "description": "moonshotai/Kimi-K2.6",
+            "documentation_link": "https://developer.infomaniak.com/docs/api/post/2/ai/%7Bproduct_id%7D/openai/v1/chat/completions",
+            "info_status": "coming_soon",
+            "logo_url": "https://storage4.infomaniak.com/ai-tools/public/logos/moonshotai.svg"
+          },
+          {
+            "id": 33,
+            "name": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-FP8",
+            "type": "llm",
+            "description": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-FP8",
+            "documentation_link": "https://developer.infomaniak.com/docs/api/post/2/ai/%7Bproduct_id%7D/openai/v1/chat/completions",
+            "info_status": "coming_soon",
+            "logo_url": "https://storage4.infomaniak.com/ai-tools/public/logos/nvidia.svg"
+          },
+          {
+            "id": 34,
+            "name": "mistralai/Mistral-Small-4-119B-2603",
+            "type": "llm",
+            "description": "mistralai/Mistral-Small-4-119B-2603",
+            "documentation_link": "https://developer.infomaniak.com/docs/api/post/2/ai/%7Bproduct_id%7D/openai/v1/chat/completions",
+            "info_status": "coming_soon",
+            "logo_url": "https://storage4.infomaniak.com/ai-tools/public/logos/mistralai.svg"
+          }
+        ]
+      }
+    },
+    "jsonrpc": "2.0",
+    "id": 44
+  }
+}
