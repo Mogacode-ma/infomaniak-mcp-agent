@@ -102,24 +102,48 @@ export const getCertificateTool = defineTool({
 // ---------------------------------------------------------------------------
 
 const RequestCertificateInput = z.object({
-  hosting_id: z.number().int().positive(),
-  site_id: z.number().int().positive(),
-  /**
-   * `free`   — Let's Encrypt (no extra fields).
-   * `paid`   — a pre-purchased Sectigo certificate (requires `certificate_id`).
-   * `custom` — bring-your-own PEM certificate (requires `certificate` and
-   *            typically `private_key` + optional `intermediate_certificate`).
-   */
-  type: CertificateTypeSchema,
-  /** Required when `type === "paid"` — id of the purchased certificate. */
-  certificate_id: z.number().int().positive().optional(),
-  /** Required when `type === "custom"` — PEM-encoded certificate string. */
-  certificate: z.string().optional(),
-  /** Required when `type === "custom"` — PEM-encoded private key. */
-  private_key: z.string().optional(),
-  /** Optional when `type === "custom"` — PEM-encoded intermediate chain. */
-  intermediate_certificate: z.string().optional(),
-  confirmation_token: z.string().uuid().optional(),
+  hosting_id: z
+    .number()
+    .int()
+    .positive()
+    .describe("Web hosting ID. Discover via infomaniak_find_site(domain) → hosting_id."),
+  site_id: z
+    .number()
+    .int()
+    .positive()
+    .describe("Site ID on that hosting. Same source as hosting_id."),
+  type: CertificateTypeSchema.describe(
+    "Certificate kind: `free` (Let's Encrypt, no extra fields), `paid` (pre-purchased Sectigo, requires `certificate_id`), `custom` (bring-your-own PEM, requires `certificate` + `private_key`). Default workflow: `free`.",
+  ),
+  certificate_id: z
+    .number()
+    .int()
+    .positive()
+    .optional()
+    .describe("Pre-purchased certificate ID. REQUIRED when type=`paid`, ignored otherwise."),
+  certificate: z
+    .string()
+    .optional()
+    .describe(
+      "PEM-encoded leaf certificate. REQUIRED when type=`custom`, ignored otherwise. Multi-line string starting with `-----BEGIN CERTIFICATE-----`.",
+    ),
+  private_key: z
+    .string()
+    .optional()
+    .describe(
+      "PEM-encoded private key matching `certificate`. REQUIRED when type=`custom`. Multi-line string starting with `-----BEGIN PRIVATE KEY-----` (or `RSA PRIVATE KEY`).",
+    ),
+  intermediate_certificate: z
+    .string()
+    .optional()
+    .describe(
+      "PEM-encoded intermediate CA chain. OPTIONAL for type=`custom` but recommended; without it some clients may fail trust validation.",
+    ),
+  confirmation_token: z
+    .string()
+    .uuid()
+    .optional()
+    .describe("Token from the prior plan response. Required on the apply phase only."),
 });
 
 const RequestCertificateOutput = z.union([
