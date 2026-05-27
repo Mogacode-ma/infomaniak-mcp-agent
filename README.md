@@ -8,12 +8,12 @@
 [![Node](https://img.shields.io/badge/node-%3E%3D18-43853d.svg)](https://nodejs.org)
 [![TypeScript strict](https://img.shields.io/badge/TypeScript-strict-3178c6.svg)](https://www.typescriptlang.org/)
 [![MCP](https://img.shields.io/badge/Model_Context_Protocol-1.0-9333ea.svg)](https://modelcontextprotocol.io/)
-[![Tools](https://img.shields.io/badge/tools-59-blueviolet.svg)](#tools)
+[![Tools](https://img.shields.io/badge/tools-51-blueviolet.svg)](#tools)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](./CONTRIBUTING.md)
 
 > **Drive your entire [Infomaniak](https://www.infomaniak.com) account from [Claude](https://www.anthropic.com/claude) — agentic, two-phase commit, open-source.**
 
-`infomaniak-mcp-agent` is an unofficial [Model Context Protocol](https://modelcontextprotocol.io/) server that exposes the full surface of Infomaniak — Switzerland's sovereign cloud — as **59 tools** an LLM can call directly: web hosting, mail (kSuite), kDrive, domains, DNS, DNSSEC, FTP/SSH users, AI products, account audits and more. Every destructive operation goes through a strict two-phase commit, so an agent can never silently delete or mutate something on your account.
+`infomaniak-mcp-agent` is an unofficial [Model Context Protocol](https://modelcontextprotocol.io/) server that exposes the full surface of Infomaniak — Switzerland's sovereign cloud — as **51 tools** an LLM can call directly: web hosting, mail (kSuite), kDrive, domains, DNS, DNSSEC, FTP/SSH users, AI products, account audits and more. Every destructive operation goes through a strict two-phase commit, so an agent can never silently delete or mutate something on your account.
 
 ```
 You → Claude:  "audit the example.com hosting and tell me which mailboxes are over quota"
@@ -25,7 +25,7 @@ Claude → You:  3 mailboxes >85% — paul@ (94%), notify@ (88%), team@ (87%). W
 
 - [Why](#why-this-exists) · [What it does](#what-you-can-do-with-it) · [How it differs](#why-agentic-and-not-wrapper)
 - [Install](#install) · [Authentication](#authentication) · [Quick example](#quick-example)
-- [Tools](#tools) (54 across 11 areas) · [Limitations](#limitations) · [Roadmap](#roadmap) · [FAQ](#faq)
+- [Tools](#tools) (51 across 11 areas) · [Limitations](#limitations) · [Roadmap](#roadmap) · [FAQ](#faq)
 - [Contributing](#contributing) · [License](#license)
 
 ## Why this exists
@@ -201,7 +201,7 @@ Claude: [calls infomaniak_dns_create_record again with the token]
 
 ## Tools
 
-59 tools across 11 areas. Use `infomaniak_help` to fuzzy-search by intent, or `infomaniak_explain` to dump a tool's full JSON schema.
+51 tools across 11 areas. Use `infomaniak_help` to fuzzy-search by intent, or `infomaniak_explain` to dump a tool's full JSON schema.
 
 ### Introspection (start here)
 | Tool | Annotation | Purpose |
@@ -224,6 +224,7 @@ Claude: [calls infomaniak_dns_create_record again with the token]
 ### Web hosting sites
 | Tool | Annotation | Purpose |
 |---|---|---|
+| `infomaniak_find_site` | read-only | **Domain-first lookup.** Resolves a public domain (e.g. `broz.be`) to `{account_id, hosting_id, hosting_label, site_id, full site object}`. Use this BEFORE any tool that needs `hosting_id + site_id`. Replaces iterating every hosting's `list_sites` (46+ API calls on a real fleet). |
 | `infomaniak_list_sites` | read-only | Sites on a given web hosting (with applications). |
 | `infomaniak_create_site` | **destructive** | Two-phase: returns a plan + token, second call with token actually creates. |
 | `infomaniak_delete_site` | **destructive** | Two-phase delete (full preview of the site to be removed). |
@@ -261,22 +262,17 @@ Claude: [calls infomaniak_dns_create_record again with the token]
 | `infomaniak_dns_create_record` | **destructive** | Two-phase create record (A, AAAA, CNAME, MX, TXT, SRV, NS, CAA, PTR, SPF). |
 | `infomaniak_dns_update_record` | **destructive** | Two-phase update (current vs proposed diff in the plan). |
 | `infomaniak_dns_delete_record` | **destructive** | Two-phase delete record (with full preview before commit). |
-| `infomaniak_dnssec_check` | read-only | DNSSEC status of a zone. |
-| `infomaniak_dnssec_enable` | **destructive** | Two-phase enable (signing keys auto-provisioned). |
-| `infomaniak_dnssec_disable` | **destructive** | Two-phase disable. |
+| `infomaniak_manage_dnssec` | mixed | Unified DNSSEC: `action: check` (read-only, KSK/DS records), `action: enable` or `action: disable` (two-phase commit destructive). Replaces the v0.9 trio `dnssec_check` / `dnssec_enable` / `dnssec_disable`. |
 
 ### Mail
 | Tool | Annotation | Purpose |
 |---|---|---|
 | `infomaniak_list_mail_hostings` | read-only | Mail hostings for one organization. |
 | `infomaniak_list_mailboxes` | read-only | Mailboxes on a given mail hosting. |
-| `infomaniak_get_mailbox_aliases` | read-only | Aliases configured on a specific mailbox. |
+| `infomaniak_get_mailbox_info` | read-only | Unified mailbox read: pass `fields: ["aliases" \| "signatures" \| "backups"]` (subset or all). Fetches in parallel, per-section errors returned independently. Replaces the v0.9 trio `get_mailbox_aliases` / `get_mailbox_signatures` / `get_mailbox_backups`. |
 | `infomaniak_create_mailbox` | **destructive** | Two-phase create with password policy enforcement. |
 | `infomaniak_delete_mailbox` | **destructive** | Two-phase delete (also wipes stored mail). |
 | `infomaniak_create_mailbox_alias` | **destructive** | Two-phase add alias to a mailbox. |
-| `infomaniak_get_mailbox_signature` | read-only | Current signature of a mailbox. |
-| `infomaniak_update_mailbox_signature` | **destructive** | Two-phase signature update. |
-| `infomaniak_get_mailbox_backups` | read-only | List backup snapshots for a mailbox. |
 | `infomaniak_list_redirections` | read-only | Server-side mail redirection rules. |
 | `infomaniak_create_redirection` | **destructive** | Two-phase create rule (forward `name@…` to N targets). |
 | `infomaniak_delete_redirection` | **destructive** | Two-phase delete rule. |
