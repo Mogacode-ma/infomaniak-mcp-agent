@@ -178,9 +178,24 @@ export const createMailboxTool = defineTool({
 // ---------------------------------------------------------------------------
 
 const DeleteMailboxInput = z.object({
-  mail_hosting_id: z.number().int().positive(),
-  mailbox_name: z.string().min(1),
-  confirmation_token: z.string().uuid().optional(),
+  mail_hosting_id: z
+    .number()
+    .int()
+    .positive()
+    .describe("Mail hosting ID. Discover via infomaniak_list_mail_hostings."),
+  mailbox_name: z
+    .string()
+    .min(1)
+    .describe(
+      "Local part of the mailbox WITHOUT the @domain (e.g. 'anthony' for anthony@coden.lu). NOT the full email address. Verify with infomaniak_list_mailboxes before deleting — this wipes stored mail.",
+    ),
+  confirmation_token: z
+    .string()
+    .uuid()
+    .optional()
+    .describe(
+      "Token from the first (plan) phase. The plan response shows the mailbox + a warning that stored mail will be wiped. Re-pass to execute.",
+    ),
 });
 
 const DeleteMailboxOutput = z.union([

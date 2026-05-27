@@ -225,9 +225,24 @@ export const createHostingUserTool = defineTool({
 // ---------------------------------------------------------------------------
 
 const DeleteInput = z.object({
-  hosting_id: z.number().int().positive(),
-  login: z.string().min(1).describe("Full login as shown by infomaniak_list_hosting_users"),
-  confirmation_token: z.string().uuid().optional(),
+  hosting_id: z
+    .number()
+    .int()
+    .positive()
+    .describe("Web hosting ID. Discover via infomaniak_list_hostings."),
+  login: z
+    .string()
+    .min(1)
+    .describe(
+      "Full user login as shown by infomaniak_list_hosting_users (includes the hosting prefix, e.g. 'q387gx_audit'). User's files are preserved on disk; only access is revoked.",
+    ),
+  confirmation_token: z
+    .string()
+    .uuid()
+    .optional()
+    .describe(
+      "Token from the first (plan) phase. Re-pass on the second call to actually revoke access. Omit on first call to receive the plan + token.",
+    ),
 });
 
 const DeleteOutput = z.union([

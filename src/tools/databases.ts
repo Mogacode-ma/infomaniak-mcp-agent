@@ -246,9 +246,26 @@ export const createDatabaseTool = defineTool({
 // ---------------------------------------------------------------------------
 
 const DeleteDatabaseInput = z.object({
-  hosting_id: z.number().int().positive(),
-  database_name: z.string().min(1),
-  confirmation_token: z.string().uuid().optional(),
+  hosting_id: z
+    .number()
+    .int()
+    .positive()
+    .describe(
+      "Web hosting ID. Discover via infomaniak_find_site(domain) or infomaniak_list_hostings.",
+    ),
+  database_name: z
+    .string()
+    .min(1)
+    .describe(
+      "Full database name as returned by infomaniak_list_databases (includes the hosting prefix, e.g. 'v33dqc_WP1250842'). NOT the unprefixed name you'd pass to create_database.",
+    ),
+  confirmation_token: z
+    .string()
+    .uuid()
+    .optional()
+    .describe(
+      "Token from the first (plan) phase. The plan response includes disk usage and any linked application so you can review before confirming. Re-pass to execute.",
+    ),
 });
 
 const DeleteDatabaseOutput = z.union([
