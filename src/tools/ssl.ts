@@ -65,8 +65,8 @@ const CertificateStatusSchema = z.object({
   error_identifiers: z.array(z.unknown()).optional(),
   /** Top-level certificate error, when applicable. */
   error_on_certificate: z.unknown().nullable().optional(),
-  /** Unix timestamp of the last issuance attempt. */
-  last_attempt_at: z.number().optional(),
+  /** Unix timestamp of the last issuance attempt. Null when no attempt has been made yet. */
+  last_attempt_at: z.number().nullable().optional(),
 });
 
 // ---------------------------------------------------------------------------

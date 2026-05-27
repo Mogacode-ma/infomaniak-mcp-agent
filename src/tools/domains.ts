@@ -9,6 +9,7 @@ import { z } from "zod";
 
 import { PublicApiClient } from "../api/http.js";
 import { DomainSchema, ProductSchema } from "../types/infomaniak.js";
+import { defaultAccountId } from "../utils/accounts.js";
 
 import { defineTool } from "./types.js";
 
@@ -17,7 +18,14 @@ import { defineTool } from "./types.js";
 // ---------------------------------------------------------------------------
 
 const ListDomainsInput = z.object({
-  account_id: z.number().int().positive(),
+  account_id: z
+    .number()
+    .int()
+    .positive()
+    .optional()
+    .describe(
+      "Organization/account ID. Optional: defaults to the first account the token has access to. Discover via infomaniak_overview.",
+    ),
 });
 
 const ListDomainsOutput = z.object({
@@ -43,13 +51,19 @@ export const listDomainsTool = defineTool({
   outputSchema: ListDomainsOutput,
   annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: true },
   handler: async (input) => {
+    const accountId = input.account_id ?? (await defaultAccountId());
+    if (accountId === null) {
+      throw new Error(
+        "No account_id provided and the token reaches no accounts. Use infomaniak_overview to list available accounts.",
+      );
+    }
     const client = new PublicApiClient();
     const products = await client.request<Array<unknown>>("GET", "/1/products", {
-      query: { per_page: 500, account_id: input.account_id },
+      query: { per_page: 500, account_id: accountId },
     });
     const domains = products
       .map((p) => ProductSchema.parse(p))
-      .filter((p) => p.account_id === input.account_id && p.service_name === "domain")
+      .filter((p) => p.account_id === accountId && p.service_name === "domain")
       .map(({ id, account_id, service_name, customer_name, created_at, expired_at }) => ({
         id,
         account_id,
@@ -58,7 +72,7 @@ export const listDomainsTool = defineTool({
         ...(created_at !== undefined ? { created_at } : {}),
         ...(expired_at !== undefined ? { expired_at } : {}),
       }));
-    return { account_id: input.account_id, count: domains.length, domains };
+    return { account_id: accountId, count: domains.length, domains };
   },
 });
 

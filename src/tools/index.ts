@@ -24,6 +24,7 @@ import {
 import { dnssecCheckTool, dnssecDisableTool, dnssecEnableTool } from "./dnssec.js";
 import { getDomainTool, listDomainsTool } from "./domains.js";
 import { listDriveFilesTool, listDrivesTool } from "./drive.js";
+import { findSiteTool } from "./find-site.js";
 import { createHostingUserTool, deleteHostingUserTool, listHostingUsersTool } from "./ftp-users.js";
 import { listHostingsTool } from "./hostings.js";
 import { explainTool, helpTool } from "./introspection.js";
@@ -62,6 +63,7 @@ export const tools: ReadonlyArray<ToolDefinition> = [
   listDomainsTool,
   getDomainTool,
   // Web hosting sites
+  findSiteTool,
   listSitesTool,
   createSiteTool,
   deleteSiteTool,
