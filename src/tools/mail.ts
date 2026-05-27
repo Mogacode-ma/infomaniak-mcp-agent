@@ -110,47 +110,6 @@ export const listMailboxesTool = defineTool({
 });
 
 // ---------------------------------------------------------------------------
-// get_mailbox_aliases
-// ---------------------------------------------------------------------------
-
-const GetAliasesInput = z.object({
-  mail_hosting_id: z.number().int().positive(),
-  mailbox_name: z.string().min(1).describe("Local part of the mailbox (without @domain)"),
-});
-
-const GetAliasesOutput = z.object({
-  mail_hosting_id: z.number(),
-  mailbox_name: z.string(),
-  /** Whether catch-all aliases are enabled. Infomaniak returns 0/1; we coerce to boolean. */
-  enabled_alias: z.boolean().optional(),
-  aliases: z.array(z.string()),
-});
-
-export const getMailboxAliasesTool = defineTool({
-  name: "infomaniak_get_mailbox_aliases",
-  description: "Get the aliases configured on a specific mailbox.",
-  inputSchema: GetAliasesInput,
-  outputSchema: GetAliasesOutput,
-  annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: true },
-  handler: async (input) => {
-    const client = new PublicApiClient();
-    const data = await client.request<{
-      enabled_alias?: number | boolean;
-      aliases?: ReadonlyArray<unknown>;
-    }>(
-      "GET",
-      `/1/mail_hostings/${input.mail_hosting_id}/mailboxes/${encodeURIComponent(
-        input.mailbox_name,
-      )}/aliases`,
-    );
-    const aliases = Array.isArray(data.aliases) ? data.aliases.map(String) : [];
-    // Infomaniak returns enabled_alias as 0|1 — coerce to boolean for our consumers.
-    const enabledAlias = data.enabled_alias === undefined ? undefined : Boolean(data.enabled_alias);
-    return {
-      mail_hosting_id: input.mail_hosting_id,
-      mailbox_name: input.mailbox_name,
-      ...(enabledAlias !== undefined ? { enabled_alias: enabledAlias } : {}),
-      aliases,
-    };
-  },
-});
+// get_mailbox_aliases — REMOVED in v0.10. Replaced by `infomaniak_get_mailbox_info`
+// which fetches aliases / signatures / backups in a single tool call. See
+// `src/tools/mail-extras.ts`.

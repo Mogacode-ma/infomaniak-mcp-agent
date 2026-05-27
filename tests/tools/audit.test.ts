@@ -54,16 +54,34 @@ describe("infomaniak_audit_account", () => {
       expired_at: now + 365 * 86_400,
     };
 
-    globalThis.fetch = vi.fn(
-      async () =>
-        new Response(
+    // The audit tool fetches per-domain live truth via /1/domain/{name} for
+    // domain products (because /1/products.expired_at is stale in prod).
+    // Mock both endpoints accordingly.
+    globalThis.fetch = vi.fn(async (input: RequestInfo | URL) => {
+      const url = typeof input === "string" ? input : input.toString();
+      if (url.includes("/1/products")) {
+        return new Response(
           JSON.stringify({
             result: "success",
             data: [expiredProduct, expiringSoon, lockedProduct, healthyProduct],
           }),
           { status: 200, headers: { "Content-Type": "application/json" } },
-        ),
-    ) as typeof fetch;
+        );
+      }
+      if (url.includes("/1/domain/expired.example")) {
+        return new Response(
+          JSON.stringify({ result: "success", data: { expired_at: now - 86_400 } }),
+          { status: 200, headers: { "Content-Type": "application/json" } },
+        );
+      }
+      if (url.includes("/1/domain/expiring-soon.example")) {
+        return new Response(
+          JSON.stringify({ result: "success", data: { expired_at: now + 7 * 86_400 } }),
+          { status: 200, headers: { "Content-Type": "application/json" } },
+        );
+      }
+      return new Response(JSON.stringify({ result: "error" }), { status: 404 });
+    }) as typeof fetch;
 
     const result = (await auditAccountTool.handler({
       account_id: 99,

@@ -79,7 +79,47 @@ export const auditAccountTool = defineTool({
 
     for (const product of products) {
       const productName = `${product.service_name}: ${product.customer_name ?? "(unnamed)"}`;
-      if (product.expired_at !== undefined && product.expired_at !== null) {
+      // Domain products: /1/products.expired_at is stale (often the original contract
+      // expiry, not the current renewed expiry). Re-fetch the live truth via
+      // /1/domain/{name}, where `expired_at: null` means the registration is healthy
+      // (auto-renewed). Skip the stale signal entirely for domains.
+      if (product.service_name === "domain" && product.customer_name) {
+        try {
+          const liveDomain = await client.request<{
+            data?: { expired_at?: number | null };
+            expired_at?: number | null;
+          }>("GET", `/1/domain/${encodeURIComponent(product.customer_name)}`);
+          const liveExpiry =
+            liveDomain.data?.expired_at !== undefined
+              ? liveDomain.data.expired_at
+              : liveDomain.expired_at;
+          if (typeof liveExpiry === "number") {
+            if (liveExpiry < now) {
+              findings.push({
+                severity: "critical",
+                category: "expiration",
+                message: `Expired ${formatDaysAgo(now - liveExpiry)} ago (live whois)`,
+                product_id: product.id,
+                product_name: productName,
+              });
+            } else if (liveExpiry < cutoff) {
+              findings.push({
+                severity: "warning",
+                category: "expiration",
+                message: `Expires in ${Math.round((liveExpiry - now) / SECONDS_PER_DAY)} days`,
+                product_id: product.id,
+                product_name: productName,
+              });
+            }
+            // liveExpiry > cutoff or null → healthy, no finding
+          }
+          // No "live truth" available → silently drop the stale signal rather than
+          // emit a false positive.
+        } catch {
+          // network / 404 → skip
+        }
+      } else if (product.expired_at !== undefined && product.expired_at !== null) {
+        // Non-domain products keep the original logic (hosting / mail / drive etc.)
         if (product.expired_at < now) {
           findings.push({
             severity: "critical",

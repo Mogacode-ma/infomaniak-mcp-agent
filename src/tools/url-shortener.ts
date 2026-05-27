@@ -90,9 +90,17 @@ export const shortUrlsQuotaTool = defineTool({
 // ---------------------------------------------------------------------------
 
 const CreateInput = z.object({
-  /** Long URL to shorten. Must be http(s):// */
-  target: z.string().url(),
-  confirmation_token: z.string().uuid().optional(),
+  target: z
+    .string()
+    .url()
+    .describe(
+      "Long URL to shorten. Must be a complete http:// or https:// URL (e.g. 'https://example.com/page'). A bare domain like 'example.com' is rejected.",
+    ),
+  confirmation_token: z
+    .string()
+    .uuid()
+    .optional()
+    .describe("Token from the prior plan response. Required on the apply phase only."),
 });
 
 const CreateOutput = z.union([

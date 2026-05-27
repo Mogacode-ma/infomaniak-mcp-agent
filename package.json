@@ -1,6 +1,6 @@
 {
   "name": "infomaniak-mcp-agent",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "description": "Full unofficial agentic Infomaniak MCP server — guided automation of web hosting, mail, kDrive, domains and DNS",
   "license": "MIT",
   "author": "Mogacode",
