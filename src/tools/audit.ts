@@ -30,7 +30,22 @@ const InputSchema = z.object({
       "Organization/account ID. Optional: defaults to the first account the token has access to. Discover via infomaniak_overview.",
     ),
   /** Flag products expiring within this many days as "soon". Default: 60. */
-  days_ahead: z.number().int().min(1).max(365).default(60),
+  days_ahead: z
+    .number()
+    .int()
+    .min(1)
+    .max(365)
+    .default(60)
+    .describe("Flag products expiring within this many days as warnings. Default 60."),
+  max_domain_checks: z
+    .number()
+    .int()
+    .min(0)
+    .max(500)
+    .default(50)
+    .describe(
+      "Cap on the number of `/1/domain/{name}` lookups used to disambiguate stale `expired_at` flags on domain products. Each lookup is one API call. With the 60 req/min rate limit, leave this ≤ 50 unless you have time. Set to 0 to skip domain re-checks entirely (faster but may miss real expirations).",
+    ),
 });
 
 const FindingSchema = z.object({
@@ -76,6 +91,7 @@ export const auditAccountTool = defineTool({
     const now = Math.floor(Date.now() / 1000);
     const cutoff = now + input.days_ahead * SECONDS_PER_DAY;
     const findings: Array<z.infer<typeof FindingSchema>> = [];
+    let domainChecksUsed = 0;
 
     for (const product of products) {
       const productName = `${product.service_name}: ${product.customer_name ?? "(unnamed)"}`;
@@ -84,6 +100,17 @@ export const auditAccountTool = defineTool({
       // /1/domain/{name}, where `expired_at: null` means the registration is healthy
       // (auto-renewed). Skip the stale signal entirely for domains.
       if (product.service_name === "domain" && product.customer_name) {
+        if (domainChecksUsed >= input.max_domain_checks) {
+          findings.push({
+            severity: "info",
+            category: "unverified_expiry",
+            message: `Skipped live expiry check (max_domain_checks=${input.max_domain_checks} reached). Raise the cap or re-run with this domain in focus to verify.`,
+            product_id: product.id,
+            product_name: productName,
+          });
+          continue;
+        }
+        domainChecksUsed += 1;
         try {
           const liveDomain = await client.request<{
             data?: { expired_at?: number | null };
@@ -111,12 +138,28 @@ export const auditAccountTool = defineTool({
                 product_name: productName,
               });
             }
-            // liveExpiry > cutoff or null → healthy, no finding
+            // liveExpiry > cutoff → healthy, no finding
+          } else {
+            // Live endpoint returned no usable expiry value. Surface this rather
+            // than swallow it — a missing signal is itself a finding (Laetitia).
+            findings.push({
+              severity: "info",
+              category: "unverified_expiry",
+              message:
+                "Live expiry endpoint returned no value. The domain might be healthy (auto-renewed) or its DNS might not be managed by Infomaniak.",
+              product_id: product.id,
+              product_name: productName,
+            });
           }
-          // No "live truth" available → silently drop the stale signal rather than
-          // emit a false positive.
-        } catch {
-          // network / 404 → skip
+        } catch (err) {
+          // network / 404 → surface as info so the operator knows the audit was incomplete.
+          findings.push({
+            severity: "info",
+            category: "unverified_expiry",
+            message: `Could not verify live expiry: ${err instanceof Error ? err.message : String(err)}`,
+            product_id: product.id,
+            product_name: productName,
+          });
         }
       } else if (product.expired_at !== undefined && product.expired_at !== null) {
         // Non-domain products keep the original logic (hosting / mail / drive etc.)

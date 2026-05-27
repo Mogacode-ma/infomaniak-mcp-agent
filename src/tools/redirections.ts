@@ -66,16 +66,30 @@ export const listRedirectionsTool = defineTool({
 // ---------------------------------------------------------------------------
 
 const CreateInput = z.object({
-  mail_hosting_id: z.number().int().positive(),
-  /** Local part — emails to `name@<domain>` will be forwarded. */
+  mail_hosting_id: z
+    .number()
+    .int()
+    .positive()
+    .describe("Mail hosting ID. Discover via infomaniak_list_mail_hostings."),
   name: z
     .string()
     .min(1)
     .max(64)
-    .regex(/^[a-z0-9._-]+$/, "name must be lowercase alphanumeric with . _ -"),
-  /** Destination email addresses. At least one. */
-  targets: z.array(z.string().email("targets must be valid email addresses")).min(1),
-  confirmation_token: z.string().uuid().optional(),
+    .regex(/^[a-z0-9._-]+$/, "name must be lowercase alphanumeric with . _ -")
+    .describe(
+      "Local part of the source address (e.g. 'support' to forward 'support@coden.lu'). Lowercase alphanumeric with dots, underscores or dashes; 1-64 chars. NOT the full email.",
+    ),
+  targets: z
+    .array(z.string().email("targets must be valid email addresses"))
+    .min(1)
+    .describe(
+      "Destination addresses, full emails. Every address must be valid. Multiple targets fan-out (each receives a copy).",
+    ),
+  confirmation_token: z
+    .string()
+    .uuid()
+    .optional()
+    .describe("Token from the prior plan response. Required on the apply phase only."),
 });
 
 const CreateOutput = z.union([

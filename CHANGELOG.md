@@ -8,6 +8,41 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 _(no unreleased changes yet)_
 
+## [0.10.1] — 2026-05-27
+
+### Changed
+
+- **`audit_account` now caps live domain re-checks** with the new
+  `max_domain_checks` arg (default 50). On accounts with 200+ domains this
+  prevents the audit from saturating the 60 req/min rate limit. Skipped
+  domains emit an `info` finding rather than disappearing silently.
+- **`audit_account` no longer swallows unverifiable expiries.** When the live
+  `/1/domain/{name}` endpoint can't return a value (404, network, no DNS
+  managed by Infomaniak), the tool now emits an `info` finding so the
+  operator knows the audit was incomplete for that domain.
+- **`manage_dnssec` annotations relaxed.** `destructiveHint` lowered to false
+  because the default action is read-only (`check`); the actual destructive
+  paths (`enable`/`disable`) are still gated by the two-phase commit
+  confirmation_token, which is the real safety mechanism.
+
+### Added (param descriptions on remaining hot destructive tools)
+
+- `create_database`: regex on `database_name`, hosting prefix behaviour, etc.
+- `create_hosting_user`: login format vs hosting prefix, password policy,
+  `ssh` vs `ftp` connection types, `home_directory` semantics.
+- `create_redirection`: source `name` is the local part only, `targets` must
+  be full valid emails.
+- `request_certificate`: which fields are required per certificate `type`
+  (`free` / `paid` / `custom`), PEM-block hints.
+- `provision_site_full`: FQDN format constraint, zone-derivation rule for
+  multi-level subdomains, `target_ipv4` default explanation, `skip_dns`
+  semantics.
+
+### Notes
+
+This patch is driven by an expert-panel review of v0.10. Five concrete
+residual items, all shipped here. `npm test`: 78/78. Lint clean.
+
 ## [0.10.0] — 2026-05-27
 
 ### Fixed

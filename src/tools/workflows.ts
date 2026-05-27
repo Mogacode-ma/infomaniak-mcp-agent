@@ -34,35 +34,58 @@ import { defineTool } from "./types.js";
 // ---------------------------------------------------------------------------
 
 const ProvisionInput = z.object({
-  hosting_id: z.number().int().positive(),
-  /** FQDN of the new site (e.g. "shop.example.com"). */
+  hosting_id: z
+    .number()
+    .int()
+    .positive()
+    .describe("Web hosting ID where the new site lives. Discover via infomaniak_list_hostings."),
   fqdn: z
     .string()
     .min(3)
-    .regex(/^[a-z0-9.-]+\.[a-z]{2,}$/i, "fqdn must look like 'sub.example.com'"),
-  /** Database to create alongside the site. */
+    .regex(/^[a-z0-9.-]+\.[a-z]{2,}$/i, "fqdn must look like 'sub.example.com'")
+    .describe(
+      "Full FQDN of the new site (e.g. 'shop.example.com'). Lowercase, must contain at least one dot and end with a TLD of ≥ 2 chars. NOT just a subdomain label.",
+    ),
   database_name: z
     .string()
     .min(1)
     .max(64)
-    .regex(/^[a-z0-9_]+$/i, "database_name must be alphanumeric with underscores"),
-  /**
-   * Parent zone to host the A record on. If omitted we'll derive it
-   * from the FQDN (everything after the first dot). Supply explicitly
-   * if your subdomain is multi-level (e.g. "app.subzone.example.com"
-   * where the actual zone is "example.com").
-   */
-  zone: z.string().min(3).optional(),
-  /**
-   * IPv4 to point the A record at. Defaults to Infomaniak's shared
-   * apache_php pool front-end. If your hosting has a dedicated IP,
-   * supply it here.
-   */
-  target_ipv4: z.string().ip({ version: "v4" }).default("185.177.62.161"),
-  ttl: z.number().int().min(60).max(86_400).default(3600),
-  /** Skip the DNS step (useful when DNS is managed elsewhere). */
-  skip_dns: z.boolean().default(false),
-  confirmation_token: z.string().uuid().optional(),
+    .regex(/^[a-z0-9_]+$/i, "database_name must be alphanumeric with underscores")
+    .describe(
+      "MariaDB database to create alongside the site. Alphanumeric + underscores only (no dots / dashes), 1-64 chars. Hosting prefix prepended automatically.",
+    ),
+  zone: z
+    .string()
+    .min(3)
+    .optional()
+    .describe(
+      "Parent DNS zone to host the A record. If omitted, derived from fqdn (everything after the first dot). Provide explicitly when the subdomain is multi-level, e.g. fqdn='app.subzone.example.com' but zone='example.com'.",
+    ),
+  target_ipv4: z
+    .string()
+    .ip({ version: "v4" })
+    .default("185.177.62.161")
+    .describe(
+      "IPv4 the A record will point at. Default is Infomaniak's shared apache_php front-end (185.177.62.161). Override if your hosting has a dedicated IP.",
+    ),
+  ttl: z
+    .number()
+    .int()
+    .min(60)
+    .max(86_400)
+    .default(3600)
+    .describe("TTL of the A record in seconds. 60 to 86400 (24h). Default 3600 (1h)."),
+  skip_dns: z
+    .boolean()
+    .default(false)
+    .describe(
+      "If true, the DNS step is skipped. Use when DNS is managed elsewhere (Cloudflare, OVH, etc.) and you only want the site + database provisioned.",
+    ),
+  confirmation_token: z
+    .string()
+    .uuid()
+    .optional()
+    .describe("Token from the prior plan response. Required on the apply phase only."),
 });
 
 const StepStatusSchema = z.enum(["pending", "succeeded", "failed", "skipped"]);

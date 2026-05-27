@@ -79,24 +79,44 @@ export const listHostingUsersTool = defineTool({
 // ---------------------------------------------------------------------------
 
 const CreateInput = z.object({
-  hosting_id: z.number().int().positive(),
-  /** Login WITHOUT the hosting prefix — Infomaniak prepends it automatically. */
+  hosting_id: z
+    .number()
+    .int()
+    .positive()
+    .describe(
+      "Web hosting ID where the user will be created. Discover via infomaniak_list_hostings.",
+    ),
   login: z
     .string()
     .min(1)
     .max(32)
-    .regex(/^[a-z0-9_-]+$/i, "login must be alphanumeric with _ -"),
+    .regex(/^[a-z0-9_-]+$/i, "login must be alphanumeric with _ -")
+    .describe(
+      "User login WITHOUT the hosting prefix (e.g. 'audit', not 'q387gx_audit'). Alphanumeric + underscore/dash only, 1-32 chars. Infomaniak prepends the hosting prefix automatically.",
+    ),
   password: z
     .string()
     .min(8)
     .regex(/[a-z]/, "password must contain at least one lowercase letter")
     .regex(/[A-Z]/, "password must contain at least one uppercase letter")
-    .regex(/\d/, "password must contain at least one digit"),
-  /** Access level. `ssh` = full shell + FTP, `ftp` = SFTP-only (no shell). */
-  connection_type: ConnectionTypeSchema.default("ftp"),
-  /** Sub-path the user is jailed into (default: root of the hosting). */
-  home_directory: z.string().default("/"),
-  confirmation_token: z.string().uuid().optional(),
+    .regex(/\d/, "password must contain at least one digit")
+    .describe(
+      "User password. Minimum 8 chars with at least one lowercase, one uppercase, one digit. Special character recommended but not required.",
+    ),
+  connection_type: ConnectionTypeSchema.default("ftp").describe(
+    "Access level. `ssh` = full shell + FTP/SFTP, `ftp` = SFTP-only (no interactive shell). Default `ftp` (safer).",
+  ),
+  home_directory: z
+    .string()
+    .default("/")
+    .describe(
+      "Sub-path inside the hosting the user is jailed into. Default '/' (root of the hosting). Use to scope an FTP-only user to a single site, e.g. '/sites/example.com'.",
+    ),
+  confirmation_token: z
+    .string()
+    .uuid()
+    .optional()
+    .describe("Token from the prior plan response. Required on the apply phase only."),
 });
 
 const CreateOutput = z.union([

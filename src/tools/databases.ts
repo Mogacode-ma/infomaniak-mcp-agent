@@ -127,15 +127,31 @@ export const getDatabaseTool = defineTool({
  * Laravel CSRF cookie. See REVERSE-ENGINEERING.md.
  */
 const CreateDatabaseInput = z.object({
-  hosting_id: z.number().int().positive(),
-  /** Database name. Infomaniak prepends the hosting prefix automatically. */
+  hosting_id: z
+    .number()
+    .int()
+    .positive()
+    .describe(
+      "Web hosting ID where the database will live. Discover via infomaniak_find_site(domain) or infomaniak_list_hostings.",
+    ),
   database_name: z
     .string()
     .min(1)
     .max(64)
-    .regex(/^[a-z0-9_]+$/i, "database_name must be alphanumeric with underscores"),
-  description: z.string().max(255).optional(),
-  confirmation_token: z.string().uuid().optional(),
+    .regex(/^[a-z0-9_]+$/i, "database_name must be alphanumeric with underscores")
+    .describe(
+      "Database name. Alphanumeric and underscores only (no dots, dashes or hyphens), 1-64 chars. Infomaniak automatically prepends the hosting prefix (e.g. 'v33dqc_') — do NOT include it yourself.",
+    ),
+  description: z
+    .string()
+    .max(255)
+    .optional()
+    .describe("Optional description shown in the manager UI (≤ 255 chars)."),
+  confirmation_token: z
+    .string()
+    .uuid()
+    .optional()
+    .describe("Token from the prior plan response. Required on the apply phase only."),
 });
 
 const CreateDatabaseOutput = z.union([

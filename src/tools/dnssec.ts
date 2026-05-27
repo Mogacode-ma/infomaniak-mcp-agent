@@ -93,12 +93,14 @@ export const manageDnssecTool = defineTool({
   inputSchema: ManageDnssecInput,
   outputSchema: ManageDnssecOutput,
   annotations: {
-    // openWorldHint=true always (touches the public DNS registry).
-    // The other hints are only accurate for the `check` action; for
-    // `enable`/`disable` the tool becomes destructive. We mark the
-    // worst-case (destructive) here so agents apply maximum care.
+    // The default action is `check`, which is read-only. `enable`/`disable`
+    // are destructive, but they require a confirmation_token (two-phase
+    // commit), so the agent can't reach the destructive path without
+    // explicit user consent regardless of these hints.
+    // Hints reflect the DEFAULT (check) so agents don't trigger confirmation
+    // UI for a read. The two-phase commit is the real safety net.
     readOnlyHint: false,
-    destructiveHint: true,
+    destructiveHint: false,
     idempotentHint: true,
     openWorldHint: true,
   },
