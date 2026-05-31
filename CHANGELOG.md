@@ -8,6 +8,40 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 _(no unreleased changes yet)_
 
+## [0.12.0] — 2026-05-31
+
+### Added — Node.js DevOps (8 new tools, manager-private)
+
+This release is the first **proper DevOps surface for Infomaniak Cloud Server Node.js hostings** (`hosting_3`, service_id 57). The public Bearer API exposes only a `GET /1/hostings/{id}` state-check for these products — every meaningful operation (list apps, runtime config, status, logs, restart/build) lives behind the manager session and was unmapped until now.
+
+Reverse-engineered live against `manager.infomaniak.com` (XHR capture via chrome-devtools, then systematic POST/PATCH/CSRF probing). All endpoints validated end-to-end in production. The new tools sit on top of the existing `ManagerApiClient` — they require `INFOMANIAK_AUTH_MODE=auto` (Chrome cookies) or `manual` (SASESSION + MANAGER-XSRF-TOKEN env vars).
+
+**8 new tools** — all under the namespace `infomaniak_*nodejs*`:
+
+| Tool | Method | Endpoint | Purpose |
+|---|---|---|---|
+| `infomaniak_list_nodejs_apps` | GET | `/proxy/1/hostings/{id}?with[]=hosting_features` | Discover the apps on a Node.js hosting — returns each app's `vhost_route_id` (the canonical handle used by every other tool) + its serving FQDNs. Each Infomaniak Node.js hosting runs exactly one app, so this typically returns one entry. |
+| `infomaniak_get_nodejs_app` | GET | `/proxy/1/hostings/{hid}/nodejs/{vid}?with[]=ips,ssl,environments,storage` | Full app config: Node version, listen port, `start_command`, `build_command`, IPv4 + IPv6, SSL state, directory on disk, storage quota. |
+| `infomaniak_nodejs_app_status` | GET | `/proxy/1/hostings/{hid}/nodejs/{vid}/actions/status` | Live status of the app — `Running` or `Stopped`. Cheap, safe to poll. |
+| `infomaniak_nodejs_app_aliases` | GET | `/proxy/1/hostings/{hid}/vhost_route/{vid}/aliases?with[]=domain_options` | All FQDNs serving the app: primary + the always-provisioned `xxx.preview.hosting-ik.com` preview URL. |
+| `infomaniak_nodejs_app_jobs` | GET | `/proxy/1/hostings/{hid}/nodejs/{vid}/jobs` | Recent jobs that ran on the app (build / restart / …), each with a per-job log_stream JWT to tail its output. |
+| `infomaniak_nodejs_app_logs` | GET | `/proxy/1/hostings/{hid}/webapp/{vid}/stream` | Returns a short-lived (~1h) JWT + the SSE endpoint URL on `manager-logs-01.hosting-ik.com` to consume the **live stdout/stderr stream** of the running app. The tool decodes the JWT `exp` claim and returns `expires_at_iso` for convenience. |
+| `infomaniak_nodejs_app_thumbnail` | GET | `/proxy/1/hostings/{hid}/webapp/{vid}/thumbnail?refresh=...` | Screenshot of the live page as a base64 JPEG data URL — useful as a visual smoke test without HTTP-probing. |
+| `infomaniak_nodejs_app_action` | POST | `/proxy/1/hostings/{hid}/nodejs/{vid}/actions/{action}` | Start / stop / restart / build the app. **Two-phase commit** — first call plans (introspects the app + current status to give the agent context), second call applies. `stop` records an undo entry pointing back at `start`. `build` returns the spawned job's `resource_id` + `log_stream` so the agent can tail the build output. |
+
+### Reverse-engineered (REVERSE-ENGINEERING.md)
+
+New section *"Node.js DevOps — the `/proxy/1/` namespace"* covering:
+- The `hosting_features` tree model — `Storage` → `Node.js (WebApp)` → `VhostRoute` (the action handle) → `TLSCertificate` (chained as parent-child via `hosting_feature_parent_id`).
+- Why `vhost_route_id` (not `webapp_id`) is the identifier for every action — confirmed via the URL pattern in the manager UI: `/v3/hosting/{account}/hosting/{php}/h3/{node}/nodejs/{vhost}/data/dashboard`.
+- Why `PATCH /nodejs/{vid}` returns `success:true` on anything but mutates nothing — it's a generic no-op save endpoint; real mutations go through `POST /actions/{name}`.
+- The CSRF rotation gotcha — Laravel rotates both `SASESSION` and `MANAGER-XSRF-TOKEN` on every response; consumers must re-read the `Set-Cookie` header after each request (handled transparently by `ManagerApiClient`).
+- Why env vars and explicit deploy are **not** exposed via the manager API — the Infomaniak Node.js workflow is "push code via git/SFTP/SSH, then call the `build` action", with `.env` files managed over SSH. Documented as a known limitation.
+
+### Tool count
+
+`51 → 59` tools. The new Node.js surface adds a single coherent vertical to the MCP's reach.
+
 ## [0.11.0] — 2026-05-27
 
 ### Changed (TDQS — Glama scoring on delete tools)

@@ -31,6 +31,16 @@ import { explainTool, helpTool } from "./introspection.js";
 import { getMailboxInfoTool } from "./mail-extras.js";
 import { createAliasTool, createMailboxTool, deleteMailboxTool } from "./mail-write.js";
 import { listMailHostingsTool, listMailboxesTool } from "./mail.js";
+import {
+  getNodejsAppTool,
+  listNodejsAppsTool,
+  nodejsAppActionTool,
+  nodejsAppAliasesTool,
+  nodejsAppJobsTool,
+  nodejsAppLogsTool,
+  nodejsAppStatusTool,
+  nodejsAppThumbnailTool,
+} from "./nodejs.js";
 import { listOrganizationsTool } from "./organizations.js";
 import { overviewTool } from "./overview.js";
 import {
@@ -107,6 +117,15 @@ export const tools: ReadonlyArray<ToolDefinition> = [
   // AI Tools
   listAiProductsTool,
   listAiModelsTool,
+  // Node.js apps (hosting_3 — manager-private)
+  listNodejsAppsTool,
+  getNodejsAppTool,
+  nodejsAppStatusTool,
+  nodejsAppAliasesTool,
+  nodejsAppJobsTool,
+  nodejsAppLogsTool,
+  nodejsAppThumbnailTool,
+  nodejsAppActionTool,
   // Swiss Backup
   listSwissBackupsTool,
   // URL Shortener

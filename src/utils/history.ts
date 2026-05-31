@@ -20,7 +20,8 @@ export type ActionKind =
   | "create_database"
   | "delete_database"
   | "request_certificate"
-  | "delete_certificate";
+  | "delete_certificate"
+  | "nodejs_app_action";
 
 /**
  * Description of how to reverse an action. `undefined` means the action

@@ -252,6 +252,110 @@ CHROME_COOKIES_PATH  e.g. "/tmp/chrome_profile" — the directory containing a C
 
 These env vars are passed straight through to the `chrome-cookies-secure` `profileOrPath` argument, so the lib decides whether to interpret the value as a profile name or as a path.
 
+### Node.js DevOps — the `/proxy/1/` namespace
+
+The Infomaniak `hosting_3` product line (Cloud Server Node.js, service_id 57) sits in a separate management surface from the classic PHP hostings. The public Bearer API exposes essentially nothing for these products:
+
+```
+GET /1/hostings/{id}              → {"state": "Ready", "created_at": ...}   ← that's all
+GET /1/hostings/{id}/<anything>   → 404 (no sub-routes)
+GET /1/web_hostings/{id}          → 403 (wrong namespace for Node.js)
+```
+
+Even the Infomaniak [Terraform Provider](https://github.com/Infomaniak/terraform-provider-infomaniak) — which covers DBaaS, KaaS, and Domain/DNS — **ignores** these hostings entirely. So there is no documented path to manage Node.js apps via API.
+
+The actual API used by the manager UI is at `manager.infomaniak.com/proxy/1/...` — different from the namespace `/v3/api/proxypass_2/1/...` used by other parts of the manager. Same auth: SASESSION cookie + MANAGER-XSRF-TOKEN as `X-XSRF-TOKEN` header on non-GET.
+
+**How we mapped it.** Snapshot the XHR fired by the panel `https://manager.infomaniak.com/v3/hosting/{account}/hosting/{php_id}/h3/{node_id}/nodejs/{vhost_id}/data/dashboard` via Chrome DevTools, then enumerate `?with=` valid values via 422 introspection, then probe POST/PATCH actions on each handle. CSRF check happens **before** routing, so a wrong token returns 419 on *every* path — only a fresh-token probe distinguishes 404-truly-missing from 404-CSRF-stripped.
+
+#### The `hosting_features` tree
+
+Every Node.js hosting carries a tree of features chained via `hosting_feature_parent_id`:
+
+```
+Storage         (feature_type "Storage",      root)
+Node.js         (feature_type "WebApp",       root)
+  └─ VhostRoute (feature_type "VhostRoute",   parent: Node.js)   ← FQDNs + actions
+       └─ TLSCertificate (feature_type "Certificate", parent: VhostRoute)
+SshRoute        (feature_type "SshRoute",     root)
+```
+
+The `VhostRoute.id` is the canonical handle for every Node.js action — Infomaniak surfaces it as `feature_id` in some responses and as `vhost_route_id` in others. **All action URLs use this id**, NOT the `Node.js` WebApp id.
+
+#### Endpoints (validated live, 2026-05-31)
+
+```
+# Discovery
+GET  /proxy/1/hostings/{id}                                      → minimal state
+GET  /proxy/1/hostings/{id}?with[]=hosting_features              → list apps via tree walk
+                                                                   accepted ?with[]: product |
+                                                                   hosting_features | offer | feature
+
+# App config
+GET  /proxy/1/hostings/{id}/nodejs/{vhost}?with[]=ips,ssl,environments,storage
+                                                                 → Node version, port,
+                                                                   start_command, build_command,
+                                                                   IPv4 + IPv6, SSL, storage
+                                                                   accepted ?with[]:
+                                                                   ssl | ips | environments | storage
+GET  /proxy/1/hostings/{id}/webapp/{vhost}                       → compact runtime info
+
+# Live state + telemetry
+GET  /proxy/1/hostings/{id}/nodejs/{vhost}/actions/status        → {status: "Running" | "Stopped"}
+GET  /proxy/1/hostings/{id}/nodejs/{vhost}/jobs                  → recent jobs + per-job log_stream
+GET  /proxy/1/hostings/{id}/webapp/{vhost}/stream                → {endpoint, jwt_token}
+                                                                   for the LIVE stdout/stderr SSE
+                                                                   on manager-logs-01.hosting-ik.com
+                                                                   JWT exp ~1h, aud "msgbeam"
+GET  /proxy/1/hostings/{id}/webapp/{vhost}/thumbnail?refresh=... → base64 JPEG screenshot
+
+# FQDNs
+GET  /proxy/1/hostings/{id}/vhost_route/{vhost}/aliases?with[]=domain_options
+                                                                 → primary + preview FQDNs
+
+# Mutations (CSRF required)
+POST /proxy/1/hostings/{id}/nodejs/{vhost}/actions/start         → {status: "Running"}
+POST /proxy/1/hostings/{id}/nodejs/{vhost}/actions/stop          → {status: "Stopped"} ⚠ downtime
+POST /proxy/1/hostings/{id}/nodejs/{vhost}/actions/restart       → {status: "Running"}
+POST /proxy/1/hostings/{id}/nodejs/{vhost}/actions/build         → {resource_id, status, log_stream}
+                                                                   triggers build_command then
+                                                                   relaunches the app
+
+# Generic save endpoint — DO NOT USE for actions
+PATCH /proxy/1/hostings/{id}/nodejs/{vhost}                      → always {success: true} but
+                                                                   mutates nothing observable
+                                                                   (generic config-save endpoint
+                                                                    that silently no-ops on
+                                                                    unknown fields; real
+                                                                    mutations are via POST
+                                                                    /actions/{name})
+```
+
+#### Things that don't exist (despite intuition)
+
+We probed extensively for these — they all return 404:
+
+```
+POST /proxy/1/hostings/{id}/nodejs/{vhost}/actions/deploy   ← no separate deploy action;
+                                                              code is pushed via git/SFTP/SSH
+                                                              then `build` is triggered
+POST /proxy/1/hostings/{id}/nodejs/{vhost}/actions/install  ← npm install is part of `build`
+POST /proxy/1/hostings/{id}/nodejs/{vhost}/actions/reload   ← not a thing — `restart` is the
+                                                              soft-restart
+GET  /proxy/1/hostings/{id}/nodejs/{vhost}/env_variables    ← env vars NOT in the API;
+GET  /proxy/1/hostings/{id}/nodejs/{vhost}/env                managed via the app's `.env`
+GET  /proxy/1/hostings/{id}/nodejs/{vhost}/variables          file over SSH
+GET  /proxy/1/hostings/{id}/nodejs/{vhost}/dependencies     ← introspect via SSH (`npm ls`)
+GET  /proxy/1/hostings/{id}/nodejs/{vhost}/logs             ← no buffered log endpoint;
+                                                              consume the live SSE stream
+```
+
+This is by design: the Infomaniak Node.js workflow is `git push → trigger build → app restarts`, with everything else (env, dependencies, file inspection) happening over SSH. Our tool surface mirrors that: `nodejs_app_action` covers the API-driven side, SSH covers everything that has no API.
+
+#### CSRF rotation
+
+The manager backend rotates **both** `SASESSION` and `MANAGER-XSRF-TOKEN` on **every response** (sets new values in `Set-Cookie`). Consumers must re-read the response cookies after each request, or every subsequent POST will fail 419 token_mismatch. `ManagerApiClient` handles this transparently.
+
 ## Endpoint inventory
 
 Each row indicates: the HTTP route, whether it is documented, the auth type, and (when relevant) the source we used to confirm the parameters.
@@ -265,6 +369,15 @@ Each row indicates: the HTTP route, whether it is documented, the auth type, and
 | GET | `/1/web_hostings/{id}/sites` | undocumented | Bearer | live probe |
 | GET | `/1/web_hostings/{id}/sites/{sid}?with=…` | undocumented | Bearer | live probe + 422 enumeration |
 | POST | `/proxy/1/web_hostings/{id}/sites` | undocumented | SASESSION + CSRF | manager Angular bundle (`chunk-Dofr6lSR.js`) |
+| GET | `/proxy/1/hostings/{id}?with[]=hosting_features` | undocumented | SASESSION | XHR capture + 422 enum |
+| GET | `/proxy/1/hostings/{id}/nodejs/{vhost}?with[]=ips,ssl,environments,storage` | undocumented | SASESSION | XHR capture |
+| GET | `/proxy/1/hostings/{id}/nodejs/{vhost}/actions/status` | undocumented | SASESSION | XHR capture |
+| GET | `/proxy/1/hostings/{id}/nodejs/{vhost}/jobs` | undocumented | SASESSION | XHR capture |
+| GET | `/proxy/1/hostings/{id}/webapp/{vhost}` | undocumented | SASESSION | live probe |
+| GET | `/proxy/1/hostings/{id}/webapp/{vhost}/stream` | undocumented | SASESSION | XHR capture |
+| GET | `/proxy/1/hostings/{id}/webapp/{vhost}/thumbnail` | undocumented | SASESSION | XHR capture |
+| GET | `/proxy/1/hostings/{id}/vhost_route/{vhost}/aliases?with[]=domain_options` | undocumented | SASESSION | XHR capture |
+| POST | `/proxy/1/hostings/{id}/nodejs/{vhost}/actions/{start\|stop\|restart\|build}` | undocumented | SASESSION + CSRF | live probe with fresh CSRF |
 
 This list will grow as the MCP gains tools. Every newly used endpoint should be added here.
 
