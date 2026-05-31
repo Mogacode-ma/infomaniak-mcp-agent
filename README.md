@@ -8,12 +8,12 @@
 [![Node](https://img.shields.io/badge/node-%3E%3D18-43853d.svg)](https://nodejs.org)
 [![TypeScript strict](https://img.shields.io/badge/TypeScript-strict-3178c6.svg)](https://www.typescriptlang.org/)
 [![MCP](https://img.shields.io/badge/Model_Context_Protocol-1.0-9333ea.svg)](https://modelcontextprotocol.io/)
-[![Tools](https://img.shields.io/badge/tools-59-blueviolet.svg)](#tools)
+[![Tools](https://img.shields.io/badge/tools-71-blueviolet.svg)](#tools)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](./CONTRIBUTING.md)
 
 > **Drive your entire [Infomaniak](https://www.infomaniak.com) account from [Claude](https://www.anthropic.com/claude) — agentic, two-phase commit, open-source.**
 
-`infomaniak-mcp-agent` is an unofficial [Model Context Protocol](https://modelcontextprotocol.io/) server that exposes the full surface of Infomaniak — Switzerland's sovereign cloud — as **59 tools** an LLM can call directly: web hosting, mail (kSuite), kDrive, domains, DNS, DNSSEC, FTP/SSH users, AI products, account audits and more. Every destructive operation goes through a strict two-phase commit, so an agent can never silently delete or mutate something on your account.
+`infomaniak-mcp-agent` is an unofficial [Model Context Protocol](https://modelcontextprotocol.io/) server that exposes the full surface of Infomaniak — Switzerland's sovereign cloud — as **71 tools** an LLM can call directly: web hosting, mail (kSuite), kDrive, domains, DNS, DNSSEC, FTP/SSH users, AI products, account audits and more. Every destructive operation goes through a strict two-phase commit, so an agent can never silently delete or mutate something on your account.
 
 ```
 You → Claude:  "audit the example.com hosting and tell me which mailboxes are over quota"
@@ -25,7 +25,7 @@ Claude → You:  3 mailboxes >85% — paul@ (94%), notify@ (88%), team@ (87%). W
 
 - [Why](#why-this-exists) · [What it does](#what-you-can-do-with-it) · [How it differs](#why-agentic-and-not-wrapper)
 - [Install](#install) · [Authentication](#authentication) · [Quick example](#quick-example)
-- [Tools](#tools) (51 across 11 areas) · [Limitations](#limitations) · [Roadmap](#roadmap) · [FAQ](#faq)
+- [Tools](#tools) (71 across 13 areas) · [Limitations](#limitations) · [Roadmap](#roadmap) · [FAQ](#faq)
 - [Contributing](#contributing) · [License](#license)
 
 ## Why this exists
@@ -201,7 +201,7 @@ Claude: [calls infomaniak_dns_create_record again with the token]
 
 ## Tools
 
-59 tools across 12 areas. Use `infomaniak_help` to fuzzy-search by intent, or `infomaniak_explain` to dump a tool's full JSON schema.
+71 tools across 13 areas. Use `infomaniak_help` to fuzzy-search by intent, or `infomaniak_explain` to dump a tool's full JSON schema.
 
 ### Introspection (start here)
 | Tool | Annotation | Purpose |
@@ -276,6 +276,42 @@ Claude: [calls infomaniak_dns_create_record again with the token]
 | `infomaniak_list_redirections` | read-only | Server-side mail redirection rules. |
 | `infomaniak_create_redirection` | **destructive** | Two-phase create rule (forward `name@…` to N targets). |
 | `infomaniak_delete_redirection` | **destructive** | Two-phase delete rule. |
+
+### Identity ("who am I?")
+| Tool | Annotation | Purpose |
+|---|---|---|
+| `infomaniak_get_my_profile` | read-only | Name, email, language, country, timezone, current account, security posture (2FA, devices, last login). |
+| `infomaniak_get_my_security` | read-only | Focused security report — 2FA method + status, recovery email, validated phone, Yubikey, rescue codes, password age, trusted devices with IP/time. |
+
+### Account / Org (deep)
+| Tool | Annotation | Purpose |
+|---|---|---|
+| `infomaniak_get_account_full` | read-only | Full org detail: legal entity, billing addresses, VAT, locale, support tier, 2FA-required policy, your role, tags. |
+| `infomaniak_list_teams_and_tags` | read-only | Teams (owners + counts) + tags (with products carrying each tag) in a single call. |
+
+### Mail (deep)
+| Tool | Annotation | Purpose |
+|---|---|---|
+| `infomaniak_get_mail_hosting_full` | read-only | DNS health diagnostic (MX/SPF/DKIM/DMARC), quotas, admin, parent kSuite link, FQDNs, team access. |
+| `infomaniak_get_mailbox_full` | read-only | Auto-responder, aliases, IMAP/POP3 last login, password age, mailbox size, devices, DKIM, SMTP ban, mail filtering (commercials/social), authorized/blocked senders. |
+
+### Domain (deep)
+| Tool | Annotation | Purpose |
+|---|---|---|
+| `infomaniak_get_domain_full` | read-only | `auth_code` (EPP), transfer/trade status, glue records, TLD/registry, attached service, DNS detail + health, associated products, DNS logs URL. Accepts id or FQDN. |
+
+### kDrive (deep, manager-private)
+| Tool | Annotation | Purpose |
+|---|---|---|
+| `infomaniak_get_drive_full` | read-only | Drive name, total size, used size, maintenance. |
+| `infomaniak_list_drive_users` | read-only | Users with access to a kDrive (access audits). |
+| `infomaniak_list_drive_trash` | read-only | Items in the trash bin with deletion timestamps. |
+
+### VPS / Cloud Server
+| Tool | Annotation | Purpose |
+|---|---|---|
+| `infomaniak_list_vps` | read-only | List Cloud Server (Jelastic) products of an org. |
+| `infomaniak_get_vps_full` | read-only | Datacenter, IPs, CPU/RAM, bandwidth + traffic, disk usage, MySQL/PHP versions, firewall, premium support contacts, migration history. |
 
 ### Node.js apps (Cloud Server `hosting_3`)
 | Tool | Annotation | Purpose |
