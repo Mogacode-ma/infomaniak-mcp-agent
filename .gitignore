@@ -48,3 +48,15 @@ CLAUDE.md
 # Python appmap auto-generated
 appmap.yml
 tmp/
+
+# Local reverse-engineering scripts (kept out of repo)
+/probe_*.mjs
+/grep_*.mjs
+/csrf_*.mjs
+/patch_test.mjs
+/real_routes.mjs
+/test_*.mjs
+/full_re.mjs
+/deep_re.mjs
+/check_state.mjs
+/.backups/

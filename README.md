@@ -8,12 +8,12 @@
 [![Node](https://img.shields.io/badge/node-%3E%3D18-43853d.svg)](https://nodejs.org)
 [![TypeScript strict](https://img.shields.io/badge/TypeScript-strict-3178c6.svg)](https://www.typescriptlang.org/)
 [![MCP](https://img.shields.io/badge/Model_Context_Protocol-1.0-9333ea.svg)](https://modelcontextprotocol.io/)
-[![Tools](https://img.shields.io/badge/tools-51-blueviolet.svg)](#tools)
+[![Tools](https://img.shields.io/badge/tools-59-blueviolet.svg)](#tools)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](./CONTRIBUTING.md)
 
 > **Drive your entire [Infomaniak](https://www.infomaniak.com) account from [Claude](https://www.anthropic.com/claude) — agentic, two-phase commit, open-source.**
 
-`infomaniak-mcp-agent` is an unofficial [Model Context Protocol](https://modelcontextprotocol.io/) server that exposes the full surface of Infomaniak — Switzerland's sovereign cloud — as **51 tools** an LLM can call directly: web hosting, mail (kSuite), kDrive, domains, DNS, DNSSEC, FTP/SSH users, AI products, account audits and more. Every destructive operation goes through a strict two-phase commit, so an agent can never silently delete or mutate something on your account.
+`infomaniak-mcp-agent` is an unofficial [Model Context Protocol](https://modelcontextprotocol.io/) server that exposes the full surface of Infomaniak — Switzerland's sovereign cloud — as **59 tools** an LLM can call directly: web hosting, mail (kSuite), kDrive, domains, DNS, DNSSEC, FTP/SSH users, AI products, account audits and more. Every destructive operation goes through a strict two-phase commit, so an agent can never silently delete or mutate something on your account.
 
 ```
 You → Claude:  "audit the example.com hosting and tell me which mailboxes are over quota"
@@ -201,7 +201,7 @@ Claude: [calls infomaniak_dns_create_record again with the token]
 
 ## Tools
 
-51 tools across 11 areas. Use `infomaniak_help` to fuzzy-search by intent, or `infomaniak_explain` to dump a tool's full JSON schema.
+59 tools across 12 areas. Use `infomaniak_help` to fuzzy-search by intent, or `infomaniak_explain` to dump a tool's full JSON schema.
 
 ### Introspection (start here)
 | Tool | Annotation | Purpose |
@@ -276,6 +276,20 @@ Claude: [calls infomaniak_dns_create_record again with the token]
 | `infomaniak_list_redirections` | read-only | Server-side mail redirection rules. |
 | `infomaniak_create_redirection` | **destructive** | Two-phase create rule (forward `name@…` to N targets). |
 | `infomaniak_delete_redirection` | **destructive** | Two-phase delete rule. |
+
+### Node.js apps (Cloud Server `hosting_3`)
+| Tool | Annotation | Purpose |
+|---|---|---|
+| `infomaniak_list_nodejs_apps` | read-only | Discover the apps on a Node.js hosting. Returns each app's `vhost_route_id` (handle for every other Node.js tool) and its serving FQDNs. |
+| `infomaniak_get_nodejs_app` | read-only | Full app config: Node version, listen port, `start_command`, `build_command`, public IPs (v4 + v6), SSL state, directory, storage quota. |
+| `infomaniak_nodejs_app_status` | read-only | Live status — `Running` or `Stopped`. Cheap, safe to poll. |
+| `infomaniak_nodejs_app_aliases` | read-only | All FQDNs serving the app (primary + auto `xxx.preview.hosting-ik.com`). |
+| `infomaniak_nodejs_app_jobs` | read-only | Recent jobs (build / restart / …) with per-job log_stream JWT. |
+| `infomaniak_nodejs_app_logs` | read-only | Returns a short-lived JWT + SSE endpoint URL to consume the **live stdout/stderr stream** of the running app. |
+| `infomaniak_nodejs_app_thumbnail` | read-only | Screenshot of the live page as a base64 JPEG — visual smoke test without HTTP-probing. |
+| `infomaniak_nodejs_app_action` | **destructive** | Two-phase. Start / stop / restart / build. `stop` records an undo to `start`. `build` returns the spawned job's `resource_id` + live `log_stream` to tail the output. |
+
+> All Node.js tools are **manager-private** (the public Bearer API exposes only a state-check for Node.js hostings). They require `INFOMANIAK_AUTH_MODE=auto` (Chrome cookies) or `manual` (SASESSION + MANAGER-XSRF-TOKEN env vars). See [`REVERSE-ENGINEERING.md` §Node.js DevOps](./REVERSE-ENGINEERING.md#nodejs-devops--the-proxy1-namespace).
 
 ### kDrive
 | Tool | Annotation | Purpose |
