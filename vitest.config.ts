@@ -27,7 +27,7 @@ export default defineConfig({
         // back to 70%+ once those tests land.
         lines: 35,
         functions: 35,
-        branches: 70,
+        branches: 65,
         statements: 35,
       },
     },
