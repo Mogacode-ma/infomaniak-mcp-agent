@@ -4,6 +4,7 @@
  * Adding a new tool: import it here and append to the `tools` array.
  * The server iterates this array at startup to register everything.
  */
+import { getAccountFullTool, listTeamsAndTagsTool } from "./account-deep.js";
 import { listAiModelsTool, listAiProductsTool } from "./ai.js";
 import { apiCallTool } from "./api-call.js";
 import { auditAccountTool } from "./audit.js";
@@ -22,12 +23,15 @@ import {
   dnsUpdateRecordTool,
 } from "./dns.js";
 import { manageDnssecTool } from "./dnssec.js";
+import { getDomainFullTool } from "./domain-deep.js";
 import { getDomainTool, listDomainsTool } from "./domains.js";
+import { getDriveFullTool, listDriveTrashTool, listDriveUsersTool } from "./drive-deep.js";
 import { listDriveFilesTool, listDrivesTool } from "./drive.js";
 import { findSiteTool } from "./find-site.js";
 import { createHostingUserTool, deleteHostingUserTool, listHostingUsersTool } from "./ftp-users.js";
 import { listHostingsTool } from "./hostings.js";
 import { explainTool, helpTool } from "./introspection.js";
+import { getMailHostingFullTool, getMailboxFullTool } from "./mail-deep.js";
 import { getMailboxInfoTool } from "./mail-extras.js";
 import { createAliasTool, createMailboxTool, deleteMailboxTool } from "./mail-write.js";
 import { listMailHostingsTool, listMailboxesTool } from "./mail.js";
@@ -43,6 +47,7 @@ import {
 } from "./nodejs.js";
 import { listOrganizationsTool } from "./organizations.js";
 import { overviewTool } from "./overview.js";
+import { getMyProfileTool, getMySecurityTool } from "./profile.js";
 import {
   createRedirectionTool,
   deleteRedirectionTool,
@@ -54,6 +59,7 @@ import { deleteCertificateTool, getCertificateTool, requestCertificateTool } fro
 import { listSwissBackupsTool } from "./swiss-backup.js";
 import type { ToolDefinition } from "./types.js";
 import { createShortUrlTool, listShortUrlsTool, shortUrlsQuotaTool } from "./url-shortener.js";
+import { getVpsFullTool, listVpsTool } from "./vps.js";
 import { auditDnsZonesTool, provisionSiteFullTool } from "./workflows.js";
 
 export const tools: ReadonlyArray<ToolDefinition> = [
@@ -65,13 +71,19 @@ export const tools: ReadonlyArray<ToolDefinition> = [
   auditDnsZonesTool,
   historyTool,
   undoTool,
+  // Identity ("who am I?")
+  getMyProfileTool,
+  getMySecurityTool,
   // Workflows
   provisionSiteFullTool,
   // Organizations & products
   listOrganizationsTool,
+  getAccountFullTool,
+  listTeamsAndTagsTool,
   listHostingsTool,
   listDomainsTool,
   getDomainTool,
+  getDomainFullTool,
   // Web hosting sites
   findSiteTool,
   listSitesTool,
@@ -103,6 +115,8 @@ export const tools: ReadonlyArray<ToolDefinition> = [
   listMailHostingsTool,
   listMailboxesTool,
   getMailboxInfoTool,
+  getMailHostingFullTool,
+  getMailboxFullTool,
   // Mail (write)
   createMailboxTool,
   deleteMailboxTool,
@@ -114,9 +128,15 @@ export const tools: ReadonlyArray<ToolDefinition> = [
   // kDrive
   listDrivesTool,
   listDriveFilesTool,
+  getDriveFullTool,
+  listDriveUsersTool,
+  listDriveTrashTool,
   // AI Tools
   listAiProductsTool,
   listAiModelsTool,
+  // VPS (Cloud Server / Jelastic)
+  listVpsTool,
+  getVpsFullTool,
   // Node.js apps (hosting_3 — manager-private)
   listNodejsAppsTool,
   getNodejsAppTool,

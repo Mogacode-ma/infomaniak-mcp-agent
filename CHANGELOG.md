@@ -8,6 +8,50 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 _(no unreleased changes yet)_
 
+## [0.13.0] — 2026-05-31
+
+### Added — 12 new tools across 6 verticals (manager-private RE)
+
+Second wave of manager-private surface mapping after v0.12.0 (Node.js). Endpoints discovered via systematic `?with=` 422-enumeration and namespace probing. All validated end-to-end in production.
+
+#### Identity / "who am I?" (2 tools)
+- `infomaniak_get_my_profile` — name, email, language, country, timezone, current_account_id + security posture (2FA, recovery email, validated phone, trusted devices, last login)
+- `infomaniak_get_my_security` — focused security report: 2FA method + status, Yubikey, authenticator, rescue codes, password age, trusted devices with last connection IP/time. Useful for periodic security reviews.
+
+#### Account / Org introspection (2 tools)
+- `infomaniak_get_account_full` — legal entity, billing addresses, VAT, support tier (premium=2), 2FA-required policy, your role (owner/admin/billing), tags. Complements `list_organizations` (public Bearer summary).
+- `infomaniak_list_teams_and_tags` — teams (with owners, user/product counts) + tags (with products carrying each tag), in a single composite call.
+
+#### Mail extras (2 tools)
+- `infomaniak_get_mail_hosting_full` — diagnostic_dns (MX/SPF/DKIM/DMARC health), quotas (mailboxes + redirections + per-mailbox disk), admin user, parent kSuite link, FQDN list, team access flag.
+- `infomaniak_get_mailbox_full` — auto-responder (vacation reply), aliases, IMAP/POP3 last login, password age, mailbox size, trusted devices, DKIM signature flag, SMTP ban status, Gmail-style filtering (commercials/social_networks), authorized/blocked senders, attached users + teams. **Note: uses an explicit `?with=` field combination to avoid the `?with=*` server crash bug we discovered (reported separately).**
+
+#### VPS / Cloud Server (2 tools)
+- `infomaniak_list_vps` — Cloud Server / Jelastic products of an organization
+- `infomaniak_get_vps_full` — datacenter location, IPv4 + IPv6, CPU/RAM/perf, bandwidth + traffic, disk usage (total/assigned/used/database), MySQL version, PHP versions, firewall config, premium support contacts (email/URL/emergency), migration history
+
+#### Domain extras (1 tool)
+- `infomaniak_get_domain_full` — full detail with `auth_code` (EPP transfer code), `transfer_status`, `trade_status`, glue_records, TLD/registry, attached service, DNS detail + health diagnostic, associated products on domain AND subdomains, DNS logs API URL. Accepts either domain_id or FQDN. **Manager-private namespace uses `/proxy/1/domain/{id}` (SINGULAR) — `/proxy/1/domains/{id}` (plural) returns 404 nginx; reported as a naming inconsistency.**
+
+#### kDrive extras (3 tools)
+- `infomaniak_get_drive_full` — name, total size, used size, maintenance flag
+- `infomaniak_list_drive_users` — users with access to a kDrive (access audits)
+- `infomaniak_list_drive_trash` — items in the trash bin with deletion timestamps
+
+### Reverse-engineering yield (REVERSE-ENGINEERING.md update)
+
+- **mail_hostings `?with=` enum**: 22 valid values (`diagnostic_dns, filters, signatures, admin, has_team_access, has_multi_password, mailing_lists_configuration, signature_template_forced_state, redirections_quota, is_rate_limit_enabled` …).
+- **mailbox `?with=` enum**: 30+ values (`auto_responder, aliases, last_login, has_dkim_signature, count_devices, smtpban, mail_filtering_folder_commercials, workspace_security` …).
+- **domain `?with=` enum**: 25 values (`auth_code, restorable, dns, glue_records, transfer_status, trade_status, diagnostic_dns, dns_logs_api_url, has_mail, authcode_quota, registry, tld, owner, extra_fields` …).
+- **web_hostings `?with=` enum**: 28 values (`server, type, web_cron, antivirus, diagnostic_dns, sms, patchman, patchman_vulnerabilities, patchman_malware, php` …). Note: `patchman*` accepted but silently dropped from the response — pending Infomaniak resolution before we ship patchman tools.
+- **vps `?with=` enum**: 13 values (`configuration, network, quota, pack, reinstall, rescue, status, vnc, state, firewall_applications, os_version, all, *`).
+- **kDrive lives on `/proxy/2/drive/{id}`** (proxy version 2 — different from the rest of the API on `/proxy/1/`).
+- **profile lives on `/proxy/2/profile?with=*`** with `?with=` values `emails, phones, security`.
+
+### Tool count
+
+`59 → 71` tools across 13 verticals.
+
 ## [0.12.0] — 2026-05-31
 
 ### Added — Node.js DevOps (8 new tools, manager-private)
