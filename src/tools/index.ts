@@ -54,6 +54,7 @@ import {
   listRedirectionsTool,
 } from "./redirections.js";
 import { historyTool, undoTool } from "./session.js";
+import { addSiteAliasesTool, deleteSiteAliasTool, listSiteAliasesTool } from "./site-aliases.js";
 import { createSiteTool, deleteSiteTool, listSitesTool } from "./sites.js";
 import { deleteCertificateTool, getCertificateTool, requestCertificateTool } from "./ssl.js";
 import { listSwissBackupsTool } from "./swiss-backup.js";
@@ -89,6 +90,10 @@ export const tools: ReadonlyArray<ToolDefinition> = [
   listSitesTool,
   createSiteTool,
   deleteSiteTool,
+  // Site aliases (multi-FQDN + wildcard support)
+  listSiteAliasesTool,
+  addSiteAliasesTool,
+  deleteSiteAliasTool,
   // SSL certificates
   getCertificateTool,
   requestCertificateTool,

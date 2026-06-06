@@ -60,3 +60,4 @@ tmp/
 /deep_re.mjs
 /check_state.mjs
 /.backups/
+.findings/
