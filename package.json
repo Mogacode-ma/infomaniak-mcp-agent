@@ -5,6 +5,10 @@
   "license": "MIT",
   "author": "Mogacode",
   "homepage": "https://github.com/Mogacode-ma/infomaniak-mcp-agent#readme",
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/Mogacode-ma/infomaniak-mcp-agent"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Mogacode-ma/infomaniak-mcp-agent.git"
