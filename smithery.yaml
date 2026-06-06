@@ -1,63 +1,29 @@
-# Smithery configuration file: https://smithery.ai/docs/config#smitheryyaml
-#
-# infomaniak-mcp-agent is a stdio MCP server. Smithery builds the container
-# from the Dockerfile in this repo and runs `node /app/dist/server.js` with
-# the env vars derived from the user's Smithery config below.
-#
-# A Bearer token is the only required field. Manager-private write
-# operations (site/database/FTP-user create/delete) additionally need the
-# SASESSION + MANAGER-XSRF-TOKEN cookies; if those are not provided the
-# server boots in `disabled` auth mode and those specific tools will refuse,
-# but every public-API tool (the majority) keeps working.
-
+# Smithery.ai configuration — https://smithery.ai/docs
+runtime: typescript
 startCommand:
   type: stdio
   configSchema:
     type: object
-    required:
-      - infomaniakApiToken
     properties:
-      infomaniakApiToken:
+      INFOMANIAK_API_TOKEN:
         type: string
-        minLength: 20
-        description: Bearer token from manager.infomaniak.com/v3/ng/profile/user/token/list. Used for every public API call (api.infomaniak.com).
-      infomaniakSasession:
+        title: "Infomaniak API token"
+        description: "Bearer token from https://manager.infomaniak.com/v3/api-token. Required."
+      INFOMANIAK_AUTH_MODE:
         type: string
-        description: Optional. SASESSION cookie value from manager.infomaniak.com. Only needed if you want manager-private write operations on web hosting (site / database / FTP-user create + delete).
-      infomaniakXsrfToken:
+        title: "Manager-private auth mode"
+        description: "auto (default — reads Chrome cookies), manual (uses SASESSION+XSRF env vars), or disabled."
+        enum: ["auto", "manual", "disabled"]
+        default: "auto"
+      INFOMANIAK_SASESSION:
         type: string
-        description: Optional. MANAGER-XSRF-TOKEN cookie value, paired with SASESSION.
-      logLevel:
+        title: "Manager session cookie (manual mode only)"
+        description: "Required only when INFOMANIAK_AUTH_MODE=manual."
+      INFOMANIAK_XSRF_TOKEN:
         type: string
-        enum: [trace, debug, info, warn, error, fatal, silent]
-        default: info
-        description: pino log level.
-      confirmationTtlSeconds:
-        type: integer
-        minimum: 10
-        maximum: 600
-        default: 60
-        description: Time-to-live for the single-use confirmation tokens issued on every destructive operation.
-      rateLimitPerMinute:
-        type: integer
-        minimum: 1
-        maximum: 60
-        default: 60
-        description: Requests per minute against api.infomaniak.com (Infomaniak's hard cap is 60, do not raise).
-  commandFunction: |-
-    (config) => ({
-      command: 'node',
-      args: ['/app/dist/server.js'],
-      env: {
-        INFOMANIAK_API_TOKEN: config.infomaniakApiToken,
-        INFOMANIAK_AUTH_MODE: (config.infomaniakSasession && config.infomaniakXsrfToken) ? 'manual' : 'disabled',
-        INFOMANIAK_SASESSION: config.infomaniakSasession || '',
-        INFOMANIAK_XSRF_TOKEN: config.infomaniakXsrfToken || '',
-        LOG_LEVEL: config.logLevel || 'info',
-        CONFIRMATION_TTL_SECONDS: String(config.confirmationTtlSeconds || 60),
-        RATE_LIMIT_PER_MINUTE: String(config.rateLimitPerMinute || 60)
-      }
-    })
+        title: "Manager XSRF token (manual mode only)"
+        description: "Required only when INFOMANIAK_AUTH_MODE=manual."
+    required: ["INFOMANIAK_API_TOKEN"]
   exampleConfig:
-    infomaniakApiToken: dummy-bearer-token-at-least-20-characters-long
-    logLevel: info
+    INFOMANIAK_API_TOKEN: "your_bearer_token_here"
+    INFOMANIAK_AUTH_MODE: "auto"
