@@ -117,6 +117,17 @@ async function main(): Promise<void> {
   const transport = new StdioServerTransport();
   await server.connect(transport);
   logger.info({ tools: tools.length }, `${PACKAGE_NAME} v${PACKAGE_VERSION} ready`);
+
+  // Friendly greeting on stderr — discreet, polite, suppressible.
+  // stderr is the convention for human-readable logs in MCP servers
+  // (stdout is reserved for the JSON-RPC transport).
+  if (!process.env["SUPPRESS_BANNER"] && !process.env["CI"]) {
+    process.stderr.write(
+      `\n  ▸ ${PACKAGE_NAME} v${PACKAGE_VERSION} — ${tools.length} tools ready.\n` +
+        `    if this helps you, a ⭐ on github.com/Mogacode-ma/infomaniak-mcp-agent\n` +
+        `    is the best thanks. (set SUPPRESS_BANNER=1 to silence this)\n\n`,
+    );
+  }
 }
 
 try {

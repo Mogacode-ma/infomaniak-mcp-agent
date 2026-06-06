@@ -1,6 +1,6 @@
 {
   "name": "infomaniak-mcp-agent",
-  "version": "0.14.1",
+  "version": "0.14.2",
   "description": "Full unofficial agentic Infomaniak MCP server — guided automation of web hosting, mail, kDrive, domains and DNS",
   "license": "MIT",
   "author": "Mogacode",
@@ -38,11 +38,12 @@
     "infomaniak-mcp-agent": "./dist/server.js"
   },
   "files": [
-    "dist",
-    "README.md",
-    "LICENSE",
     "ARCHITECTURE.md",
-    "REVERSE-ENGINEERING.md"
+    "LICENSE",
+    "README.md",
+    "REVERSE-ENGINEERING.md",
+    "dist",
+    "scripts"
   ],
   "engines": {
     "node": ">=18.0.0"
@@ -62,7 +63,8 @@
     "inspector": "npx @modelcontextprotocol/inspector node dist/server.js",
     "secrets:scan": "gitleaks detect --source . --verbose --redact",
     "prepare": "husky",
-    "prepublishOnly": "npm run lint && npm run typecheck && npm run test && npm run build"
+    "prepublishOnly": "npm run lint && npm run typecheck && npm run test && npm run build",
+    "postinstall": "node scripts/postinstall.cjs || true"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.4",
