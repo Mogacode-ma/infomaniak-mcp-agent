@@ -10,6 +10,7 @@
 [![MCP](https://img.shields.io/badge/Model_Context_Protocol-1.0-9333ea.svg)](https://modelcontextprotocol.io/)
 [![Tools](https://img.shields.io/badge/tools-77-blueviolet.svg)](#tools)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](./CONTRIBUTING.md)
+[![GitHub stars](https://img.shields.io/github/stars/Mogacode-ma/infomaniak-mcp-agent?style=social)](https://github.com/Mogacode-ma/infomaniak-mcp-agent/stargazers)
 
 > **Drive your entire [Infomaniak](https://www.infomaniak.com) account from [Claude](https://www.anthropic.com/claude) — agentic, two-phase commit, open-source.**
 
@@ -437,6 +438,16 @@ Infomaniak runs a [Swiss-sovereign AI cloud](https://www.infomaniak.com/en/ai-to
 ## Contributing
 
 Contributions are welcome. Please read [`CONTRIBUTING.md`](./CONTRIBUTING.md) and follow the [`CODE_OF_CONDUCT.md`](./CODE_OF_CONDUCT.md). Security issues should be reported privately per [`SECURITY.md`](./SECURITY.md).
+
+## If this saved you time
+
+The fastest way to support the project is a [⭐ star on GitHub](https://github.com/Mogacode-ma/infomaniak-mcp-agent) — it helps other Infomaniak users find this and tells me what to keep building.
+
+You can also:
+
+- Open an [issue](https://github.com/Mogacode-ma/infomaniak-mcp-agent/issues) for bugs, edge cases, or missing tools
+- Start a [discussion](https://github.com/Mogacode-ma/infomaniak-mcp-agent/discussions) for design or API questions
+- Share what you built with it — I'd love to hear
 
 ## License
 
