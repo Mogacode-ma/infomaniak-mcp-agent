@@ -6,12 +6,12 @@
     "url": "https://github.com/Mogacode-ma/infomaniak-mcp-agent",
     "source": "github"
   },
-  "version": "0.14.0",
+  "version": "0.14.3",
   "packages": [
     {
       "registryType": "npm",
       "identifier": "infomaniak-mcp-agent",
-      "version": "0.14.0",
+      "version": "0.14.3",
       "transport": {
         "type": "stdio"
       },
