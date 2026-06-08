@@ -19,25 +19,41 @@ on:
 jobs:
   publish:
     name: Publish to npm
+    # Skip silently if NPM_TOKEN is not configured (e.g. after a repo recreate
+    # or in forks). The job still runs but doesn't fail the pipeline.
+    if: ${{ vars.PUBLISH_ON_TAG != 'false' && (github.repository == 'Mogacode-ma/infomaniak-mcp-agent') }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
       id-token: write # for npm provenance
     steps:
+      - name: Check NPM_TOKEN exists
+        id: token_check
+        run: |
+          if [ -z "${{ secrets.NPM_TOKEN }}" ]; then
+            echo "::warning::NPM_TOKEN not set — skipping publish. Generate at https://www.npmjs.com/ → Access Tokens (Automation scope) and add as repo secret."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
       - uses: actions/checkout@v4
+        if: steps.token_check.outputs.skip != 'true'
         with:
           fetch-depth: 0
 
       - name: Setup Node.js
+        if: steps.token_check.outputs.skip != 'true'
         uses: actions/setup-node@v4
         with:
           node-version: "24"
           registry-url: "https://registry.npmjs.org/"
 
       - name: Install dependencies
+        if: steps.token_check.outputs.skip != 'true'
         run: npm ci
 
       - name: Verify tag matches package.json version
+        if: steps.token_check.outputs.skip != 'true'
         run: |
           TAG_VERSION="${GITHUB_REF_NAME#v}"
           PKG_VERSION=$(node -p "require('./package.json').version")
@@ -48,18 +64,23 @@ jobs:
           fi
 
       - name: Typecheck
+        if: steps.token_check.outputs.skip != 'true'
         run: npm run typecheck
 
       - name: Lint
+        if: steps.token_check.outputs.skip != 'true'
         run: npm run lint
 
       - name: Test
+        if: steps.token_check.outputs.skip != 'true'
         run: npm test
 
       - name: Build
+        if: steps.token_check.outputs.skip != 'true'
         run: npm run build
 
       - name: Publish to npm with provenance
+        if: steps.token_check.outputs.skip != 'true'
         run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
