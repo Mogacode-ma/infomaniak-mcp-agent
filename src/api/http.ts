@@ -118,7 +118,31 @@ export class ManagerApiClient {
     if (method !== "GET") {
       headers["X-XSRF-TOKEN"] = session.xsrfToken;
     }
-    return executeRequest<T>(this.throttle, method, url, headers, options);
+    try {
+      return await executeRequest<T>(this.throttle, method, url, headers, options);
+    } catch (err) {
+      // The browser session can rotate its CSRF token (e.g. the user just
+      // re-logged into manager.infomaniak.com). Our cached session then holds
+      // a stale MANAGER-XSRF-TOKEN → the manager answers 419 (or 401). Re-read
+      // the cookies once and retry the request a single time.
+      const status = err instanceof InfomaniakError ? err.status : undefined;
+      if (status === 419 || status === 401) {
+        await this.refreshSession();
+        const fresh = this.session as ManagerSession;
+        const retryHeaders: Record<string, string> = {
+          Cookie: `SASESSION=${fresh.sasession}`,
+          Accept: "application/json",
+          "X-Requested-With": "XMLHttpRequest",
+          Referer: "https://manager.infomaniak.com/",
+          ...(options.headers ?? {}),
+        };
+        if (method !== "GET") {
+          retryHeaders["X-XSRF-TOKEN"] = fresh.xsrfToken;
+        }
+        return executeRequest<T>(this.throttle, method, url, retryHeaders, options);
+      }
+      throw err;
+    }
   }
 }
 
