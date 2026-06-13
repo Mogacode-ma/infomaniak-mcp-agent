@@ -381,6 +381,32 @@ Each row indicates: the HTTP route, whether it is documented, the auth type, and
 
 This list will grow as the MCP gains tools. Every newly used endpoint should be added here.
 
+## Observed breaking changes
+
+This section records the cases where an endpoint we depend on changed shape mid-flight. Useful for anyone else REing the same surface.
+
+### 2026-06-13 — `/proxy/2/profile`: `with[]=a,b,c` no longer accepted
+
+**Symptom**: `infomaniak_get_my_profile` and `infomaniak_get_my_security` started returning `HTTP 422 Validation failed` on the manager-private `GET /proxy/2/profile`.
+
+**What used to work** (pre-mid-June 2026):
+```
+GET /proxy/2/profile?with[]=security,emails,phones    → 200 + full payload
+```
+
+**What works now**:
+```
+GET /proxy/2/profile?with=security,emails,phones       → 200 + full payload (security + emails + phones present)
+GET /proxy/2/profile?with[]=security&with[]=emails…    → 200 but some `with` values silently dropped
+GET /proxy/2/profile?with=*                             → 200 + full payload (wildcard equivalent)
+```
+
+**Verdict**: the endpoint now treats `with` as a **scalar comma-separated value**, not a Rails/PHP array. Comma-concat inside `with[]=` is rejected outright. Tested 6 variants live (with valid Chrome cookies) — only `with=` (no brackets) returns the full intended payload.
+
+**Fix applied in v0.14.5**: the 2 affected calls in `src/tools/profile.ts` switched from `query: { "with[]": "..." }` to `query: { with: "..." }`. The other 9 `with[]=` usages in the codebase (Node.js, sites, aliases, mail, account, VPS, domain) pass a single value or a wildcard (`with[]=*`, `with[]=applications`, etc.) and still work — only profile attempted comma-concat.
+
+**Possible explanation**: Infomaniak likely added strict parameter validation on the `/proxy/2/` namespace and the `with[]=foo,bar` shape never made it through. The `/proxy/1/` namespace appears unaffected so far.
+
 ## Stability disclaimer
 
 Undocumented endpoints can change without notice. We commit to:

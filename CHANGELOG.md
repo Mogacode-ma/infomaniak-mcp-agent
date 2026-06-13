@@ -8,6 +8,51 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 _(no unreleased changes yet)_
 
+## [0.14.5] — 2026-06-13
+
+### Fixed
+
+- **`/proxy/2/profile` 422 fix.** Infomaniak's manager-private profile endpoint stopped accepting comma-separated values inside `with[]=` query parameters. `infomaniak_get_my_profile` and `infomaniak_get_my_security` both started returning `HTTP 422 Validation failed`.
+  - Root cause: `?with[]=security,emails,phones` is now rejected — the endpoint requires `?with=security,emails,phones` (plain `with=` without array brackets).
+  - Fix isolated to `src/tools/profile.ts` (2 call sites). Other manager-private endpoints (`/proxy/1/hostings`, `/proxy/2/drive`, `/proxy/2/mail_hosting`, etc.) still accept `with[]=*` and `with[]=single_value` and were not touched.
+  - Diagnostic: tested 6 query syntax variants against the live endpoint with valid cookies — `?with=security,emails,phones` is the only one returning full payload (security + emails + phones).
+
+## [0.14.4] — 2026-06-11
+
+### Fixed
+
+- **Manager-private client now retries on 419 / 401 with cookie re-read.** Long-running sessions where Infomaniak's manager rotates `SASESSION` mid-session no longer break: on 419 (CSRF expired) or 401 (session expired), the client transparently re-reads cookies from Chrome (auto mode) or env (manual mode) and retries the request once before surfacing an error.
+
+## [0.14.3] — 2026-06-06
+
+### Changed
+
+- Postinstall greeting message switched from French to English for consistency with the rest of the package.
+
+## [0.14.2] — 2026-06-06
+
+### Added
+
+- **Friendly postinstall greeting** displayed once after `npm install` (skipped on CI / silent / `SUPPRESS_INSTALL_MESSAGE=1`, marker file in `node_modules/.cache` ensures one-time display).
+- **Runtime banner** on stderr at server start (skipped on CI / `SUPPRESS_BANNER=1`).
+
+## [0.14.1] — 2026-06-06
+
+### Added
+
+- **GitHub stars badge** in README + `funding` field in `package.json` (npm Sponsor button).
+- **"If this saved you time"** section in README for project support discovery.
+
+## [0.14.0] — 2026-06-06
+
+### Added — 3 new tools (wildcard FQDN site aliases, manager-private RE)
+
+Reverse-engineered the multi-FQDN / wildcard alias endpoint on `manager.infomaniak.com/v3/api/proxypass_2/1/web_hostings/{hid}/sites/{sid}/aliases`. POST body schema: `{aliases: ["fqdn1", "fqdn2"]}`. Async provisioning (5–15 s lag for new entries to appear in GET). Wildcards like `*.evo.example.com` are accepted by the API + Let's Encrypt SAN.
+
+- `infomaniak_list_site_aliases` — list all FQDN aliases of a site
+- `infomaniak_add_site_aliases` — add aliases (supports wildcards), two-phase commit
+- `infomaniak_delete_site_alias` — delete an alias, two-phase commit
+
 ## [0.13.0] — 2026-05-31
 
 ### Added — 12 new tools across 6 verticals (manager-private RE)
