@@ -134,7 +134,7 @@ export const getMyProfileTool = defineTool({
   handler: async () => {
     const client = new ManagerApiClient();
     return await client.request<z.infer<typeof ProfileFullSchema>>("GET", "/proxy/2/profile", {
-      query: { "with[]": "security,emails,phones" },
+      query: { with: "security,emails,phones" },
     });
   },
 });
@@ -186,7 +186,7 @@ export const getMySecurityTool = defineTool({
     const profile = await client.request<z.infer<typeof ProfileFullSchema>>(
       "GET",
       "/proxy/2/profile",
-      { query: { "with[]": "security" } },
+      { query: { with: "security" } },
     );
     const sec = profile.preferences?.security;
     if (!sec) throw new Error("No security data returned by profile endpoint.");
