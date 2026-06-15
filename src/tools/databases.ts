@@ -610,7 +610,10 @@ export const changeDatabaseUserPasswordTool = defineTool({
       const current = await pub
         .request<{
           permissions?: Array<{ database: string }>;
-        }>("GET", `/1/web_hostings/${input.hosting_id}/database_users/${encodeURIComponent(input.user_name)}`)
+        }>(
+          "GET",
+          `/1/web_hostings/${input.hosting_id}/database_users/${encodeURIComponent(input.user_name)}`,
+        )
         .catch(() => ({ permissions: [] as Array<{ database: string }> }));
       const currentDbs = new Set((current.permissions ?? []).map((p) => p.database));
       const requestedDbs = new Set(input.grants.map((g) => g.database));
@@ -743,7 +746,10 @@ export const changeDatabaseUserPermissionsTool = defineTool({
       const current = await pub
         .request<{
           permissions?: Array<{ database: string }>;
-        }>("GET", `/1/web_hostings/${input.hosting_id}/database_users/${encodeURIComponent(input.user_name)}`)
+        }>(
+          "GET",
+          `/1/web_hostings/${input.hosting_id}/database_users/${encodeURIComponent(input.user_name)}`,
+        )
         .catch(() => ({ permissions: [] as Array<{ database: string }> }));
       const currentDbs = new Set((current.permissions ?? []).map((p) => p.database));
       const requestedDbs = new Set(input.grants.map((g) => g.database));
