@@ -10,7 +10,8 @@
  */
 import { z } from "zod";
 
-import { PublicApiClient } from "../api/http.js";
+import { InfomaniakError } from "../api/errors.js";
+import { ManagerApiClient, PublicApiClient } from "../api/http.js";
 import { consumeToken, mintToken } from "../utils/confirmation.js";
 import { recordHistory } from "../utils/history.js";
 
@@ -323,6 +324,263 @@ export const deleteHostingUserTool = defineTool({
       status: "applied" as const,
       login: input.login,
       message: `✅ User \`${input.login}\` revoked from hosting ${input.hosting_id}.`,
+    };
+  },
+});
+
+// ---------------------------------------------------------------------------
+// change_hosting_user_password (two-phase commit, manager-private)
+//
+// Endpoint (REd 2026-06-15 from manager UI XHR):
+//   PATCH /proxy/1/web_hostings/{hid}/users/{full_login}
+//   Body: { login: "<short_login_without_hosting_prefix>",
+//           password: "<new_password>",
+//           connection_type: "ftp" | "ssh" }
+//
+// Note: the URL path uses the FULL login (e.g. `acct_username`) but the
+// `login` field in the body is the SHORT login (`username`). Both are
+// required by the API; sending the short one in the path returns 404.
+// ---------------------------------------------------------------------------
+
+const ChangeHostingUserPasswordInput = z.object({
+  hosting_id: z.number().int().positive(),
+  login: z
+    .string()
+    .min(1)
+    .describe(
+      "FULL hosting-user login as listed by `infomaniak_list_hosting_users` (e.g. `acct_username`).",
+    ),
+  new_password: z.string().min(8).describe("New password for the FTP/SSH user."),
+  connection_type: ConnectionTypeSchema.describe(
+    "Connection type the user keeps after the change. `ftp` = SFTP-only, `ssh` = full shell + SFTP. Pass the CURRENT value if you don't want to change it (the manager UI always sends it).",
+  ),
+  confirmation_token: z.string().uuid().optional(),
+});
+
+const ChangeHostingUserPasswordOutput = z.union([
+  z.object({
+    status: z.literal("plan"),
+    plan: z.object({
+      hosting_id: z.number(),
+      login: z.string(),
+      connection_type: z.string(),
+      password_will_change: z.boolean(),
+    }),
+    confirmation_token: z.string(),
+    token_expires_at: z.string(),
+    next_step_markdown: z.string(),
+  }),
+  z.object({
+    status: z.literal("applied"),
+    hosting_id: z.number(),
+    login: z.string(),
+    note: z.string(),
+  }),
+]);
+
+export const changeHostingUserPasswordTool = defineTool({
+  name: "infomaniak_change_hosting_user_password",
+  description:
+    "Rotate the password of an FTP/SSH user on a web hosting. Two-phase commit. The `connection_type` field is required by Infomaniak (the manager UI always re-sends it); pass the user's current value to avoid changing it. Manager-private endpoint.",
+  inputSchema: ChangeHostingUserPasswordInput,
+  outputSchema: ChangeHostingUserPasswordOutput,
+  annotations: {
+    readOnlyHint: false,
+    destructiveHint: true,
+    idempotentHint: false,
+    openWorldHint: true,
+  },
+  handler: async (input) => {
+    const fingerprint = JSON.stringify({
+      tool: "infomaniak_change_hosting_user_password",
+      hosting_id: input.hosting_id,
+      login: input.login,
+      connection_type: input.connection_type,
+    });
+
+    if (!input.confirmation_token) {
+      const { token, expiresAt } = mintToken(fingerprint);
+      return {
+        status: "plan" as const,
+        plan: {
+          hosting_id: input.hosting_id,
+          login: input.login,
+          connection_type: input.connection_type,
+          password_will_change: true,
+        },
+        confirmation_token: token,
+        token_expires_at: expiresAt.toISOString(),
+        next_step_markdown: [
+          `## Plan — rotate hosting user password`,
+          ``,
+          `- **Hosting**: ${input.hosting_id}`,
+          `- **User**: \`${input.login}\``,
+          `- **Connection type**: \`${input.connection_type}\``,
+          `- **New password**: *(set, redacted)*`,
+          ``,
+          `### Note`,
+          `Any client (FileZilla, deploy scripts, CI/CD…) using the old password will need to be updated.`,
+          ``,
+          `Re-call with \`confirmation_token: "${token}"\` to apply.`,
+        ].join("\n"),
+      };
+    }
+
+    if (!consumeToken(input.confirmation_token, fingerprint)) {
+      throw new InfomaniakError({
+        message: "Confirmation token expired, already used, or does not match this operation.",
+        actionable: "Re-call the tool without confirmation_token to get a fresh plan + token.",
+      });
+    }
+
+    // The body's `login` field is the SHORT login (without the hosting prefix
+    // before the first underscore). The path uses the FULL login.
+    const shortLogin = input.login.includes("_")
+      ? input.login.split("_").slice(1).join("_")
+      : input.login;
+
+    const manager = new ManagerApiClient();
+    await manager.request<unknown>(
+      "PATCH",
+      `/proxy/1/web_hostings/${input.hosting_id}/users/${encodeURIComponent(input.login)}`,
+      {
+        body: {
+          login: shortLogin,
+          password: input.new_password,
+          connection_type: input.connection_type,
+        },
+      },
+    );
+    recordHistory({
+      tool: "infomaniak_change_hosting_user_password",
+      kind: "create_site",
+      summary: `Rotated password for hosting user ${input.login} on hosting ${input.hosting_id}`,
+      payload: {
+        hosting_id: input.hosting_id,
+        login: input.login,
+        connection_type: input.connection_type,
+      },
+    });
+    return {
+      status: "applied" as const,
+      hosting_id: input.hosting_id,
+      login: input.login,
+      note: "Password rotated. Any client (FileZilla, deploy scripts, CI/CD) using the old password must be updated.",
+    };
+  },
+});
+
+// ---------------------------------------------------------------------------
+// change_hosting_user_connection_type (two-phase commit, manager-private)
+//
+// Same endpoint as the password rotation. Sends the connection type only;
+// password remains unchanged.
+// ---------------------------------------------------------------------------
+
+const ChangeHostingUserConnectionTypeInput = z.object({
+  hosting_id: z.number().int().positive(),
+  login: z.string().min(1),
+  connection_type: ConnectionTypeSchema.describe(
+    "New connection type. `ftp` = SFTP-only, `ssh` = full shell + SFTP.",
+  ),
+  confirmation_token: z.string().uuid().optional(),
+});
+
+const ChangeHostingUserConnectionTypeOutput = z.union([
+  z.object({
+    status: z.literal("plan"),
+    plan: z.object({
+      hosting_id: z.number(),
+      login: z.string(),
+      new_connection_type: z.string(),
+    }),
+    confirmation_token: z.string(),
+    token_expires_at: z.string(),
+    next_step_markdown: z.string(),
+  }),
+  z.object({
+    status: z.literal("applied"),
+    hosting_id: z.number(),
+    login: z.string(),
+    connection_type: z.string(),
+  }),
+]);
+
+export const changeHostingUserConnectionTypeTool = defineTool({
+  name: "infomaniak_change_hosting_user_connection_type",
+  description:
+    "Promote or demote an FTP/SSH user: `ftp` = SFTP-only, `ssh` = full shell + SFTP. Two-phase commit. Does NOT change the password. Manager-private endpoint.",
+  inputSchema: ChangeHostingUserConnectionTypeInput,
+  outputSchema: ChangeHostingUserConnectionTypeOutput,
+  annotations: {
+    readOnlyHint: false,
+    destructiveHint: true,
+    idempotentHint: true,
+    openWorldHint: true,
+  },
+  handler: async (input) => {
+    const fingerprint = JSON.stringify({
+      tool: "infomaniak_change_hosting_user_connection_type",
+      hosting_id: input.hosting_id,
+      login: input.login,
+      connection_type: input.connection_type,
+    });
+
+    if (!input.confirmation_token) {
+      const { token, expiresAt } = mintToken(fingerprint);
+      return {
+        status: "plan" as const,
+        plan: {
+          hosting_id: input.hosting_id,
+          login: input.login,
+          new_connection_type: input.connection_type,
+        },
+        confirmation_token: token,
+        token_expires_at: expiresAt.toISOString(),
+        next_step_markdown: [
+          `## Plan — change hosting user connection type`,
+          ``,
+          `- **Hosting**: ${input.hosting_id}`,
+          `- **User**: \`${input.login}\``,
+          `- **New connection type**: \`${input.connection_type}\``,
+          ``,
+          `Re-call with \`confirmation_token: "${token}"\` to apply.`,
+        ].join("\n"),
+      };
+    }
+
+    if (!consumeToken(input.confirmation_token, fingerprint)) {
+      throw new InfomaniakError({
+        message: "Confirmation token expired, already used, or does not match this operation.",
+        actionable: "Re-call the tool without confirmation_token to get a fresh plan + token.",
+      });
+    }
+
+    const shortLogin = input.login.includes("_")
+      ? input.login.split("_").slice(1).join("_")
+      : input.login;
+
+    const manager = new ManagerApiClient();
+    await manager.request<unknown>(
+      "PATCH",
+      `/proxy/1/web_hostings/${input.hosting_id}/users/${encodeURIComponent(input.login)}`,
+      { body: { login: shortLogin, connection_type: input.connection_type } },
+    );
+    recordHistory({
+      tool: "infomaniak_change_hosting_user_connection_type",
+      kind: "create_site",
+      summary: `Changed connection type of ${input.login} to ${input.connection_type} on hosting ${input.hosting_id}`,
+      payload: {
+        hosting_id: input.hosting_id,
+        login: input.login,
+        connection_type: input.connection_type,
+      },
+    });
+    return {
+      status: "applied" as const,
+      hosting_id: input.hosting_id,
+      login: input.login,
+      connection_type: input.connection_type,
     };
   },
 });

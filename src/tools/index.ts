@@ -9,6 +9,8 @@ import { listAiModelsTool, listAiProductsTool } from "./ai.js";
 import { apiCallTool } from "./api-call.js";
 import { auditAccountTool } from "./audit.js";
 import {
+  changeDatabaseUserPasswordTool,
+  changeDatabaseUserPermissionsTool,
   createDatabaseTool,
   deleteDatabaseTool,
   getDatabaseTool,
@@ -28,7 +30,13 @@ import { getDomainTool, listDomainsTool } from "./domains.js";
 import { getDriveFullTool, listDriveTrashTool, listDriveUsersTool } from "./drive-deep.js";
 import { listDriveFilesTool, listDrivesTool } from "./drive.js";
 import { findSiteTool } from "./find-site.js";
-import { createHostingUserTool, deleteHostingUserTool, listHostingUsersTool } from "./ftp-users.js";
+import {
+  changeHostingUserConnectionTypeTool,
+  changeHostingUserPasswordTool,
+  createHostingUserTool,
+  deleteHostingUserTool,
+  listHostingUsersTool,
+} from "./ftp-users.js";
 import { listHostingsTool } from "./hostings.js";
 import { explainTool, helpTool } from "./introspection.js";
 import { getMailHostingFullTool, getMailboxFullTool } from "./mail-deep.js";
@@ -105,10 +113,14 @@ export const tools: ReadonlyArray<ToolDefinition> = [
   deleteDatabaseTool,
   listDatabaseUsersTool,
   getDatabaseUserTool,
+  changeDatabaseUserPasswordTool,
+  changeDatabaseUserPermissionsTool,
   // FTP / SSH users
   listHostingUsersTool,
   createHostingUserTool,
   deleteHostingUserTool,
+  changeHostingUserPasswordTool,
+  changeHostingUserConnectionTypeTool,
   // DNS
   dnsListRecordsTool,
   dnsCreateRecordTool,

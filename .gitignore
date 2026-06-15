@@ -61,3 +61,4 @@ tmp/
 /check_state.mjs
 /.backups/
 .findings/
+.tmp_*

@@ -123,10 +123,18 @@ export class ManagerApiClient {
     } catch (err) {
       // The browser session can rotate its CSRF token (e.g. the user just
       // re-logged into manager.infomaniak.com). Our cached session then holds
-      // a stale MANAGER-XSRF-TOKEN → the manager answers 419 (or 401). Re-read
-      // the cookies once and retry the request a single time.
+      // a stale MANAGER-XSRF-TOKEN → the manager answers:
+      //   - 419 / 401 (CSRF/auth expired) on most endpoints
+      //   - 500 "unexpected_error" (catch-all) on some PATCH endpoints
+      //     under /proxy/1/web_hostings/.../database_users and /users
+      //     (discovered live 2026-06-15: stale XSRF on these particular
+      //     mutating endpoints triggers a server-side fatal instead of
+      //     a clean 419). Either way: re-read cookies and retry once.
       const status = err instanceof InfomaniakError ? err.status : undefined;
-      if (status === 419 || status === 401) {
+      const code = err instanceof InfomaniakError ? err.code : undefined;
+      const isCsrfStale =
+        status === 419 || status === 401 || (status === 500 && code === "unexpected_error");
+      if (isCsrfStale) {
         await this.refreshSession();
         const fresh = this.session as ManagerSession;
         const retryHeaders: Record<string, string> = {

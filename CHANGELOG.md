@@ -8,6 +8,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 _(no unreleased changes yet)_
 
+## [0.15.0] — 2026-06-15
+
+### Added — 4 new tools for FTP/SSH + DB user password & permissions management
+
+Reverse-engineered the manager-private endpoints behind the manager UI's "Modifier le mot de passe" and "Modifier les droits" forms (via XHR capture). The historical "PATCH wipes permissions" bug is now solved: the correct shape is an OBJECT keyed by db name with every database explicitly listed, not an array.
+
+- `infomaniak_change_database_user_password` — rotate a MariaDB user's password AND set its grants atomically. Manager-private PATCH that preserves grants (the public-API PATCH silently wipes permissions; this uses the manager-private endpoint with the correct full-permissions-object shape). Two-phase commit.
+- `infomaniak_change_database_user_permissions` — update which databases a MariaDB user can access (read/write/admin per DB). No password change. Two-phase commit. Anything not in `grants` is set to no-access — canonical way to revoke a grant.
+- `infomaniak_change_hosting_user_password` — rotate the password of an FTP/SSH user on a web hosting. Two-phase commit. Manager-private endpoint. The `connection_type` field is required by the API (pass the user's current value to avoid changing it).
+- `infomaniak_change_hosting_user_connection_type` — promote/demote an FTP/SSH user between `ftp` (SFTP-only) and `ssh` (full shell + SFTP). Two-phase commit.
+
+### Fixed
+
+- **Manager-private retry now catches `500 unexpected_error`** in addition to `401/419`. The PATCH endpoints under `/proxy/1/.../database_users/...` and `/proxy/1/.../users/...` return a catch-all 500 instead of a clean 419 when the `MANAGER-XSRF-TOKEN` is stale (Chrome SQLite writes cookies async, so reading the cookie store can return the previous token between the rotation and the actual write). The retry now refreshes the session and retries once.
+
+Total tool count: **81** (was 77).
+
 ## [0.14.5] — 2026-06-13
 
 ### Fixed

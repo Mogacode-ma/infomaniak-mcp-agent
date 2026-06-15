@@ -8,6 +8,7 @@
  */
 import { z } from "zod";
 
+import { InfomaniakError } from "../api/errors.js";
 import { ManagerApiClient, PublicApiClient } from "../api/http.js";
 import { consumeToken, mintToken } from "../utils/confirmation.js";
 import { recordHistory } from "../utils/history.js";
@@ -472,40 +473,338 @@ export const getDatabaseUserTool = defineTool({
 });
 
 // ---------------------------------------------------------------------------
-// NOT IMPLEMENTED: database_user password reset
+// change_db_user_password / change_db_user_permissions
 //
-// The endpoint
-//   PATCH /1/web_hostings/{hosting_id}/database_users/{user_name}
-// exists and accepts a `password` field that **does** change the MariaDB
-// password (verified live: a `mysql -p<new>` succeeds, `mysql -p<old>` is
-// rejected with `Access denied`). BUT — and this is critical — the same
-// PATCH **silently empties the `applications` and `permissions` arrays** of
-// the user, regardless of what is sent in the body. The API responds
-// `{"result":"success","data":true}` but the user is left with only
-// `GRANT USAGE ON *.* TO ...` and zero database-level grants.
+// Endpoint (manager-private, REd 2026-06-15 from manager UI XHR capture):
+//   PATCH /proxy/1/web_hostings/{hid}/database_users/{user_name}
+//   Body: {
+//     password?: string,                  // optional — only when rotating
+//     permissions: {                      // REQUIRED — every DB on the hosting
+//       "db_name_1": { read, write, admin },
+//       "db_name_2": { read, write, admin },
+//       ...
+//     }
+//   }
 //
-// Result: the password "change" is destructive — any WordPress site whose
-// wp-config points at this user starts returning `500 Database Error`
-// because the user can authenticate but no longer has access to its own
-// database. The grants cannot be restored through the public API either
-// (POST `/database_users` accepts a `permissions` payload but ignores it,
-// PATCH back on the database is also a no-op). The only working repair is
-// the manager UI's "Modifier les droits" form, which presumably hits a
-// `/proxy/...` endpoint we have not yet reverse-engineered.
-//
-// Because of this, this MCP intentionally does NOT expose a typed
-// `infomaniak_reset_database_password` tool. If you need to rotate a DB
-// password, prefer one of:
-//
-//   1. **Direct MariaDB `ALTER USER`** — SSH into the hosting and run
-//      `ALTER USER 'user'@'%' IDENTIFIED BY 'new_password';` (the user has
-//      admin rights on its own database so this works without root). This
-//      does not touch the Infomaniak API and therefore does not trigger
-//      the permissions wipeout.
-//   2. **Manager UI** — manager.infomaniak.com → Hosting → Databases →
-//      User → Reset password. The UI applies the same fix server-side as
-//      it would for permissions.
-//
-// We will revisit this once the manager-private `/proxy/...` endpoint
-// behind "Modifier les droits" is identified (TODO in REVERSE-ENGINEERING.md).
+// The historical "wipe" bug existed because we were sending
+// `permissions: [{database, rights}]` (array) — the server silently
+// rejected it and reset the user. The correct shape is an OBJECT keyed
+// by db name with every database explicitly listed (false rights on the
+// ones the user should NOT access). Stale `MANAGER-XSRF-TOKEN` also
+// surfaced as `500 unexpected_error` (not 419) — handled by the retry
+// logic in ManagerApiClient.
 // ---------------------------------------------------------------------------
+
+const DbGrantSchema = z
+  .object({
+    database: z.string().min(1).describe("Database name (e.g. `acct_WP1234066`)."),
+    read: z.boolean().default(true),
+    write: z.boolean().default(true),
+    admin: z.boolean().default(true),
+  })
+  .describe(
+    "One grant entry: the database this user should be allowed to access, with the rights to give. Defaults to full read+write+admin.",
+  );
+
+/**
+ * Build the full `permissions` object the manager-private PATCH expects.
+ * Every database on the hosting must be listed; missing ones are treated
+ * as a wipe by the server.
+ */
+async function buildPermissionsObject(
+  hostingId: number,
+  grants: Array<z.infer<typeof DbGrantSchema>>,
+): Promise<Record<string, { read: boolean; write: boolean; admin: boolean }>> {
+  const pub = new PublicApiClient();
+  const databases = await pub.request<Array<{ name: string }>>(
+    "GET",
+    `/1/web_hostings/${hostingId}/databases`,
+    { query: { page: 1, per_page: 100 } },
+  );
+  const grantsByDb = new Map(grants.map((g) => [g.database, g]));
+  const permissions: Record<string, { read: boolean; write: boolean; admin: boolean }> = {};
+  for (const db of databases) {
+    const g = grantsByDb.get(db.name);
+    permissions[db.name] = g
+      ? { read: g.read, write: g.write, admin: g.admin }
+      : { read: false, write: false, admin: false };
+  }
+  // Include any requested DBs that don't (yet) exist on the hosting.
+  for (const g of grants) {
+    if (!(g.database in permissions)) {
+      permissions[g.database] = { read: g.read, write: g.write, admin: g.admin };
+    }
+  }
+  return permissions;
+}
+
+// ---------------------------------------------------------------------------
+// change_database_user_password (two-phase commit)
+// ---------------------------------------------------------------------------
+
+const ChangeDatabaseUserPasswordInput = z.object({
+  hosting_id: z.number().int().positive().describe("Web hosting id."),
+  user_name: z.string().min(1).describe("MariaDB user name (e.g. `acct_WP1234066`)."),
+  new_password: z
+    .string()
+    .min(8)
+    .describe("New password for the MariaDB user (server enforces complexity rules)."),
+  grants: z
+    .array(DbGrantSchema)
+    .min(1)
+    .describe(
+      "FULL list of databases this user should have access to AFTER the change. Anything not in this list is set to no-access. Tip: call `infomaniak_get_database_user` first and copy the current `permissions` to preserve them.",
+    ),
+  confirmation_token: z
+    .string()
+    .uuid()
+    .optional()
+    .describe("Token from the prior plan response. Required on apply only."),
+});
+
+const ChangeDatabaseUserPasswordOutput = z.union([
+  z.object({
+    status: z.literal("plan"),
+    plan: z.object({
+      hosting_id: z.number(),
+      user_name: z.string(),
+      grants_after: z.array(DbGrantSchema),
+      grants_dropped: z.array(z.string()),
+      grants_kept: z.array(z.string()),
+      password_will_change: z.boolean(),
+    }),
+    confirmation_token: z.string(),
+    token_expires_at: z.string(),
+    next_step_markdown: z.string(),
+  }),
+  z.object({
+    status: z.literal("applied"),
+    hosting_id: z.number(),
+    user_name: z.string(),
+    note: z.string(),
+  }),
+]);
+
+export const changeDatabaseUserPasswordTool = defineTool({
+  name: "infomaniak_change_database_user_password",
+  description:
+    "Rotate a MariaDB user's password AND set its database grants atomically. Manager-private PATCH that preserves grants (the public-API PATCH silently wipes permissions; this uses the manager-private endpoint with the correct full-permissions-object shape). Two-phase commit. The `grants` array declares EVERY database this user should access — anything omitted is set to no-access. Tip: call `infomaniak_get_database_user` first and copy current `permissions`. Manager-private.",
+  inputSchema: ChangeDatabaseUserPasswordInput,
+  outputSchema: ChangeDatabaseUserPasswordOutput,
+  annotations: {
+    readOnlyHint: false,
+    destructiveHint: true,
+    idempotentHint: false,
+    openWorldHint: true,
+  },
+  handler: async (input) => {
+    const fingerprint = JSON.stringify({
+      tool: "infomaniak_change_database_user_password",
+      hosting_id: input.hosting_id,
+      user_name: input.user_name,
+      grants: [...input.grants].sort((a, b) => a.database.localeCompare(b.database)),
+    });
+
+    if (!input.confirmation_token) {
+      const pub = new PublicApiClient();
+      const current = await pub
+        .request<{
+          permissions?: Array<{ database: string }>;
+        }>("GET", `/1/web_hostings/${input.hosting_id}/database_users/${encodeURIComponent(input.user_name)}`)
+        .catch(() => ({ permissions: [] as Array<{ database: string }> }));
+      const currentDbs = new Set((current.permissions ?? []).map((p) => p.database));
+      const requestedDbs = new Set(input.grants.map((g) => g.database));
+      const dropped = [...currentDbs].filter((d) => !requestedDbs.has(d));
+      const kept = [...currentDbs].filter((d) => requestedDbs.has(d));
+
+      const { token, expiresAt } = mintToken(fingerprint);
+      return {
+        status: "plan" as const,
+        plan: {
+          hosting_id: input.hosting_id,
+          user_name: input.user_name,
+          grants_after: input.grants,
+          grants_dropped: dropped,
+          grants_kept: kept,
+          password_will_change: true,
+        },
+        confirmation_token: token,
+        token_expires_at: expiresAt.toISOString(),
+        next_step_markdown: [
+          `## Plan — rotate MariaDB user password`,
+          ``,
+          `- **Hosting**: ${input.hosting_id}`,
+          `- **User**: \`${input.user_name}\``,
+          `- **New password**: *(set, redacted)*`,
+          `- **Grants AFTER**: ${input.grants.length === 0 ? "*(none)*" : input.grants.map((g) => `\`${g.database}\` (${[g.read && "r", g.write && "w", g.admin && "a"].filter(Boolean).join("")})`).join(", ")}`,
+          ...(dropped.length > 0
+            ? [
+                `- ⚠️ **Grants that will be DROPPED**: ${dropped.map((d) => `\`${d}\``).join(", ")} — any site using this user against these DBs will lose access.`,
+              ]
+            : []),
+          ...(kept.length > 0 ? [`- Grants kept: ${kept.map((d) => `\`${d}\``).join(", ")}`] : []),
+          ``,
+          `Re-call this tool with \`confirmation_token: "${token}"\` to apply.`,
+        ].join("\n"),
+      };
+    }
+
+    if (!consumeToken(input.confirmation_token, fingerprint)) {
+      throw new InfomaniakError({
+        message: "Confirmation token expired, already used, or does not match this operation.",
+        actionable: "Re-call the tool without confirmation_token to get a fresh plan + token.",
+      });
+    }
+    const permissions = await buildPermissionsObject(input.hosting_id, input.grants);
+    const manager = new ManagerApiClient();
+    await manager.request<unknown>(
+      "PATCH",
+      `/proxy/1/web_hostings/${input.hosting_id}/database_users/${encodeURIComponent(input.user_name)}`,
+      { body: { password: input.new_password, permissions } },
+    );
+    recordHistory({
+      tool: "infomaniak_change_database_user_password",
+      kind: "create_database",
+      summary: `Rotated password for DB user ${input.user_name} on hosting ${input.hosting_id}`,
+      payload: {
+        hosting_id: input.hosting_id,
+        user_name: input.user_name,
+        grants_count: input.grants.length,
+      },
+    });
+    return {
+      status: "applied" as const,
+      hosting_id: input.hosting_id,
+      user_name: input.user_name,
+      note: "Password rotated and grants set. Any client (wp-config.php, etc.) using the old password must be updated to the new one.",
+    };
+  },
+});
+
+// ---------------------------------------------------------------------------
+// change_database_user_permissions (two-phase commit, no password change)
+// ---------------------------------------------------------------------------
+
+const ChangeDatabaseUserPermissionsInput = z.object({
+  hosting_id: z.number().int().positive(),
+  user_name: z.string().min(1),
+  grants: z
+    .array(DbGrantSchema)
+    .describe(
+      "FULL list of databases this user should access. Empty list = revoke ALL grants (user can no longer access any database).",
+    ),
+  confirmation_token: z.string().uuid().optional(),
+});
+
+const ChangeDatabaseUserPermissionsOutput = z.union([
+  z.object({
+    status: z.literal("plan"),
+    plan: z.object({
+      hosting_id: z.number(),
+      user_name: z.string(),
+      grants_after: z.array(DbGrantSchema),
+      grants_dropped: z.array(z.string()),
+      grants_kept: z.array(z.string()),
+    }),
+    confirmation_token: z.string(),
+    token_expires_at: z.string(),
+    next_step_markdown: z.string(),
+  }),
+  z.object({
+    status: z.literal("applied"),
+    hosting_id: z.number(),
+    user_name: z.string(),
+    grants_after: z.array(DbGrantSchema),
+  }),
+]);
+
+export const changeDatabaseUserPermissionsTool = defineTool({
+  name: "infomaniak_change_database_user_permissions",
+  description:
+    "Update which databases a MariaDB user can access (read/write/admin per DB). Does NOT change the password. Same manager-private endpoint as the password rotation. Two-phase commit. Anything not in `grants` is set to no-access — this is the canonical way to revoke a grant. Manager-private.",
+  inputSchema: ChangeDatabaseUserPermissionsInput,
+  outputSchema: ChangeDatabaseUserPermissionsOutput,
+  annotations: {
+    readOnlyHint: false,
+    destructiveHint: true,
+    idempotentHint: true,
+    openWorldHint: true,
+  },
+  handler: async (input) => {
+    const fingerprint = JSON.stringify({
+      tool: "infomaniak_change_database_user_permissions",
+      hosting_id: input.hosting_id,
+      user_name: input.user_name,
+      grants: [...input.grants].sort((a, b) => a.database.localeCompare(b.database)),
+    });
+
+    if (!input.confirmation_token) {
+      const pub = new PublicApiClient();
+      const current = await pub
+        .request<{
+          permissions?: Array<{ database: string }>;
+        }>("GET", `/1/web_hostings/${input.hosting_id}/database_users/${encodeURIComponent(input.user_name)}`)
+        .catch(() => ({ permissions: [] as Array<{ database: string }> }));
+      const currentDbs = new Set((current.permissions ?? []).map((p) => p.database));
+      const requestedDbs = new Set(input.grants.map((g) => g.database));
+      const dropped = [...currentDbs].filter((d) => !requestedDbs.has(d));
+      const kept = [...currentDbs].filter((d) => requestedDbs.has(d));
+
+      const { token, expiresAt } = mintToken(fingerprint);
+      return {
+        status: "plan" as const,
+        plan: {
+          hosting_id: input.hosting_id,
+          user_name: input.user_name,
+          grants_after: input.grants,
+          grants_dropped: dropped,
+          grants_kept: kept,
+        },
+        confirmation_token: token,
+        token_expires_at: expiresAt.toISOString(),
+        next_step_markdown: [
+          `## Plan — change MariaDB user grants`,
+          ``,
+          `- **Hosting**: ${input.hosting_id}`,
+          `- **User**: \`${input.user_name}\``,
+          `- **Grants AFTER**: ${input.grants.length === 0 ? "*(none — all revoked)*" : input.grants.map((g) => `\`${g.database}\` (${[g.read && "r", g.write && "w", g.admin && "a"].filter(Boolean).join("")})`).join(", ")}`,
+          ...(dropped.length > 0
+            ? [`- ⚠️ **Grants that will be DROPPED**: ${dropped.map((d) => `\`${d}\``).join(", ")}`]
+            : []),
+          ``,
+          `Re-call with \`confirmation_token: "${token}"\` to apply.`,
+        ].join("\n"),
+      };
+    }
+
+    if (!consumeToken(input.confirmation_token, fingerprint)) {
+      throw new InfomaniakError({
+        message: "Confirmation token expired, already used, or does not match this operation.",
+        actionable: "Re-call the tool without confirmation_token to get a fresh plan + token.",
+      });
+    }
+    const permissions = await buildPermissionsObject(input.hosting_id, input.grants);
+    const manager = new ManagerApiClient();
+    await manager.request<unknown>(
+      "PATCH",
+      `/proxy/1/web_hostings/${input.hosting_id}/database_users/${encodeURIComponent(input.user_name)}`,
+      { body: { permissions } },
+    );
+    recordHistory({
+      tool: "infomaniak_change_database_user_permissions",
+      kind: "create_database",
+      summary: `Updated DB grants for ${input.user_name} on hosting ${input.hosting_id}`,
+      payload: {
+        hosting_id: input.hosting_id,
+        user_name: input.user_name,
+        grants_count: input.grants.length,
+      },
+    });
+    return {
+      status: "applied" as const,
+      hosting_id: input.hosting_id,
+      user_name: input.user_name,
+      grants_after: input.grants,
+    };
+  },
+});

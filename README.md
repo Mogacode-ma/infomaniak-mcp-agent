@@ -8,13 +8,13 @@
 [![Node](https://img.shields.io/badge/node-%3E%3D18-43853d.svg)](https://nodejs.org)
 [![TypeScript strict](https://img.shields.io/badge/TypeScript-strict-3178c6.svg)](https://www.typescriptlang.org/)
 [![MCP](https://img.shields.io/badge/Model_Context_Protocol-1.0-9333ea.svg)](https://modelcontextprotocol.io/)
-[![Tools](https://img.shields.io/badge/tools-77-blueviolet.svg)](#tools)
+[![Tools](https://img.shields.io/badge/tools-81-blueviolet.svg)](#tools)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](./CONTRIBUTING.md)
 [![GitHub stars](https://img.shields.io/github/stars/Mogacode-ma/infomaniak-mcp-agent?style=social)](https://github.com/Mogacode-ma/infomaniak-mcp-agent/stargazers)
 
 > **Drive your entire [Infomaniak](https://www.infomaniak.com) account from [Claude](https://www.anthropic.com/claude) — agentic, two-phase commit, open-source.**
 
-`infomaniak-mcp-agent` is an unofficial [Model Context Protocol](https://modelcontextprotocol.io/) server that exposes the full surface of Infomaniak — Switzerland's sovereign cloud — as **77 tools** an LLM can call directly: web hosting, mail (kSuite), kDrive, domains, DNS, DNSSEC, FTP/SSH users, AI products, account audits and more. Every destructive operation goes through a strict two-phase commit, so an agent can never silently delete or mutate something on your account.
+`infomaniak-mcp-agent` is an unofficial [Model Context Protocol](https://modelcontextprotocol.io/) server that exposes the full surface of Infomaniak — Switzerland's sovereign cloud — as **81 tools** an LLM can call directly: web hosting, mail (kSuite), kDrive, domains, DNS, DNSSEC, FTP/SSH users, AI products, account audits and more. Every destructive operation goes through a strict two-phase commit, so an agent can never silently delete or mutate something on your account.
 
 ```
 You → Claude:  "audit the example.com hosting and tell me which mailboxes are over quota"
@@ -26,7 +26,7 @@ Claude → You:  3 mailboxes >85% — paul@ (94%), notify@ (88%), team@ (87%). W
 
 - [Why](#why-this-exists) · [What it does](#what-you-can-do-with-it) · [How it differs](#why-agentic-and-not-wrapper)
 - [Install](#install) · [Authentication](#authentication) · [Quick example](#quick-example)
-- [Tools](#tools) (77 across 13 areas) · [Limitations](#limitations) · [Roadmap](#roadmap) · [FAQ](#faq)
+- [Tools](#tools) (81 across 13 areas) · [Limitations](#limitations) · [Roadmap](#roadmap) · [FAQ](#faq)
 - [Contributing](#contributing) · [License](#license)
 
 ## Why this exists
@@ -202,7 +202,7 @@ Claude: [calls infomaniak_dns_create_record again with the token]
 
 ## Tools
 
-77 tools across 13 areas. Use `infomaniak_help` to fuzzy-search by intent, or `infomaniak_explain` to dump a tool's full JSON schema.
+81 tools across 13 areas. Use `infomaniak_help` to fuzzy-search by intent, or `infomaniak_explain` to dump a tool's full JSON schema.
 
 ### Introspection (start here)
 | Tool | Annotation | Purpose |

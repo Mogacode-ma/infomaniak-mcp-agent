@@ -1,17 +1,17 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.Mogacode-ma/infomaniak-mcp-agent",
-  "description": "Unofficial Infomaniak MCP \u2014 hosting, Node.js, mail, DNS, kDrive, SSL, VPS, domains. 77 tools.",
+  "description": "Unofficial Infomaniak MCP \u2014 hosting, Node.js, mail, DNS, kDrive, SSL, VPS, domains. 81 tools.",
   "repository": {
     "url": "https://github.com/Mogacode-ma/infomaniak-mcp-agent",
     "source": "github"
   },
-  "version": "0.14.5",
+  "version": "0.15.0",
   "packages": [
     {
       "registryType": "npm",
       "identifier": "infomaniak-mcp-agent",
-      "version": "0.14.5",
+      "version": "0.15.0",
       "transport": {
         "type": "stdio"
       },
