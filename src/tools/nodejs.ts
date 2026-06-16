@@ -54,7 +54,7 @@
  */
 import { z } from "zod";
 
-import { ManagerApiClient } from "../api/http.js";
+import { ManagerApiClient, PublicApiClient } from "../api/http.js";
 import { consumeToken, mintToken } from "../utils/confirmation.js";
 import { recordHistory } from "../utils/history.js";
 
@@ -128,31 +128,6 @@ const NodejsAppDetailSchema = z.object({
   created_at: z.number().optional(),
 });
 
-/** Single hosting_features tree node returned by `?with=hosting_features`. */
-const HostingFeatureSchema = z.object({
-  id: z.number(),
-  feature: z.string(),
-  feature_type: z.string(),
-  hosting_feature_parent_id: z.number().nullable(),
-  fqdns: z
-    .array(
-      z.object({
-        id: z.number(),
-        hosting_id: z.number(),
-        source: z.string(),
-        domain: z.string(),
-        path: z.string().optional(),
-        type: z.string(),
-        created_at: z.string().optional(),
-        updated_at: z.string().optional(),
-        deleted_at: z.string().nullable().optional(),
-      }),
-    )
-    .optional(),
-  created_at: z.number().optional(),
-  updated_at: z.number().optional(),
-});
-
 /** App job entry — covers builds, restarts, etc. with their log_stream credentials. */
 const NodejsJobSchema = z.object({
   resource_id: z.string(),
@@ -181,18 +156,27 @@ const VhostAliasSchema = z.object({
 // ---------------------------------------------------------------------------
 
 const ListNodejsAppsInput = z.object({
-  hosting_id: z.number().int().positive().describe("Node.js hosting id (service_id 57)."),
+  hosting_id: z
+    .number()
+    .int()
+    .positive()
+    .describe("Parent web_hosting id (service_id 1). Discover via infomaniak_list_hostings."),
 });
 
 const ListNodejsAppsOutput = z.object({
   hosting_id: z.number(),
-  hosting_name: z.string(),
-  hosting_state: z.string(),
   apps: z.array(
     z.object({
+      site_id: z
+        .number()
+        .describe(
+          "Pass this as `site_id` to all other nodejs_* tools — Infomaniak's manager-private nodejs routes are keyed by site_id, NOT hosting_id.",
+        ),
       vhost_route_id: z.number(),
-      webapp_feature_id: z.number(),
-      fqdns: z.array(z.string()),
+      main_fqdn: z.string().optional(),
+      preview_url: z.string().optional(),
+      state: z.string().optional().describe("`Ready` | other"),
+      runtime: z.string().optional().describe("`Node.js`"),
     }),
   ),
 });
@@ -200,7 +184,7 @@ const ListNodejsAppsOutput = z.object({
 export const listNodejsAppsTool = defineTool({
   name: "infomaniak_list_nodejs_apps",
   description:
-    "List Node.js applications running on a `hosting_3` (Cloud Server Node.js) container. Each Infomaniak Node.js hosting runs a single app, so this typically returns one entry. Returns the vhost_route_id needed for every other Node.js tool, and the FQDNs serving the app. Manager-private endpoint — requires SASESSION + CSRF cookies (set INFOMANIAK_AUTH_MODE=auto).",
+    "List Node.js applications running on a web hosting. Returns `site_id` + `vhost_route_id` for each app — both are needed for every other nodejs_* tool. Each Infomaniak Node.js hosting runs a single app, so this typically returns one entry. Uses the public Bearer API (more resilient than manager-private during Infomaniak maintenance).",
   inputSchema: ListNodejsAppsInput,
   outputSchema: ListNodejsAppsOutput,
   annotations: {
@@ -210,42 +194,31 @@ export const listNodejsAppsTool = defineTool({
     openWorldHint: true,
   },
   handler: async (input) => {
-    const client = new ManagerApiClient();
-    const raw = await client.request<{
-      id: number;
-      name: string;
-      state: string;
-      hosting_features: unknown[];
-    }>("GET", `/proxy/1/hostings/${input.hosting_id}`, {
-      query: { "with[]": "hosting_features" },
-    });
+    const pub = new PublicApiClient();
+    const sites = await pub.request<
+      Array<{
+        id: number;
+        service_id: number;
+        service_name: string;
+        main_fqdn?: string;
+        preview_url?: string;
+        hosting_3?: { state?: string; vhost_route_id?: number; type?: string };
+      }>
+    >("GET", `/1/web_hostings/${input.hosting_id}/sites`);
 
-    // Validate every feature in the tree at runtime; tolerate unknown shapes
-    // by dropping anything that doesn't parse.
-    const features = raw.hosting_features
-      .map((f) => HostingFeatureSchema.safeParse(f))
-      .filter((r) => r.success)
-      .map((r) => r.data);
-
-    const webApps = features.filter((f) => f.feature_type === "WebApp");
-    const apps = webApps.map((webapp) => {
-      const vhostRoute = features.find(
-        (f) => f.feature_type === "VhostRoute" && f.hosting_feature_parent_id === webapp.id,
-      );
-      const fqdns = (vhostRoute?.fqdns ?? []).map((f) =>
-        f.path && f.path !== "" ? `${f.source}.${f.domain}${f.path}` : `${f.source}.${f.domain}`,
-      );
-      return {
-        vhost_route_id: vhostRoute?.id ?? webapp.id,
-        webapp_feature_id: webapp.id,
-        fqdns,
-      };
-    });
+    const apps = sites
+      .filter((s) => s.service_name === "hosting_3" && s.hosting_3?.vhost_route_id)
+      .map((s) => ({
+        site_id: s.id,
+        vhost_route_id: s.hosting_3!.vhost_route_id!,
+        ...(s.main_fqdn !== undefined && { main_fqdn: s.main_fqdn }),
+        ...(s.preview_url !== undefined && { preview_url: s.preview_url }),
+        ...(s.hosting_3?.state !== undefined && { state: s.hosting_3.state }),
+        ...(s.hosting_3?.type !== undefined && { runtime: s.hosting_3.type }),
+      }));
 
     return {
-      hosting_id: raw.id,
-      hosting_name: raw.name,
-      hosting_state: raw.state,
+      hosting_id: input.hosting_id,
       apps,
     };
   },
@@ -256,7 +229,7 @@ export const listNodejsAppsTool = defineTool({
 // ---------------------------------------------------------------------------
 
 const GetNodejsAppInput = z.object({
-  hosting_id: z.number().int().positive().describe("Node.js hosting id."),
+  site_id: z.number().int().positive().describe("Node.js hosting id."),
   vhost_route_id: z
     .number()
     .int()
@@ -282,7 +255,7 @@ export const getNodejsAppTool = defineTool({
     const client = new ManagerApiClient();
     return await client.request<z.infer<typeof NodejsAppDetailSchema>>(
       "GET",
-      `/proxy/1/hostings/${input.hosting_id}/nodejs/${input.vhost_route_id}`,
+      `/proxy/1/hostings/${input.site_id}/nodejs/${input.vhost_route_id}`,
       { query: { "with[]": "ips,ssl,environments,storage" } },
     );
   },
@@ -293,7 +266,7 @@ export const getNodejsAppTool = defineTool({
 // ---------------------------------------------------------------------------
 
 const NodejsAppStatusInput = z.object({
-  hosting_id: z.number().int().positive(),
+  site_id: z.number().int().positive(),
   vhost_route_id: z.number().int().positive(),
 });
 
@@ -317,7 +290,7 @@ export const nodejsAppStatusTool = defineTool({
     const client = new ManagerApiClient();
     return await client.request<z.infer<typeof NodejsAppStatusOutput>>(
       "GET",
-      `/proxy/1/hostings/${input.hosting_id}/nodejs/${input.vhost_route_id}/actions/status`,
+      `/proxy/1/hostings/${input.site_id}/nodejs/${input.vhost_route_id}/actions/status`,
     );
   },
 });
@@ -327,7 +300,7 @@ export const nodejsAppStatusTool = defineTool({
 // ---------------------------------------------------------------------------
 
 const NodejsAppAliasesInput = z.object({
-  hosting_id: z.number().int().positive(),
+  site_id: z.number().int().positive(),
   vhost_route_id: z.number().int().positive(),
 });
 
@@ -352,7 +325,7 @@ export const nodejsAppAliasesTool = defineTool({
     const client = new ManagerApiClient();
     const raw = await client.request<z.infer<typeof VhostAliasSchema>[]>(
       "GET",
-      `/proxy/1/hostings/${input.hosting_id}/vhost_route/${input.vhost_route_id}/aliases`,
+      `/proxy/1/hostings/${input.site_id}/vhost_route/${input.vhost_route_id}/aliases`,
       { query: { page: 1, per_page: 100, "with[]": "domain_options" } },
     );
     return { count: raw.length, aliases: raw };
@@ -364,7 +337,7 @@ export const nodejsAppAliasesTool = defineTool({
 // ---------------------------------------------------------------------------
 
 const NodejsAppJobsInput = z.object({
-  hosting_id: z.number().int().positive(),
+  site_id: z.number().int().positive(),
   vhost_route_id: z.number().int().positive(),
 });
 
@@ -389,7 +362,7 @@ export const nodejsAppJobsTool = defineTool({
     const client = new ManagerApiClient();
     const jobs = await client.request<z.infer<typeof NodejsJobSchema>[]>(
       "GET",
-      `/proxy/1/hostings/${input.hosting_id}/nodejs/${input.vhost_route_id}/jobs`,
+      `/proxy/1/hostings/${input.site_id}/nodejs/${input.vhost_route_id}/jobs`,
     );
     return { jobs, total: jobs.length };
   },
@@ -400,7 +373,7 @@ export const nodejsAppJobsTool = defineTool({
 // ---------------------------------------------------------------------------
 
 const NodejsAppLogsInput = z.object({
-  hosting_id: z.number().int().positive(),
+  site_id: z.number().int().positive(),
   vhost_route_id: z.number().int().positive(),
 });
 
@@ -439,7 +412,7 @@ export const nodejsAppLogsTool = defineTool({
     const client = new ManagerApiClient();
     const raw = await client.request<{ endpoint: string; jwt_token: string }>(
       "GET",
-      `/proxy/1/hostings/${input.hosting_id}/webapp/${input.vhost_route_id}/stream`,
+      `/proxy/1/hostings/${input.site_id}/webapp/${input.vhost_route_id}/stream`,
     );
     let expiresAt = "unknown";
     try {
@@ -471,7 +444,7 @@ export const nodejsAppLogsTool = defineTool({
 // ---------------------------------------------------------------------------
 
 const NodejsAppThumbnailInput = z.object({
-  hosting_id: z.number().int().positive(),
+  site_id: z.number().int().positive(),
   vhost_route_id: z.number().int().positive(),
   refresh: z
     .boolean()
@@ -499,7 +472,7 @@ export const nodejsAppThumbnailTool = defineTool({
     const client = new ManagerApiClient();
     return await client.request<z.infer<typeof NodejsAppThumbnailOutput>>(
       "GET",
-      `/proxy/1/hostings/${input.hosting_id}/webapp/${input.vhost_route_id}/thumbnail`,
+      `/proxy/1/hostings/${input.site_id}/webapp/${input.vhost_route_id}/thumbnail`,
       { query: { refresh: input.refresh } },
     );
   },
@@ -510,7 +483,7 @@ export const nodejsAppThumbnailTool = defineTool({
 // ---------------------------------------------------------------------------
 
 const NodejsAppActionInput = z.object({
-  hosting_id: z.number().int().positive(),
+  site_id: z.number().int().positive(),
   vhost_route_id: z.number().int().positive(),
   action: z
     .enum(["start", "stop", "restart", "build"])
@@ -533,7 +506,7 @@ const NodejsAppActionOutput = z.union([
   z.object({
     status: z.literal("plan"),
     plan: z.object({
-      hosting_id: z.number(),
+      site_id: z.number(),
       vhost_route_id: z.number(),
       action: z.string(),
       app_fqdn: z.string().optional(),
@@ -576,7 +549,7 @@ export const nodejsAppActionTool = defineTool({
   handler: async (input) => {
     const fingerprint = JSON.stringify({
       tool: "infomaniak_nodejs_app_action",
-      hosting_id: input.hosting_id,
+      hosting_id: input.site_id,
       vhost_route_id: input.vhost_route_id,
       action: input.action,
     });
@@ -589,7 +562,7 @@ export const nodejsAppActionTool = defineTool({
       try {
         const app = await client.request<{ main_fqdn: string }>(
           "GET",
-          `/proxy/1/hostings/${input.hosting_id}/nodejs/${input.vhost_route_id}`,
+          `/proxy/1/hostings/${input.site_id}/nodejs/${input.vhost_route_id}`,
         );
         appFqdn = app.main_fqdn;
       } catch {
@@ -598,7 +571,7 @@ export const nodejsAppActionTool = defineTool({
       try {
         const status = await client.request<{ status: string }>(
           "GET",
-          `/proxy/1/hostings/${input.hosting_id}/nodejs/${input.vhost_route_id}/actions/status`,
+          `/proxy/1/hostings/${input.site_id}/nodejs/${input.vhost_route_id}/actions/status`,
         );
         statusBefore = status.status;
       } catch {
@@ -618,7 +591,7 @@ export const nodejsAppActionTool = defineTool({
       return {
         status: "plan" as const,
         plan: {
-          hosting_id: input.hosting_id,
+          hosting_id: input.site_id,
           vhost_route_id: input.vhost_route_id,
           action: input.action,
           ...(appFqdn !== undefined && { app_fqdn: appFqdn }),
@@ -629,7 +602,7 @@ export const nodejsAppActionTool = defineTool({
         next_step_markdown: [
           `## Plan — Node.js app ${input.action}`,
           ``,
-          `- **Hosting**: ${input.hosting_id}`,
+          `- **Hosting**: ${input.site_id}`,
           `- **App (vhost_route_id)**: ${input.vhost_route_id}`,
           ...(appFqdn ? [`- **FQDN**: \`${appFqdn}\``] : []),
           ...(statusBefore ? [`- **Current status**: ${statusBefore}`] : []),
@@ -651,7 +624,7 @@ export const nodejsAppActionTool = defineTool({
       log_stream?: { endpoint: string; jwt_token: string };
     }>(
       "POST",
-      `/proxy/1/hostings/${input.hosting_id}/nodejs/${input.vhost_route_id}/actions/${input.action}`,
+      `/proxy/1/hostings/${input.site_id}/nodejs/${input.vhost_route_id}/actions/${input.action}`,
       { body: {} },
     );
 
@@ -660,20 +633,20 @@ export const nodejsAppActionTool = defineTool({
         ? {
             tool: "infomaniak_nodejs_app_action",
             params: {
-              hosting_id: input.hosting_id,
+              hosting_id: input.site_id,
               vhost_route_id: input.vhost_route_id,
               action: "start" as const,
             },
-            description: `Start the Node.js app that was just stopped (hosting ${input.hosting_id}, vhost ${input.vhost_route_id}).`,
+            description: `Start the Node.js app that was just stopped (hosting ${input.site_id}, vhost ${input.vhost_route_id}).`,
           }
         : undefined;
 
     recordHistory({
       tool: "infomaniak_nodejs_app_action",
       kind: "nodejs_app_action",
-      summary: `Node.js \`${input.action}\` on hosting ${input.hosting_id} vhost_route ${input.vhost_route_id}${data.status ? ` → ${data.status}` : ""}${data.resource_id ? ` (job ${data.resource_id})` : ""}`,
+      summary: `Node.js \`${input.action}\` on hosting ${input.site_id} vhost_route ${input.vhost_route_id}${data.status ? ` → ${data.status}` : ""}${data.resource_id ? ` (job ${data.resource_id})` : ""}`,
       payload: {
-        hosting_id: input.hosting_id,
+        hosting_id: input.site_id,
         vhost_route_id: input.vhost_route_id,
         action: input.action,
         result_status: data.status,

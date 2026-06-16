@@ -8,6 +8,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 _(no unreleased changes yet)_
 
+## [0.15.1] — 2026-06-15
+
+### Fixed — Node.js tools route on `site_id`, not `hosting_id` (was 403)
+
+Infomaniak's manager-private nodejs routes are keyed by **`site_id`** (the site inside the hosting, e.g. `106013`), not by **`hosting_id`** (the parent web hosting, e.g. `743330`). The MCP code was passing `hosting_id` everywhere, which returned **HTTP 403 access_denied** on every Node.js action — discovered when the manager came back from a partial outage on 2026-06-15 (during which a manual restart from the UI worked while the MCP tool kept failing).
+
+**Breaking change for users**: every `nodejs_*` tool except `list_nodejs_apps` now takes **`site_id`** instead of `hosting_id`. Discover the `site_id` via `infomaniak_list_nodejs_apps(hosting_id)` — the output now includes `site_id` per app.
+
+- `list_nodejs_apps` now goes through the **public Bearer API** (`/1/web_hostings/{hid}/sites`) — more resilient during Infomaniak manager outages.
+- All other nodejs_* tools route on `/proxy/1/hostings/{site_id}/...`.
+
 ## [0.15.0] — 2026-06-15
 
 ### Added — 4 new tools for FTP/SSH + DB user password & permissions management
