@@ -282,47 +282,70 @@ SshRoute        (feature_type "SshRoute",     root)
 
 The `VhostRoute.id` is the canonical handle for every Node.js action — Infomaniak surfaces it as `feature_id` in some responses and as `vhost_route_id` in others. **All action URLs use this id**, NOT the `Node.js` WebApp id.
 
-#### Endpoints (validated live, 2026-05-31)
+#### What `{id}` is in `/proxy/1/hostings/{id}/...` (re-verified 2026-06-15)
+
+**The `{id}` in every `/proxy/1/hostings/{id}/...` path is the `site_id`** (the
+hosting_3 site sitting inside the parent web_hosting), **NOT** the parent
+`hosting_id`. The two are different — e.g. for Marobal, `hosting_id = 743330`
+but `site_id = 106013`, and a `POST /proxy/1/hostings/743330/nodejs/.../actions/restart`
+returns 403 access_denied while `POST /proxy/1/hostings/106013/nodejs/.../actions/restart`
+returns 200 success.
+
+This was discovered when the manager came back from a partial outage on 2026-06-15
+— a manual restart from the UI worked while the MCP tool kept failing with 403.
+The cURL capture of the manager UI's XHR revealed the correct path uses `site_id`.
+
+Earlier versions of this MCP (v0.12.0 through v0.15.0) passed `hosting_id`
+everywhere and worked by coincidence on hostings where the parent hosting id
+and the inner site id happened to match. They returned 403 on all the others.
+Fixed in v0.15.1 — the nodejs_* tools (except `list_nodejs_apps`) now require
+`site_id` instead of `hosting_id`, discovered via `infomaniak_list_nodejs_apps`.
+
+`list_nodejs_apps` itself was rewritten to use the public Bearer API
+(`/1/web_hostings/{hosting_id}/sites`) — more resilient during Infomaniak
+manager outages.
+
+#### Endpoints (validated live, 2026-06-15)
 
 ```
-# Discovery
-GET  /proxy/1/hostings/{id}                                      → minimal state
-GET  /proxy/1/hostings/{id}?with[]=hosting_features              → list apps via tree walk
+# Discovery (the path id is site_id — the inner hosting_3 id, not the parent web_hosting id)
+GET  /proxy/1/hostings/{site_id}                                 → minimal state
+GET  /proxy/1/hostings/{site_id}?with[]=hosting_features         → list apps via tree walk
                                                                    accepted ?with[]: product |
                                                                    hosting_features | offer | feature
 
 # App config
-GET  /proxy/1/hostings/{id}/nodejs/{vhost}?with[]=ips,ssl,environments,storage
+GET  /proxy/1/hostings/{site_id}/nodejs/{vhost}?with[]=ips,ssl,environments,storage
                                                                  → Node version, port,
                                                                    start_command, build_command,
                                                                    IPv4 + IPv6, SSL, storage
                                                                    accepted ?with[]:
                                                                    ssl | ips | environments | storage
-GET  /proxy/1/hostings/{id}/webapp/{vhost}                       → compact runtime info
+GET  /proxy/1/hostings/{site_id}/webapp/{vhost}                       → compact runtime info
 
 # Live state + telemetry
-GET  /proxy/1/hostings/{id}/nodejs/{vhost}/actions/status        → {status: "Running" | "Stopped"}
-GET  /proxy/1/hostings/{id}/nodejs/{vhost}/jobs                  → recent jobs + per-job log_stream
-GET  /proxy/1/hostings/{id}/webapp/{vhost}/stream                → {endpoint, jwt_token}
+GET  /proxy/1/hostings/{site_id}/nodejs/{vhost}/actions/status        → {status: "Running" | "Stopped"}
+GET  /proxy/1/hostings/{site_id}/nodejs/{vhost}/jobs                  → recent jobs + per-job log_stream
+GET  /proxy/1/hostings/{site_id}/webapp/{vhost}/stream                → {endpoint, jwt_token}
                                                                    for the LIVE stdout/stderr SSE
                                                                    on manager-logs-01.hosting-ik.com
                                                                    JWT exp ~1h, aud "msgbeam"
-GET  /proxy/1/hostings/{id}/webapp/{vhost}/thumbnail?refresh=... → base64 JPEG screenshot
+GET  /proxy/1/hostings/{site_id}/webapp/{vhost}/thumbnail?refresh=... → base64 JPEG screenshot
 
 # FQDNs
-GET  /proxy/1/hostings/{id}/vhost_route/{vhost}/aliases?with[]=domain_options
+GET  /proxy/1/hostings/{site_id}/vhost_route/{vhost}/aliases?with[]=domain_options
                                                                  → primary + preview FQDNs
 
 # Mutations (CSRF required)
-POST /proxy/1/hostings/{id}/nodejs/{vhost}/actions/start         → {status: "Running"}
-POST /proxy/1/hostings/{id}/nodejs/{vhost}/actions/stop          → {status: "Stopped"} ⚠ downtime
-POST /proxy/1/hostings/{id}/nodejs/{vhost}/actions/restart       → {status: "Running"}
-POST /proxy/1/hostings/{id}/nodejs/{vhost}/actions/build         → {resource_id, status, log_stream}
+POST /proxy/1/hostings/{site_id}/nodejs/{vhost}/actions/start         → {status: "Running"}
+POST /proxy/1/hostings/{site_id}/nodejs/{vhost}/actions/stop          → {status: "Stopped"} ⚠ downtime
+POST /proxy/1/hostings/{site_id}/nodejs/{vhost}/actions/restart       → {status: "Running"}
+POST /proxy/1/hostings/{site_id}/nodejs/{vhost}/actions/build         → {resource_id, status, log_stream}
                                                                    triggers build_command then
                                                                    relaunches the app
 
 # Generic save endpoint — DO NOT USE for actions
-PATCH /proxy/1/hostings/{id}/nodejs/{vhost}                      → always {success: true} but
+PATCH /proxy/1/hostings/{site_id}/nodejs/{vhost}                      → always {success: true} but
                                                                    mutates nothing observable
                                                                    (generic config-save endpoint
                                                                     that silently no-ops on
@@ -336,17 +359,17 @@ PATCH /proxy/1/hostings/{id}/nodejs/{vhost}                      → always {suc
 We probed extensively for these — they all return 404:
 
 ```
-POST /proxy/1/hostings/{id}/nodejs/{vhost}/actions/deploy   ← no separate deploy action;
+POST /proxy/1/hostings/{site_id}/nodejs/{vhost}/actions/deploy   ← no separate deploy action;
                                                               code is pushed via git/SFTP/SSH
                                                               then `build` is triggered
-POST /proxy/1/hostings/{id}/nodejs/{vhost}/actions/install  ← npm install is part of `build`
-POST /proxy/1/hostings/{id}/nodejs/{vhost}/actions/reload   ← not a thing — `restart` is the
+POST /proxy/1/hostings/{site_id}/nodejs/{vhost}/actions/install  ← npm install is part of `build`
+POST /proxy/1/hostings/{site_id}/nodejs/{vhost}/actions/reload   ← not a thing — `restart` is the
                                                               soft-restart
-GET  /proxy/1/hostings/{id}/nodejs/{vhost}/env_variables    ← env vars NOT in the API;
-GET  /proxy/1/hostings/{id}/nodejs/{vhost}/env                managed via the app's `.env`
-GET  /proxy/1/hostings/{id}/nodejs/{vhost}/variables          file over SSH
-GET  /proxy/1/hostings/{id}/nodejs/{vhost}/dependencies     ← introspect via SSH (`npm ls`)
-GET  /proxy/1/hostings/{id}/nodejs/{vhost}/logs             ← no buffered log endpoint;
+GET  /proxy/1/hostings/{site_id}/nodejs/{vhost}/env_variables    ← env vars NOT in the API;
+GET  /proxy/1/hostings/{site_id}/nodejs/{vhost}/env                managed via the app's `.env`
+GET  /proxy/1/hostings/{site_id}/nodejs/{vhost}/variables          file over SSH
+GET  /proxy/1/hostings/{site_id}/nodejs/{vhost}/dependencies     ← introspect via SSH (`npm ls`)
+GET  /proxy/1/hostings/{site_id}/nodejs/{vhost}/logs             ← no buffered log endpoint;
                                                               consume the live SSE stream
 ```
 
