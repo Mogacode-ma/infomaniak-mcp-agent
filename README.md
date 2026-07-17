@@ -8,13 +8,13 @@
 [![Node](https://img.shields.io/badge/node-%3E%3D18-43853d.svg)](https://nodejs.org)
 [![TypeScript strict](https://img.shields.io/badge/TypeScript-strict-3178c6.svg)](https://www.typescriptlang.org/)
 [![MCP](https://img.shields.io/badge/Model_Context_Protocol-1.0-9333ea.svg)](https://modelcontextprotocol.io/)
-[![Tools](https://img.shields.io/badge/tools-81-blueviolet.svg)](#tools)
+[![Tools](https://img.shields.io/badge/tools-78-blueviolet.svg)](#tools)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](./CONTRIBUTING.md)
 [![GitHub stars](https://img.shields.io/github/stars/Mogacode-ma/infomaniak-mcp-agent?style=social)](https://github.com/Mogacode-ma/infomaniak-mcp-agent/stargazers)
 
 > **Drive your entire [Infomaniak](https://www.infomaniak.com) account from [Claude](https://www.anthropic.com/claude) — agentic, two-phase commit, open-source.**
 
-`infomaniak-mcp-agent` is an unofficial [Model Context Protocol](https://modelcontextprotocol.io/) server that exposes the full surface of Infomaniak — Switzerland's sovereign cloud — as **81 tools** an LLM can call directly: web hosting, mail (kSuite), kDrive, domains, DNS, DNSSEC, FTP/SSH users, AI products, account audits and more. Every destructive operation goes through a strict two-phase commit, so an agent can never silently delete or mutate something on your account.
+`infomaniak-mcp-agent` is an unofficial [Model Context Protocol](https://modelcontextprotocol.io/) server that exposes the full surface of Infomaniak — Switzerland's sovereign cloud — as **78 tools** an LLM can call directly: web hosting, mail (kSuite), kDrive, domains, DNS, DNSSEC, FTP/SSH users, AI products, account audits and more. Every destructive operation goes through a strict two-phase commit, so an agent can never silently delete or mutate something on your account.
 
 ```
 You → Claude:  "audit the example.com hosting and tell me which mailboxes are over quota"
@@ -202,7 +202,7 @@ Claude: [calls infomaniak_dns_create_record again with the token]
 
 ## Tools
 
-81 tools across 13 areas. Use `infomaniak_help` to fuzzy-search by intent, or `infomaniak_explain` to dump a tool's full JSON schema.
+78 tools across 22 areas. Use `infomaniak_help` to fuzzy-search by intent, or `infomaniak_explain` to dump a tool's full JSON schema.
 
 ### Introspection (start here)
 | Tool | Annotation | Purpose |
@@ -230,6 +230,15 @@ Claude: [calls infomaniak_dns_create_record again with the token]
 | `infomaniak_create_site` | **destructive** | Two-phase: returns a plan + token, second call with token actually creates. |
 | `infomaniak_delete_site` | **destructive** | Two-phase delete (full preview of the site to be removed). |
 
+### Site aliases
+Additional FQDNs bound to an existing site's Apache vhost / DocumentRoot — how you serve several domains from a single install without provisioning a new site.
+
+| Tool | Annotation | Purpose |
+|---|---|---|
+| `infomaniak_list_site_aliases` | read-only | FQDNs (main + aliases) bound to a site. |
+| `infomaniak_add_site_aliases` | **destructive** | Bind one or more FQDNs (wildcards like `*.example.com` accepted). Two-phase. Asynchronous: returns a `progress_id`, the alias shows up in `list_site_aliases` a few seconds later. |
+| `infomaniak_delete_site_alias` | **destructive** | Unbind one alias FQDN (the main FQDN cannot be removed). Two-phase. |
+
 ### SSL certificates
 | Tool | Annotation | Purpose |
 |---|---|---|
@@ -246,14 +255,22 @@ Claude: [calls infomaniak_dns_create_record again with the token]
 | `infomaniak_delete_database` | **destructive** | Two-phase delete (plan shows disk usage + linked app). |
 | `infomaniak_list_database_users` | read-only | MariaDB-level user accounts attached to a hosting (`applications`, `permissions`, phpMyAdmin link). |
 | `infomaniak_get_database_user` | read-only | Detail of a single MariaDB user. |
+| `infomaniak_change_database_user_password` | **destructive** | Rotate a MariaDB user's password **and** re-declare its grants atomically. Two-phase. |
+| `infomaniak_change_database_user_permissions` | **destructive** | Change which databases a user can reach (read/write/admin per DB), password untouched. Two-phase. |
 
-> ⚠️ Note: this MCP intentionally does **not** expose a tool that changes a database user's password through the public API — see [`REVERSE-ENGINEERING.md` §Database users](./REVERSE-ENGINEERING.md#database-users--patch-database_usersuser-silently-wipes-permissions-) for the destructive side-effect that prevents it. Rotate database passwords via direct MariaDB `ALTER USER` over SSH instead.
+> ⚠️ Both tools take a `grants` array that declares **every** database the user may access — anything omitted is set to no-access. Call `infomaniak_get_database_user` first and copy the current `permissions`, or you will silently revoke access. This is deliberate: it is also the canonical way to revoke a grant.
+>
+> They use the manager-private endpoint rather than the public API on purpose. The public `PATCH /1/web_hostings/{id}/database_users/{user}` accepts a password, changes it, and **silently wipes `permissions` and `applications`** — see [`REVERSE-ENGINEERING.md` §Database users](./REVERSE-ENGINEERING.md#database-users--patch-database_usersuser-silently-wipes-permissions-).
+>
+> Prefer these tools over a direct MariaDB `ALTER USER` / `SET PASSWORD` over SSH. The manager is the source of truth for hosting database credentials: a password set only in MariaDB diverges from it silently, and gets reverted to the manager's value at the next Infomaniak maintenance — which can be months later, with no apparent link to the change.
 
 ### FTP / SSH users
 | Tool | Annotation | Purpose |
 |---|---|---|
 | `infomaniak_list_hosting_users` | read-only | FTP / SSH users on a web hosting. |
 | `infomaniak_create_hosting_user` | **destructive** | Two-phase create with `connection_type`: `ftp` (SFTP-only) or `ssh` (full shell + FTP). |
+| `infomaniak_change_hosting_user_password` | **destructive** | Rotate an FTP/SSH user's password. Two-phase. Pass the user's current `connection_type` to leave it untouched. |
+| `infomaniak_change_hosting_user_connection_type` | **destructive** | Promote / demote a user between `ftp` and `ssh`. Password untouched. Two-phase. |
 | `infomaniak_delete_hosting_user` | **destructive** | Two-phase revoke (files preserved). |
 
 ### DNS & DNSSEC
@@ -338,8 +355,8 @@ Claude: [calls infomaniak_dns_create_record again with the token]
 | Tool | Annotation | Purpose |
 |---|---|---|
 | `infomaniak_list_short_urls` | read-only | Short URLs configured on a domain. |
+| `infomaniak_short_urls_quota` | read-only | Short URL quota used / available on a domain. |
 | `infomaniak_create_short_url` | **destructive** | Two-phase create. |
-| `infomaniak_delete_short_url` | **destructive** | Two-phase delete. |
 
 ### Swiss Backup
 | Tool | Annotation | Purpose |
