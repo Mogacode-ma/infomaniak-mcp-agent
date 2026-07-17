@@ -1,0 +1,30 @@
+{
+  "args": {
+    "mail_hosting_id": 100052,
+    "mailbox_name": "Example Org 49",
+    "alias": "example.com"
+  },
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"status\": \"plan\",\n  \"plan\": {\n    \"mail_hosting_id\": 100051,\n    \"mailbox_name\": \"Example Org 48\",\n    \"alias\": \"example.com\"\n  },\n  \"confirmation_token\": \"5e8d65a2-98ed-4eb0-a1df-a39c2fd3d0ad\",\n  \"token_expires_at\": \"2026-05-27T09:10:12.805Z\",\n  \"next_step_markdown\": \"## Plan — add alias\\n\\n- **Mailbox**: `example.com`\\n- **New alias**: `example.com`\\n\\n### Next step\\nRe-call with `confirmation_token: \\\"5e8d65a2-98ed-4eb0-a1df-a39c2fd3d0ad\\\"`.\"\n}"
+        }
+      ],
+      "structuredContent": {
+        "status": "plan",
+        "plan": {
+          "mail_hosting_id": 100053,
+          "mailbox_name": "Example Org 50",
+          "alias": "example.com"
+        },
+        "confirmation_token": "5e8d65a2-98ed-4eb0-a1df-a39c2fd3d0ad",
+        "token_expires_at": "2026-05-27T09:10:12.805Z",
+        "next_step_markdown": "## Plan — add alias\n\n- **Mailbox**: `example.com`\n- **New alias**: `example.com`\n\n### Next step\nRe-call with `confirmation_token: \"5e8d65a2-98ed-4eb0-a1df-a39c2fd3d0ad\"`."
+      }
+    },
+    "jsonrpc": "2.0",
+    "id": 38
+  }
+}

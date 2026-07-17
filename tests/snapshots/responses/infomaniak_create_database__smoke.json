@@ -1,0 +1,19 @@
+{
+  "args": {
+    "hosting_id": 100048,
+    "database_name": "example.com"
+  },
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "❌ [\n  {\n    \"validation\": \"regex\",\n    \"code\": \"invalid_string\",\n    \"message\": \"database_name must be alphanumeric with underscores\",\n    \"path\": [\n      \"database_name\"\n    ]\n  }\n]"
+        }
+      ],
+      "isError": true
+    },
+    "jsonrpc": "2.0",
+    "id": 21
+  }
+}

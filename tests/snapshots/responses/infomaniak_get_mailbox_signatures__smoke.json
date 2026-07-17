@@ -1,0 +1,19 @@
+{
+  "args": {
+    "mail_hosting_id": 100276,
+    "mailbox_name": "Example Org 63"
+  },
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "❌ account not found with mail address example.com@example.com\nCode: object_not_found_in_padl\nHTTP status: 404\n→ The endpoint https://example.com/1/mail_hostings/496525/mailboxes/example.com/signatures does not exist or the resource was deleted."
+        }
+      ],
+      "isError": true
+    },
+    "jsonrpc": "2.0",
+    "id": 34
+  }
+}

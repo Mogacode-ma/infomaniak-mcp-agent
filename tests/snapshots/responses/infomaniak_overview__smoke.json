@@ -1,0 +1,450 @@
+{
+  "args": {},
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"total_accounts\": 17,\n  \"total_products\": 309,\n  \"accounts\": [\n    {\n      \"account_id\": 100794,\n      \"account_name\": \"Example Org 398\",\n      \"total_products\": 130,\n      \"by_service\": [\n        {\n          \"service_name\": \"domain\",\n          \"count\": 62\n        },\n        {\n          \"service_name\": \"email_hosting\",\n          \"count\": 49\n        },\n        {\n          \"service_name\": \"hosting\",\n          \"count\": 16\n        },\n        {\n          \"service_name\": \"ksuite\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"drive\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"kchat\",\n          \"count\": 1\n        }\n      ]\n    },\n    {\n      \"account_id\": 100795,\n      \"account_name\": \"Example Org 399\",\n      \"total_products\": 107,\n      \"by_service\": [\n        {\n          \"service_name\": \"domain\",\n          \"count\": 46\n        },\n        {\n          \"service_name\": \"email_hosting\",\n          \"count\": 32\n        },\n        {\n          \"service_name\": \"hosting\",\n          \"count\": 12\n        },\n        {\n          \"service_name\": \"hosting_3\",\n          \"count\": 7\n        },\n        {\n          \"service_name\": \"mailing\",\n          \"count\": 2\n        },\n        {\n          \"service_name\": \"cloud\",\n          \"count\": 2\n        },\n        {\n          \"service_name\": \"inviation\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"support_premium\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"ksuite\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"drive\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"kchat\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"custom_url\",\n          \"count\": 1\n        }\n      ]\n    },\n    {\n      \"account_id\": 100796,\n      \"account_name\": \"Example Org 400\",\n      \"total_products\": 15,\n      \"by_service\": [\n        {\n          \"service_name\": \"domain\",\n          \"count\": 7\n        },\n        {\n          \"service_name\": \"email_hosting\",\n          \"count\": 3\n        },\n        {\n          \"service_name\": \"cloud\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"hosting\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"ksuite\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"drive\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"kchat\",\n          \"count\": 1\n        }\n      ]\n    },\n    {\n      \"account_id\": 100797,\n      \"account_name\": \"Example Org 401\",\n      \"total_products\": 9,\n      \"by_service\": [\n        {\n          \"service_name\": \"domain\",\n          \"count\": 2\n        },\n        {\n          \"service_name\": \"email_hosting\",\n          \"count\": 2\n        },\n        {\n          \"service_name\": \"ksuite\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"drive\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"kchat\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"hosting\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"vod\",\n          \"count\": 1\n        }\n      ]\n    },\n    {\n      \"account_id\": 100798,\n      \"account_name\": \"Example Org 402\",\n      \"total_products\": 7,\n      \"by_service\": [\n        {\n          \"service_name\": \"ksuite\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"drive\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"kchat\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"email_hosting\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"domain\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"hosting\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"mailing\",\n          \"count\": 1\n        }\n      ]\n    },\n    {\n      \"account_id\": 100799,\n      \"account_name\": \"Example Org 403\",\n      \"total_products\": 6,\n      \"by_service\": [\n        {\n          \"service_name\": \"domain\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"hosting\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"email_hosting\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"ksuite\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"drive\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"kchat\",\n          \"count\": 1\n        }\n      ]\n    },\n    {\n      \"account_id\": 100800,\n      \"account_name\": \"Example Org 404\",\n      \"total_products\": 6,\n      \"by_service\": [\n        {\n          \"service_name\": \"domain\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"ksuite\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"email_hosting\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"drive\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"kchat\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"hosting\",\n          \"count\": 1\n        }\n      ]\n    },\n    {\n      \"account_id\": 100801,\n      \"account_name\": \"Example Org 405\",\n      \"total_products\": 6,\n      \"by_service\": [\n        {\n          \"service_name\": \"domain\",\n          \"count\": 2\n        },\n        {\n          \"service_name\": \"ksuite\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"email_hosting\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"drive\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"kchat\",\n          \"count\": 1\n        }\n      ]\n    },\n    {\n      \"account_id\": 100802,\n      \"account_name\": \"Example Org 406\",\n      \"total_products\": 6,\n      \"by_service\": [\n        {\n          \"service_name\": \"domain\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"ksuite\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"email_hosting\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"drive\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"kchat\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"hosting\",\n          \"count\": 1\n        }\n      ]\n    },\n    {\n      \"account_id\": 100803,\n      \"account_name\": \"Example Org 407\",\n      \"total_products\": 6,\n      \"by_service\": [\n        {\n          \"service_name\": \"ksuite\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"drive\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"kchat\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"domain\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"email_hosting\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"hosting\",\n          \"count\": 1\n        }\n      ]\n    },\n    {\n      \"account_id\": 100804,\n      \"account_name\": \"Example Org 408\",\n      \"total_products\": 4,\n      \"by_service\": [\n        {\n          \"service_name\": \"hosting\",\n          \"count\": 2\n        },\n        {\n          \"service_name\": \"domain\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"email_hosting\",\n          \"count\": 1\n        }\n      ]\n    },\n    {\n      \"account_id\": 100805,\n      \"account_name\": \"Example Org 409\",\n      \"total_products\": 3,\n      \"by_service\": [\n        {\n          \"service_name\": \"domain\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"email_hosting\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"hosting\",\n          \"count\": 1\n        }\n      ]\n    },\n    {\n      \"account_id\": 100806,\n      \"account_name\": \"Example Org 410\",\n      \"total_products\": 3,\n      \"by_service\": [\n        {\n          \"service_name\": \"ksuite\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"drive\",\n          \"count\": 1\n        },\n        {\n          \"service_name\": \"kchat\",\n          \"count\": 1\n        }\n      ]\n    },\n    {\n      \"account_id\": 100807,\n      \"account_name\": \"Example Org 411\",\n      \"total_products\": 1,\n      \"by_service\": [\n        {\n          \"service_name\": \"hosting\",\n          \"count\": 1\n        }\n      ]\n    },\n    {\n      \"account_id\": 100808,\n      \"account_name\": \"Example Org 412\",\n      \"total_products\": 0,\n      \"by_service\": []\n    },\n    {\n      \"account_id\": 100809,\n      \"account_name\": \"Example Org 413\",\n      \"total_products\": 0,\n      \"by_service\": []\n    },\n    {\n      \"account_id\": 100810,\n      \"account_name\": \"Example Org 414\",\n      \"total_products\": 0,\n      \"by_service\": []\n    }\n  ],\n  \"summary_markdown\": \"# Infomaniak account overview\\n\\n**17 organization(s) — 309 product(s) total**\\n\\n## Example Org (id 999999)\\nTotal: **130** products\\n\\n- `domain`: 62\\n- `email_hosting`: 49\\n- `hosting`: 16\\n- `ksuite`: 1\\n- `drive`: 1\\n- `kchat`: 1\\n\\n## Mogacode (id 999999)\\nTotal: **107** products\\n\\n- `domain`: 46\\n- `email_hosting`: 32\\n- `hosting`: 12\\n- `hosting_3`: 7\\n- `mailing`: 2\\n- `cloud`: 2\\n- `inviation`: 1\\n- `support_premium`: 1\\n- `ksuite`: 1\\n- `drive`: 1\\n- `kchat`: 1\\n- `custom_url`: 1\\n\\n## Example Org (id 999999)\\nTotal: **15** products\\n\\n- `domain`: 7\\n- `email_hosting`: 3\\n- `cloud`: 1\\n- `hosting`: 1\\n- `ksuite`: 1\\n- `drive`: 1\\n- `kchat`: 1\\n\\n## Example Org (id 999999)\\nTotal: **9** products\\n\\n- `domain`: 2\\n- `email_hosting`: 2\\n- `ksuite`: 1\\n- `drive`: 1\\n- `kchat`: 1\\n- `hosting`: 1\\n- `vod`: 1\\n\\n## Example Org (id 999999)\\nTotal: **7** products\\n\\n- `ksuite`: 1\\n- `drive`: 1\\n- `kchat`: 1\\n- `email_hosting`: 1\\n- `domain`: 1\\n- `hosting`: 1\\n- `mailing`: 1\\n\\n## alain@Example example.com (id 999999)\\nTotal: **6** products\\n\\n- `domain`: 1\\n- `hosting`: 1\\n- `email_hosting`: 1\\n- `ksuite`: 1\\n- `drive`: 1\\n- `kchat`: 1\\n\\n## Example Org (id 999999)\\nTotal: **6** products\\n\\n- `domain`: 1\\n- `ksuite`: 1\\n- `email_hosting`: 1\\n- `drive`: 1\\n- `kchat`: 1\\n- `hosting`: 1\\n\\n## Example Org (id 999999)\\nTotal: **6** products\\n\\n- `domain`: 2\\n- `ksuite`: 1\\n- `email_hosting`: 1\\n- `drive`: 1\\n- `kchat`: 1\\n\\n## Example Org (id 999999)\\nTotal: **6** products\\n\\n- `domain`: 1\\n- `ksuite`: 1\\n- `email_hosting`: 1\\n- `drive`: 1\\n- `kchat`: 1\\n- `hosting`: 1\\n\\n## Example Org (id 999999)\\nTotal: **6** products\\n\\n- `ksuite`: 1\\n- `drive`: 1\\n- `kchat`: 1\\n- `domain`: 1\\n- `email_hosting`: 1\\n- `hosting`: 1\\n\\n## Example Org (id 999999)\\nTotal: **4** products\\n\\n- `hosting`: 2\\n- `domain`: 1\\n- `email_hosting`: 1\\n\\n## Example Org  (id 999999)\\nTotal: **3** products\\n\\n- `domain`: 1\\n- `email_hosting`: 1\\n- `hosting`: 1\\n\\n## Example Org (id 999999)\\nTotal: **3** products\\n\\n- `ksuite`: 1\\n- `drive`: 1\\n- `kchat`: 1\\n\\n## Example Org (id 999999)\\nTotal: **1** products\\n\\n- `hosting`: 1\\n\\n## Mediasanté (id 999999)\\nTotal: **0** products\\n\\n## Example Org (id 999999)\\nTotal: **0** products\\n\\n## Example Org (id 999999)\\nTotal: **0** products\\n\"\n}"
+        }
+      ],
+      "structuredContent": {
+        "total_accounts": 17,
+        "total_products": 309,
+        "accounts": [
+          {
+            "account_id": 100811,
+            "account_name": "Example Org 415",
+            "total_products": 130,
+            "by_service": [
+              {
+                "service_name": "domain",
+                "count": 62
+              },
+              {
+                "service_name": "email_hosting",
+                "count": 49
+              },
+              {
+                "service_name": "hosting",
+                "count": 16
+              },
+              {
+                "service_name": "ksuite",
+                "count": 1
+              },
+              {
+                "service_name": "drive",
+                "count": 1
+              },
+              {
+                "service_name": "kchat",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "account_id": 100812,
+            "account_name": "Example Org 416",
+            "total_products": 107,
+            "by_service": [
+              {
+                "service_name": "domain",
+                "count": 46
+              },
+              {
+                "service_name": "email_hosting",
+                "count": 32
+              },
+              {
+                "service_name": "hosting",
+                "count": 12
+              },
+              {
+                "service_name": "hosting_3",
+                "count": 7
+              },
+              {
+                "service_name": "mailing",
+                "count": 2
+              },
+              {
+                "service_name": "cloud",
+                "count": 2
+              },
+              {
+                "service_name": "inviation",
+                "count": 1
+              },
+              {
+                "service_name": "support_premium",
+                "count": 1
+              },
+              {
+                "service_name": "ksuite",
+                "count": 1
+              },
+              {
+                "service_name": "drive",
+                "count": 1
+              },
+              {
+                "service_name": "kchat",
+                "count": 1
+              },
+              {
+                "service_name": "custom_url",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "account_id": 100813,
+            "account_name": "Example Org 417",
+            "total_products": 15,
+            "by_service": [
+              {
+                "service_name": "domain",
+                "count": 7
+              },
+              {
+                "service_name": "email_hosting",
+                "count": 3
+              },
+              {
+                "service_name": "cloud",
+                "count": 1
+              },
+              {
+                "service_name": "hosting",
+                "count": 1
+              },
+              {
+                "service_name": "ksuite",
+                "count": 1
+              },
+              {
+                "service_name": "drive",
+                "count": 1
+              },
+              {
+                "service_name": "kchat",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "account_id": 100814,
+            "account_name": "Example Org 418",
+            "total_products": 9,
+            "by_service": [
+              {
+                "service_name": "domain",
+                "count": 2
+              },
+              {
+                "service_name": "email_hosting",
+                "count": 2
+              },
+              {
+                "service_name": "ksuite",
+                "count": 1
+              },
+              {
+                "service_name": "drive",
+                "count": 1
+              },
+              {
+                "service_name": "kchat",
+                "count": 1
+              },
+              {
+                "service_name": "hosting",
+                "count": 1
+              },
+              {
+                "service_name": "vod",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "account_id": 100815,
+            "account_name": "Example Org 419",
+            "total_products": 7,
+            "by_service": [
+              {
+                "service_name": "ksuite",
+                "count": 1
+              },
+              {
+                "service_name": "drive",
+                "count": 1
+              },
+              {
+                "service_name": "kchat",
+                "count": 1
+              },
+              {
+                "service_name": "email_hosting",
+                "count": 1
+              },
+              {
+                "service_name": "domain",
+                "count": 1
+              },
+              {
+                "service_name": "hosting",
+                "count": 1
+              },
+              {
+                "service_name": "mailing",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "account_id": 100816,
+            "account_name": "Example Org 420",
+            "total_products": 6,
+            "by_service": [
+              {
+                "service_name": "domain",
+                "count": 1
+              },
+              {
+                "service_name": "hosting",
+                "count": 1
+              },
+              {
+                "service_name": "email_hosting",
+                "count": 1
+              },
+              {
+                "service_name": "ksuite",
+                "count": 1
+              },
+              {
+                "service_name": "drive",
+                "count": 1
+              },
+              {
+                "service_name": "kchat",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "account_id": 100817,
+            "account_name": "Example Org 421",
+            "total_products": 6,
+            "by_service": [
+              {
+                "service_name": "domain",
+                "count": 1
+              },
+              {
+                "service_name": "ksuite",
+                "count": 1
+              },
+              {
+                "service_name": "email_hosting",
+                "count": 1
+              },
+              {
+                "service_name": "drive",
+                "count": 1
+              },
+              {
+                "service_name": "kchat",
+                "count": 1
+              },
+              {
+                "service_name": "hosting",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "account_id": 100818,
+            "account_name": "Example Org 422",
+            "total_products": 6,
+            "by_service": [
+              {
+                "service_name": "domain",
+                "count": 2
+              },
+              {
+                "service_name": "ksuite",
+                "count": 1
+              },
+              {
+                "service_name": "email_hosting",
+                "count": 1
+              },
+              {
+                "service_name": "drive",
+                "count": 1
+              },
+              {
+                "service_name": "kchat",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "account_id": 100819,
+            "account_name": "Example Org 423",
+            "total_products": 6,
+            "by_service": [
+              {
+                "service_name": "domain",
+                "count": 1
+              },
+              {
+                "service_name": "ksuite",
+                "count": 1
+              },
+              {
+                "service_name": "email_hosting",
+                "count": 1
+              },
+              {
+                "service_name": "drive",
+                "count": 1
+              },
+              {
+                "service_name": "kchat",
+                "count": 1
+              },
+              {
+                "service_name": "hosting",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "account_id": 100820,
+            "account_name": "Example Org 424",
+            "total_products": 6,
+            "by_service": [
+              {
+                "service_name": "ksuite",
+                "count": 1
+              },
+              {
+                "service_name": "drive",
+                "count": 1
+              },
+              {
+                "service_name": "kchat",
+                "count": 1
+              },
+              {
+                "service_name": "domain",
+                "count": 1
+              },
+              {
+                "service_name": "email_hosting",
+                "count": 1
+              },
+              {
+                "service_name": "hosting",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "account_id": 100821,
+            "account_name": "Example Org 425",
+            "total_products": 4,
+            "by_service": [
+              {
+                "service_name": "hosting",
+                "count": 2
+              },
+              {
+                "service_name": "domain",
+                "count": 1
+              },
+              {
+                "service_name": "email_hosting",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "account_id": 100822,
+            "account_name": "Example Org 426",
+            "total_products": 3,
+            "by_service": [
+              {
+                "service_name": "domain",
+                "count": 1
+              },
+              {
+                "service_name": "email_hosting",
+                "count": 1
+              },
+              {
+                "service_name": "hosting",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "account_id": 100823,
+            "account_name": "Example Org 427",
+            "total_products": 3,
+            "by_service": [
+              {
+                "service_name": "ksuite",
+                "count": 1
+              },
+              {
+                "service_name": "drive",
+                "count": 1
+              },
+              {
+                "service_name": "kchat",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "account_id": 100824,
+            "account_name": "Example Org 428",
+            "total_products": 1,
+            "by_service": [
+              {
+                "service_name": "hosting",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "account_id": 100825,
+            "account_name": "Example Org 429",
+            "total_products": 0,
+            "by_service": []
+          },
+          {
+            "account_id": 100826,
+            "account_name": "Example Org 430",
+            "total_products": 0,
+            "by_service": []
+          },
+          {
+            "account_id": 100827,
+            "account_name": "Example Org 431",
+            "total_products": 0,
+            "by_service": []
+          }
+        ],
+        "summary_markdown": "# Infomaniak account overview\n\n**17 organization(s) — 309 product(s) total**\n\n## Example Org (id 999999)\nTotal: **130** products\n\n- `domain`: 62\n- `email_hosting`: 49\n- `hosting`: 16\n- `ksuite`: 1\n- `drive`: 1\n- `kchat`: 1\n\n## Mogacode (id 999999)\nTotal: **107** products\n\n- `domain`: 46\n- `email_hosting`: 32\n- `hosting`: 12\n- `hosting_3`: 7\n- `mailing`: 2\n- `cloud`: 2\n- `inviation`: 1\n- `support_premium`: 1\n- `ksuite`: 1\n- `drive`: 1\n- `kchat`: 1\n- `custom_url`: 1\n\n## Example Org (id 999999)\nTotal: **15** products\n\n- `domain`: 7\n- `email_hosting`: 3\n- `cloud`: 1\n- `hosting`: 1\n- `ksuite`: 1\n- `drive`: 1\n- `kchat`: 1\n\n## Example Org (id 999999)\nTotal: **9** products\n\n- `domain`: 2\n- `email_hosting`: 2\n- `ksuite`: 1\n- `drive`: 1\n- `kchat`: 1\n- `hosting`: 1\n- `vod`: 1\n\n## Example Org (id 999999)\nTotal: **7** products\n\n- `ksuite`: 1\n- `drive`: 1\n- `kchat`: 1\n- `email_hosting`: 1\n- `domain`: 1\n- `hosting`: 1\n- `mailing`: 1\n\n## alain@Example example.com (id 999999)\nTotal: **6** products\n\n- `domain`: 1\n- `hosting`: 1\n- `email_hosting`: 1\n- `ksuite`: 1\n- `drive`: 1\n- `kchat`: 1\n\n## Example Org (id 999999)\nTotal: **6** products\n\n- `domain`: 1\n- `ksuite`: 1\n- `email_hosting`: 1\n- `drive`: 1\n- `kchat`: 1\n- `hosting`: 1\n\n## Example Org (id 999999)\nTotal: **6** products\n\n- `domain`: 2\n- `ksuite`: 1\n- `email_hosting`: 1\n- `drive`: 1\n- `kchat`: 1\n\n## Example Org (id 999999)\nTotal: **6** products\n\n- `domain`: 1\n- `ksuite`: 1\n- `email_hosting`: 1\n- `drive`: 1\n- `kchat`: 1\n- `hosting`: 1\n\n## Example Org (id 999999)\nTotal: **6** products\n\n- `ksuite`: 1\n- `drive`: 1\n- `kchat`: 1\n- `domain`: 1\n- `email_hosting`: 1\n- `hosting`: 1\n\n## Example Org (id 999999)\nTotal: **4** products\n\n- `hosting`: 2\n- `domain`: 1\n- `email_hosting`: 1\n\n## Example Org  (id 999999)\nTotal: **3** products\n\n- `domain`: 1\n- `email_hosting`: 1\n- `hosting`: 1\n\n## Example Org (id 999999)\nTotal: **3** products\n\n- `ksuite`: 1\n- `drive`: 1\n- `kchat`: 1\n\n## Example Org (id 999999)\nTotal: **1** products\n\n- `hosting`: 1\n\n## Mediasanté (id 999999)\nTotal: **0** products\n\n## Example Org (id 999999)\nTotal: **0** products\n\n## Example Org (id 999999)\nTotal: **0** products\n"
+      }
+    },
+    "jsonrpc": "2.0",
+    "id": 6
+  }
+}

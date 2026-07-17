@@ -1,0 +1,34 @@
+{
+  "args": {
+    "account_id": 100472
+  },
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"account_id\": 100468,\n  \"count\": 1,\n  \"drives\": [\n    {\n      \"id\": 100469,\n      \"name\": \"Example Org 204\",\n      \"size\": 131941395333120,\n      \"used_size\": 188459771781,\n      \"users_count\": 5,\n      \"users_quota\": 20,\n      \"in_maintenance\": false,\n      \"product_id\": 100470,\n      \"account_id\": 100471\n    }\n  ]\n}"
+        }
+      ],
+      "structuredContent": {
+        "account_id": 100473,
+        "count": 1,
+        "drives": [
+          {
+            "id": 100474,
+            "name": "Example Org 205",
+            "size": 131941395333120,
+            "used_size": 188459771781,
+            "users_count": 5,
+            "users_quota": 20,
+            "in_maintenance": false,
+            "product_id": 100475,
+            "account_id": 100476
+          }
+        ]
+      }
+    },
+    "jsonrpc": "2.0",
+    "id": 41
+  }
+}

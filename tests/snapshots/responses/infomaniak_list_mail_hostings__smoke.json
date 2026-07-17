@@ -1,0 +1,311 @@
+{
+  "args": {
+    "account_id": 100624
+  },
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"account_id\": 100559,\n  \"count\": 32,\n  \"mail_hostings\": [\n    {\n      \"id\": 100560,\n      \"account_id\": 100561,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"Example Org 244\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 100562,\n      \"account_id\": 100563,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"Example Org 245\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 100564,\n      \"account_id\": 100565,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"Example Org 246\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 100566,\n      \"account_id\": 100567,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"Example Org 247\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 100568,\n      \"account_id\": 100569,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"Example Org 248\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 100570,\n      \"account_id\": 100571,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"Example Org 249\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 100572,\n      \"account_id\": 100573,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"Example Org 250\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 100574,\n      \"account_id\": 100575,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"Example Org 251\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 100576,\n      \"account_id\": 100577,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"Example Org 252\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 100578,\n      \"account_id\": 100579,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"Example Org 253\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 100580,\n      \"account_id\": 100581,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"Example Org 254\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 100582,\n      \"account_id\": 100583,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"Example Org 255\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 100584,\n      \"account_id\": 100585,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"Example Org 256\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 100586,\n      \"account_id\": 100587,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"Example Org 257\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 100588,\n      \"account_id\": 100589,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"Example Org 258\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 100590,\n      \"account_id\": 100591,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"Example Org 259\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 100592,\n      \"account_id\": 100593,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"Example Org 260\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 100594,\n      \"account_id\": 100595,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"Example Org 261\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 100596,\n      \"account_id\": 100597,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"Example Org 262\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 100598,\n      \"account_id\": 100599,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"Example Org 263\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 100600,\n      \"account_id\": 100601,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"Example Org 264\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 100602,\n      \"account_id\": 100603,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"Example Org 265\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 100604,\n      \"account_id\": 100605,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"Example Org 266\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 100606,\n      \"account_id\": 100607,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"Example Org 267\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 100608,\n      \"account_id\": 100609,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"Example Org 268\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 100610,\n      \"account_id\": 100611,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"Example Org 269\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 100612,\n      \"account_id\": 100613,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"Example Org 270\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 100614,\n      \"account_id\": 100615,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"Example Org 271\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 100616,\n      \"account_id\": 100617,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"Example Org 272\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 100618,\n      \"account_id\": 100619,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"Example Org 273\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 100620,\n      \"account_id\": 100621,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"Example Org 274\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    },\n    {\n      \"id\": 100622,\n      \"account_id\": 100623,\n      \"service_name\": \"email_hosting\",\n      \"customer_name\": \"Example Org 275\",\n      \"has_maintenance\": false,\n      \"is_locked\": false,\n      \"has_operation_in_progress\": false\n    }\n  ]\n}"
+        }
+      ],
+      "structuredContent": {
+        "account_id": 100625,
+        "count": 32,
+        "mail_hostings": [
+          {
+            "id": 100626,
+            "account_id": 100627,
+            "service_name": "email_hosting",
+            "customer_name": "Example Org 276",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 100628,
+            "account_id": 100629,
+            "service_name": "email_hosting",
+            "customer_name": "Example Org 277",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 100630,
+            "account_id": 100631,
+            "service_name": "email_hosting",
+            "customer_name": "Example Org 278",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 100632,
+            "account_id": 100633,
+            "service_name": "email_hosting",
+            "customer_name": "Example Org 279",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 100634,
+            "account_id": 100635,
+            "service_name": "email_hosting",
+            "customer_name": "Example Org 280",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 100636,
+            "account_id": 100637,
+            "service_name": "email_hosting",
+            "customer_name": "Example Org 281",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 100638,
+            "account_id": 100639,
+            "service_name": "email_hosting",
+            "customer_name": "Example Org 282",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 100640,
+            "account_id": 100641,
+            "service_name": "email_hosting",
+            "customer_name": "Example Org 283",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 100642,
+            "account_id": 100643,
+            "service_name": "email_hosting",
+            "customer_name": "Example Org 284",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 100644,
+            "account_id": 100645,
+            "service_name": "email_hosting",
+            "customer_name": "Example Org 285",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 100646,
+            "account_id": 100647,
+            "service_name": "email_hosting",
+            "customer_name": "Example Org 286",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 100648,
+            "account_id": 100649,
+            "service_name": "email_hosting",
+            "customer_name": "Example Org 287",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 100650,
+            "account_id": 100651,
+            "service_name": "email_hosting",
+            "customer_name": "Example Org 288",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 100652,
+            "account_id": 100653,
+            "service_name": "email_hosting",
+            "customer_name": "Example Org 289",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 100654,
+            "account_id": 100655,
+            "service_name": "email_hosting",
+            "customer_name": "Example Org 290",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 100656,
+            "account_id": 100657,
+            "service_name": "email_hosting",
+            "customer_name": "Example Org 291",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 100658,
+            "account_id": 100659,
+            "service_name": "email_hosting",
+            "customer_name": "Example Org 292",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 100660,
+            "account_id": 100661,
+            "service_name": "email_hosting",
+            "customer_name": "Example Org 293",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 100662,
+            "account_id": 100663,
+            "service_name": "email_hosting",
+            "customer_name": "Example Org 294",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 100664,
+            "account_id": 100665,
+            "service_name": "email_hosting",
+            "customer_name": "Example Org 295",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 100666,
+            "account_id": 100667,
+            "service_name": "email_hosting",
+            "customer_name": "Example Org 296",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 100668,
+            "account_id": 100669,
+            "service_name": "email_hosting",
+            "customer_name": "Example Org 297",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 100670,
+            "account_id": 100671,
+            "service_name": "email_hosting",
+            "customer_name": "Example Org 298",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 100672,
+            "account_id": 100673,
+            "service_name": "email_hosting",
+            "customer_name": "Example Org 299",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 100674,
+            "account_id": 100675,
+            "service_name": "email_hosting",
+            "customer_name": "Example Org 300",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 100676,
+            "account_id": 100677,
+            "service_name": "email_hosting",
+            "customer_name": "Example Org 301",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 100678,
+            "account_id": 100679,
+            "service_name": "email_hosting",
+            "customer_name": "Example Org 302",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 100680,
+            "account_id": 100681,
+            "service_name": "email_hosting",
+            "customer_name": "Example Org 303",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 100682,
+            "account_id": 100683,
+            "service_name": "email_hosting",
+            "customer_name": "Example Org 304",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 100684,
+            "account_id": 100685,
+            "service_name": "email_hosting",
+            "customer_name": "Example Org 305",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 100686,
+            "account_id": 100687,
+            "service_name": "email_hosting",
+            "customer_name": "Example Org 306",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          },
+          {
+            "id": 100688,
+            "account_id": 100689,
+            "service_name": "email_hosting",
+            "customer_name": "Example Org 307",
+            "has_maintenance": false,
+            "is_locked": false,
+            "has_operation_in_progress": false
+          }
+        ]
+      }
+    },
+    "jsonrpc": "2.0",
+    "id": 31
+  }
+}

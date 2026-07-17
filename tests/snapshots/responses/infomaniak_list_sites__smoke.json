@@ -1,0 +1,184 @@
+{
+  "args": {
+    "hosting_id": 100759
+  },
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"hosting_id\": 100728,\n  \"sites\": [\n    {\n      \"id\": 100729,\n      \"account_id\": 100730,\n      \"customer_name\": \"Example Org 342\",\n      \"hosting_type\": \"h2\",\n      \"main_fqdn\": \"example.com\",\n      \"directory\": \"/sites/example.com\",\n      \"ssl_status\": \"free\",\n      \"ssl_issuer\": \"Example Org 343\",\n      \"has_wordpress\": false,\n      \"has_website_builder\": false,\n      \"applications\": [],\n      \"parent_id\": 100731,\n      \"parent_hosting_name\": \"Example Org 344\"\n    },\n    {\n      \"id\": 100732,\n      \"account_id\": 100733,\n      \"customer_name\": \"Example Org 345\",\n      \"hosting_type\": \"h2\",\n      \"main_fqdn\": \"example.com\",\n      \"directory\": \"/sites/example.com\",\n      \"ssl_status\": \"free\",\n      \"ssl_issuer\": \"Example Org 346\",\n      \"has_wordpress\": true,\n      \"has_website_builder\": false,\n      \"applications\": [\n        {\n          \"id\": 100734,\n          \"type\": \"wordpress\",\n          \"version\": \"6.8.1\",\n          \"name\": \"Example Org 347\",\n          \"url\": \"https://example.com\",\n          \"link_admin\": \"https://example.com/wp-admin/\",\n          \"is_complete\": true\n        }\n      ],\n      \"parent_id\": 100735,\n      \"parent_hosting_name\": \"Example Org 348\"\n    },\n    {\n      \"id\": 100736,\n      \"account_id\": 100737,\n      \"customer_name\": \"Example Org 349\",\n      \"hosting_type\": \"h2\",\n      \"main_fqdn\": \"example.com\",\n      \"directory\": \"/sites/example.com\",\n      \"ssl_status\": \"free\",\n      \"ssl_issuer\": \"Example Org 350\",\n      \"has_wordpress\": true,\n      \"has_website_builder\": false,\n      \"applications\": [\n        {\n          \"id\": 100738,\n          \"type\": \"wordpress\",\n          \"version\": \"6.8.2\",\n          \"name\": \"Example Org 351\",\n          \"url\": \"https://example.com\",\n          \"link_admin\": \"https://example.com/wp-admin/\",\n          \"is_complete\": true\n        }\n      ],\n      \"parent_id\": 100739,\n      \"parent_hosting_name\": \"Example Org 352\"\n    },\n    {\n      \"id\": 100740,\n      \"account_id\": 100741,\n      \"customer_name\": \"Example Org 353\",\n      \"hosting_type\": \"h2\",\n      \"main_fqdn\": \"example.com\",\n      \"directory\": \"/sites/example.com\",\n      \"ssl_status\": \"disabled\",\n      \"has_wordpress\": false,\n      \"has_website_builder\": false,\n      \"applications\": [],\n      \"parent_id\": 100742,\n      \"parent_hosting_name\": \"Example Org 354\"\n    },\n    {\n      \"id\": 100743,\n      \"account_id\": 100744,\n      \"customer_name\": \"Example Org 355\",\n      \"hosting_type\": \"h2\",\n      \"main_fqdn\": \"guinguette.fun\",\n      \"directory\": \"/sites/example.com\",\n      \"ssl_status\": \"free\",\n      \"ssl_issuer\": \"Example Org 356\",\n      \"has_wordpress\": false,\n      \"has_website_builder\": false,\n      \"applications\": [],\n      \"parent_id\": 100745,\n      \"parent_hosting_name\": \"Example Org 357\"\n    },\n    {\n      \"id\": 100746,\n      \"account_id\": 100747,\n      \"customer_name\": \"Example Org 358\",\n      \"hosting_type\": \"h2\",\n      \"main_fqdn\": \"example.com\",\n      \"directory\": \"/sites/example.com\",\n      \"ssl_status\": \"free\",\n      \"ssl_issuer\": \"Example Org 359\",\n      \"has_wordpress\": true,\n      \"has_website_builder\": false,\n      \"applications\": [\n        {\n          \"id\": 100748,\n          \"type\": \"wordpress\",\n          \"version\": \"6.9.4\",\n          \"name\": \"Example Org 360\",\n          \"url\": \"http://example.com\",\n          \"link_admin\": \"http://example.com/wp-admin/\",\n          \"is_complete\": true\n        }\n      ],\n      \"parent_id\": 100749,\n      \"parent_hosting_name\": \"Example Org 361\"\n    },\n    {\n      \"id\": 100750,\n      \"account_id\": 100751,\n      \"customer_name\": \"Example Org 362\",\n      \"hosting_type\": \"h2\",\n      \"main_fqdn\": \"example.com\",\n      \"directory\": \"/sites/example.com\",\n      \"ssl_status\": \"free\",\n      \"ssl_issuer\": \"Example Org 363\",\n      \"has_wordpress\": false,\n      \"has_website_builder\": false,\n      \"applications\": [],\n      \"parent_id\": 100752,\n      \"parent_hosting_name\": \"Example Org 364\"\n    },\n    {\n      \"id\": 100753,\n      \"account_id\": 100754,\n      \"customer_name\": \"Example Org 365\",\n      \"hosting_type\": \"h2\",\n      \"main_fqdn\": \"example.com\",\n      \"directory\": \"/sites/example.com\",\n      \"ssl_status\": \"disabled\",\n      \"has_wordpress\": false,\n      \"has_website_builder\": false,\n      \"applications\": [],\n      \"parent_id\": 100755,\n      \"parent_hosting_name\": \"Example Org 366\"\n    },\n    {\n      \"id\": 100756,\n      \"account_id\": 100757,\n      \"customer_name\": \"Example Org 367\",\n      \"hosting_type\": \"h3\",\n      \"main_fqdn\": \"example.com\",\n      \"ssl_status\": \"free\",\n      \"ssl_issuer\": \"Example Org 368\",\n      \"has_wordpress\": false,\n      \"has_website_builder\": false,\n      \"applications\": [],\n      \"parent_id\": 100758,\n      \"parent_hosting_name\": \"Example Org 369\"\n    }\n  ]\n}"
+        }
+      ],
+      "structuredContent": {
+        "hosting_id": 100760,
+        "sites": [
+          {
+            "id": 100761,
+            "account_id": 100762,
+            "customer_name": "Example Org 370",
+            "hosting_type": "h2",
+            "main_fqdn": "example.com",
+            "directory": "/sites/example.com",
+            "ssl_status": "free",
+            "ssl_issuer": "Example Org 371",
+            "has_wordpress": false,
+            "has_website_builder": false,
+            "applications": [],
+            "parent_id": 100763,
+            "parent_hosting_name": "Example Org 372"
+          },
+          {
+            "id": 100764,
+            "account_id": 100765,
+            "customer_name": "Example Org 373",
+            "hosting_type": "h2",
+            "main_fqdn": "example.com",
+            "directory": "/sites/example.com",
+            "ssl_status": "free",
+            "ssl_issuer": "Example Org 374",
+            "has_wordpress": true,
+            "has_website_builder": false,
+            "applications": [
+              {
+                "id": 100766,
+                "type": "wordpress",
+                "version": "6.8.1",
+                "name": "Example Org 375",
+                "url": "https://example.com",
+                "link_admin": "https://example.com/wp-admin/",
+                "is_complete": true
+              }
+            ],
+            "parent_id": 100767,
+            "parent_hosting_name": "Example Org 376"
+          },
+          {
+            "id": 100768,
+            "account_id": 100769,
+            "customer_name": "Example Org 377",
+            "hosting_type": "h2",
+            "main_fqdn": "example.com",
+            "directory": "/sites/example.com",
+            "ssl_status": "free",
+            "ssl_issuer": "Example Org 378",
+            "has_wordpress": true,
+            "has_website_builder": false,
+            "applications": [
+              {
+                "id": 100770,
+                "type": "wordpress",
+                "version": "6.8.2",
+                "name": "Example Org 379",
+                "url": "https://example.com",
+                "link_admin": "https://example.com/wp-admin/",
+                "is_complete": true
+              }
+            ],
+            "parent_id": 100771,
+            "parent_hosting_name": "Example Org 380"
+          },
+          {
+            "id": 100772,
+            "account_id": 100773,
+            "customer_name": "Example Org 381",
+            "hosting_type": "h2",
+            "main_fqdn": "example.com",
+            "directory": "/sites/example.com",
+            "ssl_status": "disabled",
+            "has_wordpress": false,
+            "has_website_builder": false,
+            "applications": [],
+            "parent_id": 100774,
+            "parent_hosting_name": "Example Org 382"
+          },
+          {
+            "id": 100775,
+            "account_id": 100776,
+            "customer_name": "Example Org 383",
+            "hosting_type": "h2",
+            "main_fqdn": "guinguette.fun",
+            "directory": "/sites/example.com",
+            "ssl_status": "free",
+            "ssl_issuer": "Example Org 384",
+            "has_wordpress": false,
+            "has_website_builder": false,
+            "applications": [],
+            "parent_id": 100777,
+            "parent_hosting_name": "Example Org 385"
+          },
+          {
+            "id": 100778,
+            "account_id": 100779,
+            "customer_name": "Example Org 386",
+            "hosting_type": "h2",
+            "main_fqdn": "example.com",
+            "directory": "/sites/example.com",
+            "ssl_status": "free",
+            "ssl_issuer": "Example Org 387",
+            "has_wordpress": true,
+            "has_website_builder": false,
+            "applications": [
+              {
+                "id": 100780,
+                "type": "wordpress",
+                "version": "6.9.4",
+                "name": "Example Org 388",
+                "url": "http://example.com",
+                "link_admin": "http://example.com/wp-admin/",
+                "is_complete": true
+              }
+            ],
+            "parent_id": 100781,
+            "parent_hosting_name": "Example Org 389"
+          },
+          {
+            "id": 100782,
+            "account_id": 100783,
+            "customer_name": "Example Org 390",
+            "hosting_type": "h2",
+            "main_fqdn": "example.com",
+            "directory": "/sites/example.com",
+            "ssl_status": "free",
+            "ssl_issuer": "Example Org 391",
+            "has_wordpress": false,
+            "has_website_builder": false,
+            "applications": [],
+            "parent_id": 100784,
+            "parent_hosting_name": "Example Org 392"
+          },
+          {
+            "id": 100785,
+            "account_id": 100786,
+            "customer_name": "Example Org 393",
+            "hosting_type": "h2",
+            "main_fqdn": "example.com",
+            "directory": "/sites/example.com",
+            "ssl_status": "disabled",
+            "has_wordpress": false,
+            "has_website_builder": false,
+            "applications": [],
+            "parent_id": 100787,
+            "parent_hosting_name": "Example Org 394"
+          },
+          {
+            "id": 100788,
+            "account_id": 100789,
+            "customer_name": "Example Org 395",
+            "hosting_type": "h3",
+            "main_fqdn": "example.com",
+            "ssl_status": "free",
+            "ssl_issuer": "Example Org 396",
+            "has_wordpress": false,
+            "has_website_builder": false,
+            "applications": [],
+            "parent_id": 100790,
+            "parent_hosting_name": "Example Org 397"
+          }
+        ]
+      }
+    },
+    "jsonrpc": "2.0",
+    "id": 16
+  }
+}

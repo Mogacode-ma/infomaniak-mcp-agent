@@ -1,0 +1,19 @@
+{
+  "args": {},
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"quota\": 0,\n  \"limit\": 100\n}"
+        }
+      ],
+      "structuredContent": {
+        "quota": 0,
+        "limit": 100
+      }
+    },
+    "jsonrpc": "2.0",
+    "id": 47
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "args": {
+    "hosting_id": 100267,
+    "site_id": 1404625
+  },
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "❌ [\n  {\n    \"code\": \"invalid_type\",\n    \"expected\": \"number\",\n    \"received\": \"null\",\n    \"path\": [\n      \"last_attempt_at\"\n    ],\n    \"message\": \"Expected number, received null\"\n  }\n]"
+        }
+      ],
+      "isError": true
+    },
+    "jsonrpc": "2.0",
+    "id": 18
+  }
+}

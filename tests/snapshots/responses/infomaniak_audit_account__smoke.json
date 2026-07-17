@@ -1,0 +1,185 @@
+{
+  "args": {
+    "account_id": 100024
+  },
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"account_id\": 100001,\n  \"scanned_products\": 107,\n  \"findings\": [\n    {\n      \"severity\": \"critical\",\n      \"category\": \"expiration\",\n      \"message\": \"Expired 1961 days ago\",\n      \"product_id\": 100002,\n      \"product_name\": \"Example Org 1\"\n    },\n    {\n      \"severity\": \"critical\",\n      \"category\": \"expiration\",\n      \"message\": \"Expired 201 days ago\",\n      \"product_id\": 100003,\n      \"product_name\": \"Example Org 2\"\n    },\n    {\n      \"severity\": \"critical\",\n      \"category\": \"expiration\",\n      \"message\": \"Expired 188 days ago\",\n      \"product_id\": 100004,\n      \"product_name\": \"Example Org 3\"\n    },\n    {\n      \"severity\": \"critical\",\n      \"category\": \"expiration\",\n      \"message\": \"Expired 83 days ago\",\n      \"product_id\": 100005,\n      \"product_name\": \"Example Org 4\"\n    },\n    {\n      \"severity\": \"critical\",\n      \"category\": \"expiration\",\n      \"message\": \"Expired 28 days ago\",\n      \"product_id\": 100006,\n      \"product_name\": \"Example Org 5\"\n    },\n    {\n      \"severity\": \"critical\",\n      \"category\": \"expiration\",\n      \"message\": \"Expired 1 day ago\",\n      \"product_id\": 100007,\n      \"product_name\": \"Example Org 6\"\n    },\n    {\n      \"severity\": \"warning\",\n      \"category\": \"expiration\",\n      \"message\": \"Expires in 13 days\",\n      \"product_id\": 997,\n      \"product_name\": \"Example Org 7\"\n    },\n    {\n      \"severity\": \"warning\",\n      \"category\": \"expiration\",\n      \"message\": \"Expires in 22 days\",\n      \"product_id\": 100008,\n      \"product_name\": \"Example Org 8\"\n    },\n    {\n      \"severity\": \"warning\",\n      \"category\": \"expiration\",\n      \"message\": \"Expires in 1 days\",\n      \"product_id\": 100009,\n      \"product_name\": \"Example Org 9\"\n    },\n    {\n      \"severity\": \"warning\",\n      \"category\": \"expiration\",\n      \"message\": \"Expires in 4 days\",\n      \"product_id\": 100010,\n      \"product_name\": \"Example Org 10\"\n    },\n    {\n      \"severity\": \"warning\",\n      \"category\": \"expiration\",\n      \"message\": \"Expires in 4 days\",\n      \"product_id\": 100011,\n      \"product_name\": \"Example Org 11\"\n    },\n    {\n      \"severity\": \"warning\",\n      \"category\": \"expiration\",\n      \"message\": \"Expires in 4 days\",\n      \"product_id\": 100012,\n      \"product_name\": \"Example Org 12\"\n    },\n    {\n      \"severity\": \"warning\",\n      \"category\": \"expiration\",\n      \"message\": \"Expires in 4 days\",\n      \"product_id\": 100013,\n      \"product_name\": \"Example Org 13\"\n    },\n    {\n      \"severity\": \"warning\",\n      \"category\": \"expiration\",\n      \"message\": \"Expires in 4 days\",\n      \"product_id\": 100014,\n      \"product_name\": \"Example Org 14\"\n    },\n    {\n      \"severity\": \"warning\",\n      \"category\": \"expiration\",\n      \"message\": \"Expires in 5 days\",\n      \"product_id\": 100015,\n      \"product_name\": \"Example Org 15\"\n    },\n    {\n      \"severity\": \"warning\",\n      \"category\": \"expiration\",\n      \"message\": \"Expires in 6 days\",\n      \"product_id\": 100016,\n      \"product_name\": \"Example Org 16\"\n    },\n    {\n      \"severity\": \"warning\",\n      \"category\": \"expiration\",\n      \"message\": \"Expires in 6 days\",\n      \"product_id\": 100017,\n      \"product_name\": \"Example Org 17\"\n    },\n    {\n      \"severity\": \"warning\",\n      \"category\": \"expiration\",\n      \"message\": \"Expires in 28 days\",\n      \"product_id\": 100018,\n      \"product_name\": \"Example Org 18\"\n    },\n    {\n      \"severity\": \"warning\",\n      \"category\": \"expiration\",\n      \"message\": \"Expires in 34 days\",\n      \"product_id\": 100019,\n      \"product_name\": \"Example Org 19\"\n    },\n    {\n      \"severity\": \"warning\",\n      \"category\": \"expiration\",\n      \"message\": \"Expires in 36 days\",\n      \"product_id\": 100020,\n      \"product_name\": \"Example Org 20\"\n    },\n    {\n      \"severity\": \"warning\",\n      \"category\": \"expiration\",\n      \"message\": \"Expires in 40 days\",\n      \"product_id\": 100021,\n      \"product_name\": \"Example Org 21\"\n    },\n    {\n      \"severity\": \"warning\",\n      \"category\": \"expiration\",\n      \"message\": \"Expires in 42 days\",\n      \"product_id\": 100022,\n      \"product_name\": \"Example Org 22\"\n    },\n    {\n      \"severity\": \"warning\",\n      \"category\": \"expiration\",\n      \"message\": \"Expires in 21 days\",\n      \"product_id\": 100023,\n      \"product_name\": \"Example Org 23\"\n    }\n  ],\n  \"summary_markdown\": \"# Audit — account 999999\\n\\nScanned **107** products.\\n\\n**6** critical · **17** warnings · **0** info\\n\\n## 🔴 Critical\\n\\n- [`expiration`] domain: example.com — Expired 1961 days ago\\n- [`expiration`] domain: example.com — Expired 201 days ago\\n- [`expiration`] domain: mertens.brussels — Expired 188 days ago\\n- [`expiration`] domain: example.com — Expired 83 days ago\\n- [`expiration`] domain: example.com — Expired 28 days ago\\n- [`expiration`] domain: example.com — Expired 1 day ago\\n\\n## 🟠 Warnings\\n\\n- [`expiration`] support_premium: Support Plus — Expires in 13 days\\n- [`expiration`] cloud: Coden — Expires in 22 days\\n- [`expiration`] email_hosting: example.com — Expires in 1 days\\n- [`expiration`] hosting: Coden VIP — Expires in 4 days\\n- [`expiration`] hosting: AxessPharma — Expires in 4 days\\n- [`expiration`] hosting: BeachNumber1 — Expires in 4 days\\n- [`expiration`] hosting: Coden Privé — Expires in 4 days\\n- [`expiration`] hosting: Coden Guests — Expires in 4 days\\n- [`expiration`] hosting: Coden Apps — Expires in 5 days\\n- [`expiration`] hosting: Coden Temp — Expires in 6 days\\n- [`expiration`] hosting: Coden Demos — Expires in 6 days\\n- [`expiration`] domain: example.com — Expires in 28 days\\n- [`expiration`] domain: example.com — Expires in 34 days\\n- [`expiration`] email_hosting: example.com — Expires in 36 days\\n- [`expiration`] domain: example.com — Expires in 40 days\\n- [`expiration`] email_hosting: example.com — Expires in 42 days\\n- [`expiration`] cloud: MogaVps — Expires in 21 days\\n\"\n}"
+        }
+      ],
+      "structuredContent": {
+        "account_id": 100025,
+        "scanned_products": 107,
+        "findings": [
+          {
+            "severity": "critical",
+            "category": "expiration",
+            "message": "Expired 1961 days ago",
+            "product_id": 100026,
+            "product_name": "Example Org 24"
+          },
+          {
+            "severity": "critical",
+            "category": "expiration",
+            "message": "Expired 201 days ago",
+            "product_id": 100027,
+            "product_name": "Example Org 25"
+          },
+          {
+            "severity": "critical",
+            "category": "expiration",
+            "message": "Expired 188 days ago",
+            "product_id": 100028,
+            "product_name": "Example Org 26"
+          },
+          {
+            "severity": "critical",
+            "category": "expiration",
+            "message": "Expired 83 days ago",
+            "product_id": 100029,
+            "product_name": "Example Org 27"
+          },
+          {
+            "severity": "critical",
+            "category": "expiration",
+            "message": "Expired 28 days ago",
+            "product_id": 100030,
+            "product_name": "Example Org 28"
+          },
+          {
+            "severity": "critical",
+            "category": "expiration",
+            "message": "Expired 1 day ago",
+            "product_id": 100031,
+            "product_name": "Example Org 29"
+          },
+          {
+            "severity": "warning",
+            "category": "expiration",
+            "message": "Expires in 13 days",
+            "product_id": 997,
+            "product_name": "Example Org 30"
+          },
+          {
+            "severity": "warning",
+            "category": "expiration",
+            "message": "Expires in 22 days",
+            "product_id": 100032,
+            "product_name": "Example Org 31"
+          },
+          {
+            "severity": "warning",
+            "category": "expiration",
+            "message": "Expires in 1 days",
+            "product_id": 100033,
+            "product_name": "Example Org 32"
+          },
+          {
+            "severity": "warning",
+            "category": "expiration",
+            "message": "Expires in 4 days",
+            "product_id": 100034,
+            "product_name": "Example Org 33"
+          },
+          {
+            "severity": "warning",
+            "category": "expiration",
+            "message": "Expires in 4 days",
+            "product_id": 100035,
+            "product_name": "Example Org 34"
+          },
+          {
+            "severity": "warning",
+            "category": "expiration",
+            "message": "Expires in 4 days",
+            "product_id": 100036,
+            "product_name": "Example Org 35"
+          },
+          {
+            "severity": "warning",
+            "category": "expiration",
+            "message": "Expires in 4 days",
+            "product_id": 100037,
+            "product_name": "Example Org 36"
+          },
+          {
+            "severity": "warning",
+            "category": "expiration",
+            "message": "Expires in 4 days",
+            "product_id": 100038,
+            "product_name": "Example Org 37"
+          },
+          {
+            "severity": "warning",
+            "category": "expiration",
+            "message": "Expires in 5 days",
+            "product_id": 100039,
+            "product_name": "Example Org 38"
+          },
+          {
+            "severity": "warning",
+            "category": "expiration",
+            "message": "Expires in 6 days",
+            "product_id": 100040,
+            "product_name": "Example Org 39"
+          },
+          {
+            "severity": "warning",
+            "category": "expiration",
+            "message": "Expires in 6 days",
+            "product_id": 100041,
+            "product_name": "Example Org 40"
+          },
+          {
+            "severity": "warning",
+            "category": "expiration",
+            "message": "Expires in 28 days",
+            "product_id": 100042,
+            "product_name": "Example Org 41"
+          },
+          {
+            "severity": "warning",
+            "category": "expiration",
+            "message": "Expires in 34 days",
+            "product_id": 100043,
+            "product_name": "Example Org 42"
+          },
+          {
+            "severity": "warning",
+            "category": "expiration",
+            "message": "Expires in 36 days",
+            "product_id": 100044,
+            "product_name": "Example Org 43"
+          },
+          {
+            "severity": "warning",
+            "category": "expiration",
+            "message": "Expires in 40 days",
+            "product_id": 100045,
+            "product_name": "Example Org 44"
+          },
+          {
+            "severity": "warning",
+            "category": "expiration",
+            "message": "Expires in 42 days",
+            "product_id": 100046,
+            "product_name": "Example Org 45"
+          },
+          {
+            "severity": "warning",
+            "category": "expiration",
+            "message": "Expires in 21 days",
+            "product_id": 100047,
+            "product_name": "Example Org 46"
+          }
+        ],
+        "summary_markdown": "# Audit — account 999999\n\nScanned **107** products.\n\n**6** critical · **17** warnings · **0** info\n\n## 🔴 Critical\n\n- [`expiration`] domain: example.com — Expired 1961 days ago\n- [`expiration`] domain: example.com — Expired 201 days ago\n- [`expiration`] domain: mertens.brussels — Expired 188 days ago\n- [`expiration`] domain: example.com — Expired 83 days ago\n- [`expiration`] domain: example.com — Expired 28 days ago\n- [`expiration`] domain: example.com — Expired 1 day ago\n\n## 🟠 Warnings\n\n- [`expiration`] support_premium: Support Plus — Expires in 13 days\n- [`expiration`] cloud: Coden — Expires in 22 days\n- [`expiration`] email_hosting: example.com — Expires in 1 days\n- [`expiration`] hosting: Coden VIP — Expires in 4 days\n- [`expiration`] hosting: AxessPharma — Expires in 4 days\n- [`expiration`] hosting: BeachNumber1 — Expires in 4 days\n- [`expiration`] hosting: Coden Privé — Expires in 4 days\n- [`expiration`] hosting: Coden Guests — Expires in 4 days\n- [`expiration`] hosting: Coden Apps — Expires in 5 days\n- [`expiration`] hosting: Coden Temp — Expires in 6 days\n- [`expiration`] hosting: Coden Demos — Expires in 6 days\n- [`expiration`] domain: example.com — Expires in 28 days\n- [`expiration`] domain: example.com — Expires in 34 days\n- [`expiration`] email_hosting: example.com — Expires in 36 days\n- [`expiration`] domain: example.com — Expires in 40 days\n- [`expiration`] email_hosting: example.com — Expires in 42 days\n- [`expiration`] cloud: MogaVps — Expires in 21 days\n"
+      }
+    },
+    "jsonrpc": "2.0",
+    "id": 9
+  }
+}

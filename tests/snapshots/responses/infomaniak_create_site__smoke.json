@@ -1,0 +1,36 @@
+{
+  "args": {
+    "hosting_id": 100055,
+    "fqdn": "example.com"
+  },
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"status\": \"plan\",\n  \"plan\": {\n    \"hosting_id\": 100054,\n    \"fqdn\": \"example.com\",\n    \"directory\": \"/sites/example.com\",\n    \"environment\": \"apache_php\",\n    \"payload_preview\": {\n      \"fqdn\": \"example.com\",\n      \"directory\": \"/sites/example.com\",\n      \"force_fqdn\": true,\n      \"environment\": \"apache_php\"\n    }\n  },\n  \"confirmation_token\": \"a9340bb8-1c04-4381-b3ea-4b53d588bcbc\",\n  \"token_expires_at\": \"2026-05-27T09:10:07.432Z\",\n  \"next_step_markdown\": \"## Plan — create site `example.com`\\n\\n- **Hosting**: 999999\\n- **FQDN**: `example.com`\\n- **Directory**: `/sites/example.com\\n- **Environment**: `apache_php`\\n\\n### Side effects\\n- A new site entry will appear in the manager.\\n- The DNS A record will be auto-created if the parent domain is managed by Infomaniak.\\n- Let's Encrypt SSL will be issued shortly after creation (a few minutes).\\n\\n### Next step\\nRe-call `infomaniak_create_site` with the same parameters AND `confirmation_token: \\\"a9340bb8-1c04-4381-b3ea-4b53d588bcbc\\\"` (expires in 60s).\"\n}"
+        }
+      ],
+      "structuredContent": {
+        "status": "plan",
+        "plan": {
+          "hosting_id": 100056,
+          "fqdn": "example.com",
+          "directory": "/sites/example.com",
+          "environment": "apache_php",
+          "payload_preview": {
+            "fqdn": "example.com",
+            "directory": "/sites/example.com",
+            "force_fqdn": true,
+            "environment": "apache_php"
+          }
+        },
+        "confirmation_token": "a9340bb8-1c04-4381-b3ea-4b53d588bcbc",
+        "token_expires_at": "2026-05-27T09:10:07.432Z",
+        "next_step_markdown": "## Plan — create site `example.com`\n\n- **Hosting**: 999999\n- **FQDN**: `example.com`\n- **Directory**: `/sites/example.com\n- **Environment**: `apache_php`\n\n### Side effects\n- A new site entry will appear in the manager.\n- The DNS A record will be auto-created if the parent domain is managed by Infomaniak.\n- Let's Encrypt SSL will be issued shortly after creation (a few minutes).\n\n### Next step\nRe-call `infomaniak_create_site` with the same parameters AND `confirmation_token: \"a9340bb8-1c04-4381-b3ea-4b53d588bcbc\"` (expires in 60s)."
+      }
+    },
+    "jsonrpc": "2.0",
+    "id": 17
+  }
+}

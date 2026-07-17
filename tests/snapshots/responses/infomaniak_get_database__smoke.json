@@ -1,0 +1,19 @@
+{
+  "args": {
+    "hosting_id": 100268,
+    "database_name": "example.com"
+  },
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "❌ Object not found\nCode: object_not_found\nHTTP status: 404\n→ The endpoint https://example.com/1/web_hostings/999999/databases/example.com does not exist or the resource was deleted."
+        }
+      ],
+      "isError": true
+    },
+    "jsonrpc": "2.0",
+    "id": 20
+  }
+}

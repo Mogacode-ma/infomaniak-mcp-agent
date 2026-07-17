@@ -1,0 +1,33 @@
+{
+  "args": {
+    "hosting_id": 100478
+  },
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"hosting_id\": 100477,\n  \"count\": 1,\n  \"users\": [\n    {\n      \"login\": \"myprefix_patrick\",\n      \"environment\": \"apache_php\",\n      \"is_active\": true,\n      \"has_ssh\": true,\n      \"is_temporary\": false,\n      \"home_directory\": \"/\",\n      \"link_ftp_manager\": \"https://example.com\",\n      \"link\": \"https://example.com\"\n    }\n  ]\n}"
+        }
+      ],
+      "structuredContent": {
+        "hosting_id": 100479,
+        "count": 1,
+        "users": [
+          {
+            "login": "myprefix_patrick",
+            "environment": "apache_php",
+            "is_active": true,
+            "has_ssh": true,
+            "is_temporary": false,
+            "home_directory": "/",
+            "link_ftp_manager": "https://example.com",
+            "link": "https://example.com"
+          }
+        ]
+      }
+    },
+    "jsonrpc": "2.0",
+    "id": 25
+  }
+}

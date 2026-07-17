@@ -1,0 +1,28 @@
+{
+  "args": {
+    "mail_hosting_id": 100062,
+    "mailbox_name": "Example Org 52"
+  },
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"status\": \"plan\",\n  \"plan\": {\n    \"mail_hosting_id\": 100061,\n    \"mailbox_name\": \"Example Org 51\"\n  },\n  \"confirmation_token\": \"26487a6b-6007-485f-9491-ff4c0e1b7ad0\",\n  \"token_expires_at\": \"2026-05-27T09:10:12.803Z\",\n  \"next_step_markdown\": \"## Plan — delete mailbox\\n\\n- **Mail hosting**: 999999\\n- **Mailbox**: `example.com@…`\\n\\n### ⚠️ Irreversible\\nAll stored mails (inbox, sent, drafts, spam) for this mailbox will be deleted.\\n\\n### Next step\\nRe-call `infomaniak_delete_mailbox` with the same parameters AND `confirmation_token: \\\"26487a6b-6007-485f-9491-ff4c0e1b7ad0\\\"`.\"\n}"
+        }
+      ],
+      "structuredContent": {
+        "status": "plan",
+        "plan": {
+          "mail_hosting_id": 100063,
+          "mailbox_name": "Example Org 53"
+        },
+        "confirmation_token": "26487a6b-6007-485f-9491-ff4c0e1b7ad0",
+        "token_expires_at": "2026-05-27T09:10:12.803Z",
+        "next_step_markdown": "## Plan — delete mailbox\n\n- **Mail hosting**: 999999\n- **Mailbox**: `example.com@…`\n\n### ⚠️ Irreversible\nAll stored mails (inbox, sent, drafts, spam) for this mailbox will be deleted.\n\n### Next step\nRe-call `infomaniak_delete_mailbox` with the same parameters AND `confirmation_token: \"26487a6b-6007-485f-9491-ff4c0e1b7ad0\"`."
+      }
+    },
+    "jsonrpc": "2.0",
+    "id": 37
+  }
+}

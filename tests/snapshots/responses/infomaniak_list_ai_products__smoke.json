@@ -1,0 +1,19 @@
+{
+  "args": {},
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"count\": 0,\n  \"products\": []\n}"
+        }
+      ],
+      "structuredContent": {
+        "count": 0,
+        "products": []
+      }
+    },
+    "jsonrpc": "2.0",
+    "id": 43
+  }
+}

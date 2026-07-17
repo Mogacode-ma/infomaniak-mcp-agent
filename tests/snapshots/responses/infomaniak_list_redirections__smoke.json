@@ -1,0 +1,22 @@
+{
+  "args": {
+    "mail_hosting_id": 100726
+  },
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"mail_hosting_id\": 100725,\n  \"count\": 0,\n  \"redirections\": []\n}"
+        }
+      ],
+      "structuredContent": {
+        "mail_hosting_id": 100727,
+        "count": 0,
+        "redirections": []
+      }
+    },
+    "jsonrpc": "2.0",
+    "id": 39
+  }
+}

@@ -1,0 +1,143 @@
+{
+  "args": {
+    "hosting_id": 100278
+  },
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"hosting_id\": 100277,\n  \"count\": 6,\n  \"users\": [\n    {\n      \"name\": \"Example Org 94\",\n      \"applications\": [\n        {\n          \"id\": \"1250842\",\n          \"type\": \"wordpress\",\n          \"name\": \"Example Org 95\"\n        }\n      ],\n      \"permissions\": [\n        {\n          \"database\": \"myprefix_WP1234567\",\n          \"rights\": {\n            \"read\": true,\n            \"write\": true,\n            \"admin\": true\n          }\n        }\n      ],\n      \"is_temporary\": false,\n      \"operation_in_progress\": false,\n      \"is_unlocked\": false\n    },\n    {\n      \"name\": \"Example Org 96\",\n      \"applications\": [\n        {\n          \"id\": \"1317109\",\n          \"type\": \"wordpress\",\n          \"name\": \"Example Org 97\"\n        }\n      ],\n      \"permissions\": [\n        {\n          \"database\": \"myprefix_WP1234567\",\n          \"rights\": {\n            \"read\": true,\n            \"write\": true,\n            \"admin\": true\n          }\n        }\n      ],\n      \"is_temporary\": false,\n      \"operation_in_progress\": false,\n      \"is_unlocked\": false\n    },\n    {\n      \"name\": \"Example Org 98\",\n      \"applications\": [\n        {\n          \"id\": \"1404625\",\n          \"type\": \"wordpress\",\n          \"name\": \"Example Org 99\"\n        }\n      ],\n      \"permissions\": [\n        {\n          \"database\": \"myprefix_WP1234567\",\n          \"rights\": {\n            \"read\": true,\n            \"write\": true,\n            \"admin\": true\n          }\n        }\n      ],\n      \"is_temporary\": false,\n      \"operation_in_progress\": false,\n      \"is_unlocked\": false\n    },\n    {\n      \"name\": \"Example Org 100\",\n      \"applications\": [],\n      \"permissions\": [\n        {\n          \"database\": \"myprefix_evoluphar\",\n          \"rights\": {\n            \"read\": true,\n            \"write\": true,\n            \"admin\": true\n          }\n        }\n      ],\n      \"is_temporary\": false,\n      \"operation_in_progress\": false,\n      \"is_unlocked\": false\n    },\n    {\n      \"name\": \"Example Org 101\",\n      \"applications\": [],\n      \"permissions\": [\n        {\n          \"database\": \"myprefix_marobal\",\n          \"rights\": {\n            \"read\": true,\n            \"write\": true,\n            \"admin\": true\n          }\n        }\n      ],\n      \"is_temporary\": false,\n      \"operation_in_progress\": false,\n      \"is_unlocked\": false\n    },\n    {\n      \"name\": \"Example Org 102\",\n      \"applications\": [],\n      \"permissions\": [\n        {\n          \"database\": \"myprefix_perfex\",\n          \"rights\": {\n            \"read\": true,\n            \"write\": true,\n            \"admin\": true\n          }\n        }\n      ],\n      \"is_temporary\": false,\n      \"operation_in_progress\": false,\n      \"is_unlocked\": false\n    }\n  ]\n}"
+        }
+      ],
+      "structuredContent": {
+        "hosting_id": 100279,
+        "count": 6,
+        "users": [
+          {
+            "name": "Example Org 103",
+            "applications": [
+              {
+                "id": "1250842",
+                "type": "wordpress",
+                "name": "Example Org 104"
+              }
+            ],
+            "permissions": [
+              {
+                "database": "myprefix_WP1234567",
+                "rights": {
+                  "read": true,
+                  "write": true,
+                  "admin": true
+                }
+              }
+            ],
+            "is_temporary": false,
+            "operation_in_progress": false,
+            "is_unlocked": false
+          },
+          {
+            "name": "Example Org 105",
+            "applications": [
+              {
+                "id": "1317109",
+                "type": "wordpress",
+                "name": "Example Org 106"
+              }
+            ],
+            "permissions": [
+              {
+                "database": "myprefix_WP1234567",
+                "rights": {
+                  "read": true,
+                  "write": true,
+                  "admin": true
+                }
+              }
+            ],
+            "is_temporary": false,
+            "operation_in_progress": false,
+            "is_unlocked": false
+          },
+          {
+            "name": "Example Org 107",
+            "applications": [
+              {
+                "id": "1404625",
+                "type": "wordpress",
+                "name": "Example Org 108"
+              }
+            ],
+            "permissions": [
+              {
+                "database": "myprefix_WP1234567",
+                "rights": {
+                  "read": true,
+                  "write": true,
+                  "admin": true
+                }
+              }
+            ],
+            "is_temporary": false,
+            "operation_in_progress": false,
+            "is_unlocked": false
+          },
+          {
+            "name": "Example Org 109",
+            "applications": [],
+            "permissions": [
+              {
+                "database": "myprefix_evoluphar",
+                "rights": {
+                  "read": true,
+                  "write": true,
+                  "admin": true
+                }
+              }
+            ],
+            "is_temporary": false,
+            "operation_in_progress": false,
+            "is_unlocked": false
+          },
+          {
+            "name": "Example Org 110",
+            "applications": [],
+            "permissions": [
+              {
+                "database": "myprefix_marobal",
+                "rights": {
+                  "read": true,
+                  "write": true,
+                  "admin": true
+                }
+              }
+            ],
+            "is_temporary": false,
+            "operation_in_progress": false,
+            "is_unlocked": false
+          },
+          {
+            "name": "Example Org 111",
+            "applications": [],
+            "permissions": [
+              {
+                "database": "myprefix_perfex",
+                "rights": {
+                  "read": true,
+                  "write": true,
+                  "admin": true
+                }
+              }
+            ],
+            "is_temporary": false,
+            "operation_in_progress": false,
+            "is_unlocked": false
+          }
+        ]
+      }
+    },
+    "jsonrpc": "2.0",
+    "id": 23
+  }
+}

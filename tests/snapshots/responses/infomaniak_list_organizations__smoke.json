@@ -1,0 +1,154 @@
+{
+  "args": {},
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"organizations\": [\n    {\n      \"id\": 100691,\n      \"name\": \"Example Org 308\",\n      \"type\": \"owner\",\n      \"legal_entity_type\": \"company\",\n      \"support_level\": 2,\n      \"website\": \"https://example.com\",\n      \"phone\": \"+10000000000\"\n    },\n    {\n      \"id\": 100692,\n      \"name\": \"Example Org 309\",\n      \"type\": \"partner_limited\",\n      \"legal_entity_type\": \"company\",\n      \"support_level\": 1,\n      \"website\": \"http://example.com\",\n      \"phone\": \"+10000000000\"\n    },\n    {\n      \"id\": 100693,\n      \"name\": \"Example Org 310\",\n      \"type\": \"external\",\n      \"legal_entity_type\": \"company\",\n      \"support_level\": 2,\n      \"website\": \"https://example.com\",\n      \"phone\": \"+10000000000\"\n    },\n    {\n      \"id\": 100694,\n      \"name\": \"Example Org 311\",\n      \"type\": \"partner_admin\",\n      \"legal_entity_type\": \"individual\",\n      \"support_level\": 1,\n      \"phone\": \"+10000000000\"\n    },\n    {\n      \"id\": 100695,\n      \"name\": \"Example Org 312\",\n      \"type\": \"partner_admin\",\n      \"legal_entity_type\": \"company\",\n      \"support_level\": 1\n    },\n    {\n      \"id\": 100696,\n      \"name\": \"Example Org 313\",\n      \"type\": \"partner_admin\",\n      \"legal_entity_type\": \"company\",\n      \"support_level\": 1,\n      \"phone\": \"+10000000000\"\n    },\n    {\n      \"id\": 100697,\n      \"name\": \"Example Org 314\",\n      \"type\": \"partner_limited\",\n      \"legal_entity_type\": \"company\",\n      \"support_level\": 1\n    },\n    {\n      \"id\": 100698,\n      \"name\": \"Example Org 315\",\n      \"type\": \"partner_admin\",\n      \"legal_entity_type\": \"company\",\n      \"support_level\": 1\n    },\n    {\n      \"id\": 100699,\n      \"name\": \"Example Org 316\",\n      \"type\": \"owner\",\n      \"legal_entity_type\": \"association\",\n      \"support_level\": 1\n    },\n    {\n      \"id\": 100700,\n      \"name\": \"Example Org 317\",\n      \"type\": \"partner_admin\",\n      \"legal_entity_type\": \"company\",\n      \"support_level\": 1\n    },\n    {\n      \"id\": 100701,\n      \"name\": \"Example Org 318\",\n      \"type\": \"partner_admin\",\n      \"legal_entity_type\": \"company\",\n      \"support_level\": 1,\n      \"phone\": \"+10000000000\"\n    },\n    {\n      \"id\": 100702,\n      \"name\": \"Example Org 319\",\n      \"type\": \"partner_admin\",\n      \"legal_entity_type\": \"company\",\n      \"support_level\": 1,\n      \"phone\": \"+10000000000\"\n    },\n    {\n      \"id\": 100703,\n      \"name\": \"Example Org 320\",\n      \"type\": \"partner_admin\",\n      \"legal_entity_type\": \"company\",\n      \"support_level\": 1,\n      \"website\": \"https://example.com\",\n      \"phone\": \"+10000000000\"\n    },\n    {\n      \"id\": 100704,\n      \"name\": \"Example Org 321\",\n      \"type\": \"partner_admin\",\n      \"legal_entity_type\": \"company\",\n      \"support_level\": 1,\n      \"phone\": \"+10000000000\"\n    },\n    {\n      \"id\": 100705,\n      \"name\": \"Example Org 322\",\n      \"type\": \"partner_admin\",\n      \"legal_entity_type\": \"company\",\n      \"support_level\": 1,\n      \"phone\": \"+10000000000\"\n    },\n    {\n      \"id\": 100706,\n      \"name\": \"Example Org 323\",\n      \"type\": \"partner_admin\",\n      \"legal_entity_type\": \"company\",\n      \"support_level\": 1,\n      \"phone\": \"+10000000000\"\n    },\n    {\n      \"id\": 100707,\n      \"name\": \"Example Org 324\",\n      \"type\": \"partner_admin\",\n      \"legal_entity_type\": \"company\",\n      \"support_level\": 1,\n      \"phone\": \"+10000000000\"\n    }\n  ]\n}"
+        }
+      ],
+      "structuredContent": {
+        "organizations": [
+          {
+            "id": 100708,
+            "name": "Example Org 325",
+            "type": "owner",
+            "legal_entity_type": "company",
+            "support_level": 2,
+            "website": "https://example.com",
+            "phone": "+10000000000"
+          },
+          {
+            "id": 100709,
+            "name": "Example Org 326",
+            "type": "partner_limited",
+            "legal_entity_type": "company",
+            "support_level": 1,
+            "website": "http://example.com",
+            "phone": "+10000000000"
+          },
+          {
+            "id": 100710,
+            "name": "Example Org 327",
+            "type": "external",
+            "legal_entity_type": "company",
+            "support_level": 2,
+            "website": "https://example.com",
+            "phone": "+10000000000"
+          },
+          {
+            "id": 100711,
+            "name": "Example Org 328",
+            "type": "partner_admin",
+            "legal_entity_type": "individual",
+            "support_level": 1,
+            "phone": "+10000000000"
+          },
+          {
+            "id": 100712,
+            "name": "Example Org 329",
+            "type": "partner_admin",
+            "legal_entity_type": "company",
+            "support_level": 1
+          },
+          {
+            "id": 100713,
+            "name": "Example Org 330",
+            "type": "partner_admin",
+            "legal_entity_type": "company",
+            "support_level": 1,
+            "phone": "+10000000000"
+          },
+          {
+            "id": 100714,
+            "name": "Example Org 331",
+            "type": "partner_limited",
+            "legal_entity_type": "company",
+            "support_level": 1
+          },
+          {
+            "id": 100715,
+            "name": "Example Org 332",
+            "type": "partner_admin",
+            "legal_entity_type": "company",
+            "support_level": 1
+          },
+          {
+            "id": 100716,
+            "name": "Example Org 333",
+            "type": "owner",
+            "legal_entity_type": "association",
+            "support_level": 1
+          },
+          {
+            "id": 100717,
+            "name": "Example Org 334",
+            "type": "partner_admin",
+            "legal_entity_type": "company",
+            "support_level": 1
+          },
+          {
+            "id": 100718,
+            "name": "Example Org 335",
+            "type": "partner_admin",
+            "legal_entity_type": "company",
+            "support_level": 1,
+            "phone": "+10000000000"
+          },
+          {
+            "id": 100719,
+            "name": "Example Org 336",
+            "type": "partner_admin",
+            "legal_entity_type": "company",
+            "support_level": 1,
+            "phone": "+10000000000"
+          },
+          {
+            "id": 100720,
+            "name": "Example Org 337",
+            "type": "partner_admin",
+            "legal_entity_type": "company",
+            "support_level": 1,
+            "website": "https://example.com",
+            "phone": "+10000000000"
+          },
+          {
+            "id": 100721,
+            "name": "Example Org 338",
+            "type": "partner_admin",
+            "legal_entity_type": "company",
+            "support_level": 1,
+            "phone": "+10000000000"
+          },
+          {
+            "id": 100722,
+            "name": "Example Org 339",
+            "type": "partner_admin",
+            "legal_entity_type": "company",
+            "support_level": 1,
+            "phone": "+10000000000"
+          },
+          {
+            "id": 100723,
+            "name": "Example Org 340",
+            "type": "partner_admin",
+            "legal_entity_type": "company",
+            "support_level": 1,
+            "phone": "+10000000000"
+          },
+          {
+            "id": 100724,
+            "name": "Example Org 341",
+            "type": "partner_admin",
+            "legal_entity_type": "company",
+            "support_level": 1,
+            "phone": "+10000000000"
+          }
+        ]
+      }
+    },
+    "jsonrpc": "2.0",
+    "id": 12
+  }
+}

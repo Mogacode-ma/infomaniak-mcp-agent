@@ -1,0 +1,21 @@
+{
+  "args": {
+    "zone": "example.com",
+    "source": "example.com",
+    "type": "example.com",
+    "target": "example.com"
+  },
+  "result": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "❌ [\n  {\n    \"received\": \"example.com\",\n    \"code\": \"invalid_enum_value\",\n    \"options\": [\n      \"A\",\n      \"AAAA\",\n      \"CNAME\",\n      \"MX\",\n      \"TXT\",\n      \"SRV\",\n      \"NS\",\n      \"CAA\",\n      \"PTR\",\n      \"SPF\"\n    ],\n    \"path\": [\n      \"type\"\n    ],\n    \"message\": \"Invalid enum value. Expected 'A' | 'AAAA' | 'CNAME' | 'MX' | 'TXT' | 'SRV' | 'NS' | 'CAA' | 'PTR' | 'SPF', received 'example.com'\"\n  }\n]"
+        }
+      ],
+      "isError": true
+    },
+    "jsonrpc": "2.0",
+    "id": 29
+  }
+}
