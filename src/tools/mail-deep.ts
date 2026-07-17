@@ -201,7 +201,7 @@ const GetMailboxFullInput = z.object({
   mail_hosting_id: z.number().int().positive(),
   mailbox_name: z
     .string()
-    .describe("Local part of the mailbox (e.g. 'anthony' for anthony@example.com)."),
+    .describe("Local part of the mailbox (e.g. 'alice' for alice@example.com)."),
 });
 
 /**

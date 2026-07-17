@@ -26,7 +26,7 @@ Claude → You:  3 mailboxes >85% — paul@ (94%), notify@ (88%), team@ (87%). W
 
 - [Why](#why-this-exists) · [What it does](#what-you-can-do-with-it) · [How it differs](#why-agentic-and-not-wrapper)
 - [Install](#install) · [Authentication](#authentication) · [Quick example](#quick-example)
-- [Tools](#tools) (81 across 13 areas) · [Limitations](#limitations) · [Roadmap](#roadmap) · [FAQ](#faq)
+- [Tools](#tools) (78 across 22 areas) · [Limitations](#limitations) · [Roadmap](#roadmap) · [FAQ](#faq)
 - [Contributing](#contributing) · [License](#license)
 
 ## Why this exists
@@ -37,7 +37,7 @@ This project closes that gap by exposing **everything** through a single MCP ser
 
 ## 🎒 Built in the open, in real time, by vibe-coding
 
-This project was built rapidly by an LLM driving a terminal session ("vibe-coding"), with live tests against a real Infomaniak account at every step. **It works perfectly on the maintainer's local setup** and the full pipeline is green (TypeScript strict, ESLint, Prettier, 37 tests, build, CodeQL, gitleaks).
+This project was built rapidly by an LLM driving a terminal session ("vibe-coding"), with live tests against a real Infomaniak account at every step. **It works perfectly on the maintainer's local setup** and the full pipeline is green (TypeScript strict, ESLint, Prettier, 78 tests, build, CodeQL, gitleaks).
 
 That said — given how it was built and given that several endpoints used here are reverse-engineered (see [`REVERSE-ENGINEERING.md`](./REVERSE-ENGINEERING.md)) — **it is entirely possible that you'll hit (potentially big) bugs** depending on your account topology, plan tier, scopes, or Infomaniak's own changes. We are here to fix them as they show up. Please:
 

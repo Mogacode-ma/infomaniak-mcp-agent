@@ -34,7 +34,7 @@ const GetMailboxInfoInput = z.object({
     .string()
     .min(1)
     .describe(
-      "Local part of the mailbox (the part before @, e.g. 'anthony' for anthony@example.com). NOT the full email address.",
+      "Local part of the mailbox (the part before @, e.g. 'alice' for alice@example.com). NOT the full email address.",
     ),
   fields: z
     .array(FieldSchema)

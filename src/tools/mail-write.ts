@@ -187,7 +187,7 @@ const DeleteMailboxInput = z.object({
     .string()
     .min(1)
     .describe(
-      "Local part of the mailbox WITHOUT the @domain (e.g. 'anthony' for anthony@example.com). NOT the full email address. Verify with infomaniak_list_mailboxes before deleting — this wipes stored mail.",
+      "Local part of the mailbox WITHOUT the @domain (e.g. 'alice' for alice@example.com). NOT the full email address. Verify with infomaniak_list_mailboxes before deleting — this wipes stored mail.",
     ),
   confirmation_token: z
     .string()

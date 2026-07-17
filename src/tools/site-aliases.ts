@@ -14,7 +14,7 @@
  * Important behaviors:
  *   - POST returns a `progress_id` (asynchronous). The new alias usually
  *     appears in GET after 5-15s of provisioning.
- *   - Wildcards are accepted: `*.evo.example.com` is a valid alias (confirmed live).
+ *   - Wildcards are accepted: `*.app.example.com` is a valid alias (confirmed live).
  *     This makes it possible to serve any subdomain from a single WP install,
  *     without per-subdomain provisioning.
  *   - The DNS for the alias must point to the hosting's IP (Apache vhost
@@ -122,7 +122,7 @@ const AddSiteAliasesInput = z.object({
     .array(z.string().min(3))
     .min(1)
     .describe(
-      "One or more FQDNs to bind to the site. WILDCARDS ARE ACCEPTED (e.g. `*.evo.example.com`) — use this pattern to serve any subdomain from a single WordPress install. The DNS for each alias must already point to the hosting's IP, otherwise Apache will respond but the browser will never reach it.",
+      "One or more FQDNs to bind to the site. WILDCARDS ARE ACCEPTED (e.g. `*.app.example.com`) — use this pattern to serve any subdomain from a single WordPress install. The DNS for each alias must already point to the hosting's IP, otherwise Apache will respond but the browser will never reach it.",
     ),
   confirmation_token: z
     .string()
@@ -283,7 +283,7 @@ const DeleteSiteAliasInput = z.object({
     .string()
     .min(3)
     .describe(
-      "The FQDN to remove (e.g. `*.evo.example.com` or `client1.example.com`). Cannot remove the main FQDN of the site (that's the `is_main: true` entry in the list).",
+      "The FQDN to remove (e.g. `*.app.example.com` or `client1.example.com`). Cannot remove the main FQDN of the site (that's the `is_main: true` entry in the list).",
     ),
   confirmation_token: z.string().uuid().optional(),
 });

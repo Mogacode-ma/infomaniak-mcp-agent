@@ -340,7 +340,7 @@ Total tool count is now **59** (was 56).
 ## [0.7.4] — 2026-05-11
 
 ### Fixed
-- Sanitize examples in `REVERSE-ENGINEERING.md` (`999999` hosting id → `999999`, `myprefix_WP1234567` DB user → `myprefix_WP1234567`) and in `README.md` (`example.com` → `example.com`). These were real identifiers from the maintainer's account that slipped through previous releases. The repo now contains no real account-specific identifiers; all examples use placeholder values.
+- Sanitize examples in `REVERSE-ENGINEERING.md` (a real hosting id → `999999`, a real DB user → `myprefix_WP1234567`) and in `README.md` (`example.com` → `example.com`). These were real identifiers from the maintainer's account that slipped through previous releases. The repo now contains no real account-specific identifiers; all examples use placeholder values.
 
 ## [0.7.3] — 2026-05-11
 
