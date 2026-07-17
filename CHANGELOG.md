@@ -8,6 +8,44 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 _(no unreleased changes yet)_
 
+## [0.15.2] — 2026-07-17
+
+### Fixed — documentation now matches the actual tool surface
+
+The badge, intro, table of contents and `server.json` all advertised **81
+tools**; the server actually exposes **78** (verified against the built
+server's `tools/list`). Three separate drifts hid behind that number:
+
+- `infomaniak_delete_short_url` was documented but has never existed in the
+  codebase — calling it returned an "unknown tool" error. Replaced by
+  `infomaniak_short_urls_quota`, which existed but was undocumented.
+- Seven tools shipped in v0.15.0 were never documented: database-user
+  password/permission rotation, FTP/SSH-user password and connection-type
+  changes, and the three site-alias tools (now their own README section).
+- The note claiming this MCP "intentionally does not expose DB password
+  rotation — use a MariaDB `ALTER USER` over SSH instead" became false in
+  v0.15.0 and recommended a dangerous practice (a password set only in
+  MariaDB diverges from the manager and gets reverted at the next
+  maintenance). Rewritten to explain the manager-private tools.
+
+Doc/code parity is now verified: 78 documented = 78 registered.
+
+### Security — purged real account data from the public repo
+
+- The test fixtures in `tests/snapshots/responses/` were **live captures**
+  containing third-party client organisation names, personal names, phone
+  numbers, emails, domains and real account/hosting IDs — i.e. personal data
+  of third parties. Every value is now a placeholder; the 78 schema-
+  conformance tests still pass. These fixtures were never shipped on npm
+  (absent from the `files` field) but were public on GitHub.
+- Remaining real identifiers in source examples (hosting prefixes, a DB name)
+  and in `CHANGELOG.md` were sanitized to placeholders.
+- The git history was rewritten to remove this data from prior commits.
+- `.gitignore` now denies root-level scratch scripts by default — a batch of
+  reverse-engineering scripts carried the API token in cleartext locally
+  (never committed, verified against the full history). Added a `gitleaks`
+  pre-commit scan mirroring the CI secret-scan job.
+
 ## [0.15.1] — 2026-06-15
 
 ### Fixed — Node.js tools route on `site_id`, not `hosting_id` (was 403)
