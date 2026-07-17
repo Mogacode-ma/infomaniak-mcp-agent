@@ -1,1 +1,11 @@
 npx lint-staged
+
+# Secret scan on staged content, mirroring the `secrets` job in CI so a leak
+# is caught here rather than after it reaches a public remote. Contributors
+# without gitleaks installed are warned, not blocked — CI remains the gate.
+if command -v gitleaks >/dev/null 2>&1; then
+  gitleaks protect --staged --config .gitleaks.toml --redact --verbose
+else
+  echo "warning: gitleaks not installed, staged changes were not scanned for secrets."
+  echo "         install it (brew install gitleaks) or rely on the CI secret scan."
+fi
