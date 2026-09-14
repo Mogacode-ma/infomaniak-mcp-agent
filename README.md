@@ -471,3 +471,7 @@ You can also:
 [MIT](./LICENSE) — see [`NOTICE`](./NOTICE) for the trademark disclaimer.
 
 This project is not affiliated with Infomaniak Network SA. "Infomaniak", "kDrive", "kChat", "kMeet", "kSuite", "Swiss Backup" are trademarks of Infomaniak Network SA.
+
+---
+
+Développé par [Mogacode](https://mogacode.ma), agence de référencement en abonnement : [notre technologie](https://mistergoo.com/technologie/).
