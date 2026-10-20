@@ -439,3 +439,18 @@ Undocumented endpoints can change without notice. We commit to:
 - Switching to documented alternatives whenever Infomaniak ships them.
 
 If you are building a critical workflow on this MCP, please read the `BREAKING CHANGES` section of `CHANGELOG.md` before each upgrade.
+
+### Public VPS reads (undocumented)
+
+On 2026-10-20, GET-only requests with a Bearer token on the contributor's own
+account returned VPS inventory from `GET /2/vps?account_id={account_id}` and
+`GET /2/vps/{id}?account_id={account_id}`, and firewall rule arrays from
+`GET /2/vps/{id}/firewall?account_id={account_id}`. `/1/vps` also returned inventory.
+These routes were absent from the published API catalogue at inspection time.
+No write requests were used for discovery.
+
+`infomaniak_list_vps` keeps the Manager route when available and uses `/2/vps`
+when Manager authentication is disabled or fails. Other Manager failures propagate.
+`infomaniak_get_vps_firewall` uses the public firewall route. Full VPS detail stays
+on the Manager API: public detail does not include its quota, traffic or disk data.
+These undocumented routes may change without notice.

@@ -68,7 +68,7 @@ import { deleteCertificateTool, getCertificateTool, requestCertificateTool } fro
 import { listSwissBackupsTool } from "./swiss-backup.js";
 import type { ToolDefinition } from "./types.js";
 import { createShortUrlTool, listShortUrlsTool, shortUrlsQuotaTool } from "./url-shortener.js";
-import { getVpsFullTool, listVpsTool } from "./vps.js";
+import { getVpsFirewallTool, getVpsFullTool, listVpsTool } from "./vps.js";
 import { auditDnsZonesTool, provisionSiteFullTool } from "./workflows.js";
 
 export const tools: ReadonlyArray<ToolDefinition> = [
@@ -154,6 +154,7 @@ export const tools: ReadonlyArray<ToolDefinition> = [
   // VPS (Cloud Server / Jelastic)
   listVpsTool,
   getVpsFullTool,
+  getVpsFirewallTool,
   // Node.js apps (hosting_3 — manager-private)
   listNodejsAppsTool,
   getNodejsAppTool,

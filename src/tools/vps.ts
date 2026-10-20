@@ -1,18 +1,24 @@
 /**
  * VPS (Cloud Server, "cloud" service_id 25) introspection.
  *
+ * Public reads (undocumented):
+ *   GET /2/vps?account_id={aid}          — token-only inventory
+ *   GET /2/vps/{id}/firewall?account_id  — provider firewall rules
+ *
  * Endpoints (manager-private):
  *   GET /proxy/1/vps?account_id={aid}      — list VPS on an account
  *   GET /proxy/1/vps/{id}?with=*           — full VPS detail (~65 keys)
  *
- * Each VPS is the Jelastic-managed Cloud Server product. The `?with=`
+ * Inventory includes VPS Lite and managed Cloud Server products. The `?with=`
  * enumeration revealed 13 valid values:
  *   configuration | network | quota | pack | reinstall | rescue |
  *   status | vnc | state | firewall_applications | os_version | all | *
  */
 import { z } from "zod";
 
-import { ManagerApiClient } from "../api/http.js";
+import { InfomaniakAuthError } from "../api/errors.js";
+import { ManagerApiClient, PublicApiClient } from "../api/http.js";
+import { loadConfig } from "../config.js";
 
 import { defineTool } from "./types.js";
 
@@ -63,10 +69,11 @@ const ListVpsOutput = z.object({
   vps: z.array(VpsListEntrySchema),
 });
 
+/** List VPS inventory without requiring a browser session in token-only mode. */
 export const listVpsTool = defineTool({
   name: "infomaniak_list_vps",
   description:
-    "List the VPS (Cloud Server, Jelastic-managed) products of an organization. Returns id, customer_name, internal_name (the server hostname), location, cloud_version, managed/lite flags, billing. Use this before `infomaniak_get_vps_full` to find the id of a specific server. Manager-private.",
+    "List the VPS products of an organization. Returns id, customer_name, internal_name (the server hostname), location, cloud_version, managed/lite flags, billing. Use this before `infomaniak_get_vps_full` to find the id of a specific server. Uses the public API when Manager authentication is disabled or unavailable.",
   inputSchema: ListVpsInput,
   outputSchema: ListVpsOutput,
   annotations: {
@@ -76,10 +83,19 @@ export const listVpsTool = defineTool({
     openWorldHint: true,
   },
   handler: async (input) => {
-    const client = new ManagerApiClient();
-    const list = await client.request<z.infer<typeof VpsListEntrySchema>[]>("GET", "/proxy/1/vps", {
-      query: { account_id: input.account_id },
-    });
+    const options = { query: { account_id: input.account_id } };
+    let response: unknown;
+    if (loadConfig().INFOMANIAK_AUTH_MODE === "disabled") {
+      response = await new PublicApiClient().request<unknown>("GET", "/2/vps", options);
+    } else {
+      try {
+        response = await new ManagerApiClient().request<unknown>("GET", "/proxy/1/vps", options);
+      } catch (error) {
+        if (!(error instanceof InfomaniakAuthError)) throw error;
+        response = await new PublicApiClient().request<unknown>("GET", "/2/vps", options);
+      }
+    }
+    const list = z.array(VpsListEntrySchema).parse(response);
     return {
       account_id: input.account_id,
       count: list.length,
@@ -173,5 +189,52 @@ export const getVpsFullTool = defineTool({
       `/proxy/1/vps/${input.vps_id}`,
       { query: { "with[]": "*" } },
     );
+  },
+});
+
+/** A VPS firewall rule; retain additional provider fields for inspection. */
+const VpsFirewallRuleSchema = z
+  .object({
+    id: z.number().int(),
+    vps_id: z.number().int(),
+    enabled: z.boolean(),
+    description: z.string().nullable().optional(),
+    ip_type: z.string(),
+    port_type: z.string(),
+    port_selection: z.string(),
+    port_selection_type: z.string().nullable(),
+    port_selection_list: z.array(z.union([z.number(), z.string()])).nullable(),
+  })
+  .passthrough();
+
+/** Read provider firewall rules using only the public API token. */
+export const getVpsFirewallTool = defineTool({
+  name: "infomaniak_get_vps_firewall",
+  description:
+    "Read the provider firewall rules for a VPS. Requires account_id and vps_id; works without a Manager session. Does not inspect the guest OS firewall.",
+  inputSchema: z.object({
+    account_id: z.number().int().positive(),
+    vps_id: z.number().int().positive(),
+  }),
+  outputSchema: z.object({
+    account_id: z.number(),
+    vps_id: z.number(),
+    count: z.number(),
+    rules: z.array(VpsFirewallRuleSchema),
+  }),
+  annotations: {
+    readOnlyHint: true,
+    destructiveHint: false,
+    idempotentHint: true,
+    openWorldHint: true,
+  },
+  handler: async (input) => {
+    const response = await new PublicApiClient().request<unknown>(
+      "GET",
+      `/2/vps/${input.vps_id}/firewall`,
+      { query: { account_id: input.account_id } },
+    );
+    const rules = z.array(VpsFirewallRuleSchema).parse(response);
+    return { account_id: input.account_id, vps_id: input.vps_id, count: rules.length, rules };
   },
 });
