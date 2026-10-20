@@ -277,10 +277,15 @@ Additional FQDNs bound to an existing site's Apache vhost / DocumentRoot — how
 | Tool | Annotation | Purpose |
 |---|---|---|
 | `infomaniak_dns_list_records` | read-only | Every DNS record on an Infomaniak-managed zone. |
+| `infomaniak_dns_export` | read-only | Return JSON or CSV records; no local file is written. |
+| `infomaniak_dns_diff` | read-only | Compare supplied records with the live zone; includes TTL changes. |
+| `infomaniak_dns_check_propagation` | read-only | Query named public resolvers directly; report failed lookups separately. |
 | `infomaniak_dns_create_record` | **destructive** | Two-phase create record (A, AAAA, CNAME, MX, TXT, SRV, NS, CAA, PTR, SPF). |
 | `infomaniak_dns_update_record` | **destructive** | Two-phase update (current vs proposed diff in the plan). |
 | `infomaniak_dns_delete_record` | **destructive** | Two-phase delete record (with full preview before commit). |
 | `infomaniak_manage_dnssec` | mixed | Unified DNSSEC: `action: check` (read-only, KSK/DS records), `action: enable` or `action: disable` (two-phase commit destructive). Replaces the v0.9 trio `dnssec_check` / `dnssec_enable` / `dnssec_disable`. |
+
+`infomaniak_dns_diff` compares targets literally, so keep the API's TXT quoting and inline MX priority. `infomaniak_dns_check_propagation` queries Google, Cloudflare and Quad9 directly; a failed or empty lookup means the resolvers do not agree, and agreement says nothing about global propagation.
 
 ### Mail
 | Tool | Annotation | Purpose |

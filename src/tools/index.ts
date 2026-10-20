@@ -18,6 +18,7 @@ import {
   listDatabaseUsersTool,
   listDatabasesTool,
 } from "./databases.js";
+import { dnsCheckPropagationTool, dnsDiffTool, dnsExportTool } from "./dns-read.js";
 import {
   dnsCreateRecordTool,
   dnsDeleteRecordTool,
@@ -123,6 +124,9 @@ export const tools: ReadonlyArray<ToolDefinition> = [
   changeHostingUserConnectionTypeTool,
   // DNS
   dnsListRecordsTool,
+  dnsExportTool,
+  dnsDiffTool,
+  dnsCheckPropagationTool,
   dnsCreateRecordTool,
   dnsUpdateRecordTool,
   dnsDeleteRecordTool,
