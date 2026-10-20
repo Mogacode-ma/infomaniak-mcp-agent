@@ -292,6 +292,9 @@ Additional FQDNs bound to an existing site's Apache vhost / DocumentRoot — how
 | `infomaniak_delete_mailbox` | **destructive** | Two-phase delete (also wipes stored mail). |
 | `infomaniak_create_mailbox_alias` | **destructive** | Two-phase add alias to a mailbox. |
 | `infomaniak_delete_mailbox_alias` | **destructive** | Two-phase remove an alias from a mailbox (undoable). |
+| `infomaniak_get_mailbox_forwarding` | read-only | Where a mailbox forwards to, and whether it keeps a local copy. Not the same as redirections. |
+| `infomaniak_add_mailbox_forwarding` | **destructive** | Two-phase forward a mailbox to another address (undoable). |
+| `infomaniak_delete_mailbox_forwarding` | **destructive** | Two-phase stop forwarding to an address (undoable). |
 | `infomaniak_list_redirections` | read-only | Server-side mail redirection rules. |
 | `infomaniak_create_redirection` | **destructive** | Two-phase create rule (forward `name@…` to N targets). |
 | `infomaniak_delete_redirection` | **destructive** | Two-phase delete rule. |

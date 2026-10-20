@@ -42,6 +42,11 @@ import { explainTool, helpTool } from "./introspection.js";
 import { getMailHostingFullTool, getMailboxFullTool } from "./mail-deep.js";
 import { getMailboxInfoTool } from "./mail-extras.js";
 import {
+  addMailboxForwardingTool,
+  deleteMailboxForwardingTool,
+  getMailboxForwardingTool,
+} from "./mail-forwarding.js";
+import {
   createAliasTool,
   createMailboxTool,
   deleteAliasTool,
@@ -144,6 +149,10 @@ export const tools: ReadonlyArray<ToolDefinition> = [
   deleteMailboxTool,
   createAliasTool,
   deleteAliasTool,
+  // Mail (mailbox forwarding)
+  getMailboxForwardingTool,
+  addMailboxForwardingTool,
+  deleteMailboxForwardingTool,
   // Mail redirections
   listRedirectionsTool,
   createRedirectionTool,

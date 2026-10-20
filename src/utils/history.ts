@@ -18,6 +18,8 @@ export type ActionKind =
   | "create_dns_record"
   | "delete_dns_record"
   | "delete_mail_alias"
+  | "create_mail_forwarding"
+  | "delete_mail_forwarding"
   | "create_database"
   | "delete_database"
   | "request_certificate"
