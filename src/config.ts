@@ -20,6 +20,12 @@ const ConfigSchema = z.object({
   /** pino log level. */
   LOG_LEVEL: z.enum(["trace", "debug", "info", "warn", "error", "fatal", "silent"]).default("info"),
 
+  /** Refuse every tool and request that would change the account (anything but GET). */
+  INFOMANIAK_READ_ONLY: z
+    .enum(["0", "1", "true", "false"])
+    .default("0")
+    .transform((value) => value === "1" || value === "true"),
+
   /** Confirmation token TTL for destructive operations (seconds). */
   CONFIRMATION_TTL_SECONDS: z.coerce.number().int().min(10).max(600).default(60),
 

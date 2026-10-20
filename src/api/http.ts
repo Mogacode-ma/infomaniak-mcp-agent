@@ -19,6 +19,7 @@ import { randomUUID } from "node:crypto";
 import { type ManagerSession, loadManagerSession } from "../auth/cookie.js";
 import { loadConfig } from "../config.js";
 import { type TokenBucket, createDefaultThrottle } from "../throttle/token-bucket.js";
+import { readOnlyError } from "../utils/confirmation.js";
 import { childLogger } from "../utils/logger.js";
 
 import { mapHttpError, InfomaniakError } from "./errors.js";
@@ -161,6 +162,10 @@ async function executeRequest<T>(
   headers: Record<string, string>,
   options: RequestOptions,
 ): Promise<T> {
+  // Backstop for tools that skip the plan phase: nothing but GET leaves the machine.
+  if (method !== "GET" && loadConfig().INFOMANIAK_READ_ONLY) {
+    throw readOnlyError();
+  }
   await throttle.acquire();
   const requestId = randomUUID();
   const correlatedLog = log.child({ requestId, method, url });

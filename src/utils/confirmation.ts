@@ -14,6 +14,7 @@
  */
 import { randomUUID } from "node:crypto";
 
+import { InfomaniakError } from "../api/errors.js";
 import { loadConfig } from "../config.js";
 
 interface TokenRecord {
@@ -35,8 +36,12 @@ const records = new Map<string, TokenRecord>();
  * operation cannot reuse a previously-issued token.
  */
 export function mintToken(fingerprint: string): { token: string; expiresAt: Date } {
+  const config = loadConfig();
+  if (config.INFOMANIAK_READ_ONLY) {
+    throw readOnlyError();
+  }
   purge();
-  const ttlMs = loadConfig().CONFIRMATION_TTL_SECONDS * 1000;
+  const ttlMs = config.CONFIRMATION_TTL_SECONDS * 1000;
   const token = randomUUID();
   const expiresAt = Date.now() + ttlMs;
   records.set(token, { token, fingerprint, expiresAt });
@@ -61,6 +66,18 @@ export function consumeToken(token: string, fingerprint: string): boolean {
   }
   records.delete(token);
   return true;
+}
+
+/**
+ * Error for a change refused because `INFOMANIAK_READ_ONLY` is set. Raised when a
+ * plan is requested, so the agent hears "no" before it asks the user to confirm.
+ */
+export function readOnlyError(): InfomaniakError {
+  return new InfomaniakError({
+    message: "INFOMANIAK_READ_ONLY is set: this server refuses requests that change the account.",
+    code: "read_only_mode",
+    actionable: "Unset INFOMANIAK_READ_ONLY and restart the server to allow changes.",
+  });
 }
 
 /** Drop expired tokens — called opportunistically. */

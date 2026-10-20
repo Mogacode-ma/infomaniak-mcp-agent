@@ -428,6 +428,10 @@ Yes. It speaks the standard [Model Context Protocol](https://modelcontextprotoco
 
 No. The server runs locally over stdio. Your Bearer token is read from `INFOMANIAK_API_TOKEN` (env or `.env`) and used only to call `api.infomaniak.com`. The Chrome cookies (`SASESSION`, `MANAGER-XSRF-TOKEN`) live in memory for the duration of a single tool call and are never persisted. Logs redact every sensitive value (tokens, cookies, passwords).
 
+### Can I stop it from changing anything?
+
+Yes. Set `INFOMANIAK_READ_ONLY=1`. Every tool that would change the account then fails at the plan step with `read_only_mode`, and the HTTP client refuses any non-GET request as a backstop. Read tools keep working.
+
 ### Does it support self-hosting / running outside macOS?
 
 Yes — `INFOMANIAK_AUTH_MODE=manual` lets you paste cookies straight into env vars, which is the path to use on Linux servers, Docker containers, or CI. Auto-extraction from Chrome works on macOS, Windows, and Linux when Chrome is installed locally.
