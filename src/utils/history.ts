@@ -17,6 +17,7 @@ export type ActionKind =
   | "delete_site"
   | "create_dns_record"
   | "delete_dns_record"
+  | "delete_mail_alias"
   | "create_database"
   | "delete_database"
   | "request_certificate"

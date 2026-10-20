@@ -385,3 +385,116 @@ export const createAliasTool = defineTool({
     };
   },
 });
+
+// ---------------------------------------------------------------------------
+// delete_alias
+// ---------------------------------------------------------------------------
+
+const DeleteAliasInput = z.object({
+  mail_hosting_id: z.number().int().positive(),
+  mailbox_name: z.string().min(1),
+  /** Alias local part (without @domain), as returned by infomaniak_get_mailbox_info. */
+  alias: z
+    .string()
+    .min(1)
+    .max(64)
+    .regex(/^[a-z0-9._-]+$/, "alias must be lowercase alphanumeric with . _ -"),
+  confirmation_token: z.string().uuid().optional(),
+});
+
+const DeleteAliasOutput = z.union([
+  z.object({
+    status: z.literal("plan"),
+    plan: z.object({
+      mail_hosting_id: z.number(),
+      mailbox_name: z.string(),
+      alias: z.string(),
+    }),
+    confirmation_token: z.string(),
+    token_expires_at: z.string(),
+    next_step_markdown: z.string(),
+  }),
+  z.object({
+    status: z.literal("applied"),
+    alias: z.string(),
+    message: z.string(),
+  }),
+]);
+
+export const deleteAliasTool = defineTool({
+  name: "infomaniak_delete_mailbox_alias",
+  description:
+    "Remove an alias from a mailbox. Two-phase commit. The mailbox itself and its mail are untouched; the alias stops receiving mail. Undo with infomaniak_create_mailbox_alias.",
+  inputSchema: DeleteAliasInput,
+  outputSchema: DeleteAliasOutput,
+  annotations: {
+    readOnlyHint: false,
+    destructiveHint: true,
+    idempotentHint: true,
+    openWorldHint: true,
+  },
+  handler: async (input) => {
+    const fingerprint = JSON.stringify({
+      tool: "infomaniak_delete_mailbox_alias",
+      mail_hosting_id: input.mail_hosting_id,
+      mailbox_name: input.mailbox_name,
+      alias: input.alias,
+    });
+    if (!input.confirmation_token) {
+      const { token, expiresAt } = mintToken(fingerprint);
+      return {
+        status: "plan" as const,
+        plan: {
+          mail_hosting_id: input.mail_hosting_id,
+          mailbox_name: input.mailbox_name,
+          alias: input.alias,
+        },
+        confirmation_token: token,
+        token_expires_at: expiresAt.toISOString(),
+        next_step_markdown: [
+          `## Plan — remove alias`,
+          ``,
+          `- **Mailbox**: \`${input.mailbox_name}\``,
+          `- **Alias**: \`${input.alias}\``,
+          ``,
+          `Mail sent to the alias will no longer be delivered. The mailbox is untouched.`,
+          ``,
+          `### Next step`,
+          `Re-call with \`confirmation_token: "${token}"\`.`,
+        ].join("\n"),
+      };
+    }
+    if (!consumeToken(input.confirmation_token, fingerprint)) {
+      throw new Error("Confirmation token is invalid, expired, or doesn't match the parameters.");
+    }
+    const client = new PublicApiClient();
+    await client.request<unknown>(
+      "DELETE",
+      `/1/mail_hostings/${input.mail_hosting_id}/mailboxes/${encodeURIComponent(input.mailbox_name)}/aliases/${encodeURIComponent(input.alias)}`,
+    );
+    recordHistory({
+      tool: "infomaniak_delete_mailbox_alias",
+      kind: "delete_mail_alias",
+      summary: `Removed alias ${input.alias} from ${input.mailbox_name}`,
+      payload: {
+        mail_hosting_id: input.mail_hosting_id,
+        mailbox_name: input.mailbox_name,
+        alias: input.alias,
+      },
+      undo: {
+        tool: "infomaniak_create_mailbox_alias",
+        params: {
+          mail_hosting_id: input.mail_hosting_id,
+          mailbox_name: input.mailbox_name,
+          alias: input.alias,
+        },
+        description: `Add alias ${input.alias} back to ${input.mailbox_name}`,
+      },
+    });
+    return {
+      status: "applied" as const,
+      alias: input.alias,
+      message: `✅ Alias \`${input.alias}\` removed from mailbox \`${input.mailbox_name}\`.`,
+    };
+  },
+});
