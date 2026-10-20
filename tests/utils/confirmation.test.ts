@@ -55,4 +55,12 @@ describe("confirmation tokens", () => {
   it("rejects unknown tokens", () => {
     expect(consumeToken("never-minted", "op:foo")).toBe(false);
   });
+
+  it("refuses to mint a token when INFOMANIAK_READ_ONLY is set", () => {
+    process.env["INFOMANIAK_READ_ONLY"] = "1";
+    _resetConfigCache();
+
+    expect(() => mintToken("op:create")).toThrow(/INFOMANIAK_READ_ONLY/);
+    delete process.env["INFOMANIAK_READ_ONLY"];
+  });
 });
