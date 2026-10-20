@@ -328,8 +328,11 @@ Additional FQDNs bound to an existing site's Apache vhost / DocumentRoot — how
 ### VPS / Cloud Server
 | Tool | Annotation | Purpose |
 |---|---|---|
-| `infomaniak_list_vps` | read-only | List Cloud Server (Jelastic) products of an org. |
+| `infomaniak_list_vps` | read-only | List VPS products of an org. Falls back to the public API when Manager authentication is unavailable or disabled. |
 | `infomaniak_get_vps_full` | read-only | Datacenter, IPs, CPU/RAM, bandwidth + traffic, disk usage, MySQL/PHP versions, firewall, premium support contacts, migration history. |
+| `infomaniak_get_vps_firewall` | read-only | Provider firewall rules via the public API token; no browser session required. |
+
+Set `INFOMANIAK_AUTH_MODE=disabled` to list VPS and read firewall rules without accessing Chrome. Full detail still requires a Manager session.
 
 ### Node.js apps (Cloud Server `hosting_3`)
 | Tool | Annotation | Purpose |
