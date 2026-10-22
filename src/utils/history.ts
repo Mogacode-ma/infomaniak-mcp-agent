@@ -21,7 +21,8 @@ export type ActionKind =
   | "delete_database"
   | "request_certificate"
   | "delete_certificate"
-  | "nodejs_app_action";
+  | "nodejs_app_action"
+  | "set_php_version";
 
 /**
  * Description of how to reverse an action. `undefined` means the action

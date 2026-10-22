@@ -8,13 +8,13 @@
 [![Node](https://img.shields.io/badge/node-%3E%3D18-43853d.svg)](https://nodejs.org)
 [![TypeScript strict](https://img.shields.io/badge/TypeScript-strict-3178c6.svg)](https://www.typescriptlang.org/)
 [![MCP](https://img.shields.io/badge/Model_Context_Protocol-1.0-9333ea.svg)](https://modelcontextprotocol.io/)
-[![Tools](https://img.shields.io/badge/tools-78-blueviolet.svg)](#tools)
+[![Tools](https://img.shields.io/badge/tools-80-blueviolet.svg)](#tools)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](./CONTRIBUTING.md)
 [![GitHub stars](https://img.shields.io/github/stars/Mogacode-ma/infomaniak-mcp-agent?style=social)](https://github.com/Mogacode-ma/infomaniak-mcp-agent/stargazers)
 
 > **Drive your entire [Infomaniak](https://www.infomaniak.com) account from [Claude](https://www.anthropic.com/claude) — agentic, two-phase commit, open-source.**
 
-`infomaniak-mcp-agent` is an unofficial [Model Context Protocol](https://modelcontextprotocol.io/) server that exposes the full surface of Infomaniak — Switzerland's sovereign cloud — as **78 tools** an LLM can call directly: web hosting, mail (kSuite), kDrive, domains, DNS, DNSSEC, FTP/SSH users, AI products, account audits and more. Every destructive operation goes through a strict two-phase commit, so an agent can never silently delete or mutate something on your account.
+`infomaniak-mcp-agent` is an unofficial [Model Context Protocol](https://modelcontextprotocol.io/) server that exposes the full surface of Infomaniak — Switzerland's sovereign cloud — as **80 tools** an LLM can call directly: web hosting, mail (kSuite), kDrive, domains, DNS, DNSSEC, FTP/SSH users, AI products, account audits and more. Every destructive operation goes through a strict two-phase commit, so an agent can never silently delete or mutate something on your account.
 
 ```
 You → Claude:  "audit the example.com hosting and tell me which mailboxes are over quota"
@@ -26,7 +26,7 @@ Claude → You:  3 mailboxes >85% — paul@ (94%), notify@ (88%), team@ (87%). W
 
 - [Why](#why-this-exists) · [What it does](#what-you-can-do-with-it) · [How it differs](#why-agentic-and-not-wrapper)
 - [Install](#install) · [Authentication](#authentication) · [Quick example](#quick-example)
-- [Tools](#tools) (78 across 22 areas) · [Limitations](#limitations) · [Roadmap](#roadmap) · [FAQ](#faq)
+- [Tools](#tools) (80 across 22 areas) · [Limitations](#limitations) · [Roadmap](#roadmap) · [FAQ](#faq)
 - [Contributing](#contributing) · [License](#license)
 
 ## Why this exists
@@ -202,7 +202,7 @@ Claude: [calls infomaniak_dns_create_record again with the token]
 
 ## Tools
 
-78 tools across 22 areas. Use `infomaniak_help` to fuzzy-search by intent, or `infomaniak_explain` to dump a tool's full JSON schema.
+80 tools across 22 areas. Use `infomaniak_help` to fuzzy-search by intent, or `infomaniak_explain` to dump a tool's full JSON schema.
 
 ### Introspection (start here)
 | Tool | Annotation | Purpose |
@@ -238,6 +238,8 @@ Additional FQDNs bound to an existing site's Apache vhost / DocumentRoot — how
 | `infomaniak_list_site_aliases` | read-only | FQDNs (main + aliases) bound to a site. |
 | `infomaniak_add_site_aliases` | **destructive** | Bind one or more FQDNs (wildcards like `*.example.com` accepted). Two-phase. Asynchronous: returns a `progress_id`, the alias shows up in `list_site_aliases` a few seconds later. |
 | `infomaniak_delete_site_alias` | **destructive** | Unbind one alias FQDN (the main FQDN cannot be removed). Two-phase. |
+| `infomaniak_get_php_version` | read-only | Current PHP branch of a site (e.g. `8.4`) with its deprecated/vulnerable flags. |
+| `infomaniak_set_php_version` | **destructive** | Change the PHP branch (e.g. to `8.4`/`8.5`). Two-phase. The public API silently no-ops PHP writes, so this uses the manager-private endpoint; the minimal write preserves the site's other PHP tuning. |
 
 ### SSL certificates
 | Tool | Annotation | Purpose |

@@ -55,6 +55,7 @@ import {
 } from "./nodejs.js";
 import { listOrganizationsTool } from "./organizations.js";
 import { overviewTool } from "./overview.js";
+import { getPhpVersionTool, setPhpVersionTool } from "./php.js";
 import { getMyProfileTool, getMySecurityTool } from "./profile.js";
 import {
   createRedirectionTool,
@@ -102,6 +103,9 @@ export const tools: ReadonlyArray<ToolDefinition> = [
   listSiteAliasesTool,
   addSiteAliasesTool,
   deleteSiteAliasTool,
+  // PHP version (read: public API; write: manager-private)
+  getPhpVersionTool,
+  setPhpVersionTool,
   // SSL certificates
   getCertificateTool,
   requestCertificateTool,

@@ -6,7 +6,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
-_(no unreleased changes yet)_
+### Added — PHP version tools (78 → 80 tools)
+
+- `infomaniak_get_php_version` (read-only, public Bearer API): returns the
+  current PHP branch of a web hosting site plus its freshness flags
+  (`is_warning` / `is_deprecated` / `is_alert`). Sites with no `apache_php`
+  environment (Node.js / "starter" hostings) return `has_php: false`.
+- `infomaniak_set_php_version` (manager-private, two-phase commit): changes the
+  PHP branch, e.g. to `8.4` / `8.5`. A minimal `{"php":{"version":"X.Y"}}`
+  write that preserves the site's other PHP tuning.
+
+  **Why a dedicated tool was needed:** the public Bearer API *silently no-ops*
+  any attempt to write the PHP version on the site resource (returns
+  `200 success` and changes nothing). The real write is the manager-private
+  call the Manager UI fires — `PATCH /proxy/1/web_hostings/{id}/sites/{sid}`
+  with `{"php":{"version":"…"}}` (the field is `php.version`, not
+  `php_version`). Captured from the Manager save and documented in
+  `REVERSE-ENGINEERING.md`. The change records an undo entry (set the previous
+  branch back).
 
 ## [0.15.2] — 2026-07-17
 
