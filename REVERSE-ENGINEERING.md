@@ -391,6 +391,8 @@ Each row indicates: the HTTP route, whether it is documented, the auth type, and
 | GET | `/1/web_hostings/{id}` | undocumented | Bearer | live probe |
 | GET | `/1/web_hostings/{id}/sites` | undocumented | Bearer | live probe |
 | GET | `/1/web_hostings/{id}/sites/{sid}?with=…` | undocumented | Bearer | live probe + 422 enumeration |
+| GET | `/1/web_hostings/{id}/sites/{sid}?with[]=environments` | undocumented | Bearer | live probe — current PHP branch under the `apache_php` environment |
+| PATCH | `/proxy/1/web_hostings/{id}/sites/{sid}` (body `{"php":{"version":"8.4"}}`) | undocumented | SASESSION + CSRF | captured from the Manager "PHP \| Apache" save (XHR) |
 | POST | `/proxy/1/web_hostings/{id}/sites` | undocumented | SASESSION + CSRF | manager Angular bundle (`chunk-Dofr6lSR.js`) |
 | GET | `/proxy/1/hostings/{id}?with[]=hosting_features` | undocumented | SASESSION | XHR capture + 422 enum |
 | GET | `/proxy/1/hostings/{id}/nodejs/{vhost}?with[]=ips,ssl,environments,storage` | undocumented | SASESSION | XHR capture |
@@ -403,6 +405,35 @@ Each row indicates: the HTTP route, whether it is documented, the auth type, and
 | POST | `/proxy/1/hostings/{id}/nodejs/{vhost}/actions/{start\|stop\|restart\|build}` | undocumented | SASESSION + CSRF | live probe with fresh CSRF |
 
 This list will grow as the MCP gains tools. Every newly used endpoint should be added here.
+
+## PHP version: public API silently no-ops, manager-private writes it
+
+Changing a site's PHP branch looks like it should be a simple Bearer PATCH on
+the site resource. It is not.
+
+- **Read** is public: `GET /1/web_hostings/{id}/sites/{sid}?with[]=environments`
+  returns the current branch under the `apache_php` environment
+  (`environments[].php.version_short` = `"8.4"`, plus `is_warning` /
+  `is_deprecated` / `is_alert` / `default_version` flags). Node.js and
+  "starter" hostings have no `apache_php` environment — nothing to change.
+- **Write via the public Bearer API is a silent no-op.** Every shape we tried —
+  `PATCH /1/web_hostings/{id}/sites/{sid}` with `{"php_version":"8.5"}`, with
+  `{"environments":[{"type":"apache_php","php":{"version_short":"8.5"}}]}`, and
+  `PUT /1/web/{id}/site/{sid}` with `{"php_version":"8.5"}` — returned
+  `200 success` and echoed the site object, but a read-back still showed the old
+  branch. The field is accepted and dropped.
+- **The real write is manager-private**, captured from the Manager's
+  "Paramètres avancés → PHP | Apache" save button (XHR):
+  `PATCH /proxy/1/web_hostings/{id}/sites/{sid}` with body
+  `{"php":{"version":"8.5", …}}`. A **minimal** body `{"php":{"version":"8.5"}}`
+  is enough and **preserves** the other PHP tuning (memory_limit,
+  max_execution_time, …) — verified by reading `memory_limit` before/after.
+  Note the field is `php.version` (nested), not `php_version`.
+
+`infomaniak_get_php_version` (public read) and `infomaniak_set_php_version`
+(manager-private write, two-phase commit) wrap these. The hosting-level
+available branches are at `GET /1/web_hostings/{id}?with=php`
+(`php.available_versions`, `php.default_version`).
 
 ## Observed breaking changes
 
